@@ -1,0 +1,1458 @@
+[
+ {
+  "id": "oNEBmBtBvtw",
+  "dur": "15:12",
+  "tr": true,
+  "cat": "قلب و عروق",
+  "cat_en": "Cardiovascular",
+  "src": "RegisteredNurseRN",
+  "views": 15591,
+  "publishedAt": "2026-10-12",
+  "fa": "فیزیولوژی چرخه قلبی: سیستول و دیاستول، دریچه‌ها و ارتباط با نوار قلب",
+  "en": "Cardiac Cycle Physiology Explained: Systole and Diastole, Nursing ECG Anatomy",
+  "sum": "چرخه قلبی مرحله‌به‌مرحله: فازهای سیستول و دیاستول، نقش چهار دریچه، سیستم الکتریکی (گره SA و AV) و تطبیق هر فاز با موج‌های ECG — پایه درس قلب و سؤالات پرتکرار ارشد.",
+  "sum_en": "Step-by-step cardiac cycle review: systole and diastole phases, the four valves, and the SA/AV conduction system mapped to ECG waves — core cardiology for nursing exams.",
+  "ch": [
+   [
+    "0:00",
+    "معرفی چرخه قلبی و فازهای آن"
+   ],
+   [
+    "1:38",
+    "سیستم الکتریکی قلب و گره SA"
+   ],
+   [
+    "4:32",
+    "چهار دریچه قلب: AV و سمیلونار"
+   ],
+   [
+    "8:54",
+    "موج P و تأخیر گره AV"
+   ],
+   [
+    "10:12",
+    "دپولاریزاسیون بطنی و انقباض ایزوولومتریک"
+   ],
+   [
+    "12:02",
+    "تخلیه بطنی و خروج خون به آئورت"
+   ],
+   [
+    "12:52",
+    "دیاستول بطنی و استراحت ایزوولومتریک"
+   ],
+   [
+    "13:45",
+    "صدای دوم قلب (S2) و پر شدن بطن‌ها"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro: the cardiac cycle and its phases"
+   ],
+   [
+    "1:38",
+    "The heart's electrical system and the SA node"
+   ],
+   [
+    "4:32",
+    "The four heart valves: AV and semilunar"
+   ],
+   [
+    "8:54",
+    "The P wave and AV nodal delay"
+   ],
+   [
+    "10:12",
+    "Ventricular depolarization and isovolumetric contraction"
+   ],
+   [
+    "12:02",
+    "Ventricular ejection: blood leaves for the aorta"
+   ],
+   [
+    "12:52",
+    "Ventricular diastole and isovolumetric relaxation"
+   ],
+   [
+    "13:45",
+    "The second heart sound (S2) and ventricular filling"
+   ]
+  ]
+ },
+ {
+  "id": "-6zD6em2oGk",
+  "dur": "1:00:16",
+  "tr": true,
+  "cat": "آناتومی",
+  "cat_en": "Anatomy",
+  "src": "RegisteredNurseRN",
+  "views": 21945,
+  "publishedAt": "2026-10-06",
+  "fa": "اصطلاحات جهت‌شناسی، نواحی و حرکات بدن + صفحات آناتومیکی",
+  "en": "Anatomy Directional Terms, Regional Terms, Movement Terms & Body Planes Made Easy",
+  "sum": "مرجع کامل اصطلاحات جهت (قدامی/خلفی/فوقانی/تحتانی/داخلی/خارجی)، نواحی بدن، حرکات مفاصل (فلکشن، اکستنشن، ابداکشن…) و سه صفحه اصلی بدن — پیش‌نیاز همه دروس آناتومی و بالینی.",
+  "sum_en": "Complete reference for directional, regional, and movement terms plus the three anatomical body planes — the prerequisite vocabulary for all anatomy and clinical courses.",
+  "ch": [
+   [
+    "0:14",
+    "موضع آناتومیکی و دیدگاه قدامی"
+   ],
+   [
+    "1:09",
+    "اصطلاحات جهت اصلی بدن"
+   ],
+   [
+    "7:32",
+    "نواحی بدن: محوری و اندامی"
+   ],
+   [
+    "17:32",
+    "صفحات ساژیتال، فرونتال و عرضی"
+   ],
+   [
+    "23:02",
+    "حرکات مفاصل و عضلات"
+   ],
+   [
+    "53:53",
+    "نواحی و ربع‌های شکمی"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:14",
+    "The anatomical position"
+   ],
+   [
+    "1:09",
+    "Main directional terms of the body"
+   ],
+   [
+    "7:32",
+    "Body regions: axial and appendicular"
+   ],
+   [
+    "17:32",
+    "Sagittal, frontal and transverse planes"
+   ],
+   [
+    "23:02",
+    "Joint and muscle movements"
+   ],
+   [
+    "53:53",
+    "Abdominal regions and quadrants"
+   ]
+  ]
+ },
+ {
+  "id": "jy4IUSt2XEE",
+  "dur": "3:01:54",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "RegisteredNurseRN",
+  "views": 52195,
+  "publishedAt": "2026-09-29",
+  "fa": "تکنیک‌های تجویز دارو در پرستاری (مجموعه نمایشی ۳ ساعته)",
+  "en": "Medication Administration Nursing Skills Checkoff Demonstration Compilation",
+  "sum": "مجموعه کامل چک‌آف مهارت دارویی: قطره چشمی، استنشاقی‌ها، کشیدن دارو از ویال و آمپول، ترکیب انسولین، تزریقات، راه‌اندازی سرم، پنج حق دارویی، اختصارات و محاسبات — مرجع تصویری فارماکولوژی بالینی.",
+  "sum_en": "Full checkoff compilation of medication-administration skills: eye drops, inhalers, vial and ampule draws, insulin mixing, injections, IV setup, the five rights, abbreviations, and dosage calculations.",
+  "ch": [
+   [
+    "0:00",
+    "بهداشت دست، دستکش و قطره چشمی"
+   ],
+   [
+    "45:20",
+    "داروهای استنشاقی و کورتیکواستروئیدی"
+   ],
+   [
+    "1:11:28",
+    "کشیدن دارو از ویال و تکنیک سرنگ"
+   ],
+   [
+    "1:21:43",
+    "ترتیب کشیدن انسولین (شفاف به کدر)"
+   ],
+   [
+    "1:41:52",
+    "تکنیک تزریق عضلانی"
+   ],
+   [
+    "1:51:51",
+    "راه‌اندازی ست سرم و IV"
+   ],
+   [
+    "2:25:27",
+    "پنج حق دارویی و بررسی بیمار"
+   ],
+   [
+    "2:40:34",
+    "اختصارات فرکانس و پسوندهای دارویی"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Hand hygiene, gloves and eye drops"
+   ],
+   [
+    "45:20",
+    "Inhaled and corticosteroid medications"
+   ],
+   [
+    "1:11:28",
+    "Drawing up from a vial and syringe technique"
+   ],
+   [
+    "1:21:43",
+    "Insulin mixing order (clear to cloudy)"
+   ],
+   [
+    "1:41:52",
+    "Intramuscular injection technique"
+   ],
+   [
+    "1:51:51",
+    "Setting up IV tubing and the infusion"
+   ],
+   [
+    "2:25:27",
+    "The five rights and checking the patient"
+   ],
+   [
+    "2:40:34",
+    "Frequency abbreviations and drug suffixes"
+   ]
+  ]
+ },
+ {
+  "id": "j75cjaVPZJw",
+  "dur": "2:58:48",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "RegisteredNurseRN",
+  "views": 59307,
+  "publishedAt": "2026-09-23",
+  "fa": "مهارت‌های بالینی و پروسیجرهای پایه پرستاری (مرور جامع)",
+  "en": "Clinical Nursing Skills and Procedures Fundamentals Check Offs",
+  "sum": "مرور تصویری پروسیجرهای فاندامنتال: بهداشت دست، شروع IV و خون‌گیری، سوند ادراری، مسیرهای دارویی، فشار خون و علائم حیاتی — مناسب آمادگی کارآموزی و آزمون مهارت.",
+  "sum_en": "Comprehensive visual review of fundamental clinical procedures: hand hygiene, IV insertion and venipuncture, Foley catheterization, medication routes, blood pressure, and vital signs.",
+  "ch": [
+   [
+    "0:00",
+    "بهداشت دست: آب‌وصابون و محلول الکلی"
+   ],
+   [
+    "20:15",
+    "آماده‌سازی و شروع IV"
+   ],
+   [
+    "40:06",
+    "خون‌گیری وریدی و نکات آن"
+   ],
+   [
+    "1:09:16",
+    "تکنیک ورود سوزن و انتخاب رگ"
+   ],
+   [
+    "1:47:40",
+    "سوندگذاری ادراری (فولی)"
+   ],
+   [
+    "2:02:02",
+    "مسیرهای تجویز دارو"
+   ],
+   [
+    "2:28:05",
+    "تکنیک صحیح فشار خون"
+   ],
+   [
+    "2:52:28",
+    "شمارش نبض و تنفس"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Hand hygiene: soap and water vs alcohol rub"
+   ],
+   [
+    "20:15",
+    "IV preparation and insertion"
+   ],
+   [
+    "40:06",
+    "Venipuncture and key tips"
+   ],
+   [
+    "1:09:16",
+    "Needle insertion technique and vein selection"
+   ],
+   [
+    "1:47:40",
+    "Urinary (Foley) catheter insertion"
+   ],
+   [
+    "2:02:02",
+    "Routes of medication administration"
+   ],
+   [
+    "2:28:05",
+    "Correct blood-pressure technique"
+   ],
+   [
+    "2:52:28",
+    "Counting pulse and respirations"
+   ]
+  ]
+ },
+ {
+  "id": "q0KneeHUEhA",
+  "dur": "23:20",
+  "tr": true,
+  "cat": "گوارش و تغذیه",
+  "cat_en": "GI & Nutrition",
+  "src": "RegisteredNurseRN",
+  "views": 21702,
+  "publishedAt": "2026-09-17",
+  "fa": "لوله‌های بینی–معده‌ای (NG) و تغذیه روده‌ای کوتاه‌مدت",
+  "en": "Nasogastric (NG) & GI Feeding Tubes (Non-Surgical): Salem Sump, Small-Bore, Large-Bore",
+  "sum": "انواع لوله NG (سالم‌سامپ، باریک، قطور)، موارد منع، اندازه‌گیری NEX، تأیید جای لوله، فلاش و تجویز دارو — کامل‌ترین مرور لوله‌های غیرجراحی برای آزمون.",
+  "sum_en": "Short-term non-surgical feeding tubes: Salem sump, small-bore, and large-bore NG tubes — contraindications, NEX measurement, placement verification, flushing, and medication administration.",
+  "ch": [
+   [
+    "0:00",
+    "معرفی لوله‌های غیرجراحی کوتاه‌مدت"
+   ],
+   [
+    "1:44",
+    "لاواژ و تخلیه معده"
+   ],
+   [
+    "3:00",
+    "موارد منع و خطرات ورود لوله"
+   ],
+   [
+    "5:34",
+    "لوله قطور در برابر باریک"
+   ],
+   [
+    "8:07",
+    "فیکس کردن و مراقبت از لوله"
+   ],
+   [
+    "14:05",
+    "اندازه‌گیری سه‌لندمارکی (NEX)"
+   ],
+   [
+    "16:02",
+    "تأیید جای لوله و pH"
+   ],
+   [
+    "21:41",
+    "ترتیب فلاش، دارو و تغذیه"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro: short-term non-surgical feeding tubes"
+   ],
+   [
+    "1:44",
+    "Lavage and gastric decompression"
+   ],
+   [
+    "3:00",
+    "Contraindications and insertion risks"
+   ],
+   [
+    "5:34",
+    "Large-bore versus small-bore tubes"
+   ],
+   [
+    "8:07",
+    "Securing and caring for the tube"
+   ],
+   [
+    "14:05",
+    "Three-landmark measurement (NEX)"
+   ],
+   [
+    "16:02",
+    "Verifying tube placement and pH"
+   ],
+   [
+    "21:41",
+    "Flush, medication and feeding sequence"
+   ]
+  ]
+ },
+ {
+  "id": "Z4i864QJNrs",
+  "dur": "1:36:09",
+  "tr": true,
+  "cat": "آناتومی",
+  "cat_en": "Anatomy",
+  "src": "RegisteredNurseRN",
+  "views": 50284,
+  "publishedAt": "2026-09-09",
+  "fa": "استخوان‌های بدن با ترفندهای حفظی (مرور جامع ۹۶ دقیقه‌ای)",
+  "en": "Bones Made Easy: Anatomy of Bones of the Body with Memory Tricks",
+  "sum": "از جمجمه تا پا: استخوان‌های محوری و اندامی با ترفند حافظه، تفاوت لگن زن و مرد، و نکات بالینی (نقاط نبض، شکستگی‌ها) — مرور سریع اسکلتی‌عضلانی.",
+  "sum_en": "Head-to-toe bone review with memory tricks, male-versus-female pelvis differences, and clinical pearls on pulse points and fractures — rapid musculoskeletal revision.",
+  "ch": [
+   [
+    "0:00",
+    "اسکلت محوری و اندامی + استخوان‌های جمجمه"
+   ],
+   [
+    "9:58",
+    "کمربند شانه‌ای و کتف"
+   ],
+   [
+    "18:14",
+    "دنده‌ها و استرنوم"
+   ],
+   [
+    "29:19",
+    "ستون مهره‌ها"
+   ],
+   [
+    "37:39",
+    "هومروس و آرنج"
+   ],
+   [
+    "48:00",
+    "استخوان‌های دست"
+   ],
+   [
+    "55:59",
+    "ساکروم و لگن"
+   ],
+   [
+    "1:00:35",
+    "تفاوت لگن زن و مرد"
+   ],
+   [
+    "1:12:18",
+    "فمور، کشکک و زانو"
+   ],
+   [
+    "1:17:39",
+    "ساق، مچ و استخوان‌های پا"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Axial and appendicular skeleton + skull bones"
+   ],
+   [
+    "9:58",
+    "Shoulder girdle and scapula"
+   ],
+   [
+    "18:14",
+    "Ribs and sternum"
+   ],
+   [
+    "29:19",
+    "The vertebral column"
+   ],
+   [
+    "37:39",
+    "Humerus and elbow"
+   ],
+   [
+    "48:00",
+    "Bones of the hand"
+   ],
+   [
+    "55:59",
+    "Sacrum and pelvis"
+   ],
+   [
+    "1:00:35",
+    "Male versus female pelvis"
+   ],
+   [
+    "1:12:18",
+    "Femur, patella and knee"
+   ],
+   [
+    "1:17:39",
+    "Lower leg, ankle and foot bones"
+   ]
+  ]
+ },
+ {
+  "id": "AgT-xm8tx-A",
+  "dur": "8:52",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "RegisteredNurseRN",
+  "views": 43748,
+  "publishedAt": "2026-09-02",
+  "fa": "۷ اشتباه رایج اندازه‌گیری فشار خون + تمرین عملی گام‌به‌گام",
+  "en": "Blood Pressure Measurement Mistakes to Avoid | Practice Tutorial",
+  "sum": "خطاهای شایعی که عدد را خراب می‌کند (گرد کردن فرد، کاف نامناسب، آمادگی بیمار) به‌علاوه تمرین کامل فشار لمسی و سمعی و تفسیر فشار نبض — کوتاه و کاربردی.",
+  "sum_en": "Seven common blood-pressure mistakes that corrupt readings, plus full step-by-step tactile and auscultatory practice with pulse-pressure interpretation.",
+  "ch": [
+   [
+    "0:00",
+    "اشتباه اول: ثبت اعداد فرد"
+   ],
+   [
+    "1:04",
+    "طبقه‌بندی فشار و هایپرتنشن"
+   ],
+   [
+    "2:19",
+    "سندرم روپوش سفید"
+   ],
+   [
+    "3:20",
+    "سایز نامناسب کاف"
+   ],
+   [
+    "3:58",
+    "آمادگی بیمار قبل از اندازه‌گیری"
+   ],
+   [
+    "4:12",
+    "فشار لمسی و خطای سیستولیک کاذب"
+   ],
+   [
+    "5:20",
+    "فشار نبض و تفسیر آن"
+   ],
+   [
+    "5:58",
+    "تمرین عملی گام‌به‌گام"
+   ],
+   [
+    "8:03",
+    "شنیدن صداهای کوروتکوف"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Mistake #1: documenting odd numbers"
+   ],
+   [
+    "1:04",
+    "Blood-pressure classification and hypertension"
+   ],
+   [
+    "2:19",
+    "White coat syndrome"
+   ],
+   [
+    "3:20",
+    "Wrong cuff size"
+   ],
+   [
+    "3:58",
+    "Preparing the patient before measuring"
+   ],
+   [
+    "4:12",
+    "Palpatory pressure and falsely low systolic"
+   ],
+   [
+    "5:20",
+    "Pulse pressure and its interpretation"
+   ],
+   [
+    "5:58",
+    "Step-by-step practical demonstration"
+   ],
+   [
+    "8:03",
+    "Listening for Korotkoff sounds"
+   ]
+  ]
+ },
+ {
+  "id": "3eKThL40ORQ",
+  "dur": "24:18",
+  "tr": true,
+  "cat": "گوارش و تغذیه",
+  "cat_en": "GI & Nutrition",
+  "src": "RegisteredNurseRN",
+  "views": 35477,
+  "publishedAt": "2026-08-26",
+  "fa": "گاستروستومی و ژژونوستومی: لوله G، لوله J و لوله GJ",
+  "en": "GI Feeding Tubes: G-Tube, J-Tube, GJ-Tube Gastrostomy & Jejunostomy Nursing Review",
+  "sum": "لوله‌های جراحی بلندمدت: روش‌های PEG و RIG، مراقبت از استوما و بالون، چرخش روزانه، بررسی pH، رفع گرفتگی و تجویز دارو — پرتکرار در سؤالات مدیکال‌سرجیکال.",
+  "sum_en": "Long-term surgical feeding tubes — G-tube, J-tube, and GJ-tube: PEG/RIG placement, stoma and balloon care, daily rotation, pH verification, declogging, and medication administration.",
+  "ch": [
+   [
+    "0:00",
+    "معرفی لوله‌های جراحی بلندمدت"
+   ],
+   [
+    "1:13",
+    "روش‌های PEG و RIG"
+   ],
+   [
+    "3:19",
+    "انواع لوله G و اجزای آن"
+   ],
+   [
+    "5:11",
+    "سپر خارجی و بالون"
+   ],
+   [
+    "7:56",
+    "لوله J و دکمه‌های low-profile"
+   ],
+   [
+    "12:02",
+    "چرخش روزانه و تمیزکاری"
+   ],
+   [
+    "16:27",
+    "تأیید جای لوله و تست pH"
+   ],
+   [
+    "18:21",
+    "گرفتگی لوله و خرد کردن دارو"
+   ],
+   [
+    "21:38",
+    "مستندسازی و تعویض پانسمان"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro: long-term surgical feeding tubes"
+   ],
+   [
+    "1:13",
+    "PEG and RIG placement methods"
+   ],
+   [
+    "3:19",
+    "Types of G-tube and their components"
+   ],
+   [
+    "5:11",
+    "External bumper and balloon"
+   ],
+   [
+    "7:56",
+    "J-tube and low-profile buttons"
+   ],
+   [
+    "12:02",
+    "Daily rotation and cleaning"
+   ],
+   [
+    "16:27",
+    "Verifying placement and pH testing"
+   ],
+   [
+    "18:21",
+    "Tube clogging and crushing medications"
+   ],
+   [
+    "21:38",
+    "Documentation and dressing changes"
+   ]
+  ]
+ },
+ {
+  "id": "BdCKkgnk8-E",
+  "dur": "9:47",
+  "tr": true,
+  "cat": "زنان و زایمان",
+  "cat_en": "Maternity",
+  "src": "RegisteredNurseRN",
+  "views": 13540,
+  "publishedAt": "2026-08-10",
+  "fa": "روش‌های مانعی پیشگیری از بارداری (نکات تستی مامایی)",
+  "en": "Birth Control Barrier Methods of Contraception | Maternity Nursing Review",
+  "sum": "کاندوم، دیافراگم، کلاهک سرویکس و اسپرم‌کش‌ها: مکانیسم، آموزش به مددجو، عوارض (شوک سمی) و موارد منع — خلاصه نکات امتحانی بهداشت باروری.",
+  "sum_en": "Barrier contraception for maternity nursing exams: condoms, spermicides, diaphragm, and cervical cap — mechanism, patient teaching, toxic shock syndrome, and contraindications.",
+  "ch": [
+   [
+    "0:00",
+    "مکانیسم روش‌های مانعی"
+   ],
+   [
+    "0:48",
+    "اصول عمومی و تاریخ انقضا"
+   ],
+   [
+    "1:30",
+    "کاندوم مردانه و نگهداری صحیح"
+   ],
+   [
+    "2:46",
+    "کاندوم زنانه"
+   ],
+   [
+    "3:18",
+    "اسپرم‌کش‌ها و نونوکسینول-۹"
+   ],
+   [
+    "4:57",
+    "دیافراگم: گذاشتن و زمان ماندن"
+   ],
+   [
+    "5:45",
+    "شوک سمی: علائم و اقدام فوری"
+   ],
+   [
+    "7:10",
+    "موارد منع دیافراگم"
+   ],
+   [
+    "7:41",
+    "کلاهک سرویکس (FemCap)"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "How barrier methods work"
+   ],
+   [
+    "0:48",
+    "General principles and expiry dates"
+   ],
+   [
+    "1:30",
+    "Male condoms and correct storage"
+   ],
+   [
+    "2:46",
+    "Female condoms"
+   ],
+   [
+    "3:18",
+    "Spermicides and nonoxynol-9"
+   ],
+   [
+    "4:57",
+    "Diaphragm: insertion and how long to leave it in"
+   ],
+   [
+    "5:45",
+    "Toxic shock syndrome: signs and immediate action"
+   ],
+   [
+    "7:10",
+    "Contraindications to the diaphragm"
+   ],
+   [
+    "7:41",
+    "Cervical cap (FemCap)"
+   ]
+  ]
+ },
+ {
+  "id": "qfbdF4t7WXg",
+  "dur": "16:16",
+  "tr": true,
+  "cat": "گوارش و تغذیه",
+  "cat_en": "GI & Nutrition",
+  "src": "RegisteredNurseRN",
+  "views": 23564,
+  "publishedAt": "2026-08-04",
+  "fa": "تغذیه وریدی در برابر روده‌ای: TPN در برابر PPN",
+  "en": "Parenteral vs Enteral Nutrition: TPN vs PPN | Med-Surg Nursing Review",
+  "sum": "مقایسه کامل TPN و تغذیه انترال: اندیکاسیون‌ها، عوارض متابولیک (قند، ریفیدینگ)، مراقبت پرستاری و تأیید جای لوله — مبحث پرتکرار آزمون ارشد.",
+  "sum_en": "TPN versus enteral nutrition compared: indications, metabolic complications including hyperglycemia and refeeding syndrome, nursing care, and tube-placement verification.",
+  "ch": [
+   [
+    "0:00",
+    "اندیکاسیون‌ها: چرا تغذیه حمایتی؟"
+   ],
+   [
+    "1:43",
+    "انترال در برابر پارنترال"
+   ],
+   [
+    "3:27",
+    "شروع TPN و محل انفوزیون"
+   ],
+   [
+    "4:23",
+    "دکستروز و هیپرتونیک بودن محلول"
+   ],
+   [
+    "6:15",
+    "پایش قند و انسولین"
+   ],
+   [
+    "7:13",
+    "سندرم تغذیه مجدد (Refeeding)"
+   ],
+   [
+    "10:17",
+    "لوله‌های انترال کوتاه‌مدت"
+   ],
+   [
+    "12:07",
+    "موارد منع لوله بینی–معده‌ای"
+   ],
+   [
+    "14:27",
+    "تأیید جای لوله و مراقبت روزانه"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Indications: why nutritional support?"
+   ],
+   [
+    "1:43",
+    "Enteral versus parenteral nutrition"
+   ],
+   [
+    "3:27",
+    "Starting TPN and the infusion site"
+   ],
+   [
+    "4:23",
+    "Dextrose and the hypertonic solution"
+   ],
+   [
+    "6:15",
+    "Monitoring glucose and insulin"
+   ],
+   [
+    "7:13",
+    "Refeeding syndrome"
+   ],
+   [
+    "10:17",
+    "Short-term enteral tubes"
+   ],
+   [
+    "12:07",
+    "Contraindications to NG tube insertion"
+   ],
+   [
+    "14:27",
+    "Verifying placement and daily care"
+   ]
+  ]
+ },
+ {
+  "id": "WJcFIjv6LkE",
+  "dur": "7:48",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Lecturio Nursing",
+  "views": 644,
+  "publishedAt": "2026-10-11",
+  "fa": "فارماکولوژی شیمی‌درمانی به‌زبان ساده | مرور NCLEX",
+  "en": "Chemotherapy Pharmacology Made Easy | NCLEX Review",
+  "sum": "مرور گروه‌های اصلی داروهای شیمی‌درمانی (آلکیلان‌ها، آنتی‌متابولیت‌ها، تاکسان‌ها)، عوارض پرتکرار مثل سرکوب مغز استخوان و تهوع، و نکات ایمنی تجویز و مراقبت پرستاری — مبحث پرتکرار فارماکولوژی در NCLEX و ارشد.",
+  "sum_en": "High-yield chemotherapy pharmacology for NCLEX: major drug classes, hallmark toxicities such as myelosuppression, and safe-administration nursing points.",
+  "ch": [
+   [
+    "0:04",
+    "سرطان چیست: رشد کنترل‌نشده، تهاجم و متاستاز"
+   ],
+   [
+    "0:43",
+    "روش‌های درمان: جراحی، رادیوتراپی و دارو"
+   ],
+   [
+    "0:51",
+    "عوامل سیتوتوکسیک: گروه اصلی آزمون"
+   ],
+   [
+    "1:22",
+    "چرا شیمی‌درمانی سلول‌های پررشد را می‌زند"
+   ],
+   [
+    "2:34",
+    "پنج بافت پررشد: مو، گوارش، پوست، تناسلی و مغز استخوان"
+   ],
+   [
+    "3:20",
+    "ترفندهای حفظی برای لیست پنج‌تایی"
+   ],
+   [
+    "6:29",
+    "روش‌های تجویز: متناوب، ترکیبی و ناحیه‌ای"
+   ],
+   [
+    "7:13",
+    "مرور: شیمی‌درمانی چه بافتی را هدف می‌گیرد؟"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:04",
+    "What cancer is: unregulated growth, invasion, metastasis"
+   ],
+   [
+    "0:43",
+    "Treatment options: surgery, radiation and drugs"
+   ],
+   [
+    "0:51",
+    "Cytotoxic agents: the main NCLEX group"
+   ],
+   [
+    "1:22",
+    "Why chemo hits high-growth-fraction cells"
+   ],
+   [
+    "2:34",
+    "The five fast-growing tissues"
+   ],
+   [
+    "3:20",
+    "Memory tricks for the five-item list"
+   ],
+   [
+    "6:29",
+    "How chemo is given: intermittent, combination, regional"
+   ],
+   [
+    "7:13",
+    "Recall check: what does chemotherapy target?"
+   ]
+  ]
+ },
+ {
+  "id": "8l1LBMGa7LI",
+  "dur": "12:36",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Lecturio Nursing",
+  "views": 648,
+  "publishedAt": "2026-10-04",
+  "fa": "آیا می‌توانید در این آزمون تمرینی فارماکولوژی پرستاری قبول شوید؟",
+  "en": "Can You Pass This Nursing Pharmacology Practice Quiz?",
+  "sum": "آزمون تمرینی چندگزینه‌ای فارماکولوژی پرستاری با تحلیل گزینه‌ها و منطق حذف پاسخ غلط — مناسب خودسنجی پیش از آزمون و تثبیت نکات عوارض دارویی و محاسبات در قالب تست NCLEX.",
+  "sum_en": "Interactive nursing pharmacology practice quiz with answer rationales — self-test drug classes, side effects, and dosage logic before exam day.",
+  "ch": [
+   [
+    "0:00",
+    "چگونه این مسابقه کار می‌کند: چهار حوزه و سه سطح سؤال"
+   ],
+   [
+    "0:32",
+    "ضدویوری‌ها: زمان شروع در آنفلوانزا و دوز پاکس‌لوید بر اساس eGFR"
+   ],
+   [
+    "2:12",
+    "ضدویوری‌ها: آموزش درباره رویاهای عجیب افاویرنز"
+   ],
+   [
+    "3:01",
+    "غدد: سرکوب محور HPA و پیوگلیتازون در نارسایی قلبی"
+   ],
+   [
+    "4:33",
+    "غدد: آستانه‌های هیپوگلیسمی در بیمار انسولینی"
+   ],
+   [
+    "5:30",
+    "گوارش: آموکسی‌سیلین برای هلیکوباکتر و موارد منع ملین محرک"
+   ],
+   [
+    "7:51",
+    "گوارش: ارزیابی اسهال قبل از داروی ضدحرکتی"
+   ],
+   [
+    "9:01",
+    "شیمی‌درمانی: ترتیب کاهش سلول‌های خونی، هیپریوریسمی و اریتروپویتین"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "How the challenge works: four areas, three levels"
+   ],
+   [
+    "0:32",
+    "Antivirals: influenza timing and Paxlovid dosing by eGFR"
+   ],
+   [
+    "2:12",
+    "Antivirals: teaching about efavirenz and strange dreams"
+   ],
+   [
+    "3:01",
+    "Endocrine: HPA-axis suppression and pioglitazone"
+   ],
+   [
+    "4:33",
+    "Endocrine: hypoglycemia thresholds on insulin"
+   ],
+   [
+    "5:30",
+    "GI: amoxicillin for H. pylori and laxative cautions"
+   ],
+   [
+    "7:51",
+    "GI: assessing diarrhea before an anti-motility drug"
+   ],
+   [
+    "9:01",
+    "Cancer: cell-line drop order, hyperuricemia, erythropoietin"
+   ]
+  ]
+ },
+ {
+  "id": "V3ad8hoQVf8",
+  "dur": "18:04",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "Lecturio Nursing",
+  "views": 1609,
+  "publishedAt": "2026-09-20",
+  "fa": "تسلط بر مقیاس کمای گلاسکو (GCS) | پادکست پرستاری لکتوریو قسمت ۱۵",
+  "en": "Mastering the Glasgow Coma Scale (GCS) | Lecturio Nursing Podcast EP. 15",
+  "sum": "آموزش جزءبه‌جزء مقیاس کمای گلاسکو (پاسخ چشمی، کلامی و حرکتی)، نحوه نمره‌دهی و تفسیر بالینی در بیماران ترومایی و نورولوژیک — مهارت پرتکرار ارزیابی عصبی در آزمون و بالین.",
+  "sum_en": "Glasgow Coma Scale broken down component by component — eye, verbal, and motor scoring with clinical interpretation for trauma and neuro patients.",
+  "ch": [
+   [
+    "0:00",
+    "چرا خواندن مغز بیمار بیهوش دشوار است"
+   ],
+   [
+    "1:11",
+    "GCS چه چیزی را می‌سنجد: هوشیاری در برابر عملکرد ذهنی"
+   ],
+   [
+    "2:11",
+    "چه زمانی از GCS و چه زمانی از NIHSS استفاده کنیم"
+   ],
+   [
+    "3:22",
+    "سه دسته ارزیابی: چشم، دهان و دست"
+   ],
+   [
+    "3:49",
+    "باز شدن چشم: ۱ تا ۴ امتیاز"
+   ],
+   [
+    "4:43",
+    "پاسخ کلامی: ۱ تا ۵ امتیاز"
+   ],
+   [
+    "5:55",
+    "پاسخ حرکتی: ۱ تا ۶ امتیاز"
+   ],
+   [
+    "6:17",
+    "محل‌یابی (۵) در برابر عقب‌کشیدن (۴)"
+   ],
+   [
+    "7:40",
+    "چرا حداکثر نمره‌ها ۴، ۵ و ۶ هستند"
+   ],
+   [
+    "8:37",
+    "جمع نمره: ۳ تا ۱۵ و مناطق خطر"
+   ],
+   [
+    "9:21",
+    "GCS کمتر یا مساوی ۸: حفظ راه هوایی و انتوباسیون"
+   ],
+   [
+    "10:56",
+    "NT (غیرقابل ارزیابی): فلج، آرام‌بخشی و انتوباسیون"
+   ],
+   [
+    "11:45",
+    "وضعیت دکورتیکیت (نمره ۳)"
+   ],
+   [
+    "12:51",
+    "وضعیت دسربریت (نمره ۲) و آسیب ساقه مغز"
+   ],
+   [
+    "14:43",
+    "رویکرد بالینی: مشاهده، تشدید محرک و محاسبه"
+   ],
+   [
+    "15:36",
+    "محدودیت GCS: مردمک‌ها را جداگانه بررسی کنید"
+   ],
+   [
+    "17:05",
+    "جمع‌بندی سه نکته کلیدی"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Why reading an unresponsive brain is hard"
+   ],
+   [
+    "1:11",
+    "What the GCS measures: LOC versus mentation"
+   ],
+   [
+    "2:11",
+    "When to use the GCS instead of the NIHSS"
+   ],
+   [
+    "3:22",
+    "The three categories: eye, mouth, moving arm"
+   ],
+   [
+    "3:49",
+    "Eye opening: 1 to 4 points"
+   ],
+   [
+    "4:43",
+    "Verbal response: 1 to 5 points"
+   ],
+   [
+    "5:55",
+    "Motor response: 1 to 6 points"
+   ],
+   [
+    "6:17",
+    "Localizing (5) versus withdrawing (4)"
+   ],
+   [
+    "7:40",
+    "Why the maximums are 4, 5 and 6"
+   ],
+   [
+    "8:37",
+    "Adding it up: 3 to 15 and the danger zones"
+   ],
+   [
+    "9:21",
+    "GCS 8 or less: airway protection and intubation"
+   ],
+   [
+    "10:56",
+    "NT (not testable): paralysis, sedation, intubation"
+   ],
+   [
+    "11:45",
+    "Decorticate posturing (score 3)"
+   ],
+   [
+    "12:51",
+    "Decerebrate posturing (score 2) and brainstem damage"
+   ],
+   [
+    "14:43",
+    "The bedside approach: observe, escalate, calculate"
+   ],
+   [
+    "15:36",
+    "What the GCS misses: check pupils separately"
+   ],
+   [
+    "17:05",
+    "Recap: the three core takeaways"
+   ]
+  ]
+ },
+ {
+  "id": "8nkJZ3g4B4Q",
+  "dur": "9:24",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "Klimek Reviews",
+  "views": 55798,
+  "publishedAt": "2026-06-15",
+  "fa": "آمادگی NCLEX: سؤالات مراقبت پایه و آسایش بیمار با دکتر شارون",
+  "en": "NCLEX PREP: Basic Care and Comfort Questions with Dr. Sharon",
+  "sum": "حل تشریحی سؤالات NCLEX از حوزه مراقبت پایه و آسایش (فعالیت‌های روزانه، تحرک، تغذیه و کنترل درد) با منطق انتخاب گزینه صحیح — تقویت مهارت تست‌زنی در پرتکرارترین حوزه آزمون.",
+  "sum_en": "Worked NCLEX-style Basic Care and Comfort questions on ADLs, mobility, nutrition, and comfort measures with test-taking strategy.",
+  "ch": [
+   [
+    "0:00",
+    "معرفی و مجموعه مراقبت پایه و آسایش"
+   ],
+   [
+    "0:43",
+    "پیشگیری از عوارض بی‌حرکتی پس از جراحی ارتوپدی"
+   ],
+   [
+    "2:33",
+    "کاهش اشتها در دمانس پیشرفته: اول ارزیابی"
+   ],
+   [
+    "3:40",
+    "آموزش تخلیه مثانه برای بی‌اختیاری اورژانسی"
+   ],
+   [
+    "4:33",
+    "محیط دوست‌دار خواب: تجمیع مراقبت ۹۰ دقیقه‌ای"
+   ],
+   [
+    "5:32",
+    "زخم فشار: وضعیتی که باید اجتناب شود"
+   ],
+   [
+    "6:32",
+    "خوردن در همی‌پلژی: تکنیک چانه پایین"
+   ],
+   [
+    "7:26",
+    "پوست خشک در شست‌وشوی بستری: آب ولرم و مرطوب‌کننده"
+   ],
+   [
+    "8:11",
+    "آموزش عصا: عصا و پای ضعیف با هم جلو می‌روند"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Welcome and the basic care and comfort set"
+   ],
+   [
+    "0:43",
+    "Preventing immobility complications after orthopedic surgery"
+   ],
+   [
+    "2:33",
+    "Decreased appetite in end-stage dementia: assess first"
+   ],
+   [
+    "3:40",
+    "Bladder training for urge incontinence"
+   ],
+   [
+    "4:33",
+    "Sleep-friendly environment: cluster care for 90 minutes"
+   ],
+   [
+    "5:32",
+    "Pressure injuries: which position to avoid"
+   ],
+   [
+    "6:32",
+    "Eating with hemiplegia: the chin-tuck technique"
+   ],
+   [
+    "7:26",
+    "Dry skin during a bed bath: tepid water and emollient"
+   ],
+   [
+    "8:11",
+    "Teaching cane use: cane and weak leg move together"
+   ]
+  ]
+ },
+ {
+  "id": "bIAnJoErzrI",
+  "dur": "12:30",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "Klimek Reviews",
+  "views": 30973,
+  "publishedAt": "2026-06-08",
+  "fa": "آمادگی NCLEX: سؤالات کاهش پتانسیل خطر با دکتر شارون",
+  "en": "NCLEX PREP: Reduction in Risk Potential Questions with Dr. Sharon",
+  "sum": "حل تشریحی سؤالات حوزه کاهش پتانسیل خطر در NCLEX (پیشگیری از عوارض، پایش علائم حیاتی و اقدامات ایمنی) با تحلیل استدلالی گزینه‌ها — مناسب مرور نهایی مدیکال‌سرجیکال.",
+  "sum_en": "Worked NCLEX-style Reduction of Risk Potential questions on complication prevention, monitoring, and safety interventions with rationales.",
+  "ch": [
+   [
+    "0:00",
+    "معرفی و شروع سؤالات کاهش پتانسیل خطر"
+   ],
+   [
+    "1:53",
+    "پس از جراحی آنوریسم آئورت: یافته‌ای که باید فوراً گزارش شود"
+   ],
+   [
+    "2:44",
+    "آزمایش D-dimer دقیقاً چه چیزی را اندازه می‌گیرد؟"
+   ],
+   [
+    "3:49",
+    "پس از آنژیوگرافی: کاهش خطر خونریزی و آمبولی"
+   ],
+   [
+    "5:21",
+    "اولین نشانه افزایش فشار داخل جمجمه"
+   ],
+   [
+    "6:34",
+    "مشکوک به سندرم کمپارتمان: اقدام اول"
+   ],
+   [
+    "9:05",
+    "لوله سینه‌ای: حباب‌زدن مداوم یعنی نشتی هوا"
+   ],
+   [
+    "10:23",
+    "پلاکت ۲۲٫۰۰۰: احتیاط‌های خونریزی"
+   ],
+   [
+    "11:34",
+    "بیماری مزمن کلیه و کنتراست وریدی: قطع متفورمین"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Welcome and the risk-potential question set"
+   ],
+   [
+    "1:53",
+    "After AAA repair: the finding to report right away"
+   ],
+   [
+    "2:44",
+    "What a D-dimer actually measures"
+   ],
+   [
+    "3:49",
+    "After cardiac catheterization: reducing hemorrhage risk"
+   ],
+   [
+    "5:21",
+    "Earliest sign of raised intracranial pressure"
+   ],
+   [
+    "6:34",
+    "Suspected compartment syndrome: the first action"
+   ],
+   [
+    "9:05",
+    "Chest tube: constant bubbling means an air leak"
+   ],
+   [
+    "10:23",
+    "Platelets 22,000: bleeding precautions"
+   ],
+   [
+    "11:34",
+    "Chronic kidney disease and IV contrast: hold metformin"
+   ]
+  ]
+ },
+ {
+  "id": "UKVRoWizoiQ",
+  "dur": "11:33",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Klimek Reviews",
+  "views": 31780,
+  "publishedAt": "2026-03-25",
+  "fa": "آمادگی NCLEX: داروهای فشار خون",
+  "en": "NCLEX PREP: BP MEDS",
+  "sum": "مرور داروهای فشار خون (مهارکننده ACE، ARB، بتابلاکر، مسدودکننده کانال کلسیم و دیورتیک‌ها) با عوارض کلیدی و نکات مراقبت پرستاری — از پرتکرارترین مباحث فارماکولوژی NCLEX و ارشد.",
+  "sum_en": "Blood-pressure medications demystified for NCLEX: ACE inhibitors, ARBs, beta blockers, calcium-channel blockers, and diuretics with key side effects and nursing considerations.",
+  "ch": [
+   [
+    "0:00",
+    "داروهای فشار خون در آزمون NCLEX"
+   ],
+   [
+    "0:53",
+    "فوروزماید: پایش پتاسیم"
+   ],
+   [
+    "1:17",
+    "فشار ۹۸ بر ۶۲: دوز را نگه دار و اطلاع بده"
+   ],
+   [
+    "2:51",
+    "سرفه خشک: نشانه مهارکننده ACE"
+   ],
+   [
+    "3:45",
+    "آسم شدید: زیر سؤال بردن پرانولول"
+   ],
+   [
+    "4:19",
+    "اسپیرونولاکتون: پرهیز از جایگزین نمک"
+   ],
+   [
+    "5:20",
+    "پرازوسین: افت فشار با اولین دوز"
+   ],
+   [
+    "7:06",
+    "قطع چسب کلونیدین: فشار برگشتی"
+   ],
+   [
+    "8:13",
+    "دیگوکسین و وراپامیل: بررسی نبض آپیکال"
+   ],
+   [
+    "9:05",
+    "نیتروپروساید برای بحران فشار خون"
+   ],
+   [
+    "10:15",
+    "آموزش برای هر داروی فشار خون جدید"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Blood-pressure medications on the NCLEX"
+   ],
+   [
+    "0:53",
+    "Furosemide: watch the potassium"
+   ],
+   [
+    "1:17",
+    "A BP of 98/62: hold the dose and call"
+   ],
+   [
+    "2:51",
+    "Dry cough: the ACE-inhibitor (-pril) clue"
+   ],
+   [
+    "3:45",
+    "Severe asthma: question propranolol"
+   ],
+   [
+    "4:19",
+    "Spironolactone: avoid salt substitutes"
+   ],
+   [
+    "5:20",
+    "Prazosin: first-dose hypotension"
+   ],
+   [
+    "7:06",
+    "Stopping clonidine: rebound hypertension"
+   ],
+   [
+    "8:13",
+    "Digoxin plus verapamil: check the apical pulse"
+   ],
+   [
+    "9:05",
+    "Nitroprusside for hypertensive crisis"
+   ],
+   [
+    "10:15",
+    "Teaching for any new blood-pressure drug"
+   ]
+  ]
+ }
+]

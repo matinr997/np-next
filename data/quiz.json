@@ -1,0 +1,962 @@
+[
+ {
+  "qf": "در کدام فاز چرخه قلبی، دریچه‌های AV بسته‌اند ولی دریچه‌های سمیلونار هنوز باز نشده‌اند؟",
+  "of": [
+   "انقباض ایزوولومتریک بطنی",
+   "تخلیه سریع بطنی",
+   "پر شدن غیرفعال بطن‌ها",
+   "دیاستول دهلیزی"
+  ],
+  "qe": "During which phase are the AV valves closed but the semilunar valves not yet open?",
+  "oe": [
+   "Isovolumetric ventricular contraction",
+   "Rapid ventricular ejection",
+   "Passive ventricular filling",
+   "Atrial diastole"
+  ],
+  "c": 0,
+  "wf": "در انقباض ایزوولومتریک حجم ثابت می‌ماند تا فشار بطن از آئورت بیشتر شود.",
+  "we": "Volume stays constant until ventricular pressure exceeds aortic pressure.",
+  "ts": 612
+ },
+ {
+  "qf": "موج P در نوار قلب نشان‌دهنده کدام رویداد است؟",
+  "of": [
+   "دپولاریزاسیون دهلیزها",
+   "دپولاریزاسیون بطن‌ها",
+   "رپولاریزاسیون بطن‌ها",
+   "تأخیر گره AV"
+  ],
+  "qe": "What event does the P wave on the ECG represent?",
+  "oe": [
+   "Atrial depolarization",
+   "Ventricular depolarization",
+   "Ventricular repolarization",
+   "AV nodal delay"
+  ],
+  "c": 0,
+  "wf": "شلیک گره SA دهلیزها را دپولاریزه می‌کند و موج P ساخته می‌شود.",
+  "we": "SA node firing depolarizes the atria, producing the P wave.",
+  "ts": 534
+ },
+ {
+  "qf": "صدای اول قلب (S1) مربوط به بسته شدن کدام دریچه‌هاست؟",
+  "of": [
+   "میترال و تریکوسپید (AV)",
+   "آئورتی و پولمونر",
+   "ورید اجوف و ریوی",
+   "کرونری چپ و راست"
+  ],
+  "qe": "The first heart sound (S1) is caused by closure of which valves?",
+  "oe": [
+   "Mitral and tricuspid (AV)",
+   "Aortic and pulmonic",
+   "Venae cavae and pulmonary veins",
+   "Left and right coronary"
+  ],
+  "c": 0,
+  "wf": "بسته شدن دریچه‌های AV در شروع سیستول بطنی صدای S1 را می‌سازد.",
+  "we": "AV valve closure at the start of ventricular systole creates S1.",
+  "ts": 272
+ },
+ {
+  "qf": "کدام صفحه بدن را به نیمه راست و چپ تقسیم می‌کند؟",
+  "of": [
+   "ساژیتال",
+   "فرونتال (کرونال)",
+   "عرضی (ترانسورس)",
+   "مایل"
+  ],
+  "qe": "Which plane divides the body into right and left halves?",
+  "oe": [
+   "Sagittal",
+   "Frontal (coronal)",
+   "Transverse",
+   "Oblique"
+  ],
+  "c": 0,
+  "wf": "صفحه ساژیتال (میانی) بدن را به دو نیمه راست و چپ تقسیم می‌کند.",
+  "we": "The (mid)sagittal plane divides the body into right and left halves.",
+  "ts": 1122
+ },
+ {
+  "qf": "اصطلاح «دیستال» به چه معناست؟",
+  "of": [
+   "دورتر از تنه یا نقطه اتصال",
+   "نزدیک‌تر به تنه",
+   "نزدیک‌تر به خط وسط",
+   "دورتر از خط وسط"
+  ],
+  "qe": "What does the term 'distal' mean?",
+  "oe": [
+   "Farther from the trunk or point of attachment",
+   "Closer to the trunk",
+   "Closer to the midline",
+   "Farther from the midline"
+  ],
+  "c": 0,
+  "wf": "دیستال یعنی دور از تنه؛ نقطه مقابل آن پروگزیمال است.",
+  "we": "Distal means away from the trunk; the opposite is proximal.",
+  "ts": 258
+ },
+ {
+  "qf": "حرکت دور کردن اندام از خط وسط بدن چه نام دارد؟",
+  "of": [
+   "ابداکشن",
+   "اداکشن",
+   "فلکشن",
+   "روتیشن"
+  ],
+  "qe": "Moving a limb away from the midline is called?",
+  "oe": [
+   "Abduction",
+   "Adduction",
+   "Flexion",
+   "Rotation"
+  ],
+  "c": 0,
+  "wf": "ابداکشن = دور شدن از خط وسط؛ اداکشن = نزدیک شدن.",
+  "we": "Abduction = away from midline; adduction = toward it.",
+  "ts": 1716
+ },
+ {
+  "qf": "ترتیب صحیح کشیدن انسولین مخلوط چیست؟",
+  "of": [
+   "اول شفاف (Regular) بعد کدر (NPH)",
+   "اول کدر بعد شفاف",
+   "ترتیب مهم نیست",
+   "فقط یکی کشیده شود"
+  ],
+  "qe": "What is the correct order for drawing up mixed insulin?",
+  "oe": [
+   "Clear (Regular) first, then cloudy (NPH)",
+   "Cloudy first, then clear",
+   "Order does not matter",
+   "Draw only one type"
+  ],
+  "c": 0,
+  "wf": "قانون «شفاف به کدر» از آلودگی ویال شفاف جلوگیری می‌کند.",
+  "we": "'Clear to cloudy' keeps the clear vial uncontaminated.",
+  "ts": 4903
+ },
+ {
+  "qf": "بعد از مصرف اسپری استنشاقی کورتیکواستروئیدی چه باید کرد؟",
+  "of": [
+   "شستن و غرغره دهان با آب",
+   "خوابیدن به پهلو",
+   "نوشیدن شیر",
+   "مصرف دوز دوم"
+  ],
+  "qe": "After using a corticosteroid inhaler, the patient should?",
+  "oe": [
+   "Rinse and gargle the mouth with water",
+   "Lie on the side",
+   "Drink milk",
+   "Take a second dose"
+  ],
+  "c": 0,
+  "wf": "شستن دهان از برفک دهانی (کاندیدیازیس) جلوگیری می‌کند.",
+  "we": "Rinsing prevents oral thrush (candidiasis).",
+  "ts": 2720
+ },
+ {
+  "qf": "کدام مورد از «پنج حق» دارویی نیست؟",
+  "of": [
+   "بیمار درست",
+   "داروی درست",
+   "دوز درست",
+   "ساعت ویزیت پزشک"
+  ],
+  "qe": "Which is NOT one of the five rights of medication?",
+  "oe": [
+   "Right patient",
+   "Right drug",
+   "Right dose",
+   "Doctor's visiting hour"
+  ],
+  "c": 3,
+  "wf": "پنج حق: بیمار، دارو، دوز، راه و زمان درست است.",
+  "we": "The five rights: patient, drug, dose, route, time.",
+  "ts": 8727
+ },
+ {
+  "qf": "مؤثرترین اقدام برای پیشگیری از عفونت‌های بیمارستانی چیست؟",
+  "of": [
+   "بهداشت دست",
+   "مصرف آنتی‌بیوتیک",
+   "ایزوله همه بیماران",
+   "ضدعفونی روزانه کف"
+  ],
+  "qe": "The single most effective action to prevent hospital infections is?",
+  "oe": [
+   "Hand hygiene",
+   "Antibiotic use",
+   "Isolating all patients",
+   "Daily floor disinfection"
+  ],
+  "c": 0,
+  "wf": "بهداشت دست قبل و بعد از مراقبت، پایه کنترل عفونت است.",
+  "we": "Hand hygiene before and after care is the basis of infection control.",
+  "ts": 21
+ },
+ {
+  "qf": "چرا قبل از فشار سمعی، فشار لمسی گرفته می‌شود؟",
+  "of": [
+   "جلوگیری از سیستولیک کاذب پایین (شکاف سمعی)",
+   "صرفه‌جویی در وقت",
+   "کالیبره دستگاه",
+   "کم کردن درد بیمار"
+  ],
+  "qe": "Why take palpatory pressure before auscultatory pressure?",
+  "oe": [
+   "To avoid falsely low systolic (auscultatory gap)",
+   "To save time",
+   "To calibrate the device",
+   "To reduce pain"
+  ],
+  "c": 0,
+  "wf": "یافتن نقطه محو نبض از خطای شکاف سمعی جلوگیری می‌کند.",
+  "we": "Finding pulse disappearance point avoids the auscultatory gap error.",
+  "ts": 8885
+ },
+ {
+  "qf": "سوندگذاری ادراری (فولی) با چه تکنیکی انجام می‌شود؟",
+  "of": [
+   "کاملاً استریل",
+   "تمیز (غیراستریل)",
+   "بدون دستکش",
+   "فقط با بتادین"
+  ],
+  "qe": "Urinary (Foley) catheter insertion requires which technique?",
+  "oe": [
+   "Fully sterile",
+   "Clean (non-sterile)",
+   "No gloves",
+   "Betadine only"
+  ],
+  "c": 0,
+  "wf": "تکنیک استریل خطر عفونت ادراری را کم می‌کند.",
+  "we": "Sterile technique reduces UTI risk.",
+  "ts": 6460
+ },
+ {
+  "qf": "طول لوله بینی–معده‌ای با کدام لندمارک‌ها اندازه‌گیری می‌شود؟",
+  "of": [
+   "نوک بینی – لاله گوش – زایفوئید",
+   "چانه – ناف – زانو",
+   "پیشانی – گردن – شکم",
+   "گوش – شانه – آرنج"
+  ],
+  "qe": "NG tube length is measured using which landmarks?",
+  "oe": [
+   "Nose tip – earlobe – xiphoid",
+   "Chin – navel – knee",
+   "Forehead – neck – belly",
+   "Ear – shoulder – elbow"
+  ],
+  "c": 0,
+  "wf": "روش NEX سه‌لندمارکی استاندارد تعیین طول لوله است.",
+  "we": "The three-landmark NEX method is the standard.",
+  "ts": 845
+ },
+ {
+  "qf": "کدام pH آسپیره تأییدکننده جای معده است؟",
+  "of": [
+   "۱ تا ۵ (اسیدی)",
+   "۶ تا ۸",
+   "بالای ۸",
+   "pH ملاک نیست"
+  ],
+  "qe": "Which aspirate pH confirms gastric placement?",
+  "oe": [
+   "1 to 5 (acidic)",
+   "6 to 8",
+   "Above 8",
+   "pH is not a criterion"
+  ],
+  "c": 0,
+  "wf": "pH اسیدی ۱ تا ۵ نشان‌دهنده جای معده است.",
+  "we": "Acidic pH 1–5 indicates gastric placement.",
+  "ts": 962
+ },
+ {
+  "qf": "ترتیب صحیح تجویز دارو از لوله تغذیه چیست؟",
+  "of": [
+   "فلاش – دارو – فلاش",
+   "دارو – فلاش – دارو",
+   "فقط دارو",
+   "فلاش – فلاش – دارو"
+  ],
+  "qe": "What is the correct sequence for giving drugs via feeding tube?",
+  "oe": [
+   "Flush – drug – flush",
+   "Drug – flush – drug",
+   "Drug only",
+   "Flush – flush – drug"
+  ],
+  "c": 0,
+  "wf": "فلاش قبل و بعد از دارو از گرفتگی لوله جلوگیری می‌کند.",
+  "we": "Flushing before and after prevents clogging.",
+  "ts": 1301
+ },
+ {
+  "qf": "اسکلت بدن بالغ از چند استخوان تشکیل شده است؟",
+  "of": [
+   "۲۰۶",
+   "۱۸۶",
+   "۲۲۶",
+   "۳۰۰"
+  ],
+  "qe": "How many bones are in the adult skeleton?",
+  "oe": [
+   "206",
+   "186",
+   "226",
+   "300"
+  ],
+  "c": 0,
+  "wf": "اسکلت بالغ ۲۰۶ استخوان محوری و اندامی دارد.",
+  "we": "The adult skeleton has 206 axial and appendicular bones.",
+  "ts": 0
+ },
+ {
+  "qf": "کدام ویژگی لگن زن با مرد متفاوت است؟",
+  "of": [
+   "زاویه ساب‌پوبیک پهن‌تر",
+   "تعداد مهره‌ها",
+   "تعداد دنده‌ها",
+   "شکل جمجمه"
+  ],
+  "qe": "Which feature differs in the female pelvis?",
+  "oe": [
+   "Wider subpubic angle",
+   "Number of vertebrae",
+   "Number of ribs",
+   "Skull shape"
+  ],
+  "c": 0,
+  "wf": "لگن زن پهن‌تر با زاویه ساب‌پوبیک بازتر برای زایمان است.",
+  "we": "The female pelvis is wider with a broader subpubic angle.",
+  "ts": 3635
+ },
+ {
+  "qf": "استخوان بازو چه نام دارد؟",
+  "of": [
+   "هومروس",
+   "فمور",
+   "تیبیا",
+   "رادیوس"
+  ],
+  "qe": "What is the upper arm bone called?",
+  "oe": [
+   "Humerus",
+   "Femur",
+   "Tibia",
+   "Radius"
+  ],
+  "c": 0,
+  "wf": "هومروس از شانه تا آرنج امتداد دارد.",
+  "we": "The humerus runs from shoulder to elbow.",
+  "ts": 2259
+ },
+ {
+  "qf": "عدد فشار خون باید به نزدیک‌ترین چند میلی‌متر جیوه ثبت شود؟",
+  "of": [
+   "۲ میلی‌متر جیوه",
+   "۱ میلی‌متر جیوه",
+   "۵ میلی‌متر جیوه",
+   "۱۰ میلی‌متر جیوه"
+  ],
+  "qe": "Blood pressure should be recorded to the nearest?",
+  "oe": [
+   "2 mmHg",
+   "1 mmHg",
+   "5 mmHg",
+   "10 mmHg"
+  ],
+  "c": 0,
+  "wf": "ثبت اعداد فرد اشتباه رایج است؛ به زوج گرد کن.",
+  "we": "Odd-number charting is a common error; round to even.",
+  "ts": 25
+ },
+ {
+  "qf": "کاف کوچک‌تر از سایز بازو چه خطایی می‌دهد؟",
+  "of": [
+   "فشار کاذب بالا",
+   "فشار کاذب پایین",
+   "بدون خطا",
+   "فقط نبض را خراب می‌کند"
+  ],
+  "qe": "A cuff smaller than the arm size causes?",
+  "oe": [
+   "Falsely high reading",
+   "Falsely low reading",
+   "No error",
+   "Only ruins the pulse"
+  ],
+  "c": 0,
+  "wf": "کاف تنگ فشار را بالاتر از واقعی نشان می‌دهد.",
+  "we": "An undersized cuff overestimates pressure.",
+  "ts": 200
+ },
+ {
+  "qf": "فشار نبض (Pulse Pressure) چگونه به دست می‌آید؟",
+  "of": [
+   "سیستولیک منهای دیاستولیک",
+   "دیاستولیک منهای سیستولیک",
+   "جمع هر دو",
+   "میانگین هر دو"
+  ],
+  "qe": "How is pulse pressure calculated?",
+  "oe": [
+   "Systolic minus diastolic",
+   "Diastolic minus systolic",
+   "Sum of both",
+   "Average of both"
+  ],
+  "c": 0,
+  "wf": "اختلاف سیستولیک و دیاستولیک، فشار نبض است.",
+  "we": "Systolic minus diastolic equals pulse pressure.",
+  "ts": 320
+ },
+ {
+  "qf": "PEG مخفف کدام روش است؟",
+  "of": [
+   "گاستروستومی آندوسکوپیک از راه پوست",
+   "لاواژ معده اورژانسی",
+   "سونداژ بینی اضطراری",
+   "تغذیه وریدی کامل"
+  ],
+  "qe": "What does PEG stand for?",
+  "oe": [
+   "Percutaneous endoscopic gastrostomy",
+   "Emergency gastric lavage",
+   "Emergency nasal intubation",
+   "Total parenteral nutrition"
+  ],
+  "c": 0,
+  "wf": "PEG رایج‌ترین روش گذاشتن لوله G بلندمدت است.",
+  "we": "PEG is the most common long-term G-tube method.",
+  "ts": 73
+ },
+ {
+  "qf": "لوله J تغذیه را به کجا می‌رساند؟",
+  "of": [
+   "ژژونوم (روده باریک)",
+   "معده",
+   "مری",
+   "کولون"
+  ],
+  "qe": "Where does a J-tube deliver feeds?",
+  "oe": [
+   "Jejunum (small bowel)",
+   "Stomach",
+   "Esophagus",
+   "Colon"
+  ],
+  "c": 0,
+  "wf": "تغذیه ژژونومی برای بیماران با ریسک آسپیراسیون مناسب‌تر است.",
+  "we": "Jejunal feeding suits patients at aspiration risk.",
+  "ts": 476
+ },
+ {
+  "qf": "مراقبت روزانه لوله G شامل چیست؟",
+  "of": [
+   "چرخش لوله و تمیزکاری استوما",
+   "کشیدن محکم لوله",
+   "باز گذاشتن پانسمان خیس",
+   "شستن با الکل خالص"
+  ],
+  "qe": "Daily G-tube care includes?",
+  "oe": [
+   "Rotating the tube and cleaning the stoma",
+   "Pulling the tube firmly",
+   "Leaving wet dressing open",
+   "Washing with pure alcohol"
+  ],
+  "c": 0,
+  "wf": "چرخش روزانه از چسبندگی و عفونت استوما جلوگیری می‌کند.",
+  "we": "Daily rotation prevents adherence and stoma infection.",
+  "ts": 722
+ },
+ {
+  "qf": "دیافراگم حداقل چند ساعت پس از مقاربت باید بماند؟",
+  "of": [
+   "۶ ساعت",
+   "۱ ساعت",
+   "۱۲ ساعت",
+   "۲۴ ساعت"
+  ],
+  "qe": "How long must a diaphragm stay in after intercourse?",
+  "oe": [
+   "6 hours",
+   "1 hour",
+   "12 hours",
+   "24 hours"
+  ],
+  "c": 0,
+  "wf": "ماندن حداقل ۶ ساعته اثر اسپرم‌کش را کامل می‌کند.",
+  "we": "At least 6 hours completes the spermicide effect.",
+  "ts": 297
+ },
+ {
+  "qf": "کدام مجموعه علائم هشدار شوک سمی (TSS) است؟",
+  "of": [
+   "تب، راش، افت فشار",
+   "سردرد خفیف",
+   "تهوع صبحگاهی",
+   "کمردرد"
+  ],
+  "qe": "Which cluster warns of toxic shock syndrome?",
+  "oe": [
+   "Fever, rash, hypotension",
+   "Mild headache",
+   "Morning nausea",
+   "Back pain"
+  ],
+  "c": 0,
+  "wf": "TSS اورژانسی است؛ وسیله را خارج و فوری مراجعه کن.",
+  "we": "TSS is an emergency; remove device and seek care immediately.",
+  "ts": 345
+ },
+ {
+  "qf": "کدام لوبریکانت با کاندوم لاتکسی ناسازگار است؟",
+  "of": [
+   "روغنی (وازلین، روغن)",
+   "پایه آب",
+   "سیلیکونی",
+   "هیچکدام"
+  ],
+  "qe": "Which lubricant is incompatible with latex condoms?",
+  "oe": [
+   "Oil-based (vaseline, oils)",
+   "Water-based",
+   "Silicone",
+   "None"
+  ],
+  "c": 0,
+  "wf": "مواد روغنی لاتکس را تخریب و ریسک پارگی را بالا می‌برند.",
+  "we": "Oil-based products degrade latex and raise breakage risk.",
+  "ts": 90
+ },
+ {
+  "qf": "TPN به دلیل هایپرتونیک بودن از چه راهی داده می‌شود؟",
+  "of": [
+   "ورید مرکزی",
+   "ورید محیطی دست",
+   "عضلانی",
+   "زیرجلدی"
+  ],
+  "qe": "Why is TPN given via a central line?",
+  "oe": [
+   "Central vein",
+   "Hand peripheral vein",
+   "Intramuscular",
+   "Subcutaneous"
+  ],
+  "c": 0,
+  "wf": "غلظت بالای دکستروز فقط در ورید مرکزی با جریان بالا قابل تحمل است.",
+  "we": "High dextrose concentration needs high-flow central veins.",
+  "ts": 207
+ },
+ {
+  "qf": "در سندرم تغذیه مجدد (Refeeding) کدام الکترولیت بیشتر می‌افتد؟",
+  "of": [
+   "فسفات",
+   "سدیم",
+   "کلسیم ادرار",
+   "آهن"
+  ],
+  "qe": "In refeeding syndrome, which electrolyte drops most critically?",
+  "oe": [
+   "Phosphate",
+   "Sodium",
+   "Urine calcium",
+   "Iron"
+  ],
+  "c": 0,
+  "wf": "شروع تدریجی تغذیه و پایش فسفات از عوارض قلبی جلوگیری می‌کند.",
+  "we": "Start feeds slowly and watch phosphate to prevent cardiac events.",
+  "ts": 433
+ },
+ {
+  "qf": "کدام مورد منع مطلق لوله بینی–معده‌ای است؟",
+  "of": [
+   "شکستگی قاعده جمجمه",
+   "دیابت",
+   "فشار خون بالا",
+   "آسم"
+  ],
+  "qe": "Which is an absolute contraindication to NG tube insertion?",
+  "oe": [
+   "Basilar skull fracture",
+   "Diabetes",
+   "Hypertension",
+   "Asthma"
+  ],
+  "c": 0,
+  "wf": "خطر ورود لوله به جمجمه در شکستگی قاعده جمجمه وجود دارد.",
+  "we": "The tube may enter the cranium with a skull base fracture.",
+  "ts": 727
+ },
+ {
+  "qf": "داروهای شیمی‌درمانی سیتوتوکسیک به سلول‌هایی آسیب می‌زنند که:",
+  "of": [
+   "نرخ رشد بالایی دارند (سریع تقسیم می‌شوند)",
+   "کاملاً بالغ شده و دیگر تقسیم نمی‌شوند",
+   "متابولیسم بسیار کمی دارند",
+   "پشت سد خونی–مغزی محافظت شده‌اند"
+  ],
+  "qe": "Cytotoxic chemotherapy drugs damage normal cells that:",
+  "oe": [
+   "have a high growth fraction (divide rapidly)",
+   "are fully mature and no longer dividing",
+   "have a very low metabolic rate",
+   "are protected by the blood-brain barrier"
+  ],
+  "c": 0,
+  "wf": "داروهای سیتوتوکسیک سلول‌های در حال تقسیم را هدف می‌گیرند؛ بافت‌های پررشد بیشترین آسیب را می‌بینند.",
+  "we": "Cytotoxic agents target dividing cells, so the fastest-growing tissues take the biggest hit.",
+  "ts": 82
+ },
+ {
+  "qf": "کدام پنج بافت بیشترین نرخ رشد را دارند و اول از شیمی‌درمانی آسیب می‌بینند؟",
+  "of": [
+   "مو، دستگاه گوارش، پوست، اندام‌های تناسلی و مغز استخوان",
+   "قلب، ریه، کبد، کلیه‌ها و مغز",
+   "استخوان‌ها، مفاصل، تاندون‌ها، رباط‌ها و غضروف",
+   "عضله اسکلتی، فاسیا، پوست، اعصاب و عروق"
+  ],
+  "qe": "Which five body tissues have the highest growth fraction and are hit first by chemotherapy?",
+  "oe": [
+   "Hair, GI tract, skin, reproductive organs and bone marrow",
+   "Heart, lungs, liver, kidneys and brain",
+   "Bones, joints, tendons, ligaments and cartilage",
+   "Skeletal muscle, fascia, skin, nerves and vessels"
+  ],
+  "c": 0,
+  "wf": "لیست پنج‌تایی ویدیو (مو، گوارش، پوست، تناسلی، مغز استخوان) همان دلیل ریزش مو، موکوزیت و سرکوب مغز استخوان است.",
+  "we": "The five-item list in the video explains alopecia, mucositis and myelosuppression.",
+  "ts": 174
+ },
+ {
+  "qf": "شیمی‌درمانی متناوب (intermittent) به چه معناست؟",
+  "of": [
+   "یک دوز قوی داده می‌شود، بیمار بهبود می‌یابد، سپس دوز بعدی",
+   "دارو به‌صورت انفوزیون مداوم ۲۴ ساعته داده می‌شود",
+   "در تمام دوره فقط از یک گروه دارویی استفاده می‌شود",
+   "دارو مستقیماً به فضای مایع نخاعی داده می‌شود"
+  ],
+  "qe": "What does intermittent chemotherapy mean?",
+  "oe": [
+   "A large dose is given, the patient recovers, then the next dose is given",
+   "The drug is given as a continuous 24-hour infusion",
+   "Only one drug class is used for the whole course",
+   "The drug is delivered directly into the cerebrospinal fluid"
+  ],
+  "c": 0,
+  "wf": "فاصله بین دوزها به مغز استخوان و بافت‌های پررشد اجازه بازیابی می‌دهد.",
+  "we": "Doses are spaced so bone marrow and other fast-growing tissues can recover between treatments.",
+  "ts": 399
+ },
+ {
+  "qf": "بهترین زمان شروع درمان ضدویوری آنفلوانزا کی است؟",
+  "of": [
+   "ظرف ۴۸ ساعت از شروع علائم",
+   "پس از کشت مثبت باکتریایی",
+   "وقتی تب از ۳۹ درجه بیشتر شد",
+   "در روز پنجم علائم، پس از قطع استفراغ"
+  ],
+  "qe": "When should influenza antiviral therapy ideally be started?",
+  "oe": [
+   "Within 48 hours of symptom onset",
+   "After a positive bacterial culture",
+   "As soon as fever exceeds 39 C",
+   "On day 5 of symptoms, once vomiting stops"
+  ],
+  "c": 0,
+  "wf": "ضدویوری‌ها تکثیر ویروس را متوقف می‌کنند؛ بهترین اثربخشی در ۴۸ ساعت اول است.",
+  "we": "Antivirals stop viral replication, so they work best early - the window is 48 hours from symptom onset.",
+  "ts": 52
+ },
+ {
+  "qf": "وقتی کورتیکواستروئیدها محور هیپوتالاموس–هیپوفیز را سرکوب می‌کنند، کدام دو هورمون کاهش می‌یابند؟",
+  "of": [
+   "CRH و ACTH",
+   "انسولین و گلوکاگون",
+   "ADH و آلدوسترون",
+   "TSH و پرولاکتین"
+  ],
+  "qe": "Which two hormones are suppressed when corticosteroids suppress the hypothalamic-pituitary-adrenal axis?",
+  "oe": [
+   "CRH and ACTH",
+   "Insulin and glucagon",
+   "ADH and aldosterone",
+   "TSH and prolactin"
+  ],
+  "c": 0,
+  "wf": "هیپوتالاموس CRH نمی‌فرستد، پس هیپوفیز قدامی ACTH نمی‌سازد.",
+  "we": "The hypothalamus stops sending CRH, so the anterior pituitary stops sending ACTH.",
+  "ts": 202
+ },
+ {
+  "qf": "کدام سلول‌های خونی اول از سرکوب مغز استخوان ناشی از شیمی‌درمانی آسیب می‌بینند؟",
+  "of": [
+   "نوتروفیل‌ها (گلبول‌های سفید)، سپس پلاکت‌ها، سپس گلبول‌های قرمز",
+   "ابتدا گلبول‌های قرمز، سپس پلاکت‌ها، سپس نوتروفیل‌ها",
+   "فقط پلاکت‌ها",
+   "فقط لنفوسیت‌ها و بازوفیل‌ها"
+  ],
+  "qe": "Which blood cells are affected first by chemotherapy-induced bone marrow suppression?",
+  "oe": [
+   "Neutrophils (white blood cells), then platelets, then red cells",
+   "Red cells, then platelets, then neutrophils",
+   "Platelets only",
+   "Lymphocytes and basophils only"
+  ],
+  "c": 0,
+  "wf": "اول گلبول سفید (عفونت)، بعد پلاکت (خونریزی)، بعد گلبول قرمز (کم‌خونی) کاهش می‌یابد.",
+  "we": "White cells drop first (infection risk), then platelets (bleeding), then red cells (anemia).",
+  "ts": 560
+ },
+ {
+  "qf": "حداکثر نمره مقیاس گلاسکو (GCS) چقدر است؟",
+  "of": [
+   "۱۵",
+   "۱۲",
+   "۱۰",
+   "۲۰"
+  ],
+  "qe": "What is the maximum total Glasgow Coma Scale (GCS) score?",
+  "oe": [
+   "15",
+   "12",
+   "10",
+   "20"
+  ],
+  "c": 0,
+  "wf": "جمع E4 + V5 + M6 برابر ۱۵ یعنی هوشیاری کامل است.",
+  "we": "E4 + V5 + M6 totals 15, indicating full alertness.",
+  "ts": 536
+ },
+ {
+  "qf": "کدام نمره GCS معمولاً اندیکاسیون لوله‌گذاری (محافظت راه هوایی) است؟",
+  "of": [
+   "۸ یا کمتر",
+   "۱۳ تا ۱۵",
+   "۱۱ تا ۱۲",
+   "۱۴"
+  ],
+  "qe": "Which GCS score commonly indicates need for airway protection (intubation)?",
+  "oe": [
+   "8 or less",
+   "13 to 15",
+   "11 to 12",
+   "14"
+  ],
+  "c": 0,
+  "wf": "قانون «GCS هشت، لوله بگذار» برای محافظت راه هوایی است.",
+  "we": "'GCS of eight, intubate' protects the airway.",
+  "ts": 569
+ },
+ {
+  "qf": "در GCS، بهترین پاسخ حرکتی (M) حداکثر چه نمره‌ای دارد؟",
+  "of": [
+   "۶ (اجرای دستور)",
+   "۴",
+   "۵",
+   "۳"
+  ],
+  "qe": "In the GCS, what is the maximum motor (M) subscore?",
+  "oe": [
+   "6 (obeys commands)",
+   "4",
+   "5",
+   "3"
+  ],
+  "c": 0,
+  "wf": "پاسخ حرکتی از ۱ تا ۶ است؛ ۶ یعنی اجرای دستور.",
+  "we": "Motor ranges 1–6; 6 means obeys commands.",
+  "ts": 355
+ },
+ {
+  "qf": "بیمار در معرض خطر زخم فشار است. کدام وضعیت را پرستار باید برای پیشگیری از تخریب پوست روی تروکانتر اجتناب کند؟",
+  "of": [
+   "پهلوی ۹۰ درجه",
+   "نیمه‌نشسته (سایم فاولر) ۳۰ درجه",
+   "پهلوی ۳۰ درجه",
+   "دراز کشیدن روی شکم با بالشت زیر ساق پا"
+  ],
+  "qe": "A client is at high risk for pressure injuries. Which position should the nurse AVOID to prevent skin breakdown over the trochanter?",
+  "oe": [
+   "90-degree side-lying",
+   "Semi-Fowler's at 30 degrees",
+   "30-degree lateral position",
+   "Prone with pillows under the shins"
+  ],
+  "c": 0,
+  "wf": "در پهلوی ۹۰ درجه وزن بدن مستقیم روی استخوان لگن (تروکانتر) می‌افتد.",
+  "we": "90-degree side-lying puts the body weight directly on the hip bone (trochanter).",
+  "ts": 373
+ },
+ {
+  "qf": "هنگام شست‌وشوی در رختخواب پوست بیمار خشک و پوسته‌پوسته است. پرستار چه اقدامی انجام دهد؟",
+  "of": [
+   "آب ولرم و زدن مرطوب‌کننده در حالی که پوست هنوز مرطوب است",
+   "شست‌وشوی مکرر با صابون آنتی‌بکتریال",
+   "مالش شدید مناطق پوسته‌دهنده با لیف",
+   "استفاده از آب داغ برای باز شدن منافذ"
+  ],
+  "qe": "During a bed bath the client's skin is very dry and flaky. Which action should the nurse take?",
+  "oe": [
+   "Use tepid water and apply an emollient moisturizer while the skin is still damp",
+   "Bathe the client more frequently with antibacterial soap",
+   "Wash the flaky areas vigorously with a washcloth",
+   "Use very hot water to open the pores"
+  ],
+  "c": 0,
+  "wf": "صابون و مالش شدید پوست را خشک‌تر می‌کند؛ مرطوب‌کننده روی پوست مرطوب رطوبت را نگه می‌دارد.",
+  "we": "Soap and vigorous scrubbing dry the skin further; moisturizer on damp skin locks in hydration.",
+  "ts": 464
+ },
+ {
+  "qf": "بیمار بستری به دلیل سر و صدای بخش خوابش مشکل دارد. کدام مداخله محیط دوست‌دار خواب را بهتر ایجاد می‌کند؟",
+  "of": [
+   "تجمیع مراقبت‌ها برای ۹۰ دقیقه استراحت ممتد",
+   "دادن دوز شبانه آنتی‌هیستامین ساعت ۲۱",
+   "روشن گذاشتن چراغ سرویس بهداشتی",
+   "دادن میان‌وعده پرپروتئین قبل از خواب"
+  ],
+  "qe": "A hospitalized client reports difficulty sleeping because of unit noise. Which intervention best promotes a sleep-friendly environment?",
+  "oe": [
+   "Cluster nursing care to allow 90-minute periods of undisturbed rest",
+   "Give a PRN dose of diphenhydramine at 2100",
+   "Leave the bathroom light on",
+   "Provide a high-protein snack at bedtime"
+  ],
+  "c": 0,
+  "wf": "تجمیع مراقبت‌ها ۹۰ دقیقه خواب ممتد را حفظ می‌کند؛ آرام‌بخش محیط را تغییر نمی‌دهد.",
+  "we": "Clustering care protects a 90-minute block of undisturbed sleep; sedation does not change the environment.",
+  "ts": 278
+ },
+ {
+  "qf": "بیمار با آسیب بسته سر: اولین نشانه افزایش فشار داخل جمجمه کدام است؟",
+  "of": [
+   "تغییر در سطح هوشیاری",
+   "کندی واکنش مردمک به نور",
+   "افزایش فشار نبض",
+   "وضعیت دسربریت"
+  ],
+  "qe": "A client with a closed head injury: what is the EARLIEST indicator of increased intracranial pressure?",
+  "oe": [
+   "Change in level of consciousness",
+   "Sluggish pupillary response to light",
+   "Widening pulse pressure",
+   "Decerebrate posturing"
+  ],
+  "c": 0,
+  "wf": "تغییر مردمک و نشانه کوشینگ (افزایش فشار نبض) دیرتر رخ می‌دهند؛ اول از همه هوشیاری تغییر می‌کند.",
+  "we": "Pupillary changes and Cushing's triad (widening pulse pressure) come later; level of consciousness changes first.",
+  "ts": 363
+ },
+ {
+  "qf": "بیمار لوله سینه‌ای برای پنوموتوراکس دارد. کدام یافته در محفظه آب‌بندی نیاز به اقدام دارد؟",
+  "of": [
+   "حباب‌زدن مداوم در محفظه آب‌بندی",
+   "بالا و پایین رفتن با تنفس",
+   "حباب‌زدن در محفظه کنترل مکش",
+   "۵۰ میلی‌لیتر ترشح سروزانگیز"
+  ],
+  "qe": "A client has a chest tube for pneumothorax. Which finding in the water-seal chamber requires intervention?",
+  "oe": [
+   "Constant bubbling in the water seal chamber",
+   "Tidaling with respirations",
+   "Bubbling in the suction control chamber",
+   "50 mL of serosanguineous drainage"
+  ],
+  "c": 0,
+  "wf": "حباب‌زدن در محفظه آب‌بندی باید متناوب باشد؛ حباب مداوم یعنی نشتی هوا در مسیر.",
+  "we": "Bubbling in the water seal should be intermittent; constant bubbling means an air leak in the system.",
+  "ts": 555
+ },
+ {
+  "qf": "بیمار شیمی‌درمانی پلاکت ۲۲٫۰۰۰ دارد. کدام اقدام برای کاهش خطر آسیب ضروری است؟",
+  "of": [
+   "بررسی خون مخفی در مدفوع و محتوای معده",
+   "مسواک با موهای زبر",
+   "تزریق عضلانی ضداستفراغ",
+   "قرار دادن بیمار در ایزولاسیون معکوس"
+  ],
+  "qe": "A client on chemotherapy has a platelet count of 22,000. Which intervention is essential to reduce the risk of injury?",
+  "oe": [
+   "Assess for occult blood in stool and gastric contents",
+   "Use a firm bristle toothbrush",
+   "Give IM injections for nausea",
+   "Place the client in reverse isolation"
+  ],
+  "c": 0,
+  "wf": "ترومبوسیتوپنی شدید یعنی رعایت احتیاط‌های خونریزی؛ تزریق عضلانی ممنوع و پایش خون مخفی لازم است.",
+  "we": "Severe thrombocytopenia means bleeding precautions - no IM injections and monitoring for occult bleeding.",
+  "ts": 655
+ },
+ {
+  "qf": "مهم‌ترین آموزش دارویی فشار خون چیست؟",
+  "of": [
+   "مصرف منظم دارو حتی با حس خوب بودن",
+   "قطع دارو با طبیعی شدن یک نوبت فشار",
+   "دو برابر کردن دوز فراموش‌شده",
+   "مصرف داروی دیگران"
+  ],
+  "qe": "What is the most important teaching about blood pressure medicines?",
+  "oe": [
+   "Take them regularly even when feeling well",
+   "Stop when one reading is normal",
+   "Double a missed dose",
+   "Take someone else's pills"
+  ],
+  "c": 0,
+  "wf": "فشار خون علامت ندارد؛ قطع خودسرانه ریسک سکته را بالا می‌برد.",
+  "we": "Hypertension is silent; stopping abruptly raises stroke risk.",
+  "ts": 647
+ },
+ {
+  "qf": "بیمار مصرف پرازوسین (گشادکننده عروقی مستقیم) را شروع می‌کند. مهم‌ترین نکته ایمنی قبل از اولین دوز چیست؟",
+  "of": [
+   "اولین دوز را شب بگیرد و آهسته بلند شود",
+   "همراه آب گریپ‌فروت مصرف کند",
+   "انتظار انرژی فراوان بلافاصله پس از مصرف",
+   "در صورت فراموشی دوز را دو برابر کند"
+  ],
+  "qe": "A client is starting prazosin (a direct vasodilator). What is the most important safety instruction before the first dose?",
+  "oe": [
+   "Take the first dose in the evening and stand up slowly",
+   "Take it with a full glass of grapefruit juice",
+   "Expect to feel highly energetic right away",
+   "Double the dose if a dose is missed"
+  ],
+  "c": 0,
+  "wf": "پرازوسین باعث افت فشار با اولین دوز می‌شود؛ به همین دلیل اولین دوز شب داده می‌شود و بیمار باید آهسته بلند شود.",
+  "we": "Prazosin causes first-dose hypotension, so the first dose is given at bedtime and the client rises slowly.",
+  "ts": 381
+ },
+ {
+  "qf": "بیمار ۶ ماه است چسب کلونیدین می‌زند و ۳ روز است تمام شده. پرستار کدام مشکل را باید بررسی کند؟",
+  "of": [
+   "افزایش برگشتی فشار خون (ریباند)",
+   "خشکی دهون",
+   "افزایش خواب‌آلودگی",
+   "التهاب پوستی زیر محل چسب قبلی"
+  ],
+  "qe": "A client has used a clonidine patch for 6 months and ran out 3 days ago. Which problem should the nurse assess for?",
+  "oe": [
+   "Rebound hypertension",
+   "Dry mouth",
+   "Increased drowsiness",
+   "A localized rash under the old patch site"
+  ],
+  "c": 0,
+  "wf": "قطع ناگهانی کلونیدین می‌تواند باعث افزایش شدید برگشتی فشار خون شود.",
+  "we": "Stopping clonidine abruptly can cause severe rebound hypertension.",
+  "ts": 468
+ }
+]

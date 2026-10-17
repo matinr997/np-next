@@ -1,0 +1,21 @@
+<!doctype html><html lang="en" dir="ltr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Premium | Nurse Plus</title>
+<link rel="stylesheet" href="../assets/globals.css">
+</head><body>
+<div style="max-width:760px;margin:0 auto;padding:24px 16px">
+  <a href="index.html" style="color:#7dd3fc">← Back to videos</a>
+  <h1 style="margin:16px 0 6px">★ Premium</h1>
+  <p style="color:#94a3b8;line-height:1.8">Ad-free, timed notes, full transcripts and bilingual quizzes. Payments in <b>USD</b> via Stripe.</p>
+  <div id="plans" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0"></div>
+  <div class="adbox" style="margin-top:18px"><span class="ad-t">Note</span> Static preview — Stripe checkout is a backend stub in production. Use "Activate (demo)" to preview Premium locally.</div>
+</div>
+<script type="module">
+import { SITE } from '../assets/config-com.js';
+const box=document.getElementById('plans');
+box.innerHTML = SITE.plans.map(p=>`<div style="border:1px solid var(--line);border-radius:14px;padding:14px">
+  <div style="font-size:.8rem;color:#94a3b8">${p.months} month${p.months>1?'s':''}</div>
+  <div style="font-size:1.3rem;font-weight:800;margin:6px 0">${p.price}</div>
+  <a class="btn btn-blue" href="index.html?plan=premium" style="display:inline-block;margin-top:8px">Activate (demo)</a>
+</div>`).join('');
+</script></body></html>
