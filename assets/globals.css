@@ -647,3 +647,36 @@ select.sel:hover{border-color:#97D7FF}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
+
+/* ============================================================
+   TRANSCRIPT: fixed-height scrollable + live bold sync
+   ============================================================ */
+#pane1{max-height:min(46vh,430px);min-height:180px;overflow-y:auto;overscroll-behavior:contain;position:relative;border:1px solid #E3EEF7;border-radius:var(--r-card);background:linear-gradient(180deg,#FDFEFF 0%,#F6FBFE 100%);padding:6px 10px 10px;scrollbar-width:thin;scrollbar-color:#CFE3F2 transparent}
+#pane1::-webkit-scrollbar{width:9px}
+#pane1::-webkit-scrollbar-thumb{background:#CFE3F2;border-radius:99px;border:2px solid transparent;background-clip:content-box}
+#pane1::-webkit-scrollbar-thumb:hover{background:#B4D5EA;background-clip:content-box}
+#pane1 h4{position:sticky;top:0;z-index:2;margin:0 -10px 6px;padding:10px 14px 8px;background:linear-gradient(180deg,#FDFEFF 78%,rgba(253,254,255,0) 100%)}
+#pane1 .sub-row{transition:background .22s var(--ease),box-shadow .22s var(--ease),border-color .22s var(--ease)}
+.sub-row .sub-fa{transition:font-weight .18s var(--ease),color .22s var(--ease)}
+/* live active line: bold + tinted + accent bar */
+.sub-row.cur{background:rgba(151,215,255,.22);border-color:#97D7FF;box-shadow:var(--sh-1);position:relative}
+.sub-row.cur::before{content:'';position:absolute;inset-inline-start:0;top:6px;bottom:6px;width:3px;border-radius:99px;background:#086288;animation:curBar .25s var(--ease)}
+@keyframes curBar{from{transform:scaleY(.2);opacity:0}to{transform:scaleY(1);opacity:1}}
+.sub-row.cur .sub-fa{font-weight:800;color:#086288}
+.sub-row.cur .ch-t{background:#086288;color:#fff;border-color:#086288}
+/* ============================================================
+   DND question: soft drag affordances
+   ============================================================ */
+.qzchip[draggable="true"]{cursor:grab}
+.qzchip[draggable="true"]:active{cursor:grabbing}
+.qzchip.dragging{opacity:.55;transform:scale(.97) rotate(-1.5deg);box-shadow:var(--sh-3)}
+.qzpool,.qzzone{transition:all .2s var(--ease)}
+.qzpool{border:2px dashed transparent;border-radius:12px;padding:4px;min-height:44px;align-content:flex-start}
+.qzpool.dzover{border-color:#97D7FF;background:rgba(151,215,255,.14)}
+.qzzone.dzover{border-color:#086288;background:rgba(151,215,255,.28);box-shadow:0 0 0 4px rgba(8,98,136,.08);transform:scale(1.005)}
+.qzzone{position:relative}
+.qzzoneL{transition:opacity .2s var(--ease)}
+.qzzone.dzover .qzzoneL{opacity:.45}
+/* drop shadow under chips while flying */
+@keyframes chipLand{0%{transform:scale(.9)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.qzchip.inzone{animation:chipLand .28s var(--ease)}
