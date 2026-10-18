@@ -912,3 +912,17 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
   #ctRow{flex-wrap:wrap;gap:6px}
   .ct-sp{flex:1 1 100%;height:0}
 }
+
+/* quality selector in player chrome */
+#ctQualVal{font-size:.74rem;font-weight:800}
+.ct-set:hover #ctQualVal{color:inherit}
+#ctQualityMenu{position:absolute;bottom:calc(100% + 9px);right:0;background:#fff;border:1px solid #E3EBF2;border-radius:8px;padding:6px;min-width:158px;display:none;box-shadow:0 16px 40px rgba(15,36,54,.22);z-index:9;direction:ltr;text-align:left}
+#ctQualityMenu .ct-hd{font-size:.72rem;color:#5A6B7D;padding:5px 9px 7px;border-bottom:1px solid #E3EBF2;margin-bottom:4px}
+#ctQualityMenu button{display:block;width:100%;background:none;border:none;color:#16283D;font-family:inherit;font-size:.8rem;padding:7px 9px;border-radius:8px;cursor:pointer;text-align:left;direction:ltr;transition:background .15s var(--ease)}
+#ctQualityMenu button:hover{background:#F2F7FB}
+#ctQualityMenu button.on{color:#086288;font-weight:800}
+
+@media(min-width:641px) and (max-width:867px){
+  #ctRow{flex-wrap:wrap;gap:7px}
+  .ct-sp{flex:1 1 100%;height:0}
+}
