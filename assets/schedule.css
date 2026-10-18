@@ -3,7 +3,7 @@
    Uses existing tokens from globals.css (teal palette).
    ============================================================ */
 body.sched{
-  font-family:Nunito, Vazirmatn, Tahoma, sans-serif;
+  font-family:'Inter','Vazirmatn',Tahoma,sans-serif;
   background:linear-gradient(180deg,#EDF5FA 0%,#F2F9FD 100%);
   min-height:100vh;margin:0;color:#16283D;
   padding-bottom:86px;
@@ -193,3 +193,78 @@ body.sched{
 /* standalone toast for schedule page */
 .sch-toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#16283D;color:#fff;padding:11px 24px;border-radius:12px;font:inherit;font-size:.8rem;font-weight:700;opacity:0;transition:transform .35s cubic-bezier(.34,1.4,.5,1),opacity .3s;z-index:200;box-shadow:0 12px 34px rgba(15,45,70,.25)}
 .sch-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ===== v2: to-do list (Day) / week grid / month grid ===== */
+.du-empty-note{text-align:center;color:#6C87A3;font-size:.8rem;padding:26px 8px;line-height:2}
+.du-item{
+  display:flex;align-items:center;gap:10px;background:#F8FCFE;border:1px solid #E3EEF7;border-radius:12px;
+  padding:10px 12px;transition:all .2s var(--ease, ease);
+}
+.du-item:hover{background:#fff;border-color:#BFE2F7;transform:translateY(-1px);box-shadow:var(--sh-1, 0 1px 2px rgba(15,45,70,.05), 0 2px 8px rgba(15,45,70,.05))}
+.du-item.is-done{background:#F2FBF7;border-color:#C4E9D6}
+.du-item.is-done .du-vname{color:#7A93AD;text-decoration:line-through;text-decoration-color:rgba(122,147,173,.5)}
+.du-chk{
+  flex:none;width:26px;height:26px;border-radius:50%;border:1.6px solid #A9D9F9;background:#fff;color:#fff;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .18s var(--ease, ease);
+}
+.du-chk svg{width:13px;height:13px;opacity:0;transition:opacity .15s}
+.du-chk:hover{border-color:#086288}
+.du-item.is-done .du-chk{background:#086288;border-color:#086288}
+.du-item.is-done .du-chk svg{opacity:1}
+.du-vname{flex:1;min-width:0;font-size:.82rem;font-weight:700;color:#173B5A;text-decoration:none;line-height:1.8;transition:color .18s var(--ease, ease)}
+.du-vname:hover{color:#086288}
+.du-topic{flex:none;background:#E7F3F9;color:#086288;border-radius:999px;padding:3px 11px;font-size:.64rem;font-weight:800;white-space:nowrap}
+.du-mins{flex:none;font-size:.7rem;font-weight:800;color:#15A866;direction:ltr}
+.du-item.is-done .du-mins{color:#7A93AD}
+
+/* week */
+.du-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.du-wday{background:#F8FCFE;border:1px solid #E3EEF7;border-radius:11px;padding:7px;min-height:130px;transition:border-color .2s}
+.du-wday:hover{border-color:#BFE2F7}
+.du-wday.is-today{border-color:#086288;box-shadow:0 0 0 2px rgba(8,98,136,.12)}
+.du-wday.is-past{opacity:.62}
+.du-whd{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:6px}
+.du-whd span{font-size:.6rem;font-weight:800;color:#6C87A3;letter-spacing:.04em}
+.du-whd b{font-size:.78rem;color:#0A3D5C;font-weight:900}
+.du-wday.is-today .du-whd b{background:#086288;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.du-wtags{display:flex;flex-direction:column;gap:5px}
+.du-wtag{
+  display:block;background:#fff;border:1px solid #D5E7F6;border-left:3px solid #4D8DBA;border-radius:8px;
+  padding:5px 7px;text-decoration:none;transition:all .18s var(--ease, ease);
+}
+.du-wtag:hover{border-color:#97D7FF;background:#F2FAFE;transform:translateY(-1px)}
+.du-wtag.done{border-left-color:#15A866;opacity:.68;background:#F6FCF9}
+.du-wtag b{display:block;font-size:.58rem;font-weight:800;color:#086288;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.du-wtag span{display:block;font-size:.62rem;color:#173B5A;font-weight:600;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.du-wtag i{display:block;font-size:.55rem;color:#15A866;font-weight:800;font-style:normal;direction:ltr;text-align:left}
+.du-rest{color:#B4C7D9;font-size:.7rem}
+
+/* month grid */
+.du-mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.du-mhd{text-align:center;font-size:.6rem;font-weight:800;color:#6C87A3;padding:4px 0;letter-spacing:.05em}
+.du-mcell{background:#F8FCFE;border:1px solid #E9F1F8;border-radius:10px;padding:6px;min-height:74px;transition:border-color .2s}
+.du-mcell:hover{border-color:#BFE2F7}
+.du-mcell.is-today{border-color:#086288;box-shadow:0 0 0 2px rgba(8,98,136,.12)}
+.du-mcell.is-today .du-mnum{background:#086288;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center}
+.du-mcell.is-past{opacity:.6}
+.du-mcell.is-end{border-style:dashed;border-color:#E2557A}
+.du-mnum{font-size:.66rem;font-weight:900;color:#0A3D5C;margin-bottom:4px;width:20px}
+.du-mtags{display:flex;flex-direction:column;gap:4px}
+.du-mtags .du-wtag{padding:3px 6px;border-radius:6px}
+.du-mtags .du-wtag b{font-size:.5rem}
+.du-mtags .du-wtag span{font-size:.55rem;-webkit-line-clamp:1}
+.du-mtags .du-wtag i{font-size:.5rem}
+
+@media(max-width:860px){
+  .du-week{grid-template-columns:1fr 1fr}
+  .du-wday{min-height:0}
+  .du-mgrid{gap:4px}
+  .du-mcell{min-height:58px;padding:4px}
+  .du-mtags .du-wtag b{display:none}
+  .du-mtags .du-wtag span{-webkit-line-clamp:2}
+}
+@media(max-width:520px){
+  .du-week{grid-template-columns:1fr}
+  .du-topic{display:none}
+  .du-item{flex-wrap:wrap}
+}

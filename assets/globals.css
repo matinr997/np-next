@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Vazirmatn:wght@400;600;700;800;900&display=swap');
 
 :root{
   --bg:#F2F9FD; --bg2:#F8FCFE; --card:#FFFFFF; --card2:#FFFFFF;
@@ -5,7 +6,7 @@
   --green:#086288; --green-d:#086288; --blue:#4D8DBA; --red:#e11d48; --amber:#086288;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+body{font-family:'Inter','Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
 /* ===== top navbar (Nurse Plus style) ===== */
 .nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:1200px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:18px}
