@@ -18,19 +18,46 @@ CREATE TABLE users (
   updated_at   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ============================================================
+-- NEW (2026-10-18): topics جدول مستقل — «cat» متن آزاد حذف شد.
+-- فرانت هنوز cat/cat_en از videos.json می‌خواند؛ DB هر دو را نگه می‌دارد
+-- (cat برای نمایش سریع، topic_id برای گزارش ضعف و برنامهٔ مطالعه).
+-- ============================================================
+CREATE TABLE topics (
+  id         SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  fa         VARCHAR(60)  NOT NULL UNIQUE,                  -- قلب و عروق
+  en         VARCHAR(60)  NOT NULL UNIQUE,                  -- Cardiovascular
+  icon       VARCHAR(16)  NULL,                             -- emoji
+  sort_order TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  active     TINYINT(1)   NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE videos (
   id           CHAR(11) PRIMARY KEY,                        -- YouTube video id (e.g. oNEBmBtBvtw)
   title_fa     VARCHAR(255) NOT NULL,
   title_en     VARCHAR(255) NOT NULL,
-  topic        VARCHAR(60)  NOT NULL,                       -- قلب و عروق / Cardiovascular ...
+  summary_fa   TEXT         NULL,                           -- NEW: sum از videos.json
+  summary_en   TEXT         NULL,
+  topic_id     SMALLINT UNSIGNED NULL,                      -- NEW: FK به topics
+  topic        VARCHAR(60)  NOT NULL,                       -- (kept for fast display / import compat)
   topic_en     VARCHAR(60)  NOT NULL,
   dur_seconds  INT UNSIGNED NOT NULL DEFAULT 0,
   channel      VARCHAR(120) NOT NULL DEFAULT '',
-  views        INT UNSIGNED NOT NULL DEFAULT 0,
+  views        INT UNSIGNED NOT NULL DEFAULT 0,             -- نمای یوتیوب (اعتمادسازی)
   has_transcript TINYINT(1) NOT NULL DEFAULT 0,
   published_at DATE         NULL,
+  -- ===== NEW (2026-10-18) =====
+  chapters     JSON         NULL,                           -- [{t:sec, fa:'...', en:'...'}] — تایم‌لاین پلیر
+  difficulty   ENUM('easy','medium','hard') NOT NULL DEFAULT 'medium',
+  status       ENUM('draft','reviewed','published') NOT NULL DEFAULT 'draft',
+                                                  -- pipeline می‌سازد → admin تایید → publish
+  tags         JSON         NULL,                           -- ["ECG","valves",...]
+  objectives_fa JSON       NULL,                            -- ["هدف یادگیری ...", ...]
+  objectives_en JSON       NULL,
   active       TINYINT(1)   NOT NULL DEFAULT 1,
-  KEY idx_topic (topic)
+  KEY idx_topic (topic),
+  KEY idx_status (status),
+  CONSTRAINT v_topic FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE video_progress (
@@ -51,6 +78,7 @@ CREATE TABLE quiz_questions (
   video_id  CHAR(11)     NOT NULL,
   ord       TINYINT UNSIGNED NOT NULL,                      -- ترتیب سؤال در آزمون
   type      ENUM('mc','cloze','dnd') NOT NULL,
+  difficulty ENUM('easy','medium','hard') NOT NULL DEFAULT 'medium',  -- NEW: سطح سؤال برای گزارش ضعف
   q_fa      TEXT NOT NULL,
   q_en      TEXT NOT NULL,
   opts_fa   JSON NULL,                                      -- گزینه‌ها (mc)
@@ -117,6 +145,26 @@ CREATE TABLE payments (
   KEY idx_user (user_id, created_at),
   KEY idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ============================================================
+-- قیمت هر پلن، جدا برای هر نسخه (.ir تومان/زرین‌پال — .com USD/Stripe)
+-- کلاینت premium.html قیمت‌ها را ثابت دارد؛ اینجا منبع حقیقت برای فاکتور است.
+-- ============================================================
+CREATE TABLE plan_prices (
+  id         TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  plan_code  VARCHAR(20)  NOT NULL,                          -- m1 / y1 / m3 ...
+  source     ENUM('ir','com') NOT NULL,
+  amount     INT UNSIGNED NOT NULL,                          -- IRT=تومان (مثلا 190000) / USD=cent (1499)
+  currency   ENUM('IRT','USD') NOT NULL,
+  gateway    ENUM('zarinpal','stripe') NOT NULL,
+  active     TINYINT(1) NOT NULL DEFAULT 1,
+  UNIQUE KEY uq_plan_source (plan_code, source)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO plan_prices (plan_code, source, amount, currency, gateway) VALUES
+  ('m1','ir',190000,'IRT','zarinpal'),
+  ('y1','ir',990000,'IRT','zarinpal'),
+  ('m1','com',1499,'USD','stripe'),
+  ('y1','com',9999,'USD','stripe');
 
 -- صف پایپ‌لاین محتوا: admin لینک کانال/ویدیو می‌دهد، cron هر ۵ دقیقه یک job را
 -- مرحله‌به‌مرحله (list → transcript → translate → quiz → publish) پیش می‌برد.
