@@ -18,6 +18,7 @@ export function initShell(){
     lists:   lang==='fa' ? 'پلی‌لیست‌ها' : 'Playlists',
     qbank:   lang==='fa' ? 'بانک سؤال' : 'QBank',
     sched:   lang==='fa' ? 'برنامه مطالعه' : 'Study Schedule',
+    account: lang==='fa' ? 'حساب کاربری' : 'Account',
     settings:lang==='fa' ? 'تنظیمات' : 'Settings',
     help:    lang==='fa' ? 'مرکز راهنمایی' : 'Help center',
     privacy: lang==='fa' ? 'حریم خصوصی' : 'Privacy',
@@ -31,6 +32,7 @@ export function initShell(){
   const plan  = (()=>{ try{ return (window.__NP_USER&&window.__NP_USER.plan)||(new URLSearchParams(location.search).get('plan'))||'free'; }catch(e){ return 'free'; } })();
   let name; try{ name = (window.__NP_USER&&window.__NP_USER.name) || sessionStorage.getItem('np_user') || (lang==='fa'?'مهمان':'Guest'); }catch(e){ name = lang==='fa'?'مهمان':'Guest'; }
   const brand = 'Nurse <b>Plus</b>';
+  const NP_BASE = /\/com(\/|$)/.test(location.pathname) ? '../' : '';
   const home = (location.pathname.endsWith('/premium.html')||location.pathname.endsWith('premium.html')) ? (document.querySelector('link[href*="globals.css"]')? ((document.querySelector('link[href*="globals.css"]').getAttribute('href').startsWith('../'))?'index.html':'index.html') : 'index.html') : 'index.html';
 
   const svg = (d, extra)=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+(d||'')+(extra||'')+'</svg>';
@@ -41,6 +43,7 @@ export function initShell(){
     list:  svg('<path d="M5 6h11M5 12h11M5 18h11"/><circle cx="19.5" cy="6" r="1.4"/><circle cx="19.5" cy="12" r="1.4"/><circle cx="19.5" cy="18" r="1.4"/>'),
     qbank: svg('<path d="M6 3.5h9.5L19 7v13.5H6z"/><path d="M9 9h7M9 12.5h7M9 16h4"/>'),
     sched: svg('<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 9.5h16M8 3.5v3M16 3.5v3"/>'),
+    user:   svg('<circle cx="12" cy="8.5" r="3.6"/><path d="M4.5 20c1.2-3.8 4-5.6 7.5-5.6s6.3 1.8 7.5 5.6"/>'),
     gear:  svg('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M18.6 5.4l-1.7 1.7M7.1 16.9l-1.7 1.7"/>'),
     help:  svg('<circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.5 2.5 0 1 1 3.7 2.7c-.7.5-1.3 1-1.3 2"/><circle cx="12" cy="17" r="0.4" fill="#086288"/>'),
     shield:svg('<path d="M12 3 5 6v5c0 5 3.4 8 7 10 3.6-2 7-5 7-10V6z"/>'),
@@ -73,6 +76,7 @@ export function initShell(){
         '<li><a class="np-item" href="#" data-np-noop>', ico.list,  '<span>', S.lists,  '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.qbank, '<span>', S.qbank, '</span></a></li>',
         '<li><a class="np-item" href="schedule.html">', ico.sched, '<span>', S.sched, '</span></a></li>',
+        '<li><a class="np-item" href="', NP_BASE, 'account.html">', ico.user, '<span>', S.account, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.gear,  '<span>', S.settings, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.help,  '<span>', S.help, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.shield,'<span>', S.privacy, '</span></a></li>',

@@ -1004,3 +1004,8 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
 @media (prefers-reduced-motion:reduce){
   .chipbar{scroll-behavior:auto}
 }
+
+/* ---- visible focus (keyboard) — subtle, doesn't change visuals otherwise ---- */
+.mh-ic:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.chip:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.mh-ic:focus-visible,.chip:focus-visible{background:#EAF3FA}
