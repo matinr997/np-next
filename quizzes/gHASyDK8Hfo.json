@@ -1,0 +1,92 @@
+{
+ "video": "gHASyDK8Hfo",
+ "gen": "2026-10-19",
+ "questions": [
+  {
+   "type": "mc",
+   "ts": 113,
+   "qf": "بیماری که پروکاین‌آمید دریافت می‌کند برای درد مفاصل و تب مراجعه کرده است. پرستار باید در نظر بگیرد که این علائم چه معنایی دارند؟",
+   "qe": "A client receiving procainamide reports joint pain and fever. What should the nurse recognize about these symptoms?",
+   "of": [
+    "نشانهٔ دیسکرازی خونی است و نیاز به پایش فوری CBC دارد",
+    "عارضهٔ شایع این گروه دارویی است و با قطع دارو برطرف می‌شود",
+    "نشانهٔ سندرم شبه‌لوپوس است که ممکن است با پروکاین‌آمید رخ دهد",
+    "نشانهٔ واکنش آلرژیک به کمک‌حامل است و نیاز به آنتی‌هیستامین دارد"
+   ],
+   "oe": [
+    "They indicate a blood dyscrasia and require immediate CBC monitoring",
+    "They are a common effect of this drug class and resolve when the drug is stopped",
+    "They indicate a lupus-like syndrome that can occur with procainamide",
+    "They indicate an allergic reaction to the vehicle and require an antihistamine"
+   ],
+   "c": 2,
+   "wf": "ویدیو به‌صراحت می‌گوید پروکاین‌آمید می‌تواند سندرم شبه‌لوپوس با علائمی مانند درد مفاصل و تب ایجاد کند. دیسکرازی خونی پروکاین‌آمید نیز هست، اما با کاهش شمارش پلاکت و گلبول سفید خود را نشان می‌دهد، نه با درد مفاصل.",
+   "we": "The video states that procainamide can cause a lupus-like syndrome with symptoms such as joint pain and fever. Procainamide also causes blood dyscrasias, but those present as low platelet and white cell counts rather than joint pain."
+  },
+  {
+   "type": "mc",
+   "ts": 157,
+   "qf": "کدام بازه، سطح سرمی درمانی پروکاین‌آمید است؟",
+   "qe": "Which range is the therapeutic serum level for procainamide?",
+   "of": [
+    "۰٫۵ تا ۲ نانوگرم در میلی‌لیتر",
+    "۴ تا ۱۰ میکروگرم در میلی‌لیتر",
+    "۱۰ تا ۲۰ میکروگرم در میلی‌لیتر",
+    "۲ تا ۵ میکروگرم در میلی‌لیتر"
+   ],
+   "oe": [
+    "0.5 to 2 ng/mL",
+    "4 to 10 mcg/mL",
+    "10 to 20 mcg/mL",
+    "2 to 5 mcg/mL"
+   ],
+   "c": 1,
+   "wf": "ویدیو صریحاً بازهٔ درمانی پروکاین‌آمید را بین ۴ تا ۱۰ میکروگرم در میلی‌لیتر ذکر می‌کند. بازهٔ ۰٫۵ تا ۲ نانوگرم در میلی‌لیتر متعلق به دیگوکسین است و به‌عنوان گزینهٔ انحرافی آمده است.",
+   "we": "The video gives the therapeutic range for procainamide as 4 to 10 mcg/mL. The 0.5 to 2 ng/mL range belongs to digoxin and serves as the distractor here."
+  },
+  {
+   "type": "cloze",
+   "ts": 76,
+   "qf": "بلوکرهای کانال سدیم با بلوکه کردن کانال {0} در سلول عضلهٔ قلبی، ورود سدیم به سلول را کاهش می‌دهند و ضربان قلب را کند می‌کنند.",
+   "qe": "Sodium channel blockers block the {0} channels in cardiac muscle cells, reducing sodium influx and slowing the heart rate.",
+   "blanks": [
+    "سدیم",
+    "sodium"
+   ],
+   "wf": "این داروها ضدآریتمی کلاس یک هستند. با کاهش سدیم ورودی، تحریک‌پذیری سلول کم می‌شود و ضربان سریع و آشفتهٔ آریتمی متوقف می‌گردد.",
+   "we": "These are Class I antiarrhythmics. Reduced sodium entry lowers cell excitability and stops the fast, chaotic impulses of an arrhythmia."
+  },
+  {
+   "type": "cloze",
+   "ts": 42,
+   "qf": "پروکاین‌آمید در زیرگروه {0} ، لیدوکاین در 1B و فلکاینید در 1C دسته‌بندی می‌شوند.",
+   "qe": "Procainamide is classified in subgroup {0}, lidocaine in 1B and flecainide in 1C.",
+   "blanks": [
+    "1A",
+    "1A"
+   ],
+   "wf": "ضدآریتمی‌های کلاس یک به سه زیرگروه تقسیم می‌شوند: پروکاین‌آمید در 1A، لیدوکاین در 1B و فلکاینید در 1C. این دسته‌بندی از نکات پرتکرار آزمون پرستاری است.",
+   "we": "Class I antiarrhythmics split into three subgroups: procainamide in 1A, lidocaine in 1B and flecainide in 1C. This is a frequently tested nursing-school classification."
+  },
+  {
+   "type": "dnd",
+   "ts": 134,
+   "qf": "اقدامات پایش برای بیماری که پروکاین‌آمید دریافت می‌کند را به همان ترتیبی بچینید که در ویدیو بیان می‌شود.",
+   "qe": "Arrange the monitoring actions for a client receiving procainamide in the order the video states.",
+   "items": [
+    "پایش CBC، به‌دلیل خطر دیسکرازی خونی",
+    "پایش نوار قلب برای آریتمی جدید یا تشدیدشده",
+    "پایش سطح سرمی دارو در طول درمان",
+    "پایش دقیق علائم حیاتی، چون افت فشار و برادی‌کاردی عوارض کلیدی هستند"
+   ],
+   "keep": [
+    "پایش نوار قلب برای آریتمی جدید یا تشدیدشده",
+    "پایش دقیق علائم حیاتی، چون افت فشار و برادی‌کاردی عوارض کلیدی هستند",
+    "پایش سطح سرمی دارو در طول درمان",
+    "پایش CBC، به‌دلیل خطر دیسکرازی خونی"
+   ],
+   "wf": "ویدیو ترتیب مراقبت را چنین بیان می‌کند: نخست نوار قلب، سپس علائم حیاتی، سپس سطح سرمی دارو و در پایان CBC به‌دلیل خطر دیسکرازی خونی.",
+   "we": "The video gives the nursing-care order: ECG first, then vital signs, then serum drug levels, and CBC last because of the risk of blood dyscrasias."
+  }
+ ]
+}

@@ -1,0 +1,92 @@
+{
+ "video": "gYajexY55hM",
+ "gen": "2026-10-19",
+ "questions": [
+  {
+   "type": "mc",
+   "ts": 138,
+   "qf": "بیماری که آمیودارون دریافت می‌کند دچار نوسان سطح پتاسیم شده است. پرستار باید نخستین چیزی که باید بررسی کند چیست؟",
+   "qe": "A client receiving amiodarone has fluctuating potassium levels. What should the nurse assess first?",
+   "of": [
+    "نوار قلب، برای شناسایی آریتمی جدید یا تشدیدشده",
+    "رنگ پوست بیمار، برای تشخیص تغییر آبی‌ـ‌خاکستری",
+    "نتایج آزمایش تیروئید، برای بررسی کم‌کاری تیروئید",
+    "دید بیمار، برای بررسی تغییرات بینایی"
+   ],
+   "oe": [
+    "The ECG, to identify new or worsening arrhythmias",
+    "The skin color, to detect blue-gray discoloration",
+    "Thyroid test results, to check for hypothyroidism",
+    "The client’s vision, to assess visual changes"
+   ],
+   "c": 0,
+   "wf": "آمیودارون کانال پتاسیم را بلوکه می‌کند و اثر دارو با سطح پتاسیم تنظیم می‌شود؛ نوسان پتاسیم می‌تواند آریتمی‌های خطرناک ایجاد کند. به همین دلیل ویدیو پایش نوار قلب و الکترولیت‌ها را در اولویت اول قرار می‌دهد. تغییر رنگ پوست، بینایی و تیروئید همگی عوارض واقعی دارند اما فوریت آریتمی را ندارند.",
+   "we": "Amiodarone blocks potassium channels, so its effect tracks the potassium level, and potassium shifts can trigger dangerous arrhythmias. That is why the video puts ECG and electrolyte monitoring first. Blue-gray skin, visual changes and thyroid dysfunction are all real adverse effects, but none is as time-critical as an arrhythmia."
+  },
+  {
+   "type": "mc",
+   "ts": 173,
+   "qf": "پرستار باید بیماری را که آمیودارون مصرف می‌کند دربارهٔ نوشیدن آب گریپ‌فروت آموزش دهد. دلیل اصلی این آموزش چیست؟",
+   "qe": "The nurse should teach a client taking amiodarone about grapefruit juice. What is the main reason?",
+   "of": [
+    "آب گریپ‌فروت اثر دارو را کاهش می‌دهد و کنترل آریتمی از دست می‌رود",
+    "آب گریپ‌فروت سطح دارو را در بدن افزایش می‌دهد و خطر سمیت ایجاد می‌کند",
+    "آب گریپ‌فروت باعث تغییر رنگ پوست به آبی‌ـ‌خاکستری می‌شود",
+    "آب گریپ‌فروت با تیروکسین تداخل دارد و کم‌کاری تیروئید ایجاد می‌کند"
+   ],
+   "oe": [
+    "Grapefruit juice decreases the effect of the drug and control of the arrhythmia is lost",
+    "Grapefruit juice raises the drug level in the body and creates a risk of toxicity",
+    "Grapefruit juice causes the blue-gray skin discoloration",
+    "Grapefruit juice interacts with thyroxine and causes hypothyroidism"
+   ],
+   "c": 1,
+   "wf": "ویدیو تصریح می‌کند که گریپ‌فروت سطح آمیودارون را در بدن بالا می‌برد و ممکن است به سمیت برسد. تغییر رنگ پوست و اختلال تیروئید عوارض مستقل دارو هستند و ربطی به گریپ‌فروت ندارند.",
+   "we": "The video states that grapefruit raises amiodarone levels in the body and can lead to toxicity. The blue-gray skin and thyroid dysfunction are independent drug adverse effects with no link to grapefruit."
+  },
+  {
+   "type": "cloze",
+   "ts": 63,
+   "qf": "آمیودارون با بلوکه کردن کانال {0} در سلول عضلهٔ قلبی، پتانسیل عمل را طولانی کرده و رپلاریزاسیون را به تأخیر می‌اندازد.",
+   "qe": "Amiodarone blocks the {0} channels in cardiac muscle cells, prolonging the action potential and delaying repolarization.",
+   "blanks": [
+    "پتاسیم",
+    "potassium"
+   ],
+   "wf": "ضدآریتمی‌های کلاس سه کانال پتاسیم را بلوکه می‌کنند. کاهش خروج پتاسیون، پتانسیل عمل را طولانی کرده و تحریک‌پذیری سلول قلبی را کاهش می‌دهد تا ریتم‌های نابهنجار تثبیت شوند.",
+   "we": "Class III antiarrhythmics block potassium channels. Reduced potassium outflow prolongs the action potential and lowers cardiac cell excitability, stabilizing abnormal rhythms."
+  },
+  {
+   "type": "cloze",
+   "ts": 110,
+   "qf": "یکی از سه هشدار بلک‌باکس آمیودارون، سمیت {0} است که می‌تواند به التهاب شدید ریه منجر شود.",
+   "qe": "One of amiodarone’s three black box warnings is {0} toxicity, which can lead to severe lung inflammation.",
+   "blanks": [
+    "ریوی",
+    "pulmonary"
+   ],
+   "wf": "سه هشدار بلک‌باکس آمیودارون عبارت‌اند از سمیت ریوی، سمیت کبدی و سمیت قلبی. سمیت قلبی می‌تواند آریتمی‌هایی مانند تورسادس‌دوپوینت ایجاد کند و سمیت کبدی آنزیم‌های کبدی را بالا می‌برد.",
+   "we": "Amiodarone carries three black box warnings: pulmonary, hepatic and cardiac toxicity. Cardiac toxicity can cause arrhythmias such as torsades de pointes, and hepatic toxicity raises liver enzymes."
+  },
+  {
+   "type": "dnd",
+   "ts": 138,
+   "qf": "پایش‌های لازم در طول درمان با آمیودارون را به همان ترتیبی بچینید که در ویدیو بیان می‌شود.",
+   "qe": "Arrange the required monitoring for a client on amiodarone in the order the video states.",
+   "items": [
+    "پایش عملکرد تیروئید با T3، T4 و TSH",
+    "پایش عملکرد ریه با تست عملکرد ریه و اسکن قفسه سینه",
+    "پایش نوار قلب، علائم حیاتی و الکترولیت‌ها",
+    "پایش عملکرد کبد با AST و ALT"
+   ],
+   "keep": [
+    "پایش نوار قلب، علائم حیاتی و الکترولیت‌ها",
+    "پایش عملکرد ریه با تست عملکرد ریه و اسکن قفسه سینه",
+    "پایش عملکرد کبد با AST و ALT",
+    "پایش عملکرد تیروئید با T3، T4 و TSH"
+   ],
+   "wf": "ویدیو ترتیب پایش را چنین بیان می‌کند: نخست نوار قلب و علائم حیاتی و الک trolیت‌ها، سپس عملکرد ریه، سپس عملکرد کبد با AST و ALT و در پایان عملکرد تیروئید با T3، T4 و TSH.",
+   "we": "The video gives the monitoring order: ECG and vital signs and electrolytes first, then lung function, then liver function with AST and ALT, and thyroid function with T3, T4 and TSH last."
+  }
+ ]
+}

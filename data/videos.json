@@ -1,5 +1,71 @@
 [
  {
+  "id": "gYajexY55hM",
+  "dur": "4:42",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Level Up RN",
+  "views": 1778,
+  "publishedAt": "2026-10-14",
+  "fa": "آمیودارون: ضدآریتمی کلاس سه — مکانیسم، عوارض و هشدارهای بلک‌باکس",
+  "en": "Amiodarone (Class III Antiarrhythmic): Mechanism, Side Effects & Black Box Warnings",
+  "sum": "آمیودارون، ضدآریتمی کلاس سه برای آریتمی‌های تهدیدکنندهٔ حیات مثل فیبریلاسیون و تاکی‌کاردی بطنی. مکانیسم آن با بلوکه کردن کانال پتاسیم و طولانی کردن پتانسیل عمل قلبی است. عوارض مهم شامل افت فشار، برادی‌کاردی، اختلال بینایی، اختلال تیروئید، حساسیت به نور و تغییر رنگ آبی‌ـ‌خاکستری پوست است. سه هشدار بلک‌باکس دارد: سمیت ریوی، کبدی و قلبی. پایش شامل نوار قلب، الکترولیت‌ها، عملکرد ریه و کبد (AST/ALT) و تیروئید (T3، T4، TSH) است. آموزش بیمار: پرهیز از آب گریپ‌فروت، معاینۀ منظم چشم و ضدآفتاب.",
+  "sum_en": "Amiodarone is a Class III antiarrhythmic for life-threatening arrhythmias such as VF and VT. It blocks potassium channels, prolonging the action potential. Key adverse effects include hypotension, bradycardia, visual changes, thyroid dysfunction, photosensitivity and blue-gray skin discoloration. It carries three black box warnings — pulmonary, hepatic and cardiac toxicity. Monitoring covers ECG, electrolytes, lung function, AST/ALT and T3/T4/TSH. Patient teaching includes avoiding grapefruit juice, regular eye exams and sun protection.",
+  "ch": [
+   [
+    "۰:۰۰",
+    "مقدمه"
+   ],
+   [
+    "۰:۳۲",
+    "موارد مصرف"
+   ],
+   [
+    "۱:۰۱",
+    "مکانیسم اثر"
+   ],
+   [
+    "۱:۲۳",
+    "عوارض جانبی"
+   ],
+   [
+    "۲:۴۴",
+    "آموزش به بیمار"
+   ],
+   [
+    "۳:۲۱",
+    "آزمون"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro"
+   ],
+   [
+    "0:32",
+    "Indications"
+   ],
+   [
+    "1:01",
+    "Mode of Action"
+   ],
+   [
+    "1:23",
+    "Side Effects"
+   ],
+   [
+    "2:44",
+    "Patient Teaching"
+   ],
+   [
+    "3:21",
+    "Quiz Time"
+   ]
+  ]
+ },
+ {
   "id": "oNEBmBtBvtw",
   "dur": "15:12",
   "tr": true,
@@ -82,6 +148,154 @@
   ]
  },
  {
+  "id": "WJcFIjv6LkE",
+  "dur": "7:48",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Lecturio Nursing",
+  "views": 644,
+  "publishedAt": "2026-10-11",
+  "fa": "فارماکولوژی شیمی‌درمانی به‌زبان ساده | مرور NCLEX",
+  "en": "Chemotherapy Pharmacology Made Easy | NCLEX Review",
+  "sum": "مرور گروه‌های اصلی داروهای شیمی‌درمانی (آلکیلان‌ها، آنتی‌متابولیت‌ها، تاکسان‌ها)، عوارض پرتکرار مثل سرکوب مغز استخوان و تهوع، و نکات ایمنی تجویز و مراقبت پرستاری — مبحث پرتکرار فارماکولوژی در NCLEX و ارشد.",
+  "sum_en": "High-yield chemotherapy pharmacology for NCLEX: major drug classes, hallmark toxicities such as myelosuppression, and safe-administration nursing points.",
+  "ch": [
+   [
+    "0:04",
+    "سرطان چیست: رشد کنترل‌نشده، تهاجم و متاستاز"
+   ],
+   [
+    "0:43",
+    "روش‌های درمان: جراحی، رادیوتراپی و دارو"
+   ],
+   [
+    "0:51",
+    "عوامل سیتوتوکسیک: گروه اصلی آزمون"
+   ],
+   [
+    "1:22",
+    "چرا شیمی‌درمانی سلول‌های پررشد را می‌زند"
+   ],
+   [
+    "2:34",
+    "پنج بافت پررشد: مو، گوارش، پوست، تناسلی و مغز استخوان"
+   ],
+   [
+    "3:20",
+    "ترفندهای حفظی برای لیست پنج‌تایی"
+   ],
+   [
+    "6:29",
+    "روش‌های تجویز: متناوب، ترکیبی و ناحیه‌ای"
+   ],
+   [
+    "7:13",
+    "مرور: شیمی‌درمانی چه بافتی را هدف می‌گیرد؟"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:04",
+    "What cancer is: unregulated growth, invasion, metastasis"
+   ],
+   [
+    "0:43",
+    "Treatment options: surgery, radiation and drugs"
+   ],
+   [
+    "0:51",
+    "Cytotoxic agents: the main NCLEX group"
+   ],
+   [
+    "1:22",
+    "Why chemo hits high-growth-fraction cells"
+   ],
+   [
+    "2:34",
+    "The five fast-growing tissues"
+   ],
+   [
+    "3:20",
+    "Memory tricks for the five-item list"
+   ],
+   [
+    "6:29",
+    "How chemo is given: intermittent, combination, regional"
+   ],
+   [
+    "7:13",
+    "Recall check: what does chemotherapy target?"
+   ]
+  ]
+ },
+ {
+  "id": "gHASyDK8Hfo",
+  "dur": "4:33",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Level Up RN",
+  "views": 3202,
+  "publishedAt": "2026-10-07",
+  "fa": "بلوکرهای کانال سدیم (پروکاین‌آمید، لیدوکاین و فلکاینید): ضدآریتمی‌های کلاس یک",
+  "en": "Sodium Channel Blockers (Procainamide, Lidocaine & Flecainide): Class I Antiarrhythmics",
+  "sum": "بلوکرهای کانال سدیم، ضدآریتمی‌های کلاس یک هستند که در سه زیرگروه 1A، 1B و 1C دسته‌بندی می‌شوند؛ پروکاین‌آمید در 1A، لیدوکاین در 1B و فلکاینید در 1C قرار دارند. با بلوکه کردن کانال سدیم و کاهش ورود سدیم به سلول، ضربان قلب کند می‌شود. برای آریتمی‌های بطنی و تاکی‌کاردی فوق‌بطنی مانند سندرم ولف–پارکینسون–وایت استفاده می‌شوند. عوارض شامل سرگیجه، برادی‌کاردی، افت فشار و آریتمی است و هشدار بلک‌باکس دارند. پروکاین‌آمید می‌تواند باعث دیسکرازی خونی و سندرم شبه‌لوپوس شود. پایش: نوار قلب، علائم حیاتی، سطح سرمی دارو (۴ تا ۱۰ میکروگرم در میلی‌لیتر) و CBC.",
+  "sum_en": "Sodium channel blockers are Class I antiarrhythmics split into 1A, 1B and 1C: procainamide (1A), lidocaine (1B) and flecainide (1C). They block sodium channels, reducing sodium influx and slowing impulses. Used for ventricular arrhythmias and supraventricular tachycardia such as Wolff-Parkinson-White. Adverse effects include dizziness, bradycardia, hypotension and arrhythmias, with black box warnings. Procainamide additionally causes blood dyscrasias and a lupus-like syndrome. Monitoring includes ECG, vital signs, serum drug levels (4-10 mcg/mL) and CBC.",
+  "ch": [
+   [
+    "۰:۰۰",
+    "مقدمه"
+   ],
+   [
+    "۰:۵۷",
+    "موارد مصرف"
+   ],
+   [
+    "۱:۱۳",
+    "مکانیسم اثر"
+   ],
+   [
+    "۱:۳۱",
+    "عوارض جانبی"
+   ],
+   [
+    "۲:۱۱",
+    "مراقبت پرستاری"
+   ],
+   [
+    "۲:۵۰",
+    "آزمون"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro"
+   ],
+   [
+    "0:57",
+    "Indications"
+   ],
+   [
+    "1:13",
+    "Mode of Action"
+   ],
+   [
+    "1:31",
+    "Side Effects"
+   ],
+   [
+    "2:11",
+    "Nursing Care"
+   ],
+   [
+    "2:50",
+    "Quiz Time"
+   ]
+  ]
+ },
+ {
   "id": "-6zD6em2oGk",
   "dur": "1:00:16",
   "tr": true,
@@ -144,6 +358,88 @@
    [
     "53:53",
     "Abdominal regions and quadrants"
+   ]
+  ]
+ },
+ {
+  "id": "8l1LBMGa7LI",
+  "dur": "12:36",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Lecturio Nursing",
+  "views": 648,
+  "publishedAt": "2026-10-04",
+  "fa": "آیا می‌توانید در این آزمون تمرینی فارماکولوژی پرستاری قبول شوید؟",
+  "en": "Can You Pass This Nursing Pharmacology Practice Quiz?",
+  "sum": "آزمون تمرینی چندگزینه‌ای فارماکولوژی پرستاری با تحلیل گزینه‌ها و منطق حذف پاسخ غلط — مناسب خودسنجی پیش از آزمون و تثبیت نکات عوارض دارویی و محاسبات در قالب تست NCLEX.",
+  "sum_en": "Interactive nursing pharmacology practice quiz with answer rationales — self-test drug classes, side effects, and dosage logic before exam day.",
+  "ch": [
+   [
+    "0:00",
+    "چگونه این مسابقه کار می‌کند: چهار حوزه و سه سطح سؤال"
+   ],
+   [
+    "0:32",
+    "ضدویوری‌ها: زمان شروع در آنفلوانزا و دوز پاکس‌لوید بر اساس eGFR"
+   ],
+   [
+    "2:12",
+    "ضدویوری‌ها: آموزش درباره رویاهای عجیب افاویرنز"
+   ],
+   [
+    "3:01",
+    "غدد: سرکوب محور HPA و پیوگلیتازون در نارسایی قلبی"
+   ],
+   [
+    "4:33",
+    "غدد: آستانه‌های هیپوگلیسمی در بیمار انسولینی"
+   ],
+   [
+    "5:30",
+    "گوارش: آموکسی‌سیلین برای هلیکوباکتر و موارد منع ملین محرک"
+   ],
+   [
+    "7:51",
+    "گوارش: ارزیابی اسهال قبل از داروی ضدحرکتی"
+   ],
+   [
+    "9:01",
+    "شیمی‌درمانی: ترتیب کاهش سلول‌های خونی، هیپریوریسمی و اریتروپویتین"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "How the challenge works: four areas, three levels"
+   ],
+   [
+    "0:32",
+    "Antivirals: influenza timing and Paxlovid dosing by eGFR"
+   ],
+   [
+    "2:12",
+    "Antivirals: teaching about efavirenz and strange dreams"
+   ],
+   [
+    "3:01",
+    "Endocrine: HPA-axis suppression and pioglitazone"
+   ],
+   [
+    "4:33",
+    "Endocrine: hypoglycemia thresholds on insulin"
+   ],
+   [
+    "5:30",
+    "GI: amoxicillin for H. pylori and laxative cautions"
+   ],
+   [
+    "7:51",
+    "GI: assessing diarrhea before an anti-motility drug"
+   ],
+   [
+    "9:01",
+    "Cancer: cell-line drop order, hyperuricemia, erythropoietin"
    ]
   ]
  },
@@ -230,6 +526,64 @@
   ]
  },
  {
+  "id": "Z1CF4pWvsj0",
+  "dur": "4:01",
+  "tr": true,
+  "cat": "فارماکولوژی",
+  "cat_en": "Pharmacology",
+  "src": "Level Up RN",
+  "views": 3388,
+  "publishedAt": "2026-09-29",
+  "fa": "دیگوکسین (گلیکوزید قلبی): اثر اینوتروپیک مثبت، سمیت و پایش",
+  "en": "Digoxin (Cardiac Glycoside): Positive Inotropic Effect, Toxicity & Monitoring",
+  "sum": "دیگوکسین یک گلیکوزید قلبی است که برای نارسایی قلبی، فیبریلاسیون دهلیزی و فلوتر دهلیزی به‌کار می‌رود. اثر اینوتروپیک مثبت دارد یعنی قدرت انقباض قلب را افزایش می‌دهد و اثر کرونوتروپیک منفی یعنی ضربان قلب را کند می‌کند. سمیت دیگوکسین با تهوع و استفراغ، خستگی، ضعف، سرگیجه و تغییرات بینایی مثل تاری دید یا دیدن هاله‌های سبز و زرد بروز می‌کند. مهم‌ترین نکتهٔ پرستاری: پیش از تجویز باید نبض بیمار بررسی شود و اگر کمتر از ۶۰ بار در دقیقه بود دارو داده نشود. سطح درمانی سرم ۰٫۵ تا ۲ نانوگرم در میلی‌لیتر است و هیپوکالمی خطر سمیت را افزایش می‌دهد. پادزهر، دیگوکسین ایمون فاب است.",
+  "sum_en": "Digoxin is a cardiac glycoside used for heart failure, atrial fibrillation and atrial flutter. It has a positive inotropic effect (stronger contractions) and a negative chronotropic effect (slower rate). Toxicity presents with nausea, vomiting, fatigue, weakness, dizziness and visual changes such as blurred vision or green-yellow halos. Key nursing step: check the pulse before administration and withhold the dose if the rate is under 60 beats per minute. Therapeutic serum range is 0.5-2 ng/mL; hypokalemia increases toxicity risk. The antidote is digoxin immune Fab.",
+  "ch": [
+   [
+    "۰:۰۰",
+    "مقدمه"
+   ],
+   [
+    "۰:۳۸",
+    "موارد مصرف و مکانیسم اثر"
+   ],
+   [
+    "۱:۱۸",
+    "عوارض جانبی"
+   ],
+   [
+    "۱:۴۷",
+    "مراقبت پرستاری"
+   ],
+   [
+    "۲:۴۴",
+    "آزمون"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Intro"
+   ],
+   [
+    "0:38",
+    "Indications & Mode of Action"
+   ],
+   [
+    "1:18",
+    "Side Effects"
+   ],
+   [
+    "1:47",
+    "Nursing Care"
+   ],
+   [
+    "2:44",
+    "Quiz Time"
+   ]
+  ]
+ },
+ {
   "id": "j75cjaVPZJw",
   "dur": "2:58:48",
   "tr": true,
@@ -308,6 +662,160 @@
    [
     "2:52:28",
     "Counting pulse and respirations"
+   ]
+  ]
+ },
+ {
+  "id": "V3ad8hoQVf8",
+  "dur": "18:04",
+  "tr": true,
+  "cat": "مهارت بالینی",
+  "cat_en": "Clinical Skills",
+  "src": "Lecturio Nursing",
+  "views": 1609,
+  "publishedAt": "2026-09-20",
+  "fa": "تسلط بر مقیاس کمای گلاسکو (GCS) | پادکست پرستاری لکتوریو قسمت ۱۵",
+  "en": "Mastering the Glasgow Coma Scale (GCS) | Lecturio Nursing Podcast EP. 15",
+  "sum": "آموزش جزءبه‌جزء مقیاس کمای گلاسکو (پاسخ چشمی، کلامی و حرکتی)، نحوه نمره‌دهی و تفسیر بالینی در بیماران ترومایی و نورولوژیک — مهارت پرتکرار ارزیابی عصبی در آزمون و بالین.",
+  "sum_en": "Glasgow Coma Scale broken down component by component — eye, verbal, and motor scoring with clinical interpretation for trauma and neuro patients.",
+  "ch": [
+   [
+    "0:00",
+    "چرا خواندن مغز بیمار بیهوش دشوار است"
+   ],
+   [
+    "1:11",
+    "GCS چه چیزی را می‌سنجد: هوشیاری در برابر عملکرد ذهنی"
+   ],
+   [
+    "2:11",
+    "چه زمانی از GCS و چه زمانی از NIHSS استفاده کنیم"
+   ],
+   [
+    "3:22",
+    "سه دسته ارزیابی: چشم، دهان و دست"
+   ],
+   [
+    "3:49",
+    "باز شدن چشم: ۱ تا ۴ امتیاز"
+   ],
+   [
+    "4:43",
+    "پاسخ کلامی: ۱ تا ۵ امتیاز"
+   ],
+   [
+    "5:55",
+    "پاسخ حرکتی: ۱ تا ۶ امتیاز"
+   ],
+   [
+    "6:17",
+    "محل‌یابی (۵) در برابر عقب‌کشیدن (۴)"
+   ],
+   [
+    "7:40",
+    "چرا حداکثر نمره‌ها ۴، ۵ و ۶ هستند"
+   ],
+   [
+    "8:37",
+    "جمع نمره: ۳ تا ۱۵ و مناطق خطر"
+   ],
+   [
+    "9:21",
+    "GCS کمتر یا مساوی ۸: حفظ راه هوایی و انتوباسیون"
+   ],
+   [
+    "10:56",
+    "NT (غیرقابل ارزیابی): فلج، آرام‌بخشی و انتوباسیون"
+   ],
+   [
+    "11:45",
+    "وضعیت دکورتیکیت (نمره ۳)"
+   ],
+   [
+    "12:51",
+    "وضعیت دسربریت (نمره ۲) و آسیب ساقه مغز"
+   ],
+   [
+    "14:43",
+    "رویکرد بالینی: مشاهده، تشدید محرک و محاسبه"
+   ],
+   [
+    "15:36",
+    "محدودیت GCS: مردمک‌ها را جداگانه بررسی کنید"
+   ],
+   [
+    "17:05",
+    "جمع‌بندی سه نکته کلیدی"
+   ]
+  ],
+  "ch_en": [
+   [
+    "0:00",
+    "Why reading an unresponsive brain is hard"
+   ],
+   [
+    "1:11",
+    "What the GCS measures: LOC versus mentation"
+   ],
+   [
+    "2:11",
+    "When to use the GCS instead of the NIHSS"
+   ],
+   [
+    "3:22",
+    "The three categories: eye, mouth, moving arm"
+   ],
+   [
+    "3:49",
+    "Eye opening: 1 to 4 points"
+   ],
+   [
+    "4:43",
+    "Verbal response: 1 to 5 points"
+   ],
+   [
+    "5:55",
+    "Motor response: 1 to 6 points"
+   ],
+   [
+    "6:17",
+    "Localizing (5) versus withdrawing (4)"
+   ],
+   [
+    "7:40",
+    "Why the maximums are 4, 5 and 6"
+   ],
+   [
+    "8:37",
+    "Adding it up: 3 to 15 and the danger zones"
+   ],
+   [
+    "9:21",
+    "GCS 8 or less: airway protection and intubation"
+   ],
+   [
+    "10:56",
+    "NT (not testable): paralysis, sedation, intubation"
+   ],
+   [
+    "11:45",
+    "Decorticate posturing (score 3)"
+   ],
+   [
+    "12:51",
+    "Decerebrate posturing (score 2) and brainstem damage"
+   ],
+   [
+    "14:43",
+    "The bedside approach: observe, escalate, calculate"
+   ],
+   [
+    "15:36",
+    "What the GCS misses: check pupils separately"
+   ],
+   [
+    "17:05",
+    "Recap: the three core takeaways"
    ]
   ]
  },
@@ -848,324 +1356,6 @@
    [
     "14:27",
     "Verifying placement and daily care"
-   ]
-  ]
- },
- {
-  "id": "WJcFIjv6LkE",
-  "dur": "7:48",
-  "tr": true,
-  "cat": "فارماکولوژی",
-  "cat_en": "Pharmacology",
-  "src": "Lecturio Nursing",
-  "views": 644,
-  "publishedAt": "2026-10-11",
-  "fa": "فارماکولوژی شیمی‌درمانی به‌زبان ساده | مرور NCLEX",
-  "en": "Chemotherapy Pharmacology Made Easy | NCLEX Review",
-  "sum": "مرور گروه‌های اصلی داروهای شیمی‌درمانی (آلکیلان‌ها، آنتی‌متابولیت‌ها، تاکسان‌ها)، عوارض پرتکرار مثل سرکوب مغز استخوان و تهوع، و نکات ایمنی تجویز و مراقبت پرستاری — مبحث پرتکرار فارماکولوژی در NCLEX و ارشد.",
-  "sum_en": "High-yield chemotherapy pharmacology for NCLEX: major drug classes, hallmark toxicities such as myelosuppression, and safe-administration nursing points.",
-  "ch": [
-   [
-    "0:04",
-    "سرطان چیست: رشد کنترل‌نشده، تهاجم و متاستاز"
-   ],
-   [
-    "0:43",
-    "روش‌های درمان: جراحی، رادیوتراپی و دارو"
-   ],
-   [
-    "0:51",
-    "عوامل سیتوتوکسیک: گروه اصلی آزمون"
-   ],
-   [
-    "1:22",
-    "چرا شیمی‌درمانی سلول‌های پررشد را می‌زند"
-   ],
-   [
-    "2:34",
-    "پنج بافت پررشد: مو، گوارش، پوست، تناسلی و مغز استخوان"
-   ],
-   [
-    "3:20",
-    "ترفندهای حفظی برای لیست پنج‌تایی"
-   ],
-   [
-    "6:29",
-    "روش‌های تجویز: متناوب، ترکیبی و ناحیه‌ای"
-   ],
-   [
-    "7:13",
-    "مرور: شیمی‌درمانی چه بافتی را هدف می‌گیرد؟"
-   ]
-  ],
-  "ch_en": [
-   [
-    "0:04",
-    "What cancer is: unregulated growth, invasion, metastasis"
-   ],
-   [
-    "0:43",
-    "Treatment options: surgery, radiation and drugs"
-   ],
-   [
-    "0:51",
-    "Cytotoxic agents: the main NCLEX group"
-   ],
-   [
-    "1:22",
-    "Why chemo hits high-growth-fraction cells"
-   ],
-   [
-    "2:34",
-    "The five fast-growing tissues"
-   ],
-   [
-    "3:20",
-    "Memory tricks for the five-item list"
-   ],
-   [
-    "6:29",
-    "How chemo is given: intermittent, combination, regional"
-   ],
-   [
-    "7:13",
-    "Recall check: what does chemotherapy target?"
-   ]
-  ]
- },
- {
-  "id": "8l1LBMGa7LI",
-  "dur": "12:36",
-  "tr": true,
-  "cat": "فارماکولوژی",
-  "cat_en": "Pharmacology",
-  "src": "Lecturio Nursing",
-  "views": 648,
-  "publishedAt": "2026-10-04",
-  "fa": "آیا می‌توانید در این آزمون تمرینی فارماکولوژی پرستاری قبول شوید؟",
-  "en": "Can You Pass This Nursing Pharmacology Practice Quiz?",
-  "sum": "آزمون تمرینی چندگزینه‌ای فارماکولوژی پرستاری با تحلیل گزینه‌ها و منطق حذف پاسخ غلط — مناسب خودسنجی پیش از آزمون و تثبیت نکات عوارض دارویی و محاسبات در قالب تست NCLEX.",
-  "sum_en": "Interactive nursing pharmacology practice quiz with answer rationales — self-test drug classes, side effects, and dosage logic before exam day.",
-  "ch": [
-   [
-    "0:00",
-    "چگونه این مسابقه کار می‌کند: چهار حوزه و سه سطح سؤال"
-   ],
-   [
-    "0:32",
-    "ضدویوری‌ها: زمان شروع در آنفلوانزا و دوز پاکس‌لوید بر اساس eGFR"
-   ],
-   [
-    "2:12",
-    "ضدویوری‌ها: آموزش درباره رویاهای عجیب افاویرنز"
-   ],
-   [
-    "3:01",
-    "غدد: سرکوب محور HPA و پیوگلیتازون در نارسایی قلبی"
-   ],
-   [
-    "4:33",
-    "غدد: آستانه‌های هیپوگلیسمی در بیمار انسولینی"
-   ],
-   [
-    "5:30",
-    "گوارش: آموکسی‌سیلین برای هلیکوباکتر و موارد منع ملین محرک"
-   ],
-   [
-    "7:51",
-    "گوارش: ارزیابی اسهال قبل از داروی ضدحرکتی"
-   ],
-   [
-    "9:01",
-    "شیمی‌درمانی: ترتیب کاهش سلول‌های خونی، هیپریوریسمی و اریتروپویتین"
-   ]
-  ],
-  "ch_en": [
-   [
-    "0:00",
-    "How the challenge works: four areas, three levels"
-   ],
-   [
-    "0:32",
-    "Antivirals: influenza timing and Paxlovid dosing by eGFR"
-   ],
-   [
-    "2:12",
-    "Antivirals: teaching about efavirenz and strange dreams"
-   ],
-   [
-    "3:01",
-    "Endocrine: HPA-axis suppression and pioglitazone"
-   ],
-   [
-    "4:33",
-    "Endocrine: hypoglycemia thresholds on insulin"
-   ],
-   [
-    "5:30",
-    "GI: amoxicillin for H. pylori and laxative cautions"
-   ],
-   [
-    "7:51",
-    "GI: assessing diarrhea before an anti-motility drug"
-   ],
-   [
-    "9:01",
-    "Cancer: cell-line drop order, hyperuricemia, erythropoietin"
-   ]
-  ]
- },
- {
-  "id": "V3ad8hoQVf8",
-  "dur": "18:04",
-  "tr": true,
-  "cat": "مهارت بالینی",
-  "cat_en": "Clinical Skills",
-  "src": "Lecturio Nursing",
-  "views": 1609,
-  "publishedAt": "2026-09-20",
-  "fa": "تسلط بر مقیاس کمای گلاسکو (GCS) | پادکست پرستاری لکتوریو قسمت ۱۵",
-  "en": "Mastering the Glasgow Coma Scale (GCS) | Lecturio Nursing Podcast EP. 15",
-  "sum": "آموزش جزءبه‌جزء مقیاس کمای گلاسکو (پاسخ چشمی، کلامی و حرکتی)، نحوه نمره‌دهی و تفسیر بالینی در بیماران ترومایی و نورولوژیک — مهارت پرتکرار ارزیابی عصبی در آزمون و بالین.",
-  "sum_en": "Glasgow Coma Scale broken down component by component — eye, verbal, and motor scoring with clinical interpretation for trauma and neuro patients.",
-  "ch": [
-   [
-    "0:00",
-    "چرا خواندن مغز بیمار بیهوش دشوار است"
-   ],
-   [
-    "1:11",
-    "GCS چه چیزی را می‌سنجد: هوشیاری در برابر عملکرد ذهنی"
-   ],
-   [
-    "2:11",
-    "چه زمانی از GCS و چه زمانی از NIHSS استفاده کنیم"
-   ],
-   [
-    "3:22",
-    "سه دسته ارزیابی: چشم، دهان و دست"
-   ],
-   [
-    "3:49",
-    "باز شدن چشم: ۱ تا ۴ امتیاز"
-   ],
-   [
-    "4:43",
-    "پاسخ کلامی: ۱ تا ۵ امتیاز"
-   ],
-   [
-    "5:55",
-    "پاسخ حرکتی: ۱ تا ۶ امتیاز"
-   ],
-   [
-    "6:17",
-    "محل‌یابی (۵) در برابر عقب‌کشیدن (۴)"
-   ],
-   [
-    "7:40",
-    "چرا حداکثر نمره‌ها ۴، ۵ و ۶ هستند"
-   ],
-   [
-    "8:37",
-    "جمع نمره: ۳ تا ۱۵ و مناطق خطر"
-   ],
-   [
-    "9:21",
-    "GCS کمتر یا مساوی ۸: حفظ راه هوایی و انتوباسیون"
-   ],
-   [
-    "10:56",
-    "NT (غیرقابل ارزیابی): فلج، آرام‌بخشی و انتوباسیون"
-   ],
-   [
-    "11:45",
-    "وضعیت دکورتیکیت (نمره ۳)"
-   ],
-   [
-    "12:51",
-    "وضعیت دسربریت (نمره ۲) و آسیب ساقه مغز"
-   ],
-   [
-    "14:43",
-    "رویکرد بالینی: مشاهده، تشدید محرک و محاسبه"
-   ],
-   [
-    "15:36",
-    "محدودیت GCS: مردمک‌ها را جداگانه بررسی کنید"
-   ],
-   [
-    "17:05",
-    "جمع‌بندی سه نکته کلیدی"
-   ]
-  ],
-  "ch_en": [
-   [
-    "0:00",
-    "Why reading an unresponsive brain is hard"
-   ],
-   [
-    "1:11",
-    "What the GCS measures: LOC versus mentation"
-   ],
-   [
-    "2:11",
-    "When to use the GCS instead of the NIHSS"
-   ],
-   [
-    "3:22",
-    "The three categories: eye, mouth, moving arm"
-   ],
-   [
-    "3:49",
-    "Eye opening: 1 to 4 points"
-   ],
-   [
-    "4:43",
-    "Verbal response: 1 to 5 points"
-   ],
-   [
-    "5:55",
-    "Motor response: 1 to 6 points"
-   ],
-   [
-    "6:17",
-    "Localizing (5) versus withdrawing (4)"
-   ],
-   [
-    "7:40",
-    "Why the maximums are 4, 5 and 6"
-   ],
-   [
-    "8:37",
-    "Adding it up: 3 to 15 and the danger zones"
-   ],
-   [
-    "9:21",
-    "GCS 8 or less: airway protection and intubation"
-   ],
-   [
-    "10:56",
-    "NT (not testable): paralysis, sedation, intubation"
-   ],
-   [
-    "11:45",
-    "Decorticate posturing (score 3)"
-   ],
-   [
-    "12:51",
-    "Decerebrate posturing (score 2) and brainstem damage"
-   ],
-   [
-    "14:43",
-    "The bedside approach: observe, escalate, calculate"
-   ],
-   [
-    "15:36",
-    "What the GCS misses: check pupils separately"
-   ],
-   [
-    "17:05",
-    "Recap: the three core takeaways"
    ]
   ]
  },

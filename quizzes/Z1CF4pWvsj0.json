@@ -1,0 +1,92 @@
+{
+ "video": "Z1CF4pWvsj0",
+ "gen": "2026-10-19",
+ "questions": [
+  {
+   "type": "mc",
+   "ts": 114,
+   "qf": "پیش از تجویز دیگوکسین، پرستار نبض بیمار را بررسی می‌کند. اگر نبض بیمار ۵۰ بار در دقیقه باشد، مناسب‌ترین اقدام کدام است؟",
+   "qe": "Before administering digoxin, a nurse assesses the client’s pulse. If the pulse is 50 beats per minute, what is the most appropriate action?",
+   "of": [
+    "تجویز دارو، زیرا اثر کرونوتروپیک منفی به کنترل آریتمی کمک می‌کند",
+    "تجویز نکردن دارو و اطلاع‌دادن به پزشک، زیرا نبض کمتر از ۶۰ است",
+    "تجویز نصف دوز به‌دلیل خطر افت فشار خون",
+    "تجویز دارو و پایش سطح سرمی پس از شش ساعت"
+   ],
+   "oe": [
+    "Administer the drug, because its negative chronotropic effect helps control the arrhythmia",
+    "Withhold the dose and notify the provider, because the pulse is under 60",
+    "Administer half the dose because of hypotension risk",
+    "Administer the drug and monitor the serum level after six hours"
+   ],
+   "c": 1,
+   "wf": "قانون کلیدی این ویدیو این است که اگر نبض بیمار کمتر از ۶۰ بار در دقیقه باشد، دیگوکسین داده نمی‌شود. برادی‌کاردی یکی از عوارض این داروست و دوز دادن در این وضعیت خطر سمیت را بالا می‌برد.",
+   "we": "The key rule in this video is that digoxin is withheld when the pulse is under 60 beats per minute. Bradycardia is an adverse effect of the drug, and giving the dose in that state raises toxicity risk."
+  },
+  {
+   "type": "mc",
+   "ts": 131,
+   "qf": "بیماری که دیگوکسین مصرف می‌کند دچار کاهش پتاسیم شده است. چرا پرستار باید نگران باشد؟",
+   "qe": "A client taking digoxin has developed low potassium. Why should the nurse be concerned?",
+   "of": [
+    "کاهش پتاسیم اثر کرونوتروپیک منفی دیگوکسین را خنثی می‌کند",
+    "کاهش پتاسیم خطر سمیت دیگوکسین را افزایش می‌دهد",
+    "کاهش پتاسیم باعث تبدیل دیگوکسین به گلیکوزید قلبی دیگری می‌شود",
+    "کاهش پتاسیم نیاز به دوز بالاتر دیگوکسین را ایجاد می‌کند"
+   ],
+   "oe": [
+    "Low potassium negates the negative chronotropic effect of digoxin",
+    "Low potassium increases the risk of digoxin toxicity",
+    "Low potassium converts digoxin into another cardiac glycoside",
+    "Low potassium creates the need for a higher digoxin dose"
+   ],
+   "c": 1,
+   "wf": "ویدیو صریحاً می‌گوید هیپوکالمی یا کاهش پتاسیم، خطر سمیت دیگوکسین را افزایش می‌دهد؛ به همین دلیل سطح پتاسیم در طول درمان پایش می‌شود. کاهش پتاسیم اثر دارو را خنثی نمی‌کند و نیاز به دوز بیشتر هم ایجاد نمی‌کند.",
+   "we": "The video states explicitly that hypokalemia increases the risk of digoxin toxicity, which is why potassium is monitored throughout therapy. Low potassium neither negates the drug’s effect nor calls for a higher dose."
+  },
+  {
+   "type": "cloze",
+   "ts": 57,
+   "qf": "اثر کرونوتروپیک منفی دیگوکسین باعث می‌شود ضربان قلب {0} شود و اثر اینوتروپیک مثبت آن قدرت انقباض را افزایش می‌دهد.",
+   "qe": "Digoxin’s negative chronotropic effect makes the heart rate {0}, while its positive inotropic effect increases the force of contraction.",
+   "blanks": [
+    "کندتر",
+    "slower"
+   ],
+   "wf": "دیگوکسین ضربان قلب را کند و قدرت انقباض را بیشتر می‌کند. همین ترکیب بار کاری قلب را کاهش می‌دهد و خستگی و تنگی نفس ناشی از نارسایی قلبی را بهتر می‌کند.",
+   "we": "Digoxin slows the heart rate while increasing contractile force. That combination lowers cardiac workload and improves the fatigue and dyspnea of heart failure."
+  },
+  {
+   "type": "cloze",
+   "ts": 144,
+   "qf": "پادزهر سمیت دیگوکسین، {0} است.",
+   "qe": "The antidote to digoxin toxicity is {0}.",
+   "blanks": [
+    "دیگوکسین ایمون فاب",
+    "digoxin immune Fab"
+   ],
+   "wf": "دیگوکسین ایمون فاب آنتی‌بادی اختصاصی است که دیگوکسین را در بدن خنثی می‌کند و به‌عنوان پادزهر در موارد سمیت شدید تجویز می‌شود.",
+   "we": "Digoxin immune Fab is a specific antibody that neutralizes digoxin in the body and is given as the antidote in severe toxicity."
+  },
+  {
+   "type": "dnd",
+   "ts": 107,
+   "qf": "اقدامات پرستاری برای بیماری که دیگوکسین دریافت می‌کند را به همان ترتیبی بچینید که در ویدیو بیان می‌شود.",
+   "qe": "Arrange the nursing actions for a client receiving digoxin in the order the video states.",
+   "items": [
+    "پایش سطح پتاسیم بیمار در طول درمان",
+    "بررسی نبض بیمار پیش از تجویز دارو",
+    "پایش سطح سرمی دیگوکسین در طول درمان",
+    "خودداری از تجویز دارو اگر نبض کمتر از ۶۰ بار در دقیقه باشد"
+   ],
+   "keep": [
+    "بررسی نبض بیمار پیش از تجویز دارو",
+    "خودداری از تجویز دارو اگر نبض کمتر از ۶۰ بار در دقیقه باشد",
+    "پایش سطح سرمی دیگوکسین در طول درمان",
+    "پایش سطح پتاسیم بیمار در طول درمان"
+   ],
+   "wf": "ویدیو ترتیب مراقبت را چنین بیان می‌کند: نخست بررسی نبض پیش از تجویز، سپس خودداری از دوز در نبض زیر ۶۰، سپس پایش سطح سرمی دیگوکسین و در پایان پایش پتاسیم به‌دلیل خطر سمیت.",
+   "we": "The video gives the nursing order: check the pulse before administration first, then withhold the dose if the rate is under 60, then monitor the serum digoxin level, and potassium last because of the toxicity risk."
+  }
+ ]
+}
