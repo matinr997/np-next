@@ -973,6 +973,8 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
   .chip.chipF.onf{background:var(--pri);color:#fff;border-color:var(--pri)}
   /* --- vertical one-card-per-row feed --- */
   .grid{display:block;padding:0 10px}
+  .card .thumb .pvfr{display:none}
+  .card{cursor:pointer}
   .card{margin-bottom:16px;border:1px solid #E3EEF7;border-radius:14px;overflow:hidden;
     box-shadow:var(--sh-1);background:#fff}
   .thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#0F77A6 0%,#086288 100%)}
