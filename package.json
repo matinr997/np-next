@@ -1,22 +1,10 @@
 {
   "name": "nurseplus-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "description": "Static front-end (IR+com). PHP backend lives on hosting under api/ — no build step.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "extract-data": "node scripts/extract-data.mjs"
-  },
-  "dependencies": {
-    "next": "^15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0"
+    "extract-data": "node scripts/extract-data.mjs",
+    "gen-quiz": "python3 scripts/gen_quiz.py"
   }
 }
