@@ -182,7 +182,10 @@ select.sel{background:var(--card);border:1px solid var(--line);color:var(--txt);
 .qjump:hover{background:#EAF4FA;color:#fff}
 html[dir="rtl"] .qjump{direction:rtl;text-align:right}
 .consent button{background:#e11d48;border:none;color:#fff;border-radius:8px;padding:10px 30px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.88rem}
-.thumb .pvfr{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;z-index:0}
+.thumb .pvfr{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;z-index:3;pointer-events:none}
+.thumb .pvfr,.thumb img{transition:opacity .18s var(--ease)}
+.thumb.pv-on img{opacity:0}
+.thumb.pv-on .play{opacity:0;transform:scale(1.15);pointer-events:none}
 .thumb .play,.thumb .dur,.thumb .tr-ok,.thumb .tr-no,.thumb .seen{z-index:2}
 
 /* ===== site-owned control bar (YouTube's own controls are disabled) ===== */
@@ -973,7 +976,6 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
   .chip.chipF.onf{background:var(--pri);color:#fff;border-color:var(--pri)}
   /* --- vertical one-card-per-row feed --- */
   .grid{display:block;padding:0 10px}
-  .card .thumb .pvfr{display:none}
   .card{cursor:pointer}
   .card{margin-bottom:16px;border:1px solid #E3EEF7;border-radius:14px;overflow:hidden;
     box-shadow:var(--sh-1);background:#fff}
@@ -1009,3 +1011,8 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
 .mh-ic:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
 .chip:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
 .mh-ic:focus-visible,.chip:focus-visible{background:#EAF3FA}
+
+/* hover preview: only disabled on touch-only devices, never on a narrow desktop window */
+@media (pointer:coarse) and (hover:none){
+  .card .thumb .pvfr{display:none!important}
+}
