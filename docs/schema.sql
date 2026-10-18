@@ -13,6 +13,7 @@ CREATE TABLE users (
   plan         ENUM('free','premium') NOT NULL DEFAULT 'free',
   plan_expires DATETIME      NULL,                          -- null = free
   source       ENUM('ir','com') NOT NULL,                  -- registration source (ir / com)
+  role         ENUM('user','admin') NOT NULL DEFAULT 'user',-- اولین admin را دستی/آیتم setup می‌سازیم
   created_at   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -115,4 +116,20 @@ CREATE TABLE payments (
   CONSTRAINT p_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   KEY idx_user (user_id, created_at),
   KEY idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- صف پایپ‌لاین محتوا: admin لینک کانال/ویدیو می‌دهد، cron هر ۵ دقیقه یک job را
+-- مرحله‌به‌مرحله (list → transcript → translate → quiz → publish) پیش می‌برد.
+CREATE TABLE pipeline_jobs (
+  id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  yt_id       CHAR(11)      NULL,                          -- بعد از کشف از کانال پر می‌شود
+  channel_url VARCHAR(255)  NULL,                          -- اگر job از لینک کانال باشد
+  stage       ENUM('discover','transcript','translate','quiz','publish','done','error')
+              NOT NULL DEFAULT 'discover',
+  status      ENUM('queued','running','ok','error') NOT NULL DEFAULT 'queued',
+  log         TEXT          NULL,                          -- خطا/جزئیات آخرین اجرا
+  created_by  BIGINT UNSIGNED NULL,                        -- users.id (admin)
+  created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_status (status, stage)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
