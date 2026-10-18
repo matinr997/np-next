@@ -680,3 +680,165 @@ select.sel:hover{border-color:#97D7FF}
 /* drop shadow under chips while flying */
 @keyframes chipLand{0%{transform:scale(.9)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
 .qzchip.inzone{animation:chipLand .28s var(--ease)}
+
+/* ============================================================
+   RESPONSIVE LAYER — desktop / tablet / mobile (additive)
+   ============================================================ */
+html{overflow-x:clip}
+@media(min-width:1400px){ .wrap{max-width:1260px} }
+
+/* ---------------- TABLET LANDSCAPE / SMALL DESKTOP (<=920) ---------------- */
+@media(max-width:920px){
+  .wrap{padding-inline:16px}
+  .d-grid{gap:16px}
+  .side{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+  .p-body{padding:16px 16px 18px}
+}
+
+/* ---------------- TABLET PORTRAIT (<=768) ---------------- */
+@media(max-width:768px){
+  .hero{padding:22px 18px}
+  .hero h1{font-size:1.36rem}
+  .hero p{font-size:.85rem;line-height:1.95}
+  .hero-stats{gap:12px;margin-top:12px}
+  .hstat{font-size:.78rem;padding:6px 12px}
+  .toolbar{gap:8px}
+  .search{flex:1 1 100%;min-width:0}
+  select.sel{flex:1 1 calc(50% - 4px);min-width:0}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+  #pane1{max-height:min(52vh,420px)}
+  .qzcard{padding:14px}
+}
+
+/* ---------------- MOBILE (<=640) ---------------- */
+@media(max-width:640px){
+  body{padding:12px 12px 14px}
+  .wrap{padding-inline:12px;padding-top:60px}
+  .crumb{font-size:.74rem;padding-inline-start:0}
+  /* hero */
+  .hero{padding:18px 15px;border-radius:12px}
+  .hero h1{font-size:1.2rem;line-height:1.7}
+  .hero p{font-size:.8rem;line-height:1.9}
+  .hero-stats{gap:8px}
+  .hstat{font-size:.73rem;padding:5px 10px}
+  .hstat b{font-size:.95rem}
+  /* toolbar */
+  .toolbar{gap:8px;margin-bottom:12px}
+  .search{width:100%;padding:0 12px;height:44px}
+  .search input{font-size:16px} /* prevents iOS auto-zoom */
+  select.sel{flex:1 1 calc(50% - 4px);height:42px;font-size:.8rem;min-width:0}
+  /* grid + cards */
+  .grid{gap:13px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+  .cbody h3{font-size:.88rem}
+  .cat{font-size:.64rem;padding:3px 10px}
+  /* detail */
+  .d-grid{gap:14px}
+  .back-btn{padding:9px 16px;font-size:.79rem;margin-bottom:12px}
+  .player-card{border-radius:12px}
+  .p-body{padding:14px 13px 16px}
+  .p-body h2{font-size:1rem}
+  .en2{font-size:.74rem}
+  .p-meta{gap:6px 12px;font-size:.74rem}
+  .p-actions{gap:8px}
+  .p-actions .btn{padding:9px 14px;font-size:.76rem}
+  .side{grid-template-columns:1fr}
+  /* player header */
+  .pl-head{padding:8px 10px;gap:8px}
+  .pl-title{max-width:52%;font-size:.85rem;padding:4px 6px}
+  .pl-acts{gap:2px}
+  .pl-ic{padding:7px 6px}
+  .pl-clock{width:32px;height:32px;top:8px;right:8px}
+  /* player controls: two tappable rows */
+  #ctRow{flex-wrap:wrap;gap:6px;padding:6px 8px 5px}
+  .ct-sp{flex:1 1 100%;height:0}
+  .ct-b{min-width:38px;min-height:38px;padding:0 6px}
+  #ctTime{font-size:.68rem}
+  .ct-cc{min-width:42px;height:38px}
+  #ctChapMenu{max-height:56vh;min-width:min(300px,calc(100vw - 36px))}
+  /* subtitles */
+  #subwrap{margin-top:8px;padding:9px 11px}
+  #subbar{font-size:.85rem;line-height:1.95;min-height:2.8em}
+  .sub-tgl{gap:6px}
+  .sub-tgl button{flex:1;padding:10px 4px;font-size:.78rem}
+  .sub-row{padding:8px;gap:8px}
+  /* tabs */
+  .ptabs{padding:4px;gap:4px;border-radius:11px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptab{padding:10px 14px;font-size:.79rem;min-height:40px}
+  .pane{padding:14px 2px}
+  #pane1{max-height:min(55vh,400px);min-height:150px;padding:6px 8px 9px}
+  #pane1 h4{margin:0 -8px 6px;padding:9px 12px 7px;font-size:.92rem}
+  .tr-row{gap:9px;padding:7px 8px}
+  .ch-row{gap:9px;padding:8px}
+  /* notes */
+  .nform{gap:6px}
+  .nform input{font-size:16px;padding:11px 12px} /* iOS no-zoom */
+  .nform button{padding:0 16px}
+  .tgl button{padding:10px 6px}
+  .vnote{padding:8px 10px}
+  /* quiz */
+  .qzhead{margin-bottom:12px}
+  .qztop{flex-wrap:wrap;justify-content:space-between;gap:8px}
+  .qzmid{order:3;flex:1 1 100%;text-align:center;padding-top:2px}
+  .qznav{padding:10px 14px}
+  .qzcard{padding:13px;border-radius:13px}
+  .qzcard h4{font-size:.89rem;line-height:1.85;margin-bottom:10px}
+  .qzopt{padding:11px 12px;font-size:.84rem;margin:7px 0;min-height:44px}
+  .qzsel{min-height:44px;font-size:.84rem}
+  .qzcheck{padding:11px 18px;min-height:44px}
+  .qzchip{font-size:.78rem;padding:9px 13px}
+  .qzzone{min-height:58px;padding:9px}
+  .qzres{font-size:.76rem;padding:6px 13px}
+  .qzrow{flex-wrap:wrap}
+  .qzfinal{padding:20px 12px}
+  .qzfinal .big{font-size:1.6rem}
+  /* drawer */
+  .np-drawer{width:min(88vw,330px)}
+  .np-item{padding:12px 14px;min-height:46px}
+  .np-drawer .np-cta,.np-drawer .np-ask{min-height:44px;justify-content:center}
+  /* misc blocks */
+  .adbox{padding:12px 13px;font-size:.8rem}
+  .heroad{padding:15px 14px}
+  .heroad .cta{display:block;text-align:center;margin-top:11px}
+  .sumbox{padding:9px 12px;font-size:.8rem}
+  .embed-box{font-size:.66rem;padding:9px 10px}
+  .qjump{font-size:.74rem;padding:11px 11px;min-height:44px}
+  .rel{gap:8px;padding:5px}
+  /* cookie bar */
+  #ckbar{flex-wrap:wrap;gap:9px;padding:11px 13px;border-radius:0;max-height:44vh;overflow-y:auto}
+  #ckbar span{flex:1 1 100%;line-height:1.8}
+  #ckbar button{flex:1 1 100%;padding:12px;min-height:44px}
+  /* toast + consent */
+  .toast{max-width:calc(100vw - 28px);width:max-content;text-align:center;font-size:.8rem;padding:10px 18px;bottom:74px}
+  .consent{padding:14px;gap:10px}
+  .consent>div:first-child{width:58px;height:58px;font-size:1.3rem}
+  .consent p{font-size:.79rem;line-height:1.8}
+  .consent button{padding:12px 22px;width:min(100%,270px)}
+}
+
+/* ---------------- SMALL MOBILE (<=400) ---------------- */
+@media(max-width:400px){
+  .hero h1{font-size:1.08rem}
+  .hstat{font-size:.7rem;padding:5px 9px}
+  .pl-ai{font-size:0;padding:9px 11px;gap:0} /* icon-only pill on tiny screens */
+  .pl-ai .ic{width:17px;height:17px}
+  #ctTime{font-size:.65rem}
+  .ptab{padding:10px 11px;font-size:.75rem}
+  .qznav{padding:10px 12px;font-size:.76rem}
+  .qzopt{font-size:.81rem}
+  .toast{font-size:.76rem;padding:9px 15px}
+  .cbody h3{font-size:.84rem}
+}
+
+/* --- responsive fix: header title must not force grid min-content (ellipsis works, no overflow) --- */
+.pl-head{min-width:0}
+.pl-head .pl-title{min-width:0;flex:1 1 auto;overflow:hidden}
+.pl-title #dTitle{min-width:0}
+.pl-acts{flex:0 0 auto}
+
+/* --- mobile: title wraps to 2 clamped lines so header never forces page overflow --- */
+@media(max-width:640px){
+  .pl-title #dTitle{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;line-height:1.5}
+  .pl-head{align-items:center}
+  .pl-title{max-width:min(56vw,340px)}
+}
