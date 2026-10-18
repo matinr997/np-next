@@ -352,3 +352,49 @@ body.np-lock{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .np-drawer,.np-ov,.np-ham span{transition:none}
 }
+
+/* ===== Quiz player (Osmosis-style) ===== */
+.qzhead{margin:0 0 14px}
+.qztop{display:flex;align-items:center;gap:10px}
+.qzmid{flex:1;text-align:center}
+.qzc{font-size:.85rem;font-weight:800;color:#086288}
+.qztrack{height:6px;background:#EAF4FA;border:1px solid #E3EFF8;border-radius:99px;overflow:hidden;margin:6px 4px}
+.qzfill{height:100%;background:linear-gradient(90deg,#4D8DBA,#086288);border-radius:99px;transition:width .35s ease}
+.qzscore{font-size:.7rem;font-weight:700;color:#4D8DBA}
+.qznav{border:1px solid #CFE3F2;background:#fff;color:#086288;border-radius:10px;padding:8px 14px;font-size:.8rem;font-weight:800;cursor:pointer;font-family:inherit;transition:background .18s ease;white-space:nowrap}
+.qznav:hover:not(:disabled){background:#F2F9FD}
+.qznav:disabled{opacity:.4;cursor:default}
+.qzcard{background:#fff;border:1px solid #E3EFF8;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(8,98,136,.06)}
+.qzcard h4{margin:0 0 12px;color:#086288;font-size:.95rem;line-height:1.9}
+.qzopt{display:flex;align-items:flex-start;gap:10px;width:100%;background:#F8FCFE;border:1px solid #CFE3F2;border-radius:12px;padding:11px 13px;margin:8px 0;cursor:pointer;font-family:inherit;font-size:.87rem;color:#086288;text-align:start;transition:border-color .15s ease,background .15s ease}
+.qzopt:hover:not(:disabled){border-color:#4D8DBA}
+.qzopt .radio{width:16px;height:16px;border-radius:50%;border:2px solid #4D8DBA;flex:none;margin-top:3px;background:#fff;transition:all .15s ease}
+.qzopt.ok{border-color:#086288;background:#97D7FF66}
+.qzopt.ok .radio{border-color:#086288;background:#086288;box-shadow:inset 0 0 0 3px #fff}
+.qzopt.no{border-color:#e11d48;background:#e11d4814}
+.qzopt.no .radio{border-color:#e11d48;background:#e11d48}
+.qzopt:disabled{cursor:default}
+.qzsentence{background:#F8FCFE;border:1px solid #E3EFF8;border-radius:12px;padding:14px;line-height:2.6;font-size:.9rem}
+.qzsel{font-family:inherit;font-size:.85rem;font-weight:700;color:#086288;background:#fff;border:1.5px solid #4D8DBA;border-radius:8px;padding:3px 8px;min-width:104px;max-width:100%;margin:0 3px;vertical-align:middle;cursor:pointer}
+.qzsel.ok{border-color:#086288;background:#97D7FF66}
+.qzsel.no{border-color:#e11d48;background:#e11d4814}
+.qzrow{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;align-items:center}
+.qzcheck{padding:9px 18px}
+.qzpool{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.qzchip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid #4D8DBA;color:#086288;border-radius:999px;padding:8px 14px;font-family:inherit;font-size:.83rem;font-weight:700;cursor:pointer;transition:all .15s ease}
+.qzchip:hover:not(:disabled){background:#97D7FF}
+.qzchip.inzone{background:#086288;border-color:#086288;color:#fff}
+.qzchip.inzone:hover:not(:disabled){background:#4D8DBA;border-color:#4D8DBA}
+.qzchip .qzh{width:17px;height:17px;border-radius:50%;background:#EAF4FA;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem;line-height:1}
+.qzchip.inzone .qzh{background:#ffffff33}
+.qzzone{min-height:64px;border:2px dashed #4D8DBA;border-radius:14px;background:#FFEFC4;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;transition:border-color .2s ease}
+.qzzone.locked{border-style:solid}
+.qzzoneL{color:#7A5A18;font-size:.75rem;font-weight:700}
+.qzres{display:inline-block;border-radius:999px;padding:5px 14px;font-size:.8rem;font-weight:800}
+.qzres.ok{background:#97D7FF;color:#086288}
+.qzres.no{background:#e11d4814;color:#e11d48}
+.qzfinal{text-align:center;padding:26px 16px;background:#fff;border:1px solid #E3EFF8;border-radius:16px;box-shadow:0 2px 10px rgba(8,98,136,.06)}
+.qzfinal .big{font-size:2rem;font-weight:900;color:#086288;margin:8px 0}
+.qzfinal .pct{font-size:.95rem;color:#4D8DBA;font-weight:700}
+.qzfinal .msg{margin:10px 0 18px;font-size:.95rem;color:#086288}
+.qzfinal .qzrow{justify-content:center}

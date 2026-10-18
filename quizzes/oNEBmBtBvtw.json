@@ -1,0 +1,142 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "در سیستول بطنی زودرس، چه اتفاقی باعث بسته شدن دریچه‌های دهلیزی-بطنی (AV) می‌شود؟",
+   "qe": "During early ventricular systole, what causes the atrioventricular (AV) valves to close?",
+   "of": [
+    "فشار بطن‌ها از فشار دهلیزها بالاتر می‌رود",
+    "فشار دهلیزها از فشار بطن‌ها بالاتر می‌رود",
+    "گره AV سیگنال الکتریکی را به تأخیر می‌اندازد",
+    "فشار بطن‌ها از فشار آئورت بالاتر می‌رود"
+   ],
+   "oe": [
+    "Ventricular pressure rises above atrial pressure",
+    "Atrial pressure rises above ventricular pressure",
+    "The AV node delays the electrical signal",
+    "Ventricular pressure rises above aortic pressure"
+   ],
+   "c": 0,
+   "wf": "در این فاز فشار بطن‌ها بالا می‌رود و وقتی از فشار دهلیزها که اکنون شل هستند بیشتر شد، دریچه‌های AV بسته می‌شوند و صدای S1 ایجاد می‌شود.",
+   "we": "In this phase ventricular pressure builds; once it exceeds the pressure in the now-relaxed atria, the AV valves close and S1 is heard.",
+   "ts": 634
+  },
+  {
+   "type": "mc",
+   "qf": "بسته شدن دریچه‌های سمی‌لونر در دیاستول بطنی زودرس، کدام صدای قلب را ایجاد می‌کند؟",
+   "qe": "Closure of the semilunar valves during early ventricular diastole produces which heart sound?",
+   "of": [
+    "صدای اول قلب (S1) یعنی لاب",
+    "صدای دوم قلب (S2) یعنی داب",
+    "موج P روی نوار قلب",
+    "قطعه PR روی نوار قلب"
+   ],
+   "oe": [
+    "First heart sound (S1), the \"lub\"",
+    "Second heart sound (S2), the \"dub\"",
+    "The P wave on the ECG",
+    "The PR interval on the ECG"
+   ],
+   "c": 1,
+   "wf": "وقتی فشار بطن‌ها پس از تخلیه به‌شدت کم می‌شود و از فشار آئورت و شریان پولمونر کمتر می‌شود، دریچه‌های سمی‌لونر می‌بندند و این همان S2 یا صدای داب است.",
+   "we": "When ventricular pressure drops sharply after emptying and falls below aortic and pulmonary artery pressure, the semilunar valves close, producing S2 (the dub).",
+   "ts": 822
+  },
+  {
+   "type": "mc",
+   "qf": "موج P روی نوار قلب (ECG) چه رویدادی را نشان می‌دهد؟",
+   "qe": "What event does the P wave on the ECG represent?",
+   "of": [
+    "دپولاریزاسیون دهلیزها که به انقباض آن‌ها می‌انجامد",
+    "دپولاریزاسیون بطن‌ها که به انقباض آن‌ها می‌انجامد",
+    "رپولاریزاسیون بطن‌ها که به شل شدن آن‌ها می‌انجامد",
+    "تأخیر سیگنال در گره AV قبل از ورود به بطن‌ها"
+   ],
+   "oe": [
+    "Depolarization of the atria, leading to their contraction",
+    "Depolarization of the ventricles, leading to their contraction",
+    "Repolarization of the ventricles, leading to their relaxation",
+    "Delay of the signal at the AV node before it enters the ventricles"
+   ],
+   "c": 0,
+   "wf": "شلیک گره SA باعث دپولاریزاسیون دهلیزها و انقباض آن‌ها می‌شود و همین رویداد موج P را می‌سازد.",
+   "we": "Firing of the SA node depolarizes and contracts the atria, and this event creates the P wave.",
+   "ts": 194
+  },
+  {
+   "type": "cloze",
+   "qf": "در انقباض ایزوولومتریک، هر چهار دریچه قلب {0} هستند و حجم خون داخل بطن‌ها {1} زیرا هنوز خونی از بطن‌ها خارج نشده است.",
+   "qe": "During isovolumetric contraction, all four heart valves are {0} and ventricular blood volume {1} because no blood has yet been ejected from the ventricles.",
+   "blanks": [
+    {
+     "of": [
+      "بسته",
+      "باز",
+      "نیمه‌باز"
+     ],
+     "oe": [
+      "closed",
+      "open",
+      "half open"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "تغییر نمی‌کند",
+      "افزایش می‌یابد",
+      "کاهش می‌یابد"
+     ],
+     "oe": [
+      "does not change",
+      "increases",
+      "decreases"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "در سیستول بطنی زودرس هر چهار دریچه برای لحظه‌ای بسته‌اند و چون خونی بیرون نرفته، حجم بطن تغییری نمی‌کند؛ به همین دلیل به آن انقباض ایزوولومتریک می‌گویند.",
+   "we": "In early ventricular systole all four valves are briefly closed and no blood has been ejected, so ventricular volume stays the same — which is why it is called isovolumetric contraction.",
+   "ts": 666
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام یک از موارد زیر دریچه‌های سمی‌لونر هستند؟",
+   "qe": "Which of the following are semilunar valves?",
+   "items": [
+    {
+     "fa": "دریچه تریکوسپید",
+     "en": "Tricuspid valve"
+    },
+    {
+     "fa": "دریچه پولمونر",
+     "en": "Pulmonic valve"
+    },
+    {
+     "fa": "دریچه میترال (بای‌کاسپید)",
+     "en": "Mitral (bicuspid) valve"
+    },
+    {
+     "fa": "دریچه آئورتی",
+     "en": "Aortic valve"
+    },
+    {
+     "fa": "الیاف پورکینجه",
+     "en": "Purkinje fibers"
+    }
+   ],
+   "keep": [
+    1,
+    3
+   ],
+   "wf": "دریچه پولمونر و دریچه آئورتی از نوع سمی‌لونر هستند و بطن‌ها را به شریان پولمونر و آئورت وصل می‌کنند؛ تریکوسپید و میترال دریچه‌های AV و الیاف پورکینجه بخشی از سیستم هدایتی است.",
+   "we": "The pulmonic and aortic valves are the semilunar valves connecting the ventricles to the pulmonary artery and aorta; the tricuspid and mitral are AV valves and Purkinje fibers are part of the conduction system.",
+   "ts": 325
+  }
+ ],
+ "video": "oNEBmBtBvtw",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}
