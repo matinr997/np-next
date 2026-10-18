@@ -7,7 +7,8 @@ const SITE = window.__NP_ACCOUNT_SITE || { id:'ir', lang:'fa', dir:'rtl', curren
 
 /* ============================ paths ============================ */
 export const IS_COM = /\/com(\/|$)/.test(location.pathname);
-export const BASE    = IS_COM ? '../' : './';
+export const BASE    = IS_COM ? '../' : './';        // shared assets live at the repo root (data/, subs/)
+export const PAGE    = '';                             // sibling pages: account.html sits next to index.html in BOTH deployments
 export const FA      = SITE.lang === 'fa';
 const L = (fa, en) => (FA ? fa : en);
 

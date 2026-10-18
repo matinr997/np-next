@@ -1,7 +1,7 @@
 /* NursePlus — Account Dashboard UI layer (shared ir/com; RTL comes from <html dir>) */
 // per-deployment config: ir uses config-ir.js, com uses config-com.js (set by entry)
 const SITE = window.__NP_ACCOUNT_SITE || { id:'ir', lang:'fa', dir:'rtl', currency:'IRT', gateway:'zarinpal' };
-import { IS_COM, BASE, FA, L, esc, fmtInt, pct, getUser, getStats, getVideos } from './account-core.js';
+import { IS_COM, BASE, PAGE, FA, L, esc, fmtInt, pct, getUser, getStats, getVideos } from './account-core.js';
 import { initShell } from './shell.js';
 
 /* ---------------- i18n ---------------- */
@@ -173,7 +173,7 @@ async function render(){
   wrap.querySelector('[data-p=billing]').innerHTML = `
     <h1 class="atitle">${S.billingDetails[I]} <a class="aterms" href="#">${S.terms[I]}</a></h1>
     <div class="acard">
-      ${row(S.package[I], `<b>${esc(plan)}</b>`, linkBtn(BASE + 'premium.html', S.changePkg[I], 'blue'))}
+      ${row(S.package[I], `<b>${esc(plan)}</b>`, linkBtn(PAGE + 'premium.html', S.changePkg[I], 'blue'))}
       ${row(S.status[I], `<span class="pill ${user.plan === 'premium' ? 'ok' : ''}">${user.plan === 'premium' ? S.active[I] : S.free[I]}</span>`, '')}
       ${row(S.expires[I], user.planExpires ? esc(user.planExpires) : `<span class="muted">—</span>`, '')}
       <div class="anote">${S.gatewayNote[I]}</div>
@@ -185,7 +185,7 @@ async function render(){
       <div class="acard">
         <h2 class="acard-h">${S.learningSet[I]}</h2>
         ${row(S.videos[I] + ' — ' + S.videosDesc[I], '', `<label class="sw"><input type="checkbox" id="setAuto"><span></span></label>`)}
-        ${row(S.schedules[I] + ' — ' + S.schedulesDesc[I], '', linkBtn(BASE + 'schedule.html', S.openSched[I], 'blue'))}
+        ${row(S.schedules[I] + ' — ' + S.schedulesDesc[I], '', linkBtn(PAGE + 'schedule.html', S.openSched[I], 'blue'))}
         ${row(S.daily[I] + ' — ' + S.qLen[I],
           `<select class="asel" id="setQLen"><option>3</option><option>5</option><option>10</option></select>`, '')}
         ${row(S.daily[I] + ' — ' + S.reminder[I],
@@ -243,7 +243,7 @@ async function render(){
           <div class="chead">${S.videosWatched[I]}</div>
           <div class="csub muted">${S.watchedNote[I]}</div>
           <div class="cempty">${vDone ? '' : S.noActivity[I]}</div>
-          <div class="acts">${linkBtn(BASE + 'index.html', S.watchVideo[I], 'blue')}</div>
+          <div class="acts">${linkBtn(PAGE + 'index.html', S.watchVideo[I], 'blue')}</div>
         </div>
       </div>
 
@@ -259,7 +259,7 @@ async function render(){
           <div class="csub muted">${S.qNote[I]}</div>
           <div class="chart" data-chart="quiz"></div>
           <div class="cempty">${qA ? '' : S.noActivity[I]}</div>
-          <div class="acts">${linkBtn(BASE + 'index.html?v=oNEBmBtBvtw', S.takeQuiz[I], 'blue')}</div>
+          <div class="acts">${linkBtn(PAGE + 'index.html?v=oNEBmBtBvtw', S.takeQuiz[I], 'blue')}</div>
         </div>
       </div>
     </div>
@@ -365,7 +365,7 @@ async function bootAccount(){
           .map(([p, ic]) => `<button data-p="${p}"><span class="i">${ic}</span><span class="t">${S[p][I]}</span><span class="ar">›</span></button>`).join('')}
         <button data-p="signout"><span class="i">⏏</span><span class="t">${S.signout[I]}</span></button>
       </div>
-      <div class="aside-foot">${linkBtn(BASE + 'index.html', S.backTo[I], 'ghost')}</div>
+      <div class="aside-foot">${linkBtn(PAGE + 'index.html', S.backTo[I], 'ghost')}</div>
     </aside>
     <main class="acc-main" id="accMain"></main>
    </div>
@@ -382,7 +382,7 @@ async function bootAccount(){
     </div>`;
   await render();
   document.querySelectorAll('.anav button').forEach(b => b.addEventListener('click', () => {
-    if (b.dataset.p === 'signout') { try { sessionStorage.removeItem('np_user'); } catch (e) {} location.href = BASE + 'index.html'; return; }
+    if (b.dataset.p === 'signout') { try { sessionStorage.removeItem('np_user'); } catch (e) {} location.href = PAGE + 'index.html'; return; }
     go(b.dataset.p);
   }));
   const start = (location.hash || '').replace('#', '') || 'profile';
