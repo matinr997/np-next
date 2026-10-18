@@ -842,3 +842,73 @@ html{overflow-x:clip}
   .pl-head{align-items:center}
   .pl-title{max-width:min(56vw,340px)}
 }
+
+/* ============================================================
+   SIDE TRANSCRIPT PANEL — right of video (push >=1200px),
+   full-width collapsible below (tablet/mobile).
+   ============================================================ */
+.stage-row{display:flex;align-items:stretch;min-width:0;direction:ltr}
+#stage{flex:1 1 auto;min-width:0}
+html[dir="rtl"] #subwrap{direction:rtl}
+html[dir="rtl"] .consent{direction:rtl}
+#trPanel{
+  order:2;flex:0 0 auto;width:100%;min-width:0;
+  display:grid;grid-template-rows:0fr;opacity:0;
+  background:linear-gradient(180deg,#F9FCFE 0%,#F3FAFD 100%);
+  border-top:1px solid transparent;
+  transition:grid-template-rows .42s var(--ease),width .38s var(--ease),opacity .3s var(--ease),flex-basis .38s var(--ease),border-color .3s var(--ease);
+}
+#trPanel.open{grid-template-rows:1fr;opacity:1;border-top-color:#E3EEF7}
+.tr-inner{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.tr-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px 8px;border-bottom:1px solid #E9F1F8;background:rgba(255,255,255,.75);direction:ltr;flex:0 0 auto}
+.tr-title{font-size:.85rem;font-weight:800;color:#086288;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.tr-x{border:none;background:#EDF5FA;color:#086288;border-radius:9px;width:34px;height:34px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none;transition:transform .2s var(--ease),background .2s var(--ease)}
+.tr-x:hover{background:#DDF0FA;transform:rotate(90deg)}
+.tr-x .ic{width:15px;height:15px}
+#trPanel #pane1{display:block !important;flex:1 1 auto;min-height:0;max-height:min(52vh,480px);overflow-y:auto;overscroll-behavior:contain;border:none;border-radius:0;background:none;padding:8px 12px 14px;position:relative}
+#trPanel #pane1 h4{display:none}
+html[dir="rtl"] #trPanel #pane1{direction:rtl}
+.ptab.tr-on{background:rgba(151,215,255,.45);color:#086288;box-shadow:var(--sh-1)}
+@media(max-width:640px){
+  .tr-head{padding:9px 12px 7px}
+  .tr-x{width:40px;height:40px}
+  #trPanel #pane1{max-height:min(58vh,440px);padding:8px 9px 12px}
+}
+/* ---- desktop: inline push panel on the right of the video ---- */
+@media(min-width:1200px){
+  #trPanel{width:0;flex:0 0 0px;border-top:none;border-left:1px solid transparent}
+  #trPanel.open{width:340px;flex:0 0 340px;border-left-color:#E3EEF7}
+  .tr-inner{width:340px;height:100%}
+  #trPanel #pane1{max-height:none}
+}
+
+/* ============================================================
+   SIDE TRANSCRIPT PANEL — corrections & column mode
+   ============================================================ */
+/* grid items must be shrinkable (kill min-content floor of main col) */
+.d-grid>*{min-width:0}
+.player-card{min-width:0}
+/* header carries the separators (borders must not paint when closed) */
+.tr-head{border-top:1px solid #E3EEF7}
+#trPanel{overflow:hidden;position:relative}
+/* ---- <1200: full-width collapsible panel BELOW the video ---- */
+@media(max-width:1199px){
+  .stage-row{flex-direction:column}
+  #trPanel{width:100%;flex:0 0 auto}
+}
+/* ---- >=1200: inline push panel; inner pinned left so it never squeezes mid-animation ---- */
+@media(min-width:1200px){
+  .tr-inner{position:absolute;top:0;left:0;bottom:0;width:340px;height:auto;border-left:1px solid #E3EEF7}
+  /* narrow stage while panel open: player controls wrap to two rows */
+  .stage-row:has(#trPanel.open) #ctRow{flex-wrap:wrap;gap:6px}
+  .stage-row:has(#trPanel.open) .ct-sp{flex:1 1 100%;height:0}
+  .stage-row:has(#trPanel.open) .ct-b{min-height:36px}
+}
+@media(max-width:1400px){
+  .stage-row:has(#trPanel.open) .pl-lbl{display:none}
+}
+/* ---- narrow tablets/large phones: two-row control bar safety ---- */
+@media(max-width:720px){
+  #ctRow{flex-wrap:wrap;gap:6px}
+  .ct-sp{flex:1 1 100%;height:0}
+}
