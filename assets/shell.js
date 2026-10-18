@@ -72,7 +72,7 @@ export function initShell(){
         '<li><a class="np-item" href="#" data-np-noop>', ico.topics, '<span>', S.vTopics, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.list,  '<span>', S.lists,  '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.qbank, '<span>', S.qbank, '</span></a></li>',
-        '<li><a class="np-item" href="#" data-np-noop>', ico.sched, '<span>', S.sched, '</span></a></li>',
+        '<li><a class="np-item" href="schedule.html">', ico.sched, '<span>', S.sched, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.gear,  '<span>', S.settings, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.help,  '<span>', S.help, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.shield,'<span>', S.privacy, '</span></a></li>',

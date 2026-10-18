@@ -1,0 +1,5 @@
+/* RTL polish: mini-calendar flows right; numbers/LTR bits pinned */
+body.sched[lang="fa"] .du-minihd b{order:2}
+body.sched[lang="fa"] .du-mainh svg{transform:scaleX(-1)}
+.du-mins{unicode-bidi:embed}
+#duDate,#duMonth,#duProgPct,#duAway,#duOverallPct{unicode-bidi:plaintext}
