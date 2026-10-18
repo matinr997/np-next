@@ -2,7 +2,7 @@
 // per-deployment config: ir uses config-ir.js, com uses config-com.js (set by entry)
 const SITE = window.__NP_ACCOUNT_SITE || { id:'ir', lang:'fa', dir:'rtl', currency:'IRT', gateway:'zarinpal' };
 import { IS_COM, BASE, PAGE, FA, L, esc, fmtInt, pct, getUser, getStats, getVideos } from './account-core.js';
-import { initShell } from './shell.js';
+import { initShell } from './shell.js?v=2';
 
 /* ---------------- i18n ---------------- */
 const S = {

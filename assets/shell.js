@@ -32,6 +32,10 @@ export function initShell(){
   const plan  = (()=>{ try{ return (window.__NP_USER&&window.__NP_USER.plan)||(new URLSearchParams(location.search).get('plan'))||'free'; }catch(e){ return 'free'; } })();
   let name; try{ name = (window.__NP_USER&&window.__NP_USER.name) || sessionStorage.getItem('np_user') || (lang==='fa'?'مهمان':'Guest'); }catch(e){ name = lang==='fa'?'مهمان':'Guest'; }
   const brand = 'Nurse <b>Plus</b>';
+  /* derive the account page from THIS page's own directory — never guess with '../'.
+     /np-next/com/index.html -> /np-next/com/account.html (English)
+     /np-next/index.html    -> /np-next/account.html    (Persian)                */
+  const ACCOUNTHREF = location.pathname.replace(/[^/]*$/, 'account.html');
   const home = (location.pathname.endsWith('/premium.html')||location.pathname.endsWith('premium.html')) ? (document.querySelector('link[href*="globals.css"]')? ((document.querySelector('link[href*="globals.css"]').getAttribute('href').startsWith('../'))?'index.html':'index.html') : 'index.html') : 'index.html';
 
   const svg = (d, extra)=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+(d||'')+(extra||'')+'</svg>';
@@ -75,7 +79,7 @@ export function initShell(){
         '<li><a class="np-item" href="#" data-np-noop>', ico.list,  '<span>', S.lists,  '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.qbank, '<span>', S.qbank, '</span></a></li>',
         '<li><a class="np-item" href="schedule.html">', ico.sched, '<span>', S.sched, '</span></a></li>',
-        '<li><a class="np-item" href="account.html">', ico.user, '<span>', S.account, '</span></a></li>',
+        '<li><a class="np-item" href="', ACCOUNTHREF, '">', ico.user, '<span>', S.account, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.gear,  '<span>', S.settings, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.help,  '<span>', S.help, '</span></a></li>',
         '<li><a class="np-item" href="#" data-np-noop>', ico.shield,'<span>', S.privacy, '</span></a></li>',
