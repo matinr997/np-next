@@ -30,53 +30,57 @@ NOW = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 VALID_STATUS = ('draft', 'processing', 'needs_review', 'published', 'archived')
 
 WATCH_CSS = """
-:root{--ink:#12212e;--mut:#5a6b7a;--line:#e3e9ef;--bg:#fff;--acc:#086288;--acc2:#4D8DBA;--wash:#f5f8fa}
-*{box-sizing:border-box}
-body{margin:0;background:#f7f9fb;color:var(--ink);
- font:400 16px/1.75 'Inter',Vazirmatn,Tahoma,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:0 20px 72px}
-a{color:var(--acc);text-decoration:none}
-a:hover{text-decoration:underline}
-.crumb{font-size:14px;color:var(--mut);padding:18px 0 6px}
-.crumb a{color:var(--mut)}
-h1{font-size:clamp(22px,4.2vw,32px);line-height:1.3;margin:10px 0 14px;font-weight:800;letter-spacing:-.01em}
-h2{font-size:19px;margin:38px 0 12px;font-weight:700;
- border-inline-start:4px solid var(--acc);padding-inline-start:11px}
-p{margin:0 0 14px}
-.meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px;color:var(--mut);margin:0 0 22px}
-.meta span{display:inline-flex;align-items:center;gap:5px}
-.player{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;
- box-shadow:0 10px 30px rgba(8,32,48,.14);margin:0 0 8px}
-.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.thumbbar{display:flex;gap:12px;align-items:center;margin:0 0 8px;padding:12px;
- background:var(--wash);border:1px solid var(--line);border-radius:12px;font-size:14px}
-.thumbbar img{width:92px;border-radius:7px;flex:none}
-ul.ch{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-ul.ch li{border-bottom:1px solid var(--line)}
-ul.ch li:last-child{border-bottom:0}
-ul.ch a{display:flex;gap:14px;padding:11px 15px;font-size:15px;color:var(--ink)}
-ul.ch a:hover{background:var(--wash);text-decoration:none}
-ul.ch time{flex:none;font-variant-numeric:tabular-nums;color:var(--acc);font-weight:700;font-size:13px;
- min-width:52px;padding-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
-.obj li{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:15px}
-.rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
-.rel a{display:block;background:var(--bg);border:1px solid var(--line);border-radius:12px;
- padding:12px;color:var(--ink);height:100%}
-.rel a:hover{border-color:var(--acc2);text-decoration:none;box-shadow:0 4px 14px rgba(8,32,48,.08)}
-.rel img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-bottom:9px;background:#eef2f5}
-.rel b{display:block;font-size:14px;font-weight:650;line-height:1.45}
-.rel i{display:block;font-style:normal;font-size:12.5px;color:var(--mut);margin-top:5px}
-.box{background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-size:14.5px;color:var(--mut)}
-.box strong{color:var(--ink)}
-.ctas{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 0}
-.btn{display:inline-block;padding:12px 21px;border-radius:10px;font-weight:700;font-size:15px}
-.btn.p{background:var(--acc);color:#fff}
-.btn.s{background:#fff;color:var(--acc);border:1.5px solid var(--acc2)}
-.foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut)}
-.foot p{margin:0 0 9px}
-@media(max-width:600px){.wrap{padding:0 15px 52px}.rel{grid-template-columns:1fr 1fr}}
-@media(min-width:901px){.split{display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:start}}
+/* Scoped to .wp and aligned with assets/globals.css: same 14px radius, same
+   #E3EEF7 hairline, same rgba(15,45,70,.05) shadow, same #086288 accent, same
+   Inter+Vazirmatn stack. A watch page must LOOK like the product it belongs to. */
+.wp{--ink:#12212e;--mut:#5a6b7a;--line:#E3EEF7;--acc:#086288;--acc2:#4D8DBA;--wash:#F5F8FA;
+ max-width:860px;margin:0 auto;padding:0 20px 72px}
+.wp *{box-sizing:border-box}
+.wp a{color:#086288;text-decoration:none}
+.wp a:hover{text-decoration:underline}
+.wp .wp-crumb{font-size:14px;color:#5a6b7a;padding:18px 0 6px}
+.wp .wp-crumb a{color:#5a6b7a}
+.wp h1{font-size:clamp(22px,4.2vw,31px);line-height:1.32;margin:10px 0 14px;font-weight:800;
+ color:#086288;letter-spacing:-.01em}
+.wp h2{font-size:18.5px;margin:38px 0 12px;font-weight:700;color:#12212e;
+ border-inline-start:4px solid #086288;padding-inline-start:11px}
+.wp p{margin:0 0 14px;line-height:1.85}
+.wp .wp-meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px;color:#5a6b7a;margin:0 0 22px}
+.wp .wp-player{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;
+ box-shadow:0 10px 30px rgba(8,32,48,.14);margin:0 0 10px}
+.wp .wp-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wp .wp-bar{display:flex;gap:12px;align-items:center;margin:0 0 8px;padding:12px 14px;
+ background:#F5F8FA;border:1px solid #E3EEF7;border-radius:14px;font-size:14px;color:#5a6b7a}
+.wp .wp-bar img{width:92px;border-radius:8px;flex:none}
+.wp .wp-bar strong{color:#12212e}
+.wp .wp-ch{list-style:none;margin:0;padding:0;border:1px solid #E3EEF7;border-radius:14px;overflow:hidden;
+ box-shadow:0 1px 2px rgba(15,45,70,.05)}
+.wp .wp-ch li{border-bottom:1px solid #E3EEF7}
+.wp .wp-ch li:last-child{border-bottom:0}
+.wp .wp-ch a{display:flex;gap:14px;padding:11px 15px;font-size:15px;color:#12212e}
+.wp .wp-ch a:hover{background:#F5F8FA;text-decoration:none}
+.wp .wp-ch time{flex:none;color:#086288;font-weight:700;font-size:13px;min-width:54px;padding-top:2px;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.wp .wp-obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.wp .wp-obj li{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:10px;padding:11px 15px;font-size:15px}
+.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.wp .wp-rel a{display:block;background:#fff;border:1px solid #E3EEF7;border-radius:14px;padding:12px;
+ color:#12212e;height:100%;box-shadow:0 1px 2px rgba(15,45,70,.05)}
+.wp .wp-rel a:hover{border-color:#4D8DBA;text-decoration:none;box-shadow:0 6px 18px rgba(15,45,70,.10)}
+.wp .wp-rel img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:9px;background:#eef2f5}
+.wp .wp-rel b{display:block;font-size:14px;font-weight:650;line-height:1.45;color:#086288}
+.wp .wp-rel i{display:block;font-style:normal;font-size:12.5px;color:#5a6b7a;margin-top:5px}
+.wp .wp-box{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:12px;padding:15px 17px;font-size:14.5px;color:#5a6b7a}
+.wp .wp-box strong{color:#12212e}
+.wp .wp-cta{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 0}
+.wp .wp-btn{display:inline-block;padding:12px 21px;border-radius:12px;font-weight:700;font-size:15px}
+.wp .wp-btn.p{background:#086288;color:#fff}
+.wp .wp-btn.p:hover{background:#075072;text-decoration:none}
+.wp .wp-btn.s{background:#fff;color:#086288;border:1.5px solid #4D8DBA}
+.wp .wp-foot{margin-top:52px;padding-top:22px;border-top:1px solid #E3EEF7;font-size:13.5px;color:#5a6b7a}
+.wp .wp-foot p{margin:0 0 9px}
+.wp .wp-foot strong{color:#12212e}
+@media(max-width:600px){.wp{padding:0 15px 52px}.wp-rel{grid-template-columns:1fr 1fr}}
 """
 
 
@@ -270,8 +274,10 @@ PAGE_SHELL = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Vazirmatn:wght@400;700;800&display=swap">
+<!-- the product's own stylesheet first, so the page inherits its identity -->
+<link rel="stylesheet" href="%(assets)s">
 <style>%(css)s</style>
-</head><body><div class="wrap">
+</head><body class="wp-page"><div class="wp">
 %(body)s
 </div></body></html>
 """
@@ -282,10 +288,17 @@ PAGE_SHELL = """<!doctype html>
 UP = '../../'
 
 
-def page(site, dep, path, title, desc, image, body, ld, typ='website', og_title=None):
+def asset_rel(dep, depth):
+    """globals.css lives at the deployment root, so the prefix is just the
+    nesting depth. On GitHub Pages .com sits one level deeper than .ir."""
+    return '/'.join(['..'] * depth) + '/assets/globals.css' if depth else 'assets/globals.css'
+
+
+def page(site, dep, path, title, desc, image, body, ld, typ='website', og_title=None, depth=2):
     return PAGE_SHELL % {
         'lang': site['lang'][dep], 'dir': site['dir'][dep],
         'head': head_tags(site, dep, path, title, desc, image, typ, ld, og_title),
+        'assets': asset_rel(dep, depth),
         'css': WATCH_CSS, 'body': body}
 
 
@@ -305,29 +318,29 @@ def watch_page(site, dep, o, related):
     e = html.escape
     b = []
     crumb_topics = UP + 'topics/' + topic_slug(o) + '/'
-    b.append('<nav class="crumb"><a href="{up}">{brand}</a> › '
+    b.append('<nav class="wp-crumb"><a href="{up}">{brand}</a> › '
              '<a href="{tp}">{cat}</a> › {h1}</nav>'.format(
                  up=UP, brand=e(site['brand'][dep]), tp=crumb_topics,
                  cat=e(o['cat'] if ir else o['cat_en']), h1=e(h1[:58])))
     b.append('<h1>%s</h1>' % e(h1))
     ch_txt = e(o.get('src') or '')   # src = the YouTube channel that published the lecture
-    b.append('<div class="meta">'
+    b.append('<div class="wp-meta">'
              '<span>📺 %s</span><span>⏱️ %s</span>'
              '<span>🗂️ %s</span><span>🕒 %s</span></div>'
              % (e(ch_txt), e(o['dur_txt']), e(o['cat'] if ir else o['cat_en']),
                 e(str(o.get('publishedAt') or ''))))
     # The player iframe IS the LCP element on a watch page — never lazy-load it.
-    b.append('<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/%s" '
+    b.append('<div class="wp-player"><iframe src="https://www.youtube-nocookie.com/embed/%s" '
              'title="%s" allow="accelerometer; clipboard-write; encrypted-media; '
              'picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin">'
              '</iframe></div>' % (o['id'], e(h1)))
-    b.append('<div class="thumbbar"><img src="%s" width="92" height="52" alt="%s" loading="lazy">'
+    b.append('<div class="wp-bar"><img src="%s" width="92" height="52" alt="%s" loading="lazy">'
              '<span>%s<br><strong>%s</strong></span></div>'
              % (thumb, e('%s — %s' % (o['en'] if not ir else o['fa'], ch_txt)), e(ch_txt), e(ch_txt)))
 
     b.append('<h2>%s</h2><p>%s</p>' % (e('این درس دربارهٔ چیست؟' if ir else 'What this lesson covers'), e(summ)))
 
-    b.append('<h2>%s</h2><ul class="obj">' % e('اهداف آموزشی' if ir else 'Learning objectives'))
+    b.append('<h2>%s</h2><ul class="wp-obj">' % e('اهداف آموزشی' if ir else 'Learning objectives'))
     for p in pts:
         b.append('<li>%s</li>' % e(p))
     b.append('</ul>')
@@ -336,7 +349,7 @@ def watch_page(site, dep, o, related):
     player = UP + 'index.html'
     if o['chapters']:
         b.append('<h2>%s</h2>' % e('سرفصل‌های زمانی' if ir else 'Timestamped chapters'))
-        b.append('<ul class="ch">')
+        b.append('<ul class="wp-ch">')
         for c in o['chapters']:
             lbl = (c['fa'] or c['en']) if ir else (c['en'] or c['fa'])
             b.append('<li><a href="%s?v=%s&amp;t=%d"><time>%s</time><span>%s</span></a></li>'
@@ -346,17 +359,17 @@ def watch_page(site, dep, o, related):
     b.append('<h2>%s</h2>' % e('آزمون NCLEX' if ir else 'NCLEX quiz'))
     has_q = os.path.exists(os.path.join(ROOT, 'quizzes', o['id'] + '.json'))
     if has_q:
-        b.append('<p>%s</p><div class="ctas"><a class="btn p" href="%s?v=%s">%s</a></div>'
+        b.append('<p>%s</p><div class="wp-cta"><a class="wp-btn p" href="%s?v=%s">%s</a></div>'
                  % (e('برای این درس آزمون چندگزینه‌ای، جای‌خالی و مرتب‌سازی آماده شده است.'
                       if ir else 'A multiple-choice, cloze and ordering quiz is ready for this lesson.'),
                     player, o['id'], e('شروع آزمون' if ir else 'Start the quiz')))
     else:
-        b.append('<p class="box">%s</p>' % e('آزمون این درس هنوز در حال آماده‌سازی است.'
+        b.append('<p class="wp-box">%s</p>' % e('آزمون این درس هنوز در حال آماده‌سازی است.'
                   if ir else 'The quiz for this lesson is still being prepared.'))
 
     if related:
         b.append('<h2>%s</h2>' % e('درس‌های مرتبط' if ir else 'Related lessons'))
-        b.append('<ul class="rel">')
+        b.append('<ul class="wp-rel">')
         for r in related:
             lbl = r['fa'] if ir else r['en']
             b.append('<li><a href="%svideos/%s/"><img src="https://i.ytimg.com/vi/%s/hqdefault.jpg" '
@@ -366,7 +379,7 @@ def watch_page(site, dep, o, related):
                         e(lbl[:78]), e(r['cat'] if ir else r['cat_en']), e(r['dur_txt'])))
         b.append('</ul>')
 
-    b.append('<div class="foot">')
+    b.append('<div class="wp-foot">')
     b.append('<p><strong>%s</strong> %s</p>'
              % (e('منبع:' if ir else 'Source:'), e(ch_txt)))
     b.append('<p>%s <a href="https://www.youtube.com/watch?v=%s" rel="nofollow noopener" '
@@ -386,7 +399,8 @@ def watch_page(site, dep, o, related):
                  ld_breadcrumb(site, dep, [(site['brand'][dep], ''),
                                            (o['cat'] if ir else o['cat_en'], 'topics/%s/' % topic_slug(o)),
                                            (h1, path)]),
-                 ld_video(site, dep, o)], typ='video.other', og_title=h1)
+                 ld_video(site, dep, o)], typ='video.other', og_title=h1,
+                depth=2 if ir else 3)
 
 
 def topic_page(site, dep, t):
@@ -397,10 +411,10 @@ def topic_page(site, dep, t):
     path = 'topics/%s/' % t['slug']
     e = html.escape
     mins = round(sum(x['tsec'] for x in t['vids']) / 60)
-    b = ['<nav class="crumb"><a href="%s">%s</a> › %s</nav>'
+    b = ['<nav class="wp-crumb"><a href="%s">%s</a> › %s</nav>'
          % (UP, e(site['brand'][dep]), e(t['cat'] if ir else t['cat_en']))]
     b.append('<h1>%s</h1>' % e(t['cat'] if ir else t['cat_en']))
-    b.append('<div class="meta"><span>🎞️ %s</span><span>⏱️ %s</span><span>📺 %s</span></div>'
+    b.append('<div class="wp-meta"><span>🎞️ %s</span><span>⏱️ %s</span><span>📺 %s</span></div>'
              % (e(_n(len(t['vids']), ir)), e(_dur(mins, ir)), e('، '.join(t['chans']) if ir
                                                                 else ', '.join(t['chans']))))
     intro = ('این بخش %d درس پرستاری دربارهٔ «%s» دارد؛ مجموعاً حدود %d دقیقه. هر درس متن گفتاری '
@@ -413,7 +427,7 @@ def topic_page(site, dep, t):
              % (len(t['vids']), t['cat_en'], mins))
     b.append('<p>%s</p>' % e(intro))
     b.append('<h2>%s</h2>' % e('فهرست درس‌ها' if ir else 'Lessons in this topic'))
-    b.append('<ul class="rel">')
+    b.append('<ul class="wp-rel">')
     for v in sorted(t['vids'], key=lambda x: str(x.get('publishedAt') or ''), reverse=True):
         lbl = v['fa'] if ir else v['en']
         b.append('<li><a href="%svideos/%s/"><img src="https://i.ytimg.com/vi/%s/hqdefault.jpg" '
@@ -424,10 +438,10 @@ def topic_page(site, dep, t):
     b.append('<h2>%s</h2>' % e('موضوعات مرتبط' if ir else 'Related topics'))
     b.append('<p>')
     for other in t['siblings']:
-        b.append('<a class="btn s" style="margin:0 6px 8px 0" href="%stopics/%s/">%s</a>'
+        b.append('<a class="wp-btn s" style="margin:0 6px 8px 0" href="%stopics/%s/">%s</a>'
                  % (UP, other['slug'], e(other['cat'] if ir else other['cat_en'])))
     b.append('</p>')
-    b.append('<div class="foot"><p><strong>%s</strong> %s</p></div>'
+    b.append('<div class="wp-foot"><p><strong>%s</strong> %s</p></div>'
              % (e('همهٔ بخش‌ها:' if ir else 'All sections:'),
                 e(' · '.join('%s' % (x['cat'] if ir else x['cat_en']) for x in t['siblings']))))
     return page(site, dep, path, title, desc, img, '\n'.join(b),
@@ -436,7 +450,7 @@ def topic_page(site, dep, t):
                                            (t['cat'] if ir else t['cat_en'], path)]),
                  {'@context': 'https://schema.org', '@type': 'CollectionPage',
                   'name': title, 'description': desc, 'inLanguage': site['lang'][dep],
-                  'url': url(site, dep, path)}])
+                  'url': url(site, dep, path)}], depth=2 if ir else 3)
 
 
 def _n(i, ir):
@@ -556,19 +570,19 @@ def _chan_handle(src):
 
 
 def write_404(site):
-    b = ['<nav class="crumb"><a href="./">%s</a></nav>' % html.escape(site['brand']['ir']),
+    b = ['<nav class="wp-crumb"><a href="./">%s</a></nav>' % html.escape(site['brand']['ir']),
          '<h1>صفحه پیدا نشد (۴۰۴)</h1>',
-         '<p class="box">این نشانی وجود ندارد یا جابه‌جا شده است. از جست‌وجوی بالای صفحهٔ اصلی '
+         '<p class="wp-box">این نشانی وجود ندارد یا جابه‌جا شده است. از جست‌وجوی بالای صفحهٔ اصلی '
          'استفاده کنید یا یکی از درس‌های زیر را ببینید.</p>']
     with open(os.path.join(ROOT, 'data', 'videos.json'), encoding='utf-8') as f:
         vs = [normalise(x) for x in json.load(f)][:6]
-    b.append('<h2>پیشنهاد</h2><ul class="rel">')
+    b.append('<h2>پیشنهاد</h2><ul class="wp-rel">')
     for v in vs:
         b.append('<li><a href="./videos/%s/"><img src="https://i.ytimg.com/vi/%s/hqdefault.jpg" '
                  'width="320" height="180" loading="lazy" alt="%s"><b>%s</b><i>%s · %s</i></a></li>'
                  % (v['slug'], v['id'], html.escape(v['fa']), html.escape(v['fa'][:78]),
                     html.escape(v['dur_txt']), html.escape(v['cat'])))
-    b.append('</ul><div class="ctas"><a class="btn p" href="./">بازگشت به صفحهٔ اصلی</a></div>')
+    b.append('</ul><div class="wp-cta"><a class="wp-btn p" href="./">بازگشت به صفحهٔ اصلی</a></div>')
     head = head_tags(site, 'ir', '404.html', 'صفحه پیدا نشد | %s' % site['brand']['ir'],
                      'نشانی درخواستی در %s وجود ندارد یا جابه‌جا شده است. از فهرست درس‌های '
                      'پیشنهادی پایین همین صفحه یا جست‌وجوی کتابخانه استفاده کنید.'
@@ -576,8 +590,10 @@ def write_404(site):
                      'https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg',
                      'website', [ld_site(site, 'ir')])
     open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8').write(
-        PAGE_SHELL % {'lang': 'fa', 'dir': 'rtl', 'head': head, 'css': WATCH_CSS,
-                      'body': '\n'.join(b)})
+        page(site, 'ir', '404.html',
+             'صفحه پیدا نشد | %s' % site['brand']['ir'],
+             'نشانی درخواستی وجود ندارد یا جابه‌جا شده است.', '', '\n'.join(b),
+             [ld_site(site, 'ir')], depth=0))
 
 
 # ---------------------------------------------------------------- main

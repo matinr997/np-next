@@ -69,62 +69,68 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Vazirmatn:wght@400;700;800&display=swap">
+<!-- the product's own stylesheet first, so the page inherits its identity -->
+<link rel="stylesheet" href="../../../assets/globals.css">
 <style>
-:root{--ink:#12212e;--mut:#5a6b7a;--line:#e3e9ef;--bg:#fff;--acc:#086288;--acc2:#4D8DBA;--wash:#f5f8fa}
-*{box-sizing:border-box}
-body{margin:0;background:#f7f9fb;color:var(--ink);
- font:400 16px/1.75 'Inter',Vazirmatn,Tahoma,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:0 20px 72px}
-a{color:var(--acc);text-decoration:none}
-a:hover{text-decoration:underline}
-.crumb{font-size:14px;color:var(--mut);padding:18px 0 6px}
-.crumb a{color:var(--mut)}
-h1{font-size:clamp(22px,4.2vw,32px);line-height:1.3;margin:10px 0 14px;font-weight:800;letter-spacing:-.01em}
-h2{font-size:19px;margin:38px 0 12px;font-weight:700;
- border-inline-start:4px solid var(--acc);padding-inline-start:11px}
-p{margin:0 0 14px}
-.meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px;color:var(--mut);margin:0 0 22px}
-.meta span{display:inline-flex;align-items:center;gap:5px}
-.player{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;
- box-shadow:0 10px 30px rgba(8,32,48,.14);margin:0 0 8px}
-.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.thumbbar{display:flex;gap:12px;align-items:center;margin:0 0 8px;padding:12px;
- background:var(--wash);border:1px solid var(--line);border-radius:12px;font-size:14px}
-.thumbbar img{width:92px;border-radius:7px;flex:none}
-ul.ch{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-ul.ch li{border-bottom:1px solid var(--line)}
-ul.ch li:last-child{border-bottom:0}
-ul.ch a{display:flex;gap:14px;padding:11px 15px;font-size:15px;color:var(--ink)}
-ul.ch a:hover{background:var(--wash);text-decoration:none}
-ul.ch time{flex:none;font-variant-numeric:tabular-nums;color:var(--acc);font-weight:700;font-size:13px;
- min-width:52px;padding-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
-.obj li{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:15px}
-.rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
-.rel a{display:block;background:var(--bg);border:1px solid var(--line);border-radius:12px;
- padding:12px;color:var(--ink);height:100%}
-.rel a:hover{border-color:var(--acc2);text-decoration:none;box-shadow:0 4px 14px rgba(8,32,48,.08)}
-.rel img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-bottom:9px;background:#eef2f5}
-.rel b{display:block;font-size:14px;font-weight:650;line-height:1.45}
-.rel i{display:block;font-style:normal;font-size:12.5px;color:var(--mut);margin-top:5px}
-.box{background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-size:14.5px;color:var(--mut)}
-.box strong{color:var(--ink)}
-.ctas{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 0}
-.btn{display:inline-block;padding:12px 21px;border-radius:10px;font-weight:700;font-size:15px}
-.btn.p{background:var(--acc);color:#fff}
-.btn.s{background:#fff;color:var(--acc);border:1.5px solid var(--acc2)}
-.foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut)}
-.foot p{margin:0 0 9px}
-@media(max-width:600px){.wrap{padding:0 15px 52px}.rel{grid-template-columns:1fr 1fr}}
-@media(min-width:901px){.split{display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:start}}
+/* Scoped to .wp and aligned with assets/globals.css: same 14px radius, same
+   #E3EEF7 hairline, same rgba(15,45,70,.05) shadow, same #086288 accent, same
+   Inter+Vazirmatn stack. A watch page must LOOK like the product it belongs to. */
+.wp{--ink:#12212e;--mut:#5a6b7a;--line:#E3EEF7;--acc:#086288;--acc2:#4D8DBA;--wash:#F5F8FA;
+ max-width:860px;margin:0 auto;padding:0 20px 72px}
+.wp *{box-sizing:border-box}
+.wp a{color:#086288;text-decoration:none}
+.wp a:hover{text-decoration:underline}
+.wp .wp-crumb{font-size:14px;color:#5a6b7a;padding:18px 0 6px}
+.wp .wp-crumb a{color:#5a6b7a}
+.wp h1{font-size:clamp(22px,4.2vw,31px);line-height:1.32;margin:10px 0 14px;font-weight:800;
+ color:#086288;letter-spacing:-.01em}
+.wp h2{font-size:18.5px;margin:38px 0 12px;font-weight:700;color:#12212e;
+ border-inline-start:4px solid #086288;padding-inline-start:11px}
+.wp p{margin:0 0 14px;line-height:1.85}
+.wp .wp-meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:14px;color:#5a6b7a;margin:0 0 22px}
+.wp .wp-player{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;
+ box-shadow:0 10px 30px rgba(8,32,48,.14);margin:0 0 10px}
+.wp .wp-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.wp .wp-bar{display:flex;gap:12px;align-items:center;margin:0 0 8px;padding:12px 14px;
+ background:#F5F8FA;border:1px solid #E3EEF7;border-radius:14px;font-size:14px;color:#5a6b7a}
+.wp .wp-bar img{width:92px;border-radius:8px;flex:none}
+.wp .wp-bar strong{color:#12212e}
+.wp .wp-ch{list-style:none;margin:0;padding:0;border:1px solid #E3EEF7;border-radius:14px;overflow:hidden;
+ box-shadow:0 1px 2px rgba(15,45,70,.05)}
+.wp .wp-ch li{border-bottom:1px solid #E3EEF7}
+.wp .wp-ch li:last-child{border-bottom:0}
+.wp .wp-ch a{display:flex;gap:14px;padding:11px 15px;font-size:15px;color:#12212e}
+.wp .wp-ch a:hover{background:#F5F8FA;text-decoration:none}
+.wp .wp-ch time{flex:none;color:#086288;font-weight:700;font-size:13px;min-width:54px;padding-top:2px;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.wp .wp-obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.wp .wp-obj li{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:10px;padding:11px 15px;font-size:15px}
+.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.wp .wp-rel a{display:block;background:#fff;border:1px solid #E3EEF7;border-radius:14px;padding:12px;
+ color:#12212e;height:100%;box-shadow:0 1px 2px rgba(15,45,70,.05)}
+.wp .wp-rel a:hover{border-color:#4D8DBA;text-decoration:none;box-shadow:0 6px 18px rgba(15,45,70,.10)}
+.wp .wp-rel img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:9px;background:#eef2f5}
+.wp .wp-rel b{display:block;font-size:14px;font-weight:650;line-height:1.45;color:#086288}
+.wp .wp-rel i{display:block;font-style:normal;font-size:12.5px;color:#5a6b7a;margin-top:5px}
+.wp .wp-box{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:12px;padding:15px 17px;font-size:14.5px;color:#5a6b7a}
+.wp .wp-box strong{color:#12212e}
+.wp .wp-cta{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 0}
+.wp .wp-btn{display:inline-block;padding:12px 21px;border-radius:12px;font-weight:700;font-size:15px}
+.wp .wp-btn.p{background:#086288;color:#fff}
+.wp .wp-btn.p:hover{background:#075072;text-decoration:none}
+.wp .wp-btn.s{background:#fff;color:#086288;border:1.5px solid #4D8DBA}
+.wp .wp-foot{margin-top:52px;padding-top:22px;border-top:1px solid #E3EEF7;font-size:13.5px;color:#5a6b7a}
+.wp .wp-foot p{margin:0 0 9px}
+.wp .wp-foot strong{color:#12212e}
+@media(max-width:600px){.wp{padding:0 15px 52px}.wp-rel{grid-template-columns:1fr 1fr}}
 </style>
-</head><body><div class="wrap">
-<nav class="crumb"><a href="../../">Nurse Plus</a> › Pharmacology</nav>
+</head><body class="wp-page"><div class="wp">
+<nav class="wp-crumb"><a href="../../">Nurse Plus</a> › Pharmacology</nav>
 <h1>Pharmacology</h1>
-<div class="meta"><span>🎞️ 7 lessons</span><span>⏱️ 227 min</span><span>📺 Klimek Reviews, Lecturio Nursing, Level Up RN, RegisteredNurseRN</span></div>
+<div class="wp-meta"><span>🎞️ 7 lessons</span><span>⏱️ 227 min</span><span>📺 Klimek Reviews, Lecturio Nursing, Level Up RN, RegisteredNurseRN</span></div>
 <p>This section has 7 nursing lessons on Pharmacology, about 227 minutes in total. Each lesson includes a full transcript, timestamped chapters, timed notes and an NCLEX quiz, and is designed for review and consolidation.</p>
 <h2>Lessons in this topic</h2>
-<ul class="rel">
+<ul class="wp-rel">
 <li><a href="../../videos/amiodarone-class-iii-antiarrhythmic-mechanism-side-effects-black-box/"><img src="https://i.ytimg.com/vi/gYajexY55hM/hqdefault.jpg" width="320" height="180" loading="lazy" alt="Amiodarone (Class III Antiarrhythmic): Mechanism, Side Effects &amp; Black Box Warnings — 4:42"><b>Amiodarone (Class III Antiarrhythmic): Mechanism, Side Effects &amp; Black Box War</b><i>4:42 · Level Up RN</i></a></li>
 <li><a href="../../videos/chemotherapy-pharmacology-made-easy-nclex-review/"><img src="https://i.ytimg.com/vi/WJcFIjv6LkE/hqdefault.jpg" width="320" height="180" loading="lazy" alt="Chemotherapy Pharmacology Made Easy | NCLEX Review — 7:48"><b>Chemotherapy Pharmacology Made Easy | NCLEX Review</b><i>7:48 · Lecturio Nursing</i></a></li>
 <li><a href="../../videos/sodium-channel-blockers-procainamide-lidocaine-flecainide-class-i/"><img src="https://i.ytimg.com/vi/gHASyDK8Hfo/hqdefault.jpg" width="320" height="180" loading="lazy" alt="Sodium Channel Blockers (Procainamide, Lidocaine &amp; Flecainide): Class I Antiarrhythmics — 4:33"><b>Sodium Channel Blockers (Procainamide, Lidocaine &amp; Flecainide): Class I Antiar</b><i>4:33 · Level Up RN</i></a></li>
@@ -135,11 +141,11 @@ ul.ch time{flex:none;font-variant-numeric:tabular-nums;color:var(--acc);font-wei
 </ul>
 <h2>Related topics</h2>
 <p>
-<a class="btn s" style="margin:0 6px 8px 0" href="../../topics/cardiovascular/">Cardiovascular</a>
-<a class="btn s" style="margin:0 6px 8px 0" href="../../topics/anatomy/">Anatomy</a>
-<a class="btn s" style="margin:0 6px 8px 0" href="../../topics/clinical-skills/">Clinical Skills</a>
-<a class="btn s" style="margin:0 6px 8px 0" href="../../topics/gi-nutrition/">GI &amp; Nutrition</a>
-<a class="btn s" style="margin:0 6px 8px 0" href="../../topics/maternity/">Maternity</a>
+<a class="wp-btn s" style="margin:0 6px 8px 0" href="../../topics/cardiovascular/">Cardiovascular</a>
+<a class="wp-btn s" style="margin:0 6px 8px 0" href="../../topics/anatomy/">Anatomy</a>
+<a class="wp-btn s" style="margin:0 6px 8px 0" href="../../topics/clinical-skills/">Clinical Skills</a>
+<a class="wp-btn s" style="margin:0 6px 8px 0" href="../../topics/gi-nutrition/">GI &amp; Nutrition</a>
+<a class="wp-btn s" style="margin:0 6px 8px 0" href="../../topics/maternity/">Maternity</a>
 </p>
-<div class="foot"><p><strong>All sections:</strong> Cardiovascular · Anatomy · Clinical Skills · GI &amp; Nutrition · Maternity</p></div>
+<div class="wp-foot"><p><strong>All sections:</strong> Cardiovascular · Anatomy · Clinical Skills · GI &amp; Nutrition · Maternity</p></div>
 </div></body></html>
