@@ -34,7 +34,11 @@ WATCH_CSS = """
    #E3EEF7 hairline, same rgba(15,45,70,.05) shadow, same #086288 accent, same
    Inter+Vazirmatn stack. A watch page must LOOK like the product it belongs to. */
 .wp{--ink:#12212e;--mut:#5a6b7a;--line:#E3EEF7;--acc:#086288;--acc2:#4D8DBA;--wash:#F5F8FA;
- max-width:860px;margin:0 auto;padding:0 20px 72px}
+ /* same max-width as the app's own .wrap so the two never look like different products */
+ max-width:1260px;margin:0 auto;padding:22px 18px 60px}
+/* main + related sidebar, mirroring the app's own .d-grid split (1fr 340px / 18px) */
+.wp-body{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.wp-main,.wp-side{min-width:0}   /* min-width:0 stops a grid child from overflowing */
 .wp *{box-sizing:border-box}
 .wp a{color:#086288;text-decoration:none}
 .wp a:hover{text-decoration:underline}
@@ -63,7 +67,7 @@ WATCH_CSS = """
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .wp .wp-obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
 .wp .wp-obj li{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:10px;padding:11px 15px;font-size:15px}
-.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:0;padding:0;list-style:none}
 .wp .wp-rel a{display:block;background:#fff;border:1px solid #E3EEF7;border-radius:14px;padding:12px;
  color:#12212e;height:100%;box-shadow:0 1px 2px rgba(15,45,70,.05)}
 .wp .wp-rel a:hover{border-color:#4D8DBA;text-decoration:none;box-shadow:0 6px 18px rgba(15,45,70,.10)}
@@ -80,7 +84,22 @@ WATCH_CSS = """
 .wp .wp-foot{margin-top:52px;padding-top:22px;border-top:1px solid #E3EEF7;font-size:13.5px;color:#5a6b7a}
 .wp .wp-foot p{margin:0 0 9px}
 .wp .wp-foot strong{color:#12212e}
-@media(max-width:600px){.wp{padding:0 15px 52px}.wp-rel{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){
+ .wp-body{grid-template-columns:minmax(0,1fr) 340px;align-items:start}
+ .wp-side .wp-rel{grid-template-columns:1fr;gap:12px}
+ .wp-side .wp-rel a{display:flex;gap:12px;padding:10px;align-items:flex-start}
+ .wp-side .wp-rel img{width:104px;flex:none;margin-bottom:0}
+ .wp-side .wp-rel b{font-size:13.5px}
+ .wp-side .wp-rel i{margin-top:3px}
+}
+@media(max-width:1000px){.wp-side .wp-rel{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+@media(max-width:640px){
+ .wp{padding:14px 12px 52px}
+ .wp .wp-rel{grid-template-columns:1fr}
+ .wp h2{margin:30px 0 10px}
+ .wp .wp-bar{padding:10px}
+}
+@media(max-width:360px){.wp .wp-bar img{display:none}}
 """
 
 
@@ -329,6 +348,7 @@ def watch_page(site, dep, o, related):
              '<span>🗂️ %s</span><span>🕒 %s</span></div>'
              % (e(ch_txt), e(o['dur_txt']), e(o['cat'] if ir else o['cat_en']),
                 e(str(o.get('publishedAt') or ''))))
+    b.append('<div class="wp-body"><main class="wp-main">')
     # The player iframe IS the LCP element on a watch page — never lazy-load it.
     b.append('<div class="wp-player"><iframe src="https://www.youtube-nocookie.com/embed/%s" '
              'title="%s" allow="accelerometer; clipboard-write; encrypted-media; '
@@ -367,8 +387,10 @@ def watch_page(site, dep, o, related):
         b.append('<p class="wp-box">%s</p>' % e('آزمون این درس هنوز در حال آماده‌سازی است.'
                   if ir else 'The quiz for this lesson is still being prepared.'))
 
+    b.append('</main>')
+
     if related:
-        b.append('<h2>%s</h2>' % e('درس‌های مرتبط' if ir else 'Related lessons'))
+        b.append('<aside class="wp-side"><h2>%s</h2>' % e('درس‌های مرتبط' if ir else 'Related lessons'))
         b.append('<ul class="wp-rel">')
         for r in related:
             lbl = r['fa'] if ir else r['en']
@@ -377,8 +399,9 @@ def watch_page(site, dep, o, related):
                      '<b>%s</b><i>%s · %s</i></a></li>'
                      % (UP, r['slug'], r['id'], e('%s — %s' % (lbl, r['cat'] if ir else r['cat_en'])),
                         e(lbl[:78]), e(r['cat'] if ir else r['cat_en']), e(r['dur_txt'])))
-        b.append('</ul>')
+        b.append('</ul></aside>')
 
+    b.append('</div>')
     b.append('<div class="wp-foot">')
     b.append('<p><strong>%s</strong> %s</p>'
              % (e('منبع:' if ir else 'Source:'), e(ch_txt)))
@@ -426,6 +449,7 @@ def topic_page(site, dep, t):
              'is designed for review and consolidation.'
              % (len(t['vids']), t['cat_en'], mins))
     b.append('<p>%s</p>' % e(intro))
+    b.append('<div class="wp-body"><main class="wp-main">')
     b.append('<h2>%s</h2>' % e('فهرست درس‌ها' if ir else 'Lessons in this topic'))
     b.append('<ul class="wp-rel">')
     for v in sorted(t['vids'], key=lambda x: str(x.get('publishedAt') or ''), reverse=True):
@@ -435,12 +459,12 @@ def topic_page(site, dep, t):
                  % (UP, v['slug'], v['id'], e('%s — %s' % (lbl, v['dur_txt'])), e(lbl[:78]),
                     e(v['dur_txt']), e(v['src'])))
     b.append('</ul>')
-    b.append('<h2>%s</h2>' % e('موضوعات مرتبط' if ir else 'Related topics'))
+    b.append('</main><aside class="wp-side"><h2>%s</h2>' % e('موضوعات مرتبط' if ir else 'Related topics'))
     b.append('<p>')
     for other in t['siblings']:
         b.append('<a class="wp-btn s" style="margin:0 6px 8px 0" href="%stopics/%s/">%s</a>'
                  % (UP, other['slug'], e(other['cat'] if ir else other['cat_en'])))
-    b.append('</p>')
+    b.append('</p></aside></div>')
     b.append('<div class="wp-foot"><p><strong>%s</strong> %s</p></div>'
              % (e('همهٔ بخش‌ها:' if ir else 'All sections:'),
                 e(' · '.join('%s' % (x['cat'] if ir else x['cat_en']) for x in t['siblings']))))

@@ -1022,3 +1022,10 @@ a.card,a.card:visited{display:flex;color:inherit;text-decoration:none}
 a.card:hover,a.card:focus-visible{text-decoration:none}
 a.card:focus-visible{outline:2px solid var(--acc2);outline-offset:3px;border-radius:10px}
 a.card h3,a.card:hover .cbody h3{color:inherit}
+
+/* ---- PAGE WIDTH LAYOUT (sizing only) ----
+   The pricing page was a hard-coded 760px column, which left ~40% of a desktop
+   viewport empty. Same maximum as every other page; #plans is already an
+   auto-fit grid, so the cards simply take the space. */
+.pmax{max-width:1100px;margin:0 auto;padding:24px 16px}
+@media(max-width:640px){.pmax{padding:16px 12px}}

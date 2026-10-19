@@ -145,7 +145,11 @@
    #E3EEF7 hairline, same rgba(15,45,70,.05) shadow, same #086288 accent, same
    Inter+Vazirmatn stack. A watch page must LOOK like the product it belongs to. */
 .wp{--ink:#12212e;--mut:#5a6b7a;--line:#E3EEF7;--acc:#086288;--acc2:#4D8DBA;--wash:#F5F8FA;
- max-width:860px;margin:0 auto;padding:0 20px 72px}
+ /* same max-width as the app's own .wrap so the two never look like different products */
+ max-width:1260px;margin:0 auto;padding:22px 18px 60px}
+/* main + related sidebar, mirroring the app's own .d-grid split (1fr 340px / 18px) */
+.wp-body{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.wp-main,.wp-side{min-width:0}   /* min-width:0 stops a grid child from overflowing */
 .wp *{box-sizing:border-box}
 .wp a{color:#086288;text-decoration:none}
 .wp a:hover{text-decoration:underline}
@@ -174,7 +178,7 @@
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .wp .wp-obj{display:grid;gap:9px;margin:0;padding:0;list-style:none}
 .wp .wp-obj li{background:#F5F8FA;border:1px solid #E3EEF7;border-radius:10px;padding:11px 15px;font-size:15px}
-.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.wp .wp-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:0;padding:0;list-style:none}
 .wp .wp-rel a{display:block;background:#fff;border:1px solid #E3EEF7;border-radius:14px;padding:12px;
  color:#12212e;height:100%;box-shadow:0 1px 2px rgba(15,45,70,.05)}
 .wp .wp-rel a:hover{border-color:#4D8DBA;text-decoration:none;box-shadow:0 6px 18px rgba(15,45,70,.10)}
@@ -191,12 +195,28 @@
 .wp .wp-foot{margin-top:52px;padding-top:22px;border-top:1px solid #E3EEF7;font-size:13.5px;color:#5a6b7a}
 .wp .wp-foot p{margin:0 0 9px}
 .wp .wp-foot strong{color:#12212e}
-@media(max-width:600px){.wp{padding:0 15px 52px}.wp-rel{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){
+ .wp-body{grid-template-columns:minmax(0,1fr) 340px;align-items:start}
+ .wp-side .wp-rel{grid-template-columns:1fr;gap:12px}
+ .wp-side .wp-rel a{display:flex;gap:12px;padding:10px;align-items:flex-start}
+ .wp-side .wp-rel img{width:104px;flex:none;margin-bottom:0}
+ .wp-side .wp-rel b{font-size:13.5px}
+ .wp-side .wp-rel i{margin-top:3px}
+}
+@media(max-width:1000px){.wp-side .wp-rel{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+@media(max-width:640px){
+ .wp{padding:14px 12px 52px}
+ .wp .wp-rel{grid-template-columns:1fr}
+ .wp h2{margin:30px 0 10px}
+ .wp .wp-bar{padding:10px}
+}
+@media(max-width:360px){.wp .wp-bar img{display:none}}
 </style>
 </head><body class="wp-page"><div class="wp">
 <nav class="wp-crumb"><a href="../../">نرس پلاس</a> › <a href="../../topics/clinical-skills/">مهارت بالینی</a> › مهارت‌های بالینی و پروسیجرهای پایه پرستاری (مرور جامع)</nav>
 <h1>مهارت‌های بالینی و پروسیجرهای پایه پرستاری (مرور جامع)</h1>
 <div class="wp-meta"><span>📺 RegisteredNurseRN</span><span>⏱️ 178:48</span><span>🗂️ مهارت بالینی</span><span>🕒 2026-09-23</span></div>
+<div class="wp-body"><main class="wp-main">
 <div class="wp-player"><iframe src="https://www.youtube-nocookie.com/embed/j75cjaVPZJw" title="مهارت‌های بالینی و پروسیجرهای پایه پرستاری (مرور جامع)" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
 <div class="wp-bar"><img src="https://i.ytimg.com/vi/j75cjaVPZJw/hqdefault.jpg" width="92" height="52" alt="مهارت‌های بالینی و پروسیجرهای پایه پرستاری (مرور جامع) — RegisteredNurseRN" loading="lazy"><span>RegisteredNurseRN<br><strong>RegisteredNurseRN</strong></span></div>
 <h2>این درس دربارهٔ چیست؟</h2><p>مرور تصویری پروسیجرهای فاندامنتال: بهداشت دست، شروع IV و خون‌گیری، سوند ادراری، مسیرهای دارویی، فشار خون و علائم حیاتی — مناسب آمادگی کارآموزی و آزمون مهارت.</p>
@@ -221,13 +241,15 @@
 </ul>
 <h2>آزمون NCLEX</h2>
 <p class="wp-box">آزمون این درس هنوز در حال آماده‌سازی است.</p>
-<h2>درس‌های مرتبط</h2>
+</main>
+<aside class="wp-side"><h2>درس‌های مرتبط</h2>
 <ul class="wp-rel">
 <li><a href="../../videos/mastering-the-glasgow-coma-scale-gcs-lecturio-nursing-podcast-ep-15/"><img src="https://i.ytimg.com/vi/V3ad8hoQVf8/hqdefault.jpg" width="320" height="180" loading="lazy" alt="تسلط بر مقیاس کمای گلاسکو (GCS) | پادکست پرستاری لکتوریو قسمت ۱۵ — مهارت بالینی"><b>تسلط بر مقیاس کمای گلاسکو (GCS) | پادکست پرستاری لکتوریو قسمت ۱۵</b><i>مهارت بالینی · 18:04</i></a></li>
 <li><a href="../../videos/blood-pressure-measurement-mistakes-to-avoid-practice-tutorial/"><img src="https://i.ytimg.com/vi/AgT-xm8tx-A/hqdefault.jpg" width="320" height="180" loading="lazy" alt="۷ اشتباه رایج اندازه‌گیری فشار خون + تمرین عملی گام‌به‌گام — مهارت بالینی"><b>۷ اشتباه رایج اندازه‌گیری فشار خون + تمرین عملی گام‌به‌گام</b><i>مهارت بالینی · 8:52</i></a></li>
 <li><a href="../../videos/nclex-prep-basic-care-and-comfort-questions-with-dr-sharon/"><img src="https://i.ytimg.com/vi/8nkJZ3g4B4Q/hqdefault.jpg" width="320" height="180" loading="lazy" alt="آمادگی NCLEX: سؤالات مراقبت پایه و آسایش بیمار با دکتر شارون — مهارت بالینی"><b>آمادگی NCLEX: سؤالات مراقبت پایه و آسایش بیمار با دکتر شارون</b><i>مهارت بالینی · 9:24</i></a></li>
 <li><a href="../../videos/nclex-prep-reduction-in-risk-potential-questions-with-dr-sharon/"><img src="https://i.ytimg.com/vi/bIAnJoErzrI/hqdefault.jpg" width="320" height="180" loading="lazy" alt="آمادگی NCLEX: سؤالات کاهش پتانسیل خطر با دکتر شارون — مهارت بالینی"><b>آمادگی NCLEX: سؤالات کاهش پتانسیل خطر با دکتر شارون</b><i>مهارت بالینی · 12:30</i></a></li>
-</ul>
+</ul></aside>
+</div>
 <div class="wp-foot">
 <p><strong>منبع:</strong> RegisteredNurseRN</p>
 <p>این صفحه یک ابزار آموزشی است و جایگزین مشاورهٔ پزشکی یا پرستاری نیست. <a href="https://www.youtube.com/watch?v=j75cjaVPZJw" rel="nofollow noopener" target="_blank">YouTube</a>.</p>
