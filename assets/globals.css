@@ -1016,3 +1016,9 @@ html[dir="rtl"] #trPanel #pane1{direction:rtl}
 @media (pointer:coarse) and (hover:none){
   .card .thumb .pvfr{display:none!important}
 }
+
+/* ---- the card is an <a>: real watch-page URL for crawlers, same visual ---- */
+a.card,a.card:visited{display:flex;color:inherit;text-decoration:none}
+a.card:hover,a.card:focus-visible{text-decoration:none}
+a.card:focus-visible{outline:2px solid var(--acc2);outline-offset:3px;border-radius:10px}
+a.card h3,a.card:hover .cbody h3{color:inherit}

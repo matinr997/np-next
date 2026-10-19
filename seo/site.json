@@ -1,0 +1,97 @@
+{
+  "_README": "THE ONLY FILE IN THIS REPO THAT MAY CONTAIN A HOSTNAME. Everything SEO-visible (canonical, hreflang, Open Graph, JSON-LD, sitemaps, robots.txt, watch pages) is generated from here by scripts/gen_seo.py. To move to the real domains: edit canonicalOrigin, then re-run `python3 scripts/gen_seo.py` and `python3 scripts/build_deploy.py`. Nothing else changes.",
+  "noindex": false,
+  "_noindex": "Set true for dev/staging/preview so Google indexes nothing. This writes <meta name=robots content=noindex>. Do NOT use robots.txt to noindex — a block stops the crawl, so Google can never see the directive.",
+  "canonicalOrigin": {
+    "ir": "https://matinr997.github.io/np-next",
+    "com": "https://matinr997.github.io/np-next"
+  },
+  "_canonicalOrigin": "Absolute origin with NO trailing slash. When the .ir and .com domains exist, ir becomes e.g. https://nurseplus.ir and com becomes https://nurseplus.com. Until then both legitimately share the GitHub Pages host and differ only by base.",
+  "base": {
+    "ir": "/",
+    "com": "/com/"
+  },
+  "_base": "Path prefix inside canonicalOrigin. On GitHub Pages today the .com site lives in /com/. When .com moves to its own domain root, set both to '/' and set build_deploy.py to emit two separate packages — gen_seo.py needs no other change.",
+  "lang": {
+    "ir": "fa",
+    "com": "en"
+  },
+  "dir": {
+    "ir": "rtl",
+    "com": "ltr"
+  },
+  "brand": {
+    "ir": "نرس پلاس",
+    "com": "Nurse Plus"
+  },
+  "brandLine": {
+    "ir": "ویدیوهای آموزشی پرستاری",
+    "com": "Nursing video library"
+  },
+  "org": {
+    "name": "Nurse Plus",
+    "urlPlaceholder": "https://nurseplus.example",
+    "logo": "assets/hero-char.png"
+  },
+  "_org": "org.urlPlaceholder is used only in WebSite/Organization JSON-LD. Replace it with the real site URL at launch; leaving a placeholder is better than shipping a wrong domain.",
+  "social": {
+    "twitter": "",
+    "_twitter": "@handle — leave empty until the account exists. Never invent a verification code or handle.",
+    "gscProperty": "",
+    "_gscProperty": "Google Search Console HTML-tag verification string. Leave empty; never fabricate one."
+  },
+  "perPage": {
+    "home": {
+      "ir": {
+        "title": "نرس پلاس — ویدیوهای آموزشی پرستاری با متن و آزمون",
+        "h1": "کتابخانه ویدیوهای آموزشی پرستاری",
+        "desc": "کتابخانهٔ ویدیوهای آموزشی پرستاری با متن گفتاری کامل، سرفصل زمانی، یادداشت زمان‌دار و آزمون NCLEX — نرس پلاس."
+      },
+      "com": {
+        "title": "Nurse Plus — Nursing Video Library with Transcripts and NCLEX Quizzes",
+        "h1": "Nursing video library",
+        "desc": "A nursing video library where every lesson ships a full transcript, timestamped chapters, timed notes and an NCLEX quiz."
+      }
+    },
+    "premium": {
+      "ir": {
+        "title": "پلن‌های اشتراک نرس پلاس",
+        "h1": "پلن‌های اشتراک",
+        "desc": "پلن‌های اشتراک نرس پلاس: دسترسی کامل به همهٔ درس‌ها، متن گفتاری و آزمون NCLEX. پرداخت از طریق درگاه زرین‌پال."
+      },
+      "com": {
+        "title": "Nurse Plus Plans",
+        "h1": "Subscription plans",
+        "desc": "Nurse Plus plans: full access to every lesson, transcripts and NCLEX quizzes. Secure checkout by card."
+      }
+    },
+    "schedule": {
+      "ir": {
+        "title": "برنامهٔ مطالعه — نرس پلاس",
+        "h1": "برنامهٔ مطالعه",
+        "desc": "برنامهٔ مطالعهٔ شخصی نرس پلاس: درس‌ها را روی روزهای مشخص پخش کنید و پیشرفت خود را دنبال کنید."
+      },
+      "com": {
+        "title": "Study Schedule — Nurse Plus",
+        "h1": "Study schedule",
+        "desc": "Build a personal study plan: spread lessons across the days you choose and track your progress."
+      }
+    },
+    "account": {
+      "ir": {
+        "title": "حساب کاربری — نرس پلاس",
+        "h1": "حساب کاربری",
+        "desc": "حساب کاربری نرس پلاس: پروفایل، صورتحساب، تنظیمات، آمار پیشرفت و اعتبارهای CME."
+      },
+      "com": {
+        "title": "Account — Nurse Plus",
+        "h1": "Account",
+        "desc": "Your Nurse Plus account: profile, billing, settings, progress statistics and CME credits."
+      }
+    }
+  },
+  "notIndexed": [
+    "account.html"
+  ],
+  "_notIndexed": "Pages kept out of the sitemap and served noindex: personal per-user dashboards have no indexable value."
+}

@@ -7,7 +7,7 @@ Run this EVERY time before uploading to public_html:
 It re-copies every runtime file (so new videos/subs/quizzes are picked up
 automatically), refreshes the README, and writes a fresh ZIP.
 """
-import glob, json, os, shutil, sys, zipfile
+import glob, json, os, shutil, subprocess, sys, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEP  = os.path.join(ROOT, 'deploy', 'nurseplus-site')
@@ -22,7 +22,9 @@ PAGES = [('index.html',''), ('premium.html',''), ('schedule.html',''), ('account
          ('com/index.html','com/'), ('com/premium.html','com/'),
          ('com/schedule.html','com/'), ('com/account.html','com/'),
          ('lib/player-core.js','lib/'), ('lib/skeleton.js','lib/'),
-         ('data/videos.json','data/')]
+         ('data/videos.json','data/'), ('data/seo.json','data/'),
+         ('robots.txt',''), ('sitemap.xml',''), ('sitemap-video.xml',''),
+         ('404.html',''), ('seo/site.json','seo/')]
 
 for rel, dest in PAGES:
     src = os.path.join(ROOT, rel)
@@ -42,6 +44,30 @@ for sub in ('subs', 'quizzes'):
     os.makedirs(PUB + '/' + sub, exist_ok=True)
     for f in glob.glob(os.path.join(ROOT, sub, '*.json')):
         shutil.copy(f, PUB + '/' + sub + '/')
+
+# ---------- 1b. generated watch + topic pages (both languages) ----------
+# These ARE the indexable content. If gen_seo.py has not run, the package would
+# ship without them and the sitemap would point at nothing.
+n_pages = 0
+for base_rel in ('', 'com/'):
+    for kind in ('videos', 'topics'):
+        src = os.path.join(ROOT, base_rel, kind)
+        if not os.path.isdir(src):
+            continue
+        n_pages += sum(1 for _ in glob.glob(os.path.join(src, '*', 'index.html')))
+        shutil.copytree(src, os.path.join(PUB, base_rel, kind), dirs_exist_ok=True)
+print('  watch/topic pages: %d' % n_pages)
+
+# ---------- 1c. SEO gate ----------
+import sys as _sys
+_lint = subprocess.run([_sys.executable, os.path.join(ROOT, 'scripts', 'check_seo.py'), ROOT,
+                        '--site-url', 'https://matinr997.github.io/np-next'],
+                       capture_output=True, text=True)
+_err = [l for l in _lint.stdout.splitlines() if l.strip().startswith('[')]
+print('  SEO lint: %s' % ('PASS' if _lint.returncode == 0 else 'FAIL (%d errors)' % _err.__len__()))
+if _lint.returncode != 0:
+    for l in _err:
+        print('    ' + l.strip())
 
 # ---------- 2. backend stub (kept in sync, never uploaded by accident) ----------
 os.makedirs(PUB + '/api', exist_ok=True)
@@ -74,6 +100,8 @@ AddDefaultCharset UTF-8
 #   RewriteCond %{HTTPS} !=on
 #   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 # </IfModule>
+# A real 404 status is a crawling signal; serving 404.html with a 200 is a soft 404.
+ErrorDocument 404 /404.html
 <FilesMatch "config\\.php$|\\.bak$|\\.env$">
   <IfModule mod_authz_core.c>
     Require all denied
@@ -84,7 +112,6 @@ AddDefaultCharset UTF-8
   </IfModule>
 </FilesMatch>
 ''')
-open(PUB + '/robots.txt', 'w', encoding='utf-8').write('User-agent: *\nAllow: /\n')
 
 # ---------- 4. README ----------
 readme_src = os.path.join(ROOT, 'deploy-README.md')
