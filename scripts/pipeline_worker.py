@@ -113,6 +113,16 @@ def run(cmd, cwd=ROOT):
     return p.stdout
 
 
+def run_rc(cmd, cwd=ROOT):
+    """Run a command and report its exit code instead of raising.
+
+    The quiz check needs the exit code, not the output: a non-zero code
+    means the quiz is broken and must not be published.
+    """
+    p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+    return p.returncode, p.stdout
+
+
 # --------------------------------------------------------------------------
 # site API
 # --------------------------------------------------------------------------
@@ -185,7 +195,7 @@ class Site:
         payload = {"action": "set", "job_id": job_id, "stage": stage, "status": status}
         payload.update(kw)
         try:
-            return self._req("/api/stages.php", body=payload, method="POST")
+            return self._req("/api/stages.php", payload=payload, method="POST")
         except Exception as e:                                   # noqa: BLE001
             log("   stage update failed (%s)" % e)
             return {}
@@ -193,7 +203,7 @@ class Site:
     def stage_seed(self, job_id, yt_id=""):
         try:
             return self._req("/api/stages.php",
-                              body={"action": "seed", "job_id": job_id, "yt_id": yt_id},
+                              payload={"action": "seed", "job_id": job_id, "yt_id": yt_id},
                               method="POST")
         except Exception as e:                                   # noqa: BLE001
             log("   stage seed failed (%s)" % e)
@@ -204,7 +214,7 @@ class Site:
         payload = {"action": "report", "category": category, "message": str(message)[:2000]}
         payload.update(ctx)
         try:
-            return self._req("/api/errors.php", body=payload, method="POST")
+            return self._req("/api/errors.php", payload=payload, method="POST")
         except Exception as e:                                   # noqa: BLE001
             log("   error report failed (%s)" % e)
             return {}
@@ -222,7 +232,7 @@ class Site:
             "ok": 1 if ok else 0,
             "error_kind": (error_kind or "")[:32],
         }
-        return self._req("/api/models.php", body=payload, method="POST")
+        return self._req("/api/models.php", payload=payload, method="POST")
 
     def chat_file(self, msg_id, dest):
         """Download an uploaded file from the host (the filesystems are not shared)."""
@@ -626,7 +636,7 @@ def stage_translate(cues, llm, batch=8, cache=None):
 # --------------------------------------------------------------------------
 # stage 4 — quiz (reuses scripts/gen_quiz.py, with the panel's LLM)
 # --------------------------------------------------------------------------
-def stage_quiz(yt_id, llm):
+def stage_quiz(yt_id, llm, dry_run=False):
     """Generate the quiz, trying several models until one produces a valid one.
 
     A weak model often returns a single question instead of the five the
@@ -662,6 +672,10 @@ def stage_quiz(yt_id, llm):
     current = {"model": None}
 
     outp = os.path.join(ROOT, "quizzes", yt_id + ".json")
+    if dry_run:
+        # gen_quiz writes the file itself, so the path it writes to has to
+        # be redirected. The scratch copy is read back from there.
+        outp = os.path.join(SCR, "dryrun_quiz_%s.json" % yt_id)
     # Do not rebuild a quiz that is already valid — regenerating costs minutes
     # and can replace a good one with a weaker model's output.
     prev = jload(outp, {})
@@ -682,7 +696,24 @@ def stage_quiz(yt_id, llm):
         gen_quiz.MODEL = m
         log("   quiz with %s" % m)
         try:
-            gen_quiz.generate(yt_id, force=True)
+            if dry_run:
+                # generate() writes quizzes/<id>.json itself. The file is
+                # moved to the scratch right after and the real one is put
+                # back, so the repository never changes.
+                made = os.path.join(ROOT, "quizzes", yt_id + ".json")
+                backup = None
+                if os.path.exists(made):
+                    backup = made + ".dryrun-backup"
+                    shutil.move(made, backup)
+                try:
+                    gen_quiz.generate(yt_id, force=True)
+                    if os.path.exists(made):
+                        shutil.move(made, outp)
+                finally:
+                    if backup and os.path.exists(backup):
+                        shutil.move(backup, made)
+            else:
+                gen_quiz.generate(yt_id, force=True)
         except Exception as e:                       # noqa: BLE001
             log("   quiz failed with %s: %s" % (m, e))
             continue
@@ -801,7 +832,27 @@ def phase_done(site, job_id, stages):
     return True
 
 
-def process_job(site, llm, job, git=True, push=True):
+def _err_category(e):
+    """Map an exception to a category the error centre understands."""
+    text = str(e).lower()
+    if "transcript" in text or "caption" in text:
+        return "no_transcript"
+    if "untranslated" in text:
+        return "translation"
+    if "quiz" in text:
+        return "quiz"
+    if "timeout" in text or "timed out" in text:
+        return "timeout"
+    if "410" in text or "deprecated" in text:
+        return "provider"
+    if "http 4" in text or "http 5" in text:
+        return "network"
+    if "json" in text or "keyerror" in text:
+        return "model_output"
+    return "other"
+
+
+def process_job(site, llm, job, git=True, push=True, dry_run=False):
     """Run the pipeline for one job.
 
     The checklist decides what runs: a phase whose stages are all completed is
@@ -829,7 +880,7 @@ def process_job(site, llm, job, git=True, push=True):
         if not todo:
             # everything is already done — the job only needs publishing
             todo = [ph for ph, _st in PHASES if ph == "publish"]
-        log("   phases to run: %s" % ", ".join(ph for ph, _ in todo))
+        log("   phases to run: %s" % ", ".join(todo))
 
         info = None
         phases = dict(PHASES)
@@ -859,9 +910,13 @@ def process_job(site, llm, job, git=True, push=True):
             site.stage(jid, "terminology", "skipped", yt_id=yt_id,
                        skipped_reason="terminology review is a human task; it runs in the content audit")
             # The quiz generator needs the video in videos.json (title + duration),
-            # so register it before the quiz stage.
-            upsert_catalogue(info)
-            run([PY, os.path.join(ROOT, "scripts", "sync_videos_to_core.py")])
+            # so register it before the quiz stage. A dry run writes to a copy
+            # of the catalogue instead of the real one.
+            if dry_run:
+                log("   dry run — the catalogue is not touched")
+            else:
+                upsert_catalogue(info)
+                run([PY, os.path.join(ROOT, "scripts", "sync_videos_to_core.py")])
         else:
             # the metadata is already in the catalogue — read it back so the
             # later phases can use it
@@ -920,7 +975,9 @@ def process_job(site, llm, job, git=True, push=True):
                         log="%d cues" % len(cues))
             site.stage(jid, "translate_fa", "running", yt_id=yt_id, model=llm.model)
             cues = stage_translate(cues, llm, cache=cache)
-            jdump(os.path.join(ROOT, "subs", yt_id + ".json"), cues)
+            # a dry run must not touch the real subtitles file
+            jdump(os.path.join(SCR, "dryrun_subs_%s.json" % yt_id) if dry_run
+                  else os.path.join(ROOT, "subs", yt_id + ".json"), cues)
             en_left = sum(1 for c in cues if not fa_persian(c["fa"]))
             site.update(jid, stage="translate", progress=65,
                         log="%d cues, %d untranslated" % (len(cues), en_left))
@@ -940,14 +997,14 @@ def process_job(site, llm, job, git=True, push=True):
         # --------------------------------------------------------- quiz
         if "quiz" in todo:
             site.stage(jid, "quiz", "running", yt_id=yt_id, model=llm.model)
-            stage_quiz(yt_id, llm)
+            stage_quiz(yt_id, llm, dry_run=dry_run)
             site.update(jid, stage="quiz", progress=85, log="quiz written")
             site.stage(jid, "quiz", "completed", yt_id=yt_id, model=llm.model,
                        output_ref="quizzes/%s.json" % yt_id)
             # the structural check is a separate stage: it is what the panel
             # shows as "the quiz is valid"
-            rc = run([PY, os.path.join(ROOT, "scripts", "fix_quiz_format.py"), "--check"])
-            ok_quiz = (rc or {}).get("returncode", 1) == 0
+            rc, _out = run_rc([PY, os.path.join(ROOT, "scripts", "fix_quiz_format.py"), "--check"])
+            ok_quiz = rc == 0
             site.stage(jid, "quiz_validate", "completed" if ok_quiz else "failed", yt_id=yt_id,
                        output_ref="quizzes/%s.json" % yt_id,
                        error="" if ok_quiz else "the quiz does not match the renderer contract",
@@ -963,6 +1020,14 @@ def process_job(site, llm, job, git=True, push=True):
         site.stage(jid, "consistency", "completed", yt_id=yt_id,
                    result="the catalogue, the transcript and the quiz agree")
         site.stage(jid, "publish", "running", yt_id=yt_id)
+        if dry_run:
+            # a dry run must not change a single file
+            site.stage(jid, "publish", "completed", yt_id=yt_id,
+                       result="dry run — nothing was published")
+            site.update(jid, stage="publish", status="done", progress=100,
+                        log="dry run — nothing was published")
+            log("job %s DRY RUN — nothing published" % jid)
+            return True
         publish_video(info, llm, git=git, push=push)
         site.stage(jid, "publish", "completed", yt_id=yt_id,
                    output_ref="videos/%s/" % (info.get("slug") or yt_id),
@@ -1351,6 +1416,8 @@ def main():
     ap.add_argument("--sleep", type=int, default=20, help="idle poll interval seconds")
     ap.add_argument("--video", default="", help="process one video id directly (no queue)")
     ap.add_argument("--no-git", action="store_true", help="do not commit/push")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="run the pipeline but publish nothing and change no file")
     args = ap.parse_args()
 
     os.makedirs(SCR, exist_ok=True)
@@ -1367,7 +1434,8 @@ def main():
         _llm.fallbacks = model_rotation(_llm, [m["id"] for m in info_llm.get("models", [])])
         llm = _llm
         job = {"id": "direct", "yt_id": args.video, "url": args.video}
-        process_job(site, llm, job, git=not args.no_git, push=not args.no_git)
+        process_job(site, llm, job, git=not args.no_git, push=not args.no_git,
+                    dry_run=args.dry_run)
         return 0
 
     while True:
@@ -1404,7 +1472,8 @@ def main():
         if kind == "chat":
             process_chat(site, llm, job, git=not args.no_git, push=not args.no_git)
         else:
-            process_job(site, llm, job, git=not args.no_git, push=not args.no_git)
+            process_job(site, llm, job, git=not args.no_git, push=not args.no_git,
+                        dry_run=args.dry_run)
         if args.once and not args.loop:
             return 0
 

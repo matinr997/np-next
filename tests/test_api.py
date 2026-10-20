@@ -12,6 +12,7 @@ of pretending it passed.
 import json
 import os
 import re
+import time
 import subprocess
 import sys
 import time
@@ -163,7 +164,9 @@ def main():
     CSRF["token"] = saved
 
     # --- 1: a valid URL creates a job ------------------------------------
-    yt = "dQw4w9WgXcQ"
+    # a random id: a fixed one would be a duplicate once the pipeline
+    # has published it, and a real video would end up on the site
+    yt = "npTest%05d" % (int(time.time()) % 100000)
     st, r = call("/api/jobs.php", {"action": "create", "urls": ["https://youtu.be/" + yt]})
     created = (r or {}).get("jobs") or (r or {}).get("created") or []
     job_id = None
