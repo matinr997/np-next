@@ -32,41 +32,41 @@ SOURCE MATERIAL:
 ---
 
 Return ONLY a JSON object:
-{{"questions":[ ... ]}}
+{"questions":[ ... ]}
 
 Each question is one of:
 
 A) multiple choice
-{{"type":"mc",
+{"type":"mc",
  "qf":"سؤال فارسی",
  "qe":"the English question",
  "of":["گزینهٔ فارسی ۱","۲","۳","۴"],
  "oe":["English option 1","2","3","4"],
  "c":0,
  "wf":"توضیح فارسی چرا این گزینه درست است",
- "we":"English explanation"}}
+ "we":"English explanation"}
 
 B) cloze (fill the blank)
-{{"type":"cloze",
+{"type":"cloze",
  "qf":"جملهٔ فارسی با {0} و جای خالی",
  "qe":"English sentence with {0}",
- "blanks":[{{"of":["گزینهٔ فارسی ۱","۲","۳"],"oe":["English 1","2","3"],"c":0}}],
- "wf":"...","we":"..."}}
+ "blanks":[{"of":["گزینهٔ فارسی ۱","۲","۳"],"oe":["English 1","2","3"],"c":0}],
+ "wf":"...","we":"..."}
 
 C) drag and drop (ordering)
-{{"type":"dnd",
+{"type":"dnd",
  "qf":"سؤال فارسی برای چیدن موارد به ترتیب درست",
  "qe":"English question",
- "items":[{{"fa":"مورد فارسی ۱","en":"item 1"}},{{"fa":"مورد فارسی ۲","en":"item 2"}},{{"fa":"مورد فارسی ۳","en":"item 3"}},{{"fa":"مورد فارسی ۴","en":"item 4"}}],
- "keep":[0,1,2,3],
- "wf":"...","we":"..."}}
+ "items":[{"fa":"مورد فارسی ۱","en":"item 1"},{"fa":"مورد فارسی ۲","en":"item 2"},{"fa":"مورد فارسی ۳","en":"item 3"},{"fa":"مورد فارسی ۴","en":"item 4"}],
+ "keep":[0,2,1],
+ "wf":"...","we":"..."}
 
 Rules:
 - Every Persian field must be in Persian script; every English field in English.
 - Exactly {n} questions, in the order: 3 mc, then 1 cloze, then 1 dnd.
 - The correct answer must be supported by the source material. Never invent a fact.
 - 4 distinct options for mc, 3 distinct options for each cloze blank.
-- For dnd, "keep" holds the INDICES of items in the correct order (0-based).
+- For dnd, "keep" holds 2 or 3 of the INDICES of the items, in the correct order (0-based).
 - Do not include "ts". Output JSON only."""
 
 
@@ -140,8 +140,8 @@ def validate(draft, want=5):
                 for it in items:
                     if not isinstance(it, dict) or not it.get("fa") or not it.get("en"):
                         errs.append("%s: item must be {fa, en}" % tag)
-            if not isinstance(keep, list) or not (2 <= len(keep) <= 3):
-                errs.append("%s: keep must be 2-3 indices" % tag)
+            if not isinstance(keep, list) or not (2 <= len(keep) <= max(2, len(items or []))):
+                errs.append("%s: keep must hold 2..%d indices" % (tag, max(2, len(items or []))))
             elif any(not isinstance(k, int) or k >= len(items or []) for k in keep):
                 errs.append("%s: keep index out of range" % tag)
         else:
@@ -161,7 +161,8 @@ def build(text, out_path, llm, vid, want=5):
     # keep the prompt inside the model's context
     if len(text) > 40000:
         text = text[:40000]
-    prompt = PROMPT.format(text=text, n=want)
+    # .format() would resolve the cloze marker {0} inside the JSON examples.
+    prompt = PROMPT.replace("{n}", str(want)).replace("{text}", text)
     draft = None
     for attempt in (1, 2):
         raw, _used = llm.chat_any([{"role": "user", "content": prompt}],

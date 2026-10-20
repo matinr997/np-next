@@ -726,7 +726,48 @@ HERMES_PROFILE = "brain-hub"
 HERMES_PROVIDER = "custom:matin-9router"
 
 
-def run_hermes(prompt, model, cwd=ROOT, timeout=900):
+SITE_CONTEXT = """تو دستیار پنل مدیریت «نرس پلاس» هستی — یک کتابخانهٔ ویدیوی آموزشی پرستاری.
+
+وضعیت فعلی سایت:
+{state}
+
+پاسخ‌ها را کوتاه و دقیق بده (حداکثر ۵ خط). اگر کاری فراتر از پاسخ‌دادن لازم است
+(نوشتن یا تغییر کد)، دقیقاً بنویس: [[AGENT]] و توضیح بده چه باید کرد."""
+
+
+def site_context():
+    """A short, factual snapshot of the site for the chat assistant."""
+    vids = jload(os.path.join(ROOT, "data", "videos.json"), []) or []
+    try:
+        quizzes = sorted(f for f in os.listdir(os.path.join(ROOT, "quizzes")) if f.endswith(".json"))
+        subs = sorted(f for f in os.listdir(os.path.join(ROOT, "subs")) if f.endswith(".json"))
+    except OSError:
+        quizzes, subs = [], []
+    topics = {}
+    for v in vids:
+        topics[v.get("cat") or "?"] = topics.get(v.get("cat") or "?", 0) + 1
+    tlist = "\n".join("  - %s: %d ویدیو" % (k, n) for k, n in sorted(topics.items()))
+    return ("  - تعداد ویدیو: %d\n  - تعداد زیرنویس: %d\n  - تعداد آزمون: %d\n"
+            "  - موضوع‌ها:\n%s\n  - شاخه گیت: main" % (len(vids), len(subs), len(quizzes), tlist))
+
+
+def looks_like_coding_task(text):
+    """Free-form questions get the fast LLM; anything that needs the agent
+    (code, a repo change, a deploy) goes to the full Hermes agent."""
+    t = (text or "").lower()
+    marks = ("کد", "کدنویسی", "تغییر بده", "اضافه کن", "حذف کن", "اصلاح کن", "بنویس",
+             "دیباگ", "دیپلوی", "استقرار", "رفع کن", "به‌روزرسانی کن", "پیادهسازی",
+             "code", "fix", "refactor", "deploy", "implement", "debug", "patch",
+             "commit", "push", "write")
+    # Word boundaries matter: a plain substring test saw "کد" inside "کدام" and
+    # sent an ordinary question to the slow coding agent.
+    for m in marks:
+        if re.search(r"(?<![\w])" + re.escape(m) + r"(?![\w])", t):
+            return True
+    return False
+
+
+def run_hermes(prompt, model, cwd=ROOT, timeout=420):
     """Hand a free-form request to the full Hermes agent (it can write code too).
 
     The model must be given explicitly: the profile default ('Matin' combo) can
@@ -843,7 +884,11 @@ def gen_quiz_from_file(text, out_path, llm, vid):
     """Build a quiz from an uploaded exam/document. Returns True on success."""
     sys.path.insert(0, os.path.join(ROOT, "scripts"))
     try:
+        import importlib
         import gen_quiz_from_file as gqf
+        # The worker is long-lived: a module imported on the first job stays
+        # cached, so an edited generator would never take effect.
+        gqf = importlib.reload(gqf)
     except Exception as e:                                   # noqa: BLE001
         log("gen_quiz_from_file import failed: %s" % e)
         return False
@@ -895,10 +940,28 @@ def process_chat(site, llm, job, git=True, push=True):
                 return False
             return True
 
-        # 3) free text -> the full Hermes agent (it can write code as well)
+        # 3) free text. A question is answered straight from the model with a
+        #    snapshot of the site; anything that needs code goes to the full
+        #    Hermes agent, which can edit the repo and run things.
+        if looks_like_coding_task(text):
+            site.chat_send(jid, "🛠️ این درخواست کدنویسی است — عامل کامل اجرا می‌شود "
+                              "(ممکن است چند دقیقه طول بکشد)…")
+            answer = run_hermes(text, llm.model)
+            site.chat_send(jid, answer or "(بدون پاسخ)")
+            site.chat_close(jid)
+            return True
+
         site.chat_send(jid, "🤔 در حال بررسی درخواست…")
-        answer = run_hermes(text, llm.model)
-        site.chat_send(jid, answer or "(بدون پاسخ)")
+        quick, _used = llm.chat_any(
+            [{"role": "user", "content": SITE_CONTEXT.format(state=site_context()) + "\n\n" + text}],
+            max_tokens=1500, temperature=0.3)
+        quick = (quick or "").strip()
+        if "[[AGENT]]" in quick:
+            site.chat_send(jid, "🛠️ نیاز به عامل کامل دارم — اجرا می‌شود…")
+            answer = run_hermes(text, llm.model)
+            site.chat_send(jid, answer or "(بدون پاسخ)")
+        else:
+            site.chat_send(jid, quick or "(بدون پاسخ)")
         site.chat_close(jid)
         return True
     except Exception as e:                                   # noqa: BLE001
@@ -910,6 +973,31 @@ def process_chat(site, llm, job, git=True, push=True):
             pass
         site.update(jid, status="failed", error=str(e)[:500])
         return False
+
+
+# Models known to answer reliably on this router. The panel's model list is
+# alphabetical, so it starts with the combo routes — several of them are
+# deprecated upstream and burn the whole timeout before the rotation moves on.
+RELIABLE_MODELS = [
+    "oc/glm-5.3-flash-free",
+    "oc/mimo-v2.6-flash-free",
+    "oc/deepseek-v4.1-flash-free",
+    "oc/space-bunny-free",
+]
+
+
+def model_rotation(llm, panel_models):
+    """The model to try first, then the reliable ones, then the panel's list."""
+    order = []
+    if llm.model:
+        order.append(llm.model)
+    for m in RELIABLE_MODELS:
+        if m not in order:
+            order.append(m)
+    for m in panel_models:
+        if m not in order:
+            order.append(m)
+    return order
 
 
 def load_site(args):
@@ -955,9 +1043,10 @@ def main():
 
     if args.video:
         info_llm = site.llm()
-        llm = LLM(info_llm["settings"]["endpoint"], info_llm.get("api_key", ""),
-                  info_llm["settings"]["model"],
-                  [m["id"] for m in info_llm.get("models", [])][:40])
+        _llm = LLM(info_llm["settings"]["endpoint"], info_llm.get("api_key", ""),
+                   info_llm["settings"]["model"], [])
+        _llm.fallbacks = model_rotation(_llm, [m["id"] for m in info_llm.get("models", [])])
+        llm = _llm
         job = {"id": "direct", "yt_id": args.video, "url": args.video}
         process_job(site, llm, job, git=not args.no_git, push=not args.no_git)
         return 0
@@ -966,8 +1055,8 @@ def main():
         try:
             cfg = site.llm()
             s = cfg.get("settings") or {}
-            llm = LLM(s.get("endpoint"), cfg.get("api_key", ""), s.get("model"),
-                      [m["id"] for m in cfg.get("models", [])][:40])
+            llm = LLM(s.get("endpoint"), cfg.get("api_key", ""), s.get("model"), [])
+            llm.fallbacks = model_rotation(llm, [m["id"] for m in cfg.get("models", [])])
         except Exception as e:                                   # noqa: BLE001
             log("cannot read LLM settings: %s" % e)
             if args.once:

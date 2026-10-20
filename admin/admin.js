@@ -212,7 +212,7 @@
   /* ------------------------------------------------------------------ */
   /* YouTube link parsing                                               */
   /* ------------------------------------------------------------------ */
-  var YT_RE = /(?:youtube(?:-nocookie)?\.com\/watch\?(?:[^\s]*&)?v=|youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:shorts|embed|live)\/)([A-Za-z0-9_-]{11})/i;
+  var YT_RE = /(?:youtube(?:-nocookie)?\.com\/watch\?(?:[^\s]*&)?v=|youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:shorts|embed|live)\/)([A-Za-z0-9_-]{11})(?![A-Za-z0-9_-])/i;
   var BARE_ID_RE = /^[A-Za-z0-9_-]{11}$/;
   var URLISH_RE = /^(?:https?:\/\/|www\.)/i;
 
@@ -827,11 +827,177 @@
     loadLlm();
   }
 
+  /* ------------------------------------------------------------------ */
+  /* chat — the assistant                                               */
+  /* ------------------------------------------------------------------ */
+  /* The panel queues a chat job; scripts/pipeline_worker.py picks it up,
+     runs it and writes the answer back as chat_messages. The browser only
+     sends and polls — the heavy lifting never happens in the page. */
+  var CHAT_POLL_MS = 1500;
+  var chat = { jobId: null, seen: 0, timer: null, busy: false, file: null };
+
+  function chatStatus(text, kind) {
+    var box = $('chatStatus');
+    if (!box) return;
+    if (!text) { box.hidden = true; return; }
+    box.hidden = false;
+    box.textContent = text;
+    box.className = 'adm-chat-status' + (kind ? ' ' + kind : '');
+  }
+
+  function chatScroll() {
+    var log = $('chatLog');
+    if (log) log.scrollTop = log.scrollHeight;
+  }
+
+  function chatBubble(role, text) {
+    var box = el('div', 'adm-msg adm-msg-' + (role === 'user' ? 'user' : 'agent'));
+    var head = el('div', 'adm-msg-head');
+    head.appendChild(el('span', null, role === 'user' ? 'شما' : 'دستیار'));
+    box.appendChild(head);
+    box.appendChild(el('div', 'adm-msg-body', text || ''));
+    return box;
+  }
+
+  function chatRender(messages) {
+    var log = $('chatLog');
+    if (!log) return;
+    if (!messages.length) return;
+    $('chatEmpty').hidden = true;
+    for (var i = chat.seen; i < messages.length; i++) {
+      var m = messages[i] || {};
+      var text = m.text || '';
+      if (m.file_name && text.indexOf(m.file_name) === -1) {
+        text = '📎 ' + m.file_name + (text ? '\n' + text : '');
+      }
+      log.appendChild(chatBubble(m.role, text));
+    }
+    chat.seen = messages.length;
+    chatScroll();
+  }
+
+  function chatPoll() {
+    if (!chat.jobId) return;
+    api('chat.php?job_id=' + encodeURIComponent(chat.jobId)).then(function (data) {
+      chatRender(data.messages || []);
+      return api('jobs.php');
+    }).then(function (d) {
+      var job = null;
+      (d.jobs || []).forEach(function (j) { if (j.id === chat.jobId) job = j; });
+      if (!job) return;
+      if (job.status === 'done') {
+        chat.busy = false; chat.jobId = null;
+        chatStatus('انجام شد.', null);
+        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
+      } else if (job.status === 'failed') {
+        chat.busy = false; chat.jobId = null;
+        chatStatus('خطا: ' + (job.error || 'ناموفق'), 'err');
+        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
+      } else if (job.status === 'canceled') {
+        chat.busy = false; chat.jobId = null;
+        chatStatus('لغو شد.', 'err');
+        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
+      } else {
+        chatStatus('در حال پردازش — مرحله: ' + stageLabel(job.stage) + ' (' + fa(job.progress || 0) + '٪)');
+      }
+    }).catch(function (e) {
+      chat.busy = false;
+      chatStatus('ارتباط با سرور قطع شد: ' + e.message, 'err');
+    });
+  }
+
+  function chatSend() {
+    if (chat.busy) { toast('یک کار در حال اجراست؛ کمی صبر کن.', 'warn'); return; }
+    var input = $('chatInput');
+    var text = (input.value || '').trim();
+    var file = chat.file;
+    if (!text && !file) { toast('پیام یا فایلی لازم است.', 'warn'); return; }
+
+    chat.busy = true;
+    chat.seen = 0;
+    chat.jobId = null;
+    chatStatus('در حال ارسال…');
+
+    var p;
+    if (file) {
+      var fd = new FormData();
+      fd.append('file', file);
+      if (text) fd.append('message', text);
+      p = fetch(API_BASE + 'chat.php', {
+        method: 'POST', credentials: 'same-origin', body: fd
+      }).then(function (res) {
+        return res.text().then(function (t) {
+          var data = null;
+          try { data = JSON.parse(t); } catch (e) { data = null; }
+          if (!data || data.ok === false) {
+            throw new ApiError((data && data.message) || 'آپلود ناموفق بود.', res.status, data);
+          }
+          return data;
+        });
+      });
+    } else {
+      p = api('chat.php', { method: 'POST', body: { action: 'send', message: text } });
+    }
+
+    p.then(function (d) {
+      chat.jobId = d.job_id;
+      input.value = '';
+      chat.file = null;
+      $('chatFileName').textContent = '';
+      clear($('chatLog'));
+      chatScroll();
+      chatPoll();
+      if (chat.timer) clearInterval(chat.timer);
+      chat.timer = setInterval(chatPoll, CHAT_POLL_MS);
+    }).catch(function (e) {
+      chat.busy = false;
+      chatStatus('ارسال ناموفق بود: ' + e.message, 'err');
+      toast('ارسال ناموفق بود: ' + e.message, 'error');
+    });
+  }
+
+  function chatSetFile(file) {
+    if (!file) return;
+    chat.file = file;
+    $('chatFileName').textContent = '📎 ' + file.name + ' (' + Math.max(1, Math.round(file.size / 1024)) + ' KB)';
+  }
+
+  function initChat() {
+    var input = $('chatInput');
+    var drop = $('chatDrop');
+    var picker = $('chatFile');
+    if (!input || !drop || !picker) return;
+
+    $('chatSend').addEventListener('click', chatSend);
+    input.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); chatSend(); }
+    });
+
+    $('chatPick').addEventListener('click', function () { picker.click(); });
+    picker.addEventListener('change', function () { chatSetFile(picker.files && picker.files[0]); });
+
+    ['dragenter', 'dragover'].forEach(function (ev) {
+      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); });
+    });
+    ['dragleave', 'drop'].forEach(function (ev) {
+      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); });
+    });
+    drop.addEventListener('drop', function (e) {
+      var dt = e.dataTransfer;
+      if (dt && dt.files && dt.files.length) {
+        chatSetFile(dt.files[0]);
+        /* the browser must not navigate to the dropped file */
+        e.preventDefault();
+      }
+    });
+  }
+
   function init() {
     initLogin();
     initLogout();
     initJobs();
     initLlm();
+    initChat();
 
     $('urlInput').addEventListener('input', renderDetected);
     $('addBtn').addEventListener('click', addToQueue);
