@@ -528,11 +528,14 @@ def inject_static(site):
     # must NOT be blocked in robots.txt — a crawl block would stop the crawler
     # from ever reading the noindex directive. So: crawlable, self-canonical,
     # noindex in the head.
-    ap = os.path.join(ROOT, 'admin', 'index.html')
-    if os.path.exists(ap) and 'admin' in site.get('perPage', {}):
+    for dep, rel_admin in (('ir', 'admin/index.html'), ('com', 'com/admin/index.html')):
+        ap = os.path.join(ROOT, rel_admin)
+        if not os.path.exists(ap) or 'admin' not in site.get('perPage', {}):
+            continue
         src = open(ap, encoding='utf-8').read()
-        meta = site['perPage']['admin']['ir']
-        block = head_tags(site, 'ir', 'admin/', meta['title'], meta['desc'],
+        meta = site['perPage']['admin'][dep]
+        path_admin = 'admin/'      # url() adds the /com/ prefix for the com dep
+        block = head_tags(site, dep, path_admin, meta['title'], meta['desc'],
                           'https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg',
                           'website', None, None, noindex=True)
         new = re.sub(r'%s.*?%s' % (marks[0], marks[1]), '', src, flags=re.S)
@@ -547,7 +550,7 @@ def inject_static(site):
             new = re.sub(r'(<head[^>]*>)',
                          lambda m: m.group(1) + '\n' + marks[0] + '\n' + block + '\n' + marks[1],
                          new, count=1)
-        assert marks[0] in new and block in new, 'head injection failed for admin/index.html'
+        assert marks[0] in new and block in new, 'head injection failed for %s' % rel_admin
         open(ap, 'w', encoding='utf-8').write(new)
 
 

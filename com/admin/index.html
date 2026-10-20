@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<!--seo:start-->
+<title>Nurse Plus Admin</title>
+<meta name="description" content="Nurse Plus admin panel — queue videos, configure the AI model and track publishing.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://matinr997.github.io/np-next/com/admin/">
+<link rel="alternate" hreflang="en" href="https://matinr997.github.io/np-next/com/admin/">
+<link rel="alternate" hreflang="fa" href="https://matinr997.github.io/np-next/admin/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matinr997.github.io/np-next/com/admin/">
+<meta property="og:title" content="Nurse Plus Admin">
+<meta property="og:description" content="Nurse Plus admin panel — queue videos, configure the AI model and track publishing.">
+<meta property="og:image" content="https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="Nurse Plus Admin">
+<meta property="og:site_name" content="Nurse Plus">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[]</script>
+<!--seo:end-->
+
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../../assets/globals.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+
+<!-- ============================ LOGIN ============================ -->
+<div class="adm-login" id="loginView">
+  <form class="adm-card adm-login-card" id="loginForm" novalidate>
+    <div class="adm-login-brand"><span class="adm-dot"></span> NursePlus admin panel</div>
+    <h1 class="adm-login-title">Sign in to the admin panel</h1>
+    <p class="adm-sub">Sign in to manage the content pipeline queue and the AI model settings.</p>
+
+    <label class="adm-field">
+      <span class="adm-label">Email</span>
+      <input type="email" id="loginEmail" dir="ltr" autocomplete="username" placeholder="admin@example.com" spellcheck="false">
+    </label>
+
+    <label class="adm-field">
+      <span class="adm-label">Password</span>
+      <input type="password" id="loginPass" dir="ltr" autocomplete="current-password" placeholder="••••••••">
+    </label>
+
+    <div class="adm-alert adm-alert-error" id="loginError" role="alert" hidden></div>
+
+    <button class="adm-btn adm-btn-primary adm-btn-block" id="loginBtn" type="submit">Sign in</button>
+  </form>
+</div>
+
+<!-- ============================ APP ============================ -->
+<div class="adm-shell" id="appView" hidden>
+
+  <header class="adm-top">
+    <div class="adm-top-in">
+      <div class="adm-top-brand"><span class="adm-dot"></span> NursePlus admin panel</div>
+      <div class="adm-top-side">
+        <span class="adm-user" id="userName"></span>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="logoutBtn" type="button">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="adm-grid">
+
+    <!-- ---------- Add a video ---------- -->
+    <section class="adm-card adm-area-add">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">Add a video</h2>
+        <span class="adm-count" id="linkCount">0 links detected</span>
+      </div>
+      <p class="adm-hint">Paste YouTube links, one per line (or separated by spaces). Duplicates are detected and skipped before anything is queued.</p>
+
+      <textarea class="adm-textarea" id="urlInput" rows="5" spellcheck="false"
+        placeholder="https://www.youtube.com/watch?v=..."></textarea>
+
+      <div class="adm-detected" id="detected"></div>
+
+      <div class="adm-actions">
+        <button class="adm-btn adm-btn-primary" id="addBtn" type="button">Add to queue</button>
+        <button class="adm-btn adm-btn-ghost" id="clearBtn" type="button">Clear results</button>
+      </div>
+
+      <div class="adm-result-summary" id="addSummary" hidden></div>
+      <ul class="adm-results" id="addResults" aria-live="polite"></ul>
+    </section>
+
+    <!-- ---------- Pipeline queue ---------- -->
+    <section class="adm-card adm-area-queue">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">Pipeline queue</h2>
+        <span class="adm-count" id="queueCount">0 jobs</span>
+      </div>
+      <p class="adm-hint adm-hint-tight">Auto-refreshes every 4 seconds</p>
+      <div class="adm-jobs" id="jobsList"></div>
+      <div class="adm-empty" id="jobsEmpty">Nothing in the queue yet.</div>
+    </section>
+
+    <!-- ---------- Assistant (chat) ---------- -->
+    <section class="adm-card adm-card-ai adm-area-chat">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">Panel assistant</h2>
+        <span class="adm-ai-pill">AI</span>
+      </div>
+      <p class="adm-hint">Send a YouTube link and the whole job — subtitles, translation, quiz and publishing — runs on its own.
+        You can drop a file too (any format). Any other request goes to the full agent, which writes code when it is needed.</p>
+
+      <div class="adm-chat-status" id="chatStatus" hidden></div>
+      <div class="adm-chat" id="chatLog" aria-live="polite"></div>
+      <div class="adm-empty" id="chatEmpty">No messages yet. Send a video link or drop a file.</div>
+
+      <div class="adm-drop" id="chatDrop">
+        <input type="file" id="chatFile" hidden>
+        <span class="adm-drop-label">Drop a file here or</span>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="chatPick" type="button">Choose a file</button>
+        <span class="adm-drop-file" id="chatFileName"></span>
+      </div>
+
+      <div class="adm-chat-compose">
+        <textarea class="adm-textarea" id="chatInput" rows="3" spellcheck="false"
+          placeholder="A message, a YouTube link, or what you want done…"></textarea>
+        <button class="adm-btn adm-btn-primary" id="chatSend" type="button">Send</button>
+      </div>
+    </section>
+
+    <!-- ---------- AI model settings ---------- -->
+    <section class="adm-card adm-card-ai adm-area-side">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">AI model settings</h2>
+        <span class="adm-ai-pill">AI</span>
+      </div>
+
+      <label class="adm-field">
+        <span class="adm-label">Endpoint URL</span>
+        <input type="text" id="llmEndpoint" dir="ltr" spellcheck="false" placeholder="http://localhost:20128/v1">
+      </label>
+
+      <label class="adm-field">
+        <span class="adm-label">API key</span>
+        <div class="adm-in-row">
+          <input type="password" id="llmKey" dir="ltr" autocomplete="off" spellcheck="false" placeholder="••••••••">
+          <button class="adm-btn adm-btn-ghost adm-btn-sm adm-btn-noflex" id="toggleKey" type="button">Show</button>
+        </div>
+        <span class="adm-note" id="keyNote"></span>
+      </label>
+
+      <label class="adm-field">
+        <span class="adm-label">Model</span>
+        <div class="adm-model-picker">
+          <input type="search" id="modelFilter" dir="ltr" placeholder="Search the model list…" spellcheck="false">
+          <select id="modelSelect" size="6" aria-label="Model list"></select>
+          <span class="adm-note" id="modelCount"></span>
+        </div>
+        <input type="text" id="llmModel" dir="ltr" spellcheck="false" placeholder="Or type a model id by hand (e.g. gpt-4o-mini)">
+      </label>
+
+      <div class="adm-actions">
+        <button class="adm-btn adm-btn-ghost" id="testBtn" type="button">Test connection</button>
+        <button class="adm-btn adm-btn-primary" id="saveLlmBtn" type="button">Save settings</button>
+      </div>
+
+      <div class="adm-alert" id="llmMsg" role="status" hidden></div>
+    </section>
+
+    <!-- ---------- Existing videos ---------- -->
+    <section class="adm-card adm-area-videos">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">Existing videos</h2>
+        <span class="adm-count" id="videosCount">0 videos</span>
+      </div>
+
+      <div class="adm-toolbar">
+        <input type="search" id="videoSearch" placeholder="Search the title or channel…" spellcheck="false">
+      </div>
+
+      <div class="adm-table-wrap">
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Persian title</th>
+              <th scope="col">English title</th>
+              <th scope="col">Channel</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="videosBody"></tbody>
+        </table>
+      </div>
+      <div class="adm-empty" id="videosEmpty">No videos to show.</div>
+    </section>
+
+  </div>
+</div>
+
+<div class="adm-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

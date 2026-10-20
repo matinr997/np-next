@@ -91,9 +91,12 @@ if os.path.isdir(os.path.join(ROOT, 'api', 'db')):
     shutil.copytree(os.path.join(ROOT, 'api', 'db'), PUB + '/api/db', dirs_exist_ok=True)
 
 # the admin panel (its head is already injected with noindex by gen_seo.py)
-if os.path.isdir(os.path.join(ROOT, 'admin')):
-    shutil.copytree(os.path.join(ROOT, 'admin'), PUB + '/admin', dirs_exist_ok=True)
-    print('  admin panel: %d file(s)' % len(glob.glob(os.path.join(ROOT, 'admin', '*'))))
+for rel_admin in ('admin', 'com/admin'):
+    src_admin = os.path.join(ROOT, rel_admin)
+    if not os.path.isdir(src_admin):
+        continue
+    shutil.copytree(src_admin, os.path.join(PUB, rel_admin), dirs_exist_ok=True)
+    print('  %s panel: %d file(s)' % (rel_admin, len(glob.glob(os.path.join(src_admin, '*')))))
 
 # ---------- 3. server config ----------
 open(PUB + '/.htaccess', 'w', encoding='utf-8').write('''# ============ NursePlus static hosting (Netafraz / DirectAdmin) ============
