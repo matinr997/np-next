@@ -69,6 +69,14 @@ if _lint.returncode != 0:
     for l in _err:
         print('    ' + l.strip())
 
+# ---------- 1d. the documents ----------
+# The administrator reads these on the host: the deployment steps, the
+# database notes, the security list and the local development guide.
+os.makedirs(PUB + '/docs', exist_ok=True)
+for f in glob.glob(os.path.join(ROOT, 'docs', '*.md')):
+    shutil.copy(f, PUB + '/docs/' + os.path.basename(f))
+print('  docs: %d' % len(glob.glob(os.path.join(ROOT, 'docs', '*.md'))))
+
 # ---------- 2. the API + the admin panel ----------
 # The panel is useless without the API next to it, so both travel together.
 # config.php holds the database credentials: it is gitignored, blocked by
