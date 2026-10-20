@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "پرستار پس از ریختن قطره چشمی در کیسه ملتحمه، کدام اقدام را باید انجام دهد؟",
+   "qe": "After instilling eye drops into the conjunctival sac, what should the nurse do next?",
+   "of": [
+    "چشم بیمار را می‌بندد و با انگشت فشار ملایمی روی گوشه داخلی چشم (مجرای اشکی) وارد می‌کند تا دارو از چشم خارج نشود",
+    "از بیمار می‌خواهد چشم را محکم بمالد تا دارو به‌طور یکنواخت پخش شود",
+    "بلافاصله و بدون فاصله، قطره دوم را در همان چشم می‌ریزد",
+    "قطره‌چکان را روی پلک بالای بیمار فشار می‌دهد تا درپوش باز شود"
+   ],
+   "oe": [
+    "Closes the patient's eye and applies gentle pressure to the inner corner (nasolacrimal duct) so the medication does not leak out",
+    "Asks the patient to rub the eye firmly so the medication spreads evenly",
+    "Instills the second drop immediately in the same eye without any pause",
+    "Presses the dropper tip against the patient's upper eyelid to open it"
+   ],
+   "c": 0,
+   "wf": "متن تأکید می‌کند که بعد از ریختن قطره، بیمار چشم را می‌بندد و پرستار با انگشت روی مجرای اشکی فشار می‌دهد تا دارو در چشم باقی بماند و نشت نکند.",
+   "we": "The transcript states that after instilling the drops the patient closes the eye and the nurse holds the ducts occluded so the medication does not leak out.",
+   "ts": 274
+  },
+  {
+   "type": "mc",
+   "qf": "بیماری پیش از دریافت نیتروگلیسرین زیرزبانی فشار خون سیستولیک ۸۸ میلی‌متر جیوه دارد. مناسب‌ترین اقدام پرستار کدام است؟",
+   "qe": "A patient's systolic blood pressure is 88 mmHg before a scheduled sublingual nitroglycerin dose. What is the most appropriate nursing action?",
+   "of": [
+    "دارو را نگه می‌دارد و پزشک را برای دریافت دستور جدید مطلع می‌کند",
+    "دارو را طبق سفارش تجویز می‌کند و سپس بیمار را دراز می‌کشد",
+    "نصف دوز تجویز می‌کند و ۱۰ دقیقه بعد در صورت ادامه درد تکرار می‌کند",
+    "دارو را تجویز می‌کند و فقط شدت درد قفسه سینه را پایش می‌کند"
+   ],
+   "oe": [
+    "Holds the dose and notifies the physician for further orders",
+    "Administers the dose as ordered and then lays the patient flat",
+    "Gives half the dose and repeats it in 10 minutes if pain persists",
+    "Administers the dose and only monitors the severity of chest pain"
+   ],
+   "c": 0,
+   "wf": "متن بیان می‌کند که بعد از تجویز نیتروگلیسرین باید سیستولیک بیشتر از ۹۰ باشد و اگر این‌طور نیست و درد ادامه دارد، پرستار باید با پزشک تماس بگیرد.",
+   "we": "The transcript says systolic BP must stay greater than 90, and if pain persists the nurse must contact the physician for further orders.",
+   "ts": 1738
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار باید هم برونکودیلاتور استنشاقی و هم کورتیکواستروئید استنشاقی به بیمار بدهد. کدام ترتیب و اقدام درست است؟",
+   "qe": "A patient is to receive both a bronchodilator inhaler and a corticosteroid inhaler. Which sequence and action is correct?",
+   "of": [
+    "ابتدا برونکودیلاتور تجویز می‌شود و سپس کورتیکواستروئید، و بعد از کورتیکواستروئید دهان شسته می‌شود",
+    "ابتدا کورتیکواستروئید تجویز می‌شود و سپس برونکودیلاتور، و نیازی به شستن دهان نیست",
+    "هر دو دارو همزمان در یک نفس داده می‌شوند تا دوز کمتری مصرف شود",
+    "برونکودیلاتور داده می‌شود و بعد از آن بلافاصله دهان شسته می‌شود، سپس کورتیکواستروئید"
+   ],
+   "oe": [
+    "The bronchodilator is given first, then the corticosteroid, and the mouth is rinsed after the corticosteroid",
+    "The corticosteroid is given first, then the bronchodilator, and mouth rinsing is unnecessary",
+    "Both inhalers are given together in one breath to reduce the number of doses",
+    "The bronchodilator is given and the mouth is rinsed immediately afterward, then the corticosteroid is given"
+   ],
+   "c": 0,
+   "wf": "ویدیو تأکید می‌کند که اگر هر دو اسپری دارید، اول برونکودیلاتور بدهید تا کار خود را انجام دهد و بعد از استفاده از کورتیکواستروئید دهان را بشویید تا از برفک (تروش) جلوگیری شود.",
+   "we": "The video states the bronchodilator puff comes first so it can open the airway, and the mouth should be rinsed after corticosteroid use to prevent thrush.",
+   "ts": 2766
+  },
+  {
+   "type": "cloze",
+   "qf": "در ترکیب انسولین، پرستار ابتدا انسولین {0} را داخل سرنگ می‌کشد و سپس انسولین {1} را اضافه می‌کند.",
+   "qe": "When mixing insulins, the nurse first draws up {0} insulin and then adds {1} insulin.",
+   "blanks": [
+    {
+     "of": [
+      "شفاف (رگولار)",
+      "کدر (NPH)",
+      "طولانی‌اثر (گلارژین)"
+     ],
+     "oe": [
+      "clear (regular)",
+      "cloudy (NPH)",
+      "long-acting (glargine)"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "شفاف (رگولار)",
+      "کدر (NPH)",
+      "فوری‌اثر (لیسپرو)"
+     ],
+     "oe": [
+      "clear (regular)",
+      "cloudy (NPH)",
+      "rapid-acting (lispro)"
+     ],
+     "c": 1
+    }
+   ],
+   "wf": "قانون کلیدی clear to cloudy است و برای به‌خاطر سپردن آن از یادآور RN (Registered Nurse) استفاده می‌شود: R برای Regular و N برای NPH؛ اگر برعکس شود، اثر NPH تغییر می‌کند.",
+   "we": "The rule is clear to cloudy, remembered by the mnemonic RN (Registered Nurse): R for regular and N for NPH; reversing it alters the NPH action.",
+   "ts": 5112
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از موارد زیر یک مسیر تجویز دارو (route) هستند؟",
+   "qe": "Which of the following are medication administration routes?",
+   "items": [
+    {
+     "fa": "PO – از راه دهان",
+     "en": "PO – by mouth"
+    },
+    {
+     "fa": "AC – قبل از غذا",
+     "en": "AC – before meals"
+    },
+    {
+     "fa": "IV – از راه وریدی",
+     "en": "IV – intravenous"
+    },
+    {
+     "fa": "QID – چهار بار در روز",
+     "en": "QID – four times a day"
+    },
+    {
+     "fa": "SL – زیرزبانی",
+     "en": "SL – sublingual"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    4
+   ],
+   "wf": "PO یعنی per os یا از راه دهان، IV وریدی و SL زیرزبانی هستند، در حالی که AC و QID اختصارات فرکانس مصرف‌اند نه مسیر تجویز.",
+   "we": "PO (per os), IV, and SL are routes, whereas AC and QID are frequency abbreviations rather than administration routes.",
+   "ts": 9037
+  }
+ ],
+ "video": "jy4IUSt2XEE",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

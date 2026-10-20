@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بیماری ۶ ساعت پس از ترمیم آنوریسم آئورت شکمی است. کدام یافته ارزیابی برای پرستار مهم‌تر است که بلافاصله به ارائه‌دهنده مراقبت‌های بهداشتی گزارش شود؟",
+   "qe": "A client is 6 hours postoperative following an abdominal aortic aneurysm repair. Which assessment finding is most important for the nurse to report to the health care provider immediately?",
+   "of": [
+    "نبود صداهای روده در هر چهار ربع",
+    "زهکشی سروزانگوئینه روی پانسمان شکم",
+    "خروجی ادرار ۲۰ میلی‌لیتر در ساعت گذشته",
+    "درد در محل برش با شدت ۷ از ۱۰"
+   ],
+   "oe": [
+    "Absent bowel sounds in all four quadrants",
+    "Serosanguineous drainage on the abdominal dressing",
+    "Urine output of 20 mL over the last hour",
+    "Pain at the incision site rated 7 on a 0-to-10 scale"
+   ],
+   "c": 2,
+   "wf": "طبق تدریس دکتر شارون، یافته‌های غیرمنتظره گزارش می‌شوند؛ نبود صداهای روده تا ۲۴ تا ۴۸ ساعت پس از جراحی بزرگ شکمی، زهکشی سروزانگوئینه و درد برش همگی مورد انتظارند، اما خروجی ادرار ۲۰ میلی‌لیتر در ساعت نشانه کم‌آبی یا عدم پرفیوژن کلیه است.",
+   "we": "Dr. Sharon explains that unexpected findings are reported; absent bowel sounds (up to 24-48 hours after major abdominal surgery), serosanguineous drainage, and incision pain are all expected, but a urine output of 20 mL/hr suggests dehydration or poor renal perfusion.",
+   "ts": 143
+  },
+  {
+   "type": "mc",
+   "qf": "پرستاری از بیماری با مشکوک به ترومبوز ورید عمقی که برای آزمایش D-dimer برنامه‌ریزی شده مراقبت می‌کند. کدام توضیح درباره این آزمایش دقیق‌ترین است؟",
+   "qe": "A nurse is caring for a client with a suspected deep vein thrombosis who is scheduled for a D-dimer test. Which explanation of this test is most accurate?",
+   "of": [
+    "محل دقیق لخته خون در اندام تحتانی را مشخص می‌کند",
+    "ماده‌ای را می‌سنجد که هنگام شروع حل شدن لخته خون آزاد می‌شود",
+    "استعداد ژنتیکی ارثی برای لخته‌شدن خون را تعیین می‌کند",
+    "اثربخشی تزریق هپارین را پایش می‌کند"
+   ],
+   "oe": [
+    "It confirms the exact location of a blood clot in the leg",
+    "It measures a substance released when a blood clot begins to dissolve",
+    "It determines a genetic predisposition to clotting",
+    "It monitors the effectiveness of a heparin infusion"
+   ],
+   "c": 1,
+   "wf": "دکتر شارون بیان می‌کند که تعیین محل لخته با داپلر وریدی، استعداد ژنتیکی با تست فاکتور ۵ لیدن و پایش هپارین با PTT انجام می‌شود؛ D-dimer تنها ماده‌ای را می‌سنجد که هنگام شروع تخریب لخته آزاد می‌شود.",
+   "we": "Dr. Sharon notes that clot location is confirmed by venous Doppler, genetic predisposition by the factor V Leiden test, and heparin effectiveness by PTT; D-dimer measures the substance released when a clot begins to dissolve.",
+   "ts": 186
+  },
+  {
+   "type": "mc",
+   "qf": "بیماری با آسیب سر بسته پس از تصادف با وسیله نقلیه موتوری بستری شده است. کدام تغییر در وضعیت بیمار اولین نشانه افزایش فشار داخل جمجمه است؟",
+   "qe": "A client is admitted with a closed head injury following a motor vehicle accident. Which change in the client's status is the earliest indicator of increased intracranial pressure?",
+   "of": [
+    "پاسخ تنبل مردمک به نور",
+    "افزایش فشار نبض (widening pulse pressure)",
+    "وضعیت دکربره‌ت (decerebrate posturing)",
+    "تغییر در سطح هوشیاری"
+   ],
+   "oe": [
+    "Sluggish pupillary response to light",
+    "Widening pulse pressure",
+    "Decerebrate posturing",
+    "Change in level of consciousness"
+   ],
+   "c": 3,
+   "wf": "به گفته دکتر شارون، تغییرات مردمک هرگز نشانه اولیه نیست و وضعیت دکربره‌ت هم دیررس است؛ افزایش فشار نبض جزئی از سه‌گانه کوشینگ است اما تغییر سطح هوشیاری واقعاً اولین و زودترین نشانه است.",
+   "we": "Dr. Sharon states that pupillary changes are never early and decerebrate posturing is not early; widening pulse pressure is part of Cushing's triad, but a change in level of consciousness is truly the earliest indicator.",
+   "ts": 363
+  },
+  {
+   "type": "cloze",
+   "qf": "در محفظه آب‌بند لوله سینه‌ای، {0} نشان‌دهنده نشتی هواست و نیازمند مداخله است؛ همچنین در بیمار مبتلا به بیماری مزمن کلیه که قرار است سی‌تی اسکن با کنتراست وریدی دریافت کند، {1} باید پیش از اقدام قطع شود.",
+   "qe": "In the water seal chamber of a chest tube, {0} indicates an air leak and requires intervention; also, a client with chronic kidney disease scheduled for a CT scan with intravenous contrast should have {1} held before the procedure.",
+   "blanks": [
+    {
+     "of": [
+      "حباب‌زدن مداوم",
+      "تیدالینگ (نوسان) همراه با تنفس",
+      "حباب‌زدن در محفظه کنترل مکش"
+     ],
+     "oe": [
+      "Constant bubbling",
+      "Tidaling with the client's respirations",
+      "Bubbling in the suction control chamber"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "متفورمین",
+      "فوروزماید",
+      "آتورواستاتین"
+     ],
+     "oe": [
+      "Metformin",
+      "Furosemide",
+      "Atorvastatin"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "دکتر شارون تأکید می‌کند که حباب‌زدن مداوم در محفظه آب‌بند یعنی جایی نشتی هوا وجود دارد، در حالی که تیدالینگ و حباب‌زدن محفظه کنترل مکش طبیعی‌اند؛ دارویی که باید حفظ (قطع) شود متفورمین است چون با عملکرد کلیه مرتبط است و کنتراست از کلیه دفع می‌شود.",
+   "we": "Dr. Sharon explains that constant bubbling in the water seal chamber means there is a leak somewhere, while tidaling and bubbling in the suction control chamber are expected; metformin must be held because it affects kidney function and contrast is excreted by the kidneys.",
+   "ts": 555
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام موارد زیر یافته‌هایی هستند که پس از جراحی یا قراردادن لوله سینه‌ای انتظار می‌روند و به‌خودی‌خود نیازمند مداخله فوری نیستند؟",
+   "qe": "Which of the following are findings that are expected after surgery or chest tube placement and do not by themselves require immediate intervention?",
+   "items": [
+    {
+     "fa": "نبود صداهای روده در هر چهار ربع ۶ ساعت پس از جراحی آنوریسم آئورت",
+     "en": "Absent bowel sounds in all four quadrants 6 hours after abdominal aortic aneurysm repair"
+    },
+    {
+     "fa": "تیدالینگ (نوسان) محفظه آب‌بند همراه با تنفس بیمار",
+     "en": "Tidaling or fluctuation in the water seal chamber with the client's respirations"
+    },
+    {
+     "fa": "خروجی ادرار ۲۰ میلی‌لیتر در ساعت گذشته پس از جراحی",
+     "en": "Urine output of 20 mL over the last hour after surgery"
+    },
+    {
+     "fa": "حباب‌زدن مداوم در محفظه آب‌بند لوله سینه‌ای",
+     "en": "Constant bubbling in the water seal chamber of the chest tube"
+    },
+    {
+     "fa": "زهکشی سروزانگوئینه روی پانسمان شکم ۶ ساعت پس از جراحی",
+     "en": "Serosanguineous drainage on the abdominal dressing 6 hours after surgery"
+    },
+    {
+     "fa": "درد غیرقابل‌تسکین همراه با پای رنگ‌پریده و نبض‌های ضعیف در گچ",
+     "en": "Unrelieved pain with a pale foot and weak pulses under a cast"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    4
+   ],
+   "wf": "دکتر شارون نبود صداهای روده تا ۲۴ تا ۴۸ ساعت پس از جراحی بزرگ و زهکشی سروزانگوئینه را مورد انتظار می‌داند و تیدالینگ را طبیعی معرفی می‌کند؛ در مقابل، خروجی ادرار ۲۰ میلی‌لیتر، حباب‌زدن مداوم (نشتی هوا) و درد غیرقابل‌تسکین با پالس ضعیف (سندرم کمپارتمان) نیازمند اقدام فوری‌اند.",
+   "we": "Dr. Sharon says absent bowel sounds (up to 24-48 hours) and serosanguineous drainage are expected, and tidaling is normal; in contrast, a urine output of 20 mL/hr, constant bubbling (air leak), and unrelieved pain with weak pulses (compartment syndrome) require immediate action.",
+   "ts": 134
+  }
+ ],
+ "video": "bIAnJoErzrI",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

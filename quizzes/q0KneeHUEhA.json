@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "کدام یافته در ارزیابی بیمار، مهم‌ترین منع برای گذاشتن لوله بینی–معده‌ای (NG) است؟",
+   "qe": "Which finding is the key contraindication to inserting a nasogastric (NG) tube?",
+   "of": [
+    "چشم راکونی، کبودی پشت گوش و نشت مایع مغزی–نخاعی از بینی یا گوش",
+    "بی‌اشتهایی و کاهش وزن ۵ کیلوگرم در یک ماه اخیر",
+    "پلاکت ۲۵۰٬۰۰۰ و INR طبیعی",
+    "سوزش سر دل و سابقه ریفلاکس معده"
+   ],
+   "oe": [
+    "Raccoon eyes, bruising behind the ears, and CSF leakage from the nose or ears",
+    "Anorexia and a 5 kg weight loss in the past month",
+    "Platelet count 250,000 and a normal INR",
+    "Heartburn and a history of gastroesophageal reflux"
+   ],
+   "c": 0,
+   "wf": "چشم راکونی، کبودی پشت گوش و نشت CSF نشانه‌های شکستگی قاعده جمجمه هستند و در این حالت گذاشتن لوله از بینی می‌تواند از محل شکستگی وارد مغز شود؛ بنابراین از موارد منع است. بی‌اشتهایی و کاهش وزن در واقع اندیکاسیون تغذیه لوله‌ای است و شمارش پلاکت و INR طبیعی منع انعقادی محسوب نمی‌شود.",
+   "we": "Raccoon eyes, bruising behind the ears, and CSF leakage are telltale signs of a basilar skull fracture; passing a tube through the nose could enter the brain through the fracture, so this is a contraindication. Anorexia with weight loss is actually an indication for tube feeding, and normal platelets/INR is not a bleeding contraindication.",
+   "ts": 122
+  },
+  {
+   "type": "mc",
+   "qf": "کدام گزینه درباره لومن تهویه (سوراخ کوچک و دم آبی) لوله سالم‌سامپ درست است؟",
+   "qe": "Which statement about the vent lumen (small hole and blue pigtail) of a Salem sump tube is correct?",
+   "of": [
+    "تنها هوا از آن عبور می‌کند و هرگز نباید دارو یا تغذیه از آن داده شود",
+    "بهترین مسیر برای دادن داروهای مایع و تغذیه بولوس است",
+    "برای ساکشن محتویات معده و لاواژ استفاده می‌شود",
+    "باید پایین‌تر از سطح معده و روی شکم فیکس شود"
+   ],
+   "oe": [
+    "Only air passes through it; medications or feedings must never be given through it",
+    "It is the best route for liquid medications and bolus feedings",
+    "It is used to suction gastric contents and perform lavage",
+    "It should be secured below stomach level, on the abdomen"
+   ],
+   "c": 0,
+   "wf": "دم آبی همراه با سوراخ تهویه فقط برای ورود هوا به معده است تا هنگام ساکشن، لوله به مخاط معده نچسبد؛ دارو و تغذیه فقط از لومن اصلی داده می‌شود. همچنین این دم باید بالای معده (حدود شانه) و سنجاق‌شده به گان نگه داشته شود.",
+   "we": "The blue pigtail works with the vent hole to let outside air into the stomach so the tube does not suction and injure the gastric lining. Feedings and medications go only through the main lumen, and the pigtail is kept above the stomach, pinned near the shoulder.",
+   "ts": 413
+  },
+  {
+   "type": "mc",
+   "qf": "در بیمار با لوله NG مستقر، کدام نتیجه pH آسپیرهشده نشان‌دهنده قرارگیری لوله در معده است؟",
+   "qe": "In a patient with an established NG tube, which aspirate pH indicates gastric placement?",
+   "of": [
+    "۱ تا ۵ (برخی منابع کمتر از ۵.۵)",
+    "۶ تا ۷، که نشانه روده یا دستگاه تنفسی است",
+    "۷.۵ تا ۸",
+    "بیش از ۸"
+   ],
+   "oe": [
+    "1 to 5 (some sources say less than 5.5)",
+    "6 to 7, which indicates intestine or respiratory tract",
+    "7.5 to 8",
+    "Greater than 8"
+   ],
+   "c": 0,
+   "wf": "بر اساس ویدیو، pH بین ۱ تا ۵ (و در برخی منابع کمتر از ۵.۵) نشان‌دهنده معده است، در حالی که ۶ تا ۷ مربوط به روده یا دستگاه تنفسی است. این بررسی برای لوله‌های باریک ND و NJ به‌طور روتین انجام نمی‌شود.",
+   "we": "According to the video, a pH of 1 to 5 (some sources say <5.5) indicates the stomach, whereas 6 to 7 indicates intestine or respiratory placement. Routine pH checks are not recommended for small-bore ND/NJ tubes.",
+   "ts": 1183
+  },
+  {
+   "type": "cloze",
+   "qf": "برای تخمین طول لوله بینی–معده‌ای از اندازه‌گیری سه‌لندمارکی NEX استفاده می‌شود؛ یعنی {0}، و برخی مراکز افزودن {1} سانتی‌متر اضافه را الزامی می‌دانند.",
+   "qe": "The three-landmark NEX measurement is used to estimate NG tube length: {0}, and some facilities require adding an extra {1} cm.",
+   "blanks": [
+    {
+     "of": [
+      "بینی، گوش، زائده زیفوئید",
+      "دهان، حلق، معده",
+      "بینی، حلق، دئودنوم"
+     ],
+     "oe": [
+      "Nose, ear, xiphoid process",
+      "Mouth, pharynx, stomach",
+      "Nose, pharynx, duodenum"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "۱۰",
+      "۵",
+      "۲۰"
+     ],
+     "oe": [
+      "10",
+      "5",
+      "20"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "لندمارک‌های NEX عبارت‌اند از بینی، گوش و زائده زیفوئید که پس از اندازه‌گیری روی لوله علامت زده می‌شود. ویدیو اشاره می‌کند این فاصله در برخی بیماران کافی نیست، بنابراین بعضی مراکز ۱۰ سانتی‌متر اضافه را طبق پروتکل الزامی می‌دانند.",
+   "we": "NEX stands for nose, ear, and xiphoid process, and the tube is marked at that measured point. The video notes this distance may be insufficient in some patients, so some facilities require inserting an extra 10 cm per protocol.",
+   "ts": 848
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام موارد از ویژگی‌های لوله‌های باریک (small-bore) است؟",
+   "qe": "Which of these are characteristics of small-bore tubes?",
+   "items": [
+    {
+     "fa": "اندازه ۳ تا ۱۲ فرنچ",
+     "en": "Size 3 to 12 French"
+    },
+    {
+     "fa": "دو لومن بودن با دم آبی برای تهویه هوا",
+     "en": "Double lumen with a blue pigtail air vent"
+    },
+    {
+     "fa": "داشتن نوک وزنه‌دار و سیم راهنما (استایلت) برای عبور به روده باریک",
+     "en": "Weighted tip and guide wire (stylet) to help it pass into the small intestine"
+    },
+    {
+     "fa": "مناسب برای ساکشن مداوم و لاواژ معده",
+     "en": "Suitable for continuous suction and gastric lavage"
+    },
+    {
+     "fa": "اندازه ۱۴ تا ۱۸ فرنچ",
+     "en": "Size 14 to 18 French"
+    },
+    {
+     "fa": "مناسب‌ترین گزینه برای تغذیه و دارو، با خطر انسداد بیشتر",
+     "en": "Best choice for feedings and medications, with a higher risk of clogging"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    5
+   ],
+   "wf": "لوله‌های باریک ۳ تا ۱۲ فرنچ هستند، اغلب نوک وزنه‌دار و سیم راهنما دارند که پس از تأیید رادیولوژی خارج می‌شود، و چون نازک‌اند بهترین گزینه برای تغذیه و دارو هستند ولی بیشتر در معرض انسداد قرار می‌گیرند. دم آبی، اندازه ۱۴ تا ۱۸ فرنچ و کاربرد ساکشن/لاواژ مربوط به لوله‌های قطور مانند سالم‌سامپ است.",
+   "we": "Small-bore tubes are 3 to 12 French, often have a weighted tip and a guide wire that is removed after x-ray confirmation, and are best for feedings and medications though they clog more easily. The blue pigtail, 14 to 18 French size, and suction/lavage use belong to large-bore tubes such as the Salem sump.",
+   "ts": 639
+  }
+ ],
+ "video": "q0KneeHUEhA",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

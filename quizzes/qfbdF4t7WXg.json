@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بیماری ۳ هفته است تغذیه وریدی کامل (TPN) دریافت می‌کند و به‌صورت ناگهانی انفوزیون قطع می‌شود. کدام یافته در این بیمار محتمل‌تر است و علت آن چیست؟",
+   "qe": "A patient has been receiving total parenteral nutrition (TPN) for 3 weeks, and the infusion is abruptly discontinued. Which finding is most likely, and why?",
+   "of": [
+    "هیپوگلیسمی برگشتی؛ سطح انسولین بالا باقی مانده است در حالی که منبع گلوکز قطع شده",
+    "هیپرگلیسمی شدید؛ TPN هنوز در جریان خون باقی مانده است",
+    "هیپوناترمی؛ مصرف نمک در اثر قطع TPN بالا رفته است",
+    "هیپرکالمی؛ پتاسیم از سلول‌ها آزاد شده است"
+   ],
+   "oe": [
+    "Rebound hypoglycemia; the insulin level remains high while the glucose supply has been cut off",
+    "Severe hyperglycemia; TPN is still circulating in the blood",
+    "Hyponatremia; sodium consumption rises when TPN is stopped",
+    "Hyperkalemia; potassium is released from the cells"
+   ],
+   "c": 0,
+   "wf": "به دلیل دکستروز بالای TPN بدن به‌طور مداوم انسولین بیشتری ترشح کرده است؛ با قطع ناگهانی محلول، انسولین بالا باقی مانده و گلوکز باقی‌مانده خون را وارد سلول کرده و قند خون را پایین می‌آورد. بنابراین بیمار باید به‌تدریج از TPN جدا شود.",
+   "we": "Because of TPN's high dextrose content, the body adapts by increasing insulin secretion. If the infusion is stopped cold turkey, the still-high insulin drives the remaining glucose into the cell, dropping the blood glucose, so patients must be tapered off.",
+   "ts": 361
+  },
+  {
+   "type": "mc",
+   "qf": "کدام بیمار بیش از سایرین به تغذیه پارنترال (به جای انترال) نیاز دارد؟",
+   "qe": "Which patient most likely requires parenteral (rather than enteral) nutrition?",
+   "of": [
+    "بیمار مبتلا به ایلئوس فلجی که روده‌ها حرکت نمی‌کنند",
+    "بیمار مبتلا به بیماری کرون که دستگاه گوارشش هنوز عمل می‌کند",
+    "بیماری که بلع ناامن دارد ولی دستگاه گوارش عملکرد طبیعی دارد",
+    "بیماری که برای کوتاه‌مدت به تغذیه مایع از راه لوله نیاز دارد"
+   ],
+   "oe": [
+    "A patient with paralytic ileus in whom the intestines are not moving",
+    "A patient with Crohn's disease whose GI tract is still functioning",
+    "A patient with unsafe swallowing but a normally functioning GI tract",
+    "A patient who needs short-term tube feedings"
+   ],
+   "c": 0,
+   "wf": "تغذیه انترال مسیر ترجیحی است، اما وقتی دستگاه گوارش کار نمی‌کند — مثلاً ایلئوس فلجی، ایسکمی یا انسداد کامل روده — تغذیه باید از طریق جریان خون داده شود.",
+   "we": "Enteral is the preferred route, but when the GI tract is not functioning—such as in paralytic ileus, ischemia, or complete bowel obstruction—the nutrition must be given through the bloodstream.",
+   "ts": 151
+  },
+  {
+   "type": "mc",
+   "qf": "به بیماری که مدت طولانی تغذیه نداشته، به‌سرعت تغذیه داده می‌شود. کدام یافته آزمایشگاهی مشخصه سندرم تغذیه مجدد است و کدام عارضه آن خطرناک است؟",
+   "qe": "Nutrition is introduced too quickly in a patient who has gone a long time without nourishment. Which laboratory finding is the hallmark of refeeding syndrome, and which complication makes it dangerous?",
+   "of": [
+    "هیپوفسفاتمی شدید؛ می‌تواند باعث نارسایی تنفسی و نارسایی قلبی شود",
+    "هیپرفسفاتمی؛ می‌تواند باعث تشنج شود",
+    "هیپرکالمی؛ می‌تواند باعث ایست قلبی شود",
+    "هیپوناترمی شدید؛ می‌تواند باعث تشنج شود"
+   ],
+   "oe": [
+    "Severe hypophosphatemia; it can cause respiratory failure and heart failure",
+    "Hyperphosphatemia; it can cause seizures",
+    "Hyperkalemia; it can cause cardiac arrest",
+    "Severe hyponatremia; it can cause seizures"
+   ],
+   "c": 0,
+   "wf": "جهش انسولین، فسفر (و همچنین پتاسیم و منیزیم) را به‌سرعت وارد سلول کرده و سطح خونی آن‌ها را پایین می‌آورد؛ هالک سندرم تغذیه مجدد هیپوفسفاتمی شدید است که می‌تواند تشنج، نارسایی تنفسی و نارسایی قلبی ایجاد کند.",
+   "we": "The insulin surge drives phosphate (as well as potassium and magnesium) rapidly into the cell, dropping serum levels. Severe hypophosphatemia is the hallmark and can lead to seizures, respiratory failure, and heart failure.",
+   "ts": 562
+  },
+  {
+   "type": "cloze",
+   "qf": "TPN به دلیل اسمولاریته بالا نباید از راه {0} داده شود؛ بنابراین معمولاً در {1} انفوزیون می‌شود چون جریان خون زیاد آن محلول را به‌سرعت رقیق می‌کند.",
+   "qe": "Because of its high osmolarity, TPN should not be given through a {0}; therefore, it is typically infused into the {1}, where the large blood flow rapidly dilutes the solution.",
+   "blanks": [
+    {
+     "of": [
+      "لوله وریدی محیطی (محیطی)",
+      "لوله بینی-معده‌ای",
+      "لوله گاستروستومی"
+     ],
+     "oe": [
+      "peripheral intravenous line",
+      "nasogastric tube",
+      "gastrostomy tube"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "ورید اجوف فوقانی",
+      "ورید محیطی کوچک ساعد",
+      "بافت زیرجلدی بازو"
+     ],
+     "oe": [
+      "superior vena cava",
+      "a small peripheral vein in the forearm",
+      "subcutaneous tissue of the arm"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "چون TPN بالاترین اسمولاریته را دارد باید از خط مرکزی داده شود و معمولاً در ورید اجوف فوقانی قرار می‌گیرد؛ این ورید بزرگ جریان خون بالایی دارد و محلول با رسیدن به آن سریع رقیق می‌شود.",
+   "we": "Because TPN has the highest osmolarity, it must be given through a central line, usually in the superior vena cava—a large vein with high blood flow that rapidly dilutes the solution as it drips in.",
+   "ts": 330
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام موارد از عوارض تغذیه انترال از راه لوله هستند؟ (۳ مورد را نگه دارید)",
+   "qe": "Which of these are complications of enteral tube feeding? (keep 3)",
+   "items": [
+    {
+     "fa": "آسپیراسیون و پنومونی ناشی از جابه‌جایی لوله",
+     "en": "Aspiration and pneumonia from tube displacement"
+    },
+    {
+     "fa": "گرفتگی لوله، به‌ویژه لوله‌های لومن کوچک",
+     "en": "Tube clogging, especially with small-bore tubes"
+    },
+    {
+     "fa": "اسهال، تهوع و استفراغ در اثر عدم تحمل تغذیه",
+     "en": "Diarrhea, nausea, and vomiting from feeding intolerance"
+    },
+    {
+     "fa": "هیپوگلیسمی برگشتی پس از قطع ناگهانی تغذیه",
+     "en": "Rebound hypoglycemia after abrupt discontinuation of nutrition"
+    },
+    {
+     "fa": "آسیب بافتی و نکروز در اثر نشت محلول هایپرتونیک از لین محیطی",
+     "en": "Tissue damage and necrosis from hypertonic solution leaking from a peripheral line"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "عوارض لوله‌های انترال شامل آسپیراسیون (به دلیل جابه‌جایی لوله یا زاویه نادرست تخت)، گرفتگی لوله و اسهال/تهوع/استفراغ است. هیپوگلیسمی برگشتی و آسیب بافتی ناشی از نشت محلول هایپرتونیک، عوارض تغذیه پارنترال هستند نه انترال.",
+   "we": "Enteral tube complications include aspiration (from tube displacement or improper bed angle), tube clogging, and diarrhea/nausea/vomiting. Rebound hypoglycemia and tissue injury from hypertonic solution infiltration are parenteral, not enteral, complications.",
+   "ts": 849
+  }
+ ],
+ "video": "qfbdF4t7WXg",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

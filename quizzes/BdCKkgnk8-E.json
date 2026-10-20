@@ -1,0 +1,142 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بیماری که برای پیشگیری از بارداری از دیافراگم استفاده می‌کند، پس از مقاربت باید چه دستورالعمل زمانی را رعایت کند؟",
+   "qe": "A patient using a diaphragm for contraception must follow which timing instruction after intercourse?",
+   "of": [
+    "حداقل ۶ ساعت در جا بگذارد اما بیش از ۲۴ ساعت نماند",
+    "حداقل ۲ ساعت در جا بگذارد اما بیش از ۶ ساعت نماند",
+    "حداقل ۸ ساعت در جا بگذارد اما بیش از ۴۸ ساعت نماند",
+    "بلافاصله پس از مقاربت آن را خارج کند و دوباره برای مقاربت بعدی بگذارد"
+   ],
+   "oe": [
+    "Leave it in at least 6 hours, but no longer than 24 hours",
+    "Leave it in at least 2 hours, but no longer than 6 hours",
+    "Leave it in at least 8 hours, but no longer than 48 hours",
+    "Remove it immediately after intercourse and reinsert before the next act"
+   ],
+   "c": 0,
+   "wf": "طبق ویدیو، دیافراگم بعد از مقاربت باید حداقل ۶ ساعت بماند تا مؤثر باشد، اما مجموع زمان ماندن نباید از ۲۴ ساعت بیشتر شود، چون خطر سندرم شوک سمی بالا می‌رود.",
+   "we": "The transcript states the diaphragm must remain at least 6 hours after intercourse to be effective, but total wear must not exceed 24 hours because of the toxic shock syndrome risk.",
+   "ts": 313
+  },
+  {
+   "type": "mc",
+   "qf": "مردی که سابقه حساسیت به لاتکس دارد، پس از مشاوره با پرستار کدام توصیه را باید بپذیرد؟",
+   "qe": "A man with a history of latex allergy receives nursing counseling. Which recommendation should he follow?",
+   "of": [
+    "از کاندوم پلی‌یورتان استفاده کند",
+    "از کاندوم لاتکس همراه با لوبریکانت روغنی استفاده کند",
+    "از کاندوم پوستی طبیعی استفاده کند چون در برابر STI محافظت می‌کند",
+    "از کاندوم لاتکس همراه با لوبریکانت پایه آب استفاده کند"
+   ],
+   "oe": [
+    "Use a polyurethane condom",
+    "Use a latex condom with an oil-based lubricant",
+    "Use a natural skin condom because it protects against STIs",
+    "Use a latex condom with a water-based lubricant"
+   ],
+   "c": 0,
+   "wf": "ویدیو تأکید می‌کند که در حساسیت به لاتکس می‌توان از کاندوم پلی‌یورتان استفاده کرد؛ همچنین لوبریکانت روغنی بافت لاتکس را تخریب می‌کند.",
+   "we": "The video notes that polyurethane condoms can be used when there is a latex allergy, and that oil-based lubricants break down latex integrity.",
+   "ts": 127
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار به بیماری که دیافراگم استفاده می‌کند آموزش می‌دهد علائم سندرم شوک سمی (TSS) را بشناسد. کدام یافته معمولاً اولین علامت این سندرم است؟",
+   "qe": "A nurse teaches a diaphragm user to recognize toxic shock syndrome (TSS). Which finding is usually the first sign of this syndrome?",
+   "of": [
+    "تب ناگهانی معمولاً بالای ۱۰۲ درجه فارنهایت",
+    "راش قرمز پوستی شبیه آفتاب‌سوختگی که به پوسته‌ریزی می‌رسد",
+    "استفراغ و اسهال همراه با گلودرد",
+    "افت فشار خون، تاکی‌کاردی و تنگی نفس"
+   ],
+   "oe": [
+    "Sudden fever, typically greater than 102°F",
+    "A red sunburn-type rash that progresses to peeling",
+    "Vomiting and diarrhea with a sore throat",
+    "Hypotension, tachycardia, and difficulty breathing"
+   ],
+   "c": 0,
+   "wf": "در بخش TSS ویدیو آمده است که T یعنی افزایش دما؛ تب ناگهانی بالای ۱۰۲ درجه فارنهایت معمولاً اولین علامت است و بقیه موارد در مراحل بعد یا شدید دیده می‌شوند.",
+   "we": "The video's TSS mnemonic explains that a sudden fever greater than 102°F is usually the first sign, while the rash and systemic shock findings occur later or in severe cases.",
+   "ts": 345
+  },
+  {
+   "type": "cloze",
+   "qf": "برخلاف ژل‌ها، فوم‌ها و کرم‌ها که فوری اثر می‌کنند، {0}‌ها، {1}‌ها و قرص‌های اسپرم‌کش برای ذوب‌شدن به حدود ۱۵ دقیقه زمان نیاز دارند.",
+   "qe": "Unlike gels, foams, and creams that work immediately, spermicide {0}s, {1}s, and tablets require up to about 15 minutes to melt.",
+   "blanks": [
+    {
+     "of": [
+      "فیلم",
+      "اسفنج",
+      "کرم"
+     ],
+     "oe": [
+      "film",
+      "sponge",
+      "cream"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "شیاف",
+      "فوم",
+      "ژل"
+     ],
+     "oe": [
+      "suppository",
+      "foam",
+      "gel"
+     ],
+     "c": 1
+    }
+   ],
+   "wf": "ویدیو بیان می‌کند که ژل‌ها، فوم‌ها و کرم‌ها فوری‌اند، اما فیلم‌ها، شیاف‌ها و قرص‌ها به حدود ۱۵ دقیقه زمان برای ذوب‌شدن نیاز دارند.",
+   "we": "The video states that gels, foams, and creams work immediately, whereas films, suppositories, and tablets need up to about 15 minutes to melt.",
+   "ts": 234
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از این روش‌ها در برابر عفونت‌های مقاربتی (STI) محافظت ایجاد می‌کنند؟ آن‌ها را نگه دارید.",
+   "qe": "Which of these methods provide protection against sexually transmitted infections (STIs)? Keep those items.",
+   "items": [
+    {
+     "fa": "کاندوم مردانه",
+     "en": "Male condom"
+    },
+    {
+     "fa": "کاندوم زنانه",
+     "en": "Female condom"
+    },
+    {
+     "fa": "اسپرم‌کش",
+     "en": "Spermicide"
+    },
+    {
+     "fa": "دیافراگم",
+     "en": "Diaphragm"
+    },
+    {
+     "fa": "کلاهک سرویکس (FemCap)",
+     "en": "Cervical cap (FemCap)"
+    }
+   ],
+   "keep": [
+    0,
+    1
+   ],
+   "wf": "کاندوم‌های مردانه و زنانه در برابر بارداری و STI محافظت می‌کنند (به‌جز نوع پوستی طبیعی). اما اسپرم‌کش‌ها، دیافراگم و کلاهک سرویکس به‌تنهایی هیچ محافظتی در برابر STI ندارند.",
+   "we": "Male and female condoms protect against both pregnancy and STIs (except natural skin condoms). Spermicides, diaphragms, and the cervical cap provide no STI protection when used alone.",
+   "ts": 54
+  }
+ ],
+ "video": "BdCKkgnk8-E",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "به بیماری فوروزماید تجویز شده است. پرستار باید کدام نتیجه آزمایشگاهی را به‌ویژه پایش کند؟",
+   "qe": "A client is prescribed furosemide. Which lab result should the nurse watch for?",
+   "of": [
+    "پتاسیم ۵٫۵ mEq/L",
+    "پتاسیم ۳٫۲ mEq/L",
+    "سدیم ۱۴۸ mEq/L",
+    "کلسیم ۱۱ mg/dL"
+   ],
+   "oe": [
+    "Potassium 5.5 mEq/L",
+    "Potassium 3.2 mEq/L",
+    "Sodium 148 mEq/L",
+    "Calcium 11 mg/dL"
+   ],
+   "c": 1,
+   "wf": "فوروزماید یک دیورتیک هدردهنده پتاسیم است؛ بنابراین خطر اصلی آن هیپوکالمی است و پتاسیم ۳٫۲ باید فوراً گزارش شود.",
+   "we": "Furosemide is a potassium-wasting diuretic, so the key risk is hypokalemia; a potassium of 3.2 is the value the nurse must watch for.",
+   "ts": 53
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار قصد تجویز داروی فشار خون را برای بیماری با فشار خون فعلی ۹۸/۶۲ دارد و هیچ پارامتر قطع دارو در دستور وجود ندارد. پرستار باید بعداً چه اقدامی انجام دهد؟",
+   "qe": "A nurse is preparing to administer a blood pressure medication to a client whose current blood pressure is 98/62, and no hold parameters are given. Which action should the nurse take next?",
+   "of": [
+    "دارو را طبق دستور تجویز کند",
+    "دارو را نگه دارد و ارائه‌دهنده مراقبت‌های بهداشتی را مطلع کند",
+    "سرعت مایعات وریدی را افزایش دهد",
+    "فشار خون را دوباره اندازه‌گیری کند تا صحت آن تأیید شود"
+   ],
+   "oe": [
+    "Administer the medication as prescribed",
+    "Hold the medication and notify the healthcare provider",
+    "Increase the rate of the client's IV fluids",
+    "Recheck the blood pressure to confirm its accuracy"
+   ],
+   "c": 1,
+   "wf": "طبق قانون NCLEX، وقتی پارامتری داده نشده و فشار سیستولیک زیر ۱۰۰ است، دارو نگه داشته می‌شود و با ارائه‌دهنده تماس گرفته می‌شود؛ افزایش سرعت سرم خارج از حیطه کار پرستار است.",
+   "we": "On the NCLEX, when no parameters are given and systolic is under 100, hold the med and call the provider; increasing IV fluids on your own is outside the nurse's scope.",
+   "ts": 141
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار در حال بررسی داروهای بیماری با سابقه آسم شدید است. کدام دارو را باید زیر سؤال ببرد؟",
+   "qe": "A nurse is reviewing the medications of a client with a history of severe asthma. Which medication should the nurse question?",
+   "of": [
+    "آملودیپین",
+    "هیدروکلروتیازید",
+    "پروپرانولول",
+    "والسارتن"
+   ],
+   "oe": [
+    "Amlodipine",
+    "Hydrochlorothiazide",
+    "Propranolol",
+    "Valsartan"
+   ],
+   "c": 2,
+   "wf": "پروپرانولول یک بتابلاکر است و بتابلاکرها در آسم شدید منع مصرف دارند؛ دپین‌ها مسدودکننده کانال کلسیم، تیازیدها دیورتیک و سارتین‌ها ARB هستند.",
+   "we": "Propranolol is a beta blocker, and beta blockers are contraindicated in severe asthma; the -pine drugs are calcium channel blockers, -thiazides are diuretics, and -sartans are ARBs.",
+   "ts": 250
+  },
+  {
+   "type": "cloze",
+   "qf": "پرازوسین به‌عنوان یک گشادکننده مستقیم عروق ممکن است {0} ایجاد کند؛ از این‌رو مهم‌ترین دستور ایمنی پیش از اولین دوز این است که بیمار آن را {1} مصرف کند.",
+   "qe": "Prazosin, as a direct vasodilator, may cause {0}; therefore, the most important safety instruction before the first dose is that the client take it {1}.",
+   "blanks": [
+    {
+     "of": [
+      "افت فشار خون با اولین دوز",
+      "افزایش سطح پتاسیم خون",
+      "سرفه خشک مقاوم"
+     ],
+     "oe": [
+      "first-dose hypotension",
+      "elevated serum potassium",
+      "persistent dry cough"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "در عصر، پیش از خواب",
+      "همراه با یک لیوان آب گریپ‌فروت",
+      "در اواسط روز هنگام فعالیت بدنی شدید"
+     ],
+     "oe": [
+      "in the evening before bedtime",
+      "with a full glass of grapefruit juice",
+      "midday during heavy physical activity"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "پرازوسین گشادکننده مستقیم عروق است و اثر افت فشار خون با اولین دوز دارد؛ بنابراین اولین دوز باید عصر و پیش از خواب مصرف شود تا بیمار در اولین دوز بالا و پایین نرود.",
+   "we": "Prazosin is a direct vasodilator with a first-dose hypotension effect, so the first dose is taken in the evening before bed to avoid being up and around afterward.",
+   "ts": 381
+  },
+  {
+   "type": "dnd",
+   "qf": "کدامیک از موارد زیر در دسته «آموزش صحیح و ایمن برای بیماری که داروی فشار خون جدید شروع کرده» قرار می‌گیرد؟",
+   "qe": "Which of the following belong to the category of correct, safe teaching for a client starting a new blood pressure medication?",
+   "items": [
+    {
+     "fa": "آویزان کردن پاها در لبه تخت پیش از بلند شدن",
+     "en": "Dangle the legs at the side of the bed before standing up"
+    },
+    {
+     "fa": "به بیمار آموزش دادن که سرفه خشک جدید با مهارکننده ACE را به ارائه‌دهنده گزارش دهد",
+     "en": "Teach the client to report a new dry cough with an ACE inhibitor to the healthcare provider"
+    },
+    {
+     "fa": "آموزش گرفتن اولین دوز پرازوسین در عصر و ایستادن آهسته",
+     "en": "Teach taking the first dose of prazosin in the evening and standing up slowly"
+    },
+    {
+     "fa": "دو برابر کردن دوز در صورت جا انداختن یک روز دارو",
+     "en": "Double the dose if a day of medication is missed"
+    },
+    {
+     "fa": "قطع دارو به محض اینکه فشار خون احساس طبیعی کرد",
+     "en": "Stop the drug as soon as the blood pressure feels normal"
+    },
+    {
+     "fa": "پرهیز کامل از هرگونه فعالیت بدنی در ماه اول درمان",
+     "en": "Avoid all physical activity during the first month of therapy"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "آویزان کردن پاها اصل عمومی پرستاری برای پیشگیری از سرگیجه با داروهای کاهنده فشار است؛ گزارش سرفه خشک ناشی از مهارکننده ACE و گرفتن اولین دوز پرازوسین در عصر نیز آموزش‌های صحیح همان داروها هستند.",
+   "we": "Dangling the legs is a general nursing principle to prevent dizziness with BP-lowering drugs; reporting an ACE-inhibitor dry cough and taking the first prazosin dose in the evening are correct teaching for those drugs. Doubling missed doses, stopping when BP feels normal, and avoiding all exercise are clearly wrong.",
+   "ts": 621
+  }
+ ],
+ "video": "UKVRoWizoiQ",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

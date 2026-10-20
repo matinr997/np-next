@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بیماری فشار خون ۱۲۰ روی ۸۲ دارد. طبق دستورالعمل‌های AHA و ACC که در ویدیو ذکر شد، تفسیر صحیح کدام است؟",
+   "qe": "A patient has a blood pressure of 120/82. According to the AHA and ACC guidelines discussed in the video, what is the correct interpretation?",
+   "of": [
+    "پرفشاری خون مرحله ۱، زیرا فشار خون بر اساس بالاترین دسته (سیستولیک یا دیاستولیک) طبقه‌بندی می‌شود",
+    "فشار خون طبیعی، زیرا سیستولیک ۱۲۰ است",
+    "فشار خون بالارفته (elevated)، زیرا فقط سیستولیک مهم است",
+    "پرفشاری خون مرحله ۲، زیرا دیاستولیک بالای ۸۰ است"
+   ],
+   "oe": [
+    "Stage 1 hypertension, because blood pressure is classified by the higher category of either systolic or diastolic",
+    "Normal blood pressure, because the systolic is 120",
+    "Elevated blood pressure, because only the systolic matters",
+    "Stage 2 hypertension, because the diastolic is above 80"
+   ],
+   "c": 0,
+   "wf": "طبق ویدیو، فشار خون بر اساس بالاترین دسته سیستولیک یا دیاستولیک طبقه‌بندی می‌شود؛ سیستولیک ۱۲۰ در محدوده بالارفته و دیاستولیک ۸۲ در پرفشاری مرحله ۱ قرار دارد و در نتیجه کل فشار ۱۲۰/۸۲ مرحله ۱ محسوب می‌شود.",
+   "we": "The video states that blood pressure is classified by the higher category of systolic or diastolic; 120 is in the elevated range and 82 falls in stage 1 hypertension, so 120/82 is stage 1 hypertension.",
+   "ts": 96
+  },
+  {
+   "type": "mc",
+   "qf": "فشار خون بیمار ۱۵۰ روی ۸۰ اندازه‌گیری شده است (فشار نبض ۷۰). کدام وضعیت ممکن است با این فشار نبض پهن (بیش از ۶۰) مطابقت داشته باشد؟",
+   "qe": "A patient's blood pressure is 150/80 (pulse pressure 70). Which condition may correspond to this wide pulse pressure (greater than 60)?",
+   "of": [
+    "نارسایی آئورت (aortic regurgitation)",
+    "شوک",
+    "تامپوناد قلبی",
+    "نارسایی قلبی"
+   ],
+   "oe": [
+    "Aortic regurgitation",
+    "Shock",
+    "Cardiac tamponade",
+    "Heart failure"
+   ],
+   "c": 0,
+   "wf": "به گفته ویدیو، فشار نبض پهن (اغلب بیش از ۶۰) می‌تواند نشانه نارسایی آئورت، پرکاری تیروئید یا سفتی شریان‌ها باشد؛ در حالی که فشار نبض باریک (کمتر از ۳۰) با نارسایی قلبی، شوک و تامپوناد قلبی همراه است.",
+   "we": "The video explains that a wide pulse pressure, often greater than 60, may indicate aortic regurgitation, hyperthyroidism, or arterial stiffness, whereas a narrow pulse pressure (less than 30) is linked to heart failure, shock, or cardiac tamponade.",
+   "ts": 333
+  },
+  {
+   "type": "mc",
+   "qf": "چرا قبل از گرفتن فشار خون دستی باید فشار سیستولیک را لمس (پالپه) کرد؟",
+   "qe": "Why should the systolic pressure be palpated before taking a manual blood pressure?",
+   "of": [
+    "برای جلوگیری از از دست دادن شکاف سمعی و ثبت عدد سیستولیک کاذب پایین",
+    "برای تنظیم سرعت خالی شدن کاف روی ۲ میلی‌متر جیوه در ثانیه",
+    "برای تعیین دقیق فشار نبض بیمار",
+    "برای بررسی اینکه آیا کاف اندازه مناسبی دارد یا نه"
+   ],
+   "oe": [
+    "To prevent missing the auscultatory gap and documenting a falsely low systolic number",
+    "To set the cuff deflation rate at 2 mmHg per second",
+    "To accurately determine the patient's pulse pressure",
+    "To check whether the cuff is properly sized"
+   ],
+   "c": 0,
+   "wf": "ویدیو تأکید می‌کند که لمس سیستولیک به جلوگیری از از دست دادن شکاف سمعی (دوره‌ای که صداهای کوروتکوف ناپدید می‌شوند) کمک می‌کند وگرنه عدد سیستولیک به‌طور کاذب پایین ثبت می‌شود.",
+   "we": "The video states that palpating the systolic pressure helps prevent missing the auscultatory gap—a period when Korotkoff sounds disappear—which could lead to documenting a falsely low systolic number.",
+   "ts": 259
+  },
+  {
+   "type": "cloze",
+   "qf": "اگر کاف فشارخون خیلی {0} باشد، فشار خوانده‌شده بالاتر از حد واقعی است؛ همچنین عقربه در حین خالی شدن باید با سرعت حدود {1} میلی‌متر جیوه در ثانیه پایین بیاید.",
+   "qe": "If the blood pressure cuff is too {0}, the reading may be higher than it should be; also, during deflation the needle should fall at a speed of about {1} mmHg per second.",
+   "blanks": [
+    {
+     "of": [
+      "کوچک",
+      "بزرگ",
+      "پهن"
+     ],
+     "oe": [
+      "small",
+      "large",
+      "wide"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "۲ تا ۳",
+      "۱۰",
+      "۳۰"
+     ],
+     "oe": [
+      "2 to 3",
+      "10",
+      "30"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "به گفته ویدیو اگر کاف خیلی کوچک باشد فشار بالاتر و اگر خیلی بزرگ باشد پایین‌تر خوانده می‌شود؛ همچنین سرعت ایده‌آل خالی شدن کاف ۲ تا ۳ میلی‌متر جیوه در ثانیه است.",
+   "we": "The video explains that a cuff that is too small reads higher than it should (too large reads lower), and the ideal deflation rate is about 2 to 3 mmHg per second.",
+   "ts": 221
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از موارد زیر عواملی هستند که طبق ویدیو می‌توانند فشار خون را به‌طور موقت افزایش دهند؟",
+   "qe": "Which of the following are factors that, according to the video, can temporarily increase a patient's blood pressure?",
+   "items": [
+    {
+     "fa": "سندرم روپوش سفید",
+     "en": "White coat syndrome"
+    },
+    {
+     "fa": "پر بودن مثانه",
+     "en": "A full bladder"
+    },
+    {
+     "fa": "مصرف کافئین",
+     "en": "Caffeine consumption"
+    },
+    {
+     "fa": "گرد کردن اعداد فشار دستی به نزدیک‌ترین عدد زوج",
+     "en": "Rounding manual blood pressure readings to the nearest even number"
+    },
+    {
+     "fa": "لمس فشار سیستولیک قبل از اندازه‌گیری سمعی",
+     "en": "Palpating the systolic pressure before auscultation"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "ویدیو عواملی مانند سندرم روپوش سفید، استرس و اضطراب، بیماری، پر بودن مثانه، مصرف کافئین، سیگار کشیدن و ورزش را عوامل موقت افزایش فشار خون برمی‌شمرد؛ گرد کردن اعداد و لمس سیستولیک روش‌های ثبت و اندازه‌گیری هستند نه عامل افزایش فشار.",
+   "we": "The video lists white coat syndrome, stress, anxiety, illness, a full bladder, caffeine, smoking, and exercise as temporary blood pressure raisers; rounding readings and palpating the systolic are measurement techniques, not factors that raise blood pressure.",
+   "ts": 141
+  }
+ ],
+ "video": "AgT-xm8tx-A",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

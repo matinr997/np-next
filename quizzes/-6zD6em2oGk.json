@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "در وضعیت آناتومیک استاندارد، کدام توصیف درست است؟",
+   "qe": "In the standard anatomical position, which description is correct?",
+   "of": [
+    "سر رو به جلو است، بازوها در کنار بدن قرار دارند و کف دست‌ها رو به جلو هستند",
+    "کف دست‌ها رو به عقب (خلفی) هستند و بازوها رو به جلوی بدن هستند",
+    "فرد نشسته و کف دست‌ها رو به داخل ران‌هاست",
+    "پاها به هم چسبیده و سر رو به بالا گرفته شده است"
+   ],
+   "oe": [
+    "Head faces forward, arms are at the sides, and palms face forward",
+    "Palms face backward (posteriorly) and the arms are held in front of the body",
+    "The person is seated with palms resting against the thighs",
+    "The feet are together and the head is tilted upward"
+   ],
+   "c": 0,
+   "wf": "ویدیو وضعیت آناتومیک را حالت ایستاده با سر رو به جلو، بازوها در کنار بدن و کف دست‌ها رو به جلو تعریف می‌کند و تأکید دارد که همه اصطلاحات جهت‌گیری از همین منظر تفسیر می‌شوند.",
+   "we": "The video defines the anatomical position as standing with the head facing forward, arms at the sides, and palms facing forward, noting that all directional terms are interpreted from this perspective.",
+   "ts": 14
+  },
+  {
+   "type": "mc",
+   "qf": "کدام صفحه آناتومیک بدن را به بخش قدامی (جلو) و خلفی (پشت) تقسیم می‌کند؟",
+   "qe": "Which anatomical plane divides the body into an anterior (front) and a posterior (back) portion?",
+   "of": [
+    "صفحه ساژیتال (نیم‌بینی)",
+    "صفحه فرونتال (کورونال)",
+    "صفحه عرضی (ترانسفرس)",
+    "صفحه میانی (مدیان)"
+   ],
+   "oe": [
+    "Sagittal plane",
+    "Frontal (coronal) plane",
+    "Transverse plane",
+    "Median plane"
+   ],
+   "c": 1,
+   "wf": "در بخش صفحات بدن، صفحه فرونتال یا کورونال به‌صورت عمودی از بالا به پایین کشیده شده و بدن را به سمت قدامی و خلفی تقسیم می‌کند؛ صفحه ساژیتال بین راست و چپ و صفحه عرضی بین فوقانی و تحتانی تقسیم می‌کند.",
+   "we": "The video states that the frontal (coronal) plane runs vertically and divides the body into an anterior and a posterior side; the sagittal plane splits right from left and the transverse plane splits upper from lower.",
+   "ts": 1210
+  },
+  {
+   "type": "mc",
+   "qf": "حرکتی که در آن یک ساختار از خط میانی بدن دور می‌شود، چه نامیده می‌شود؟",
+   "qe": "A movement in which a structure moves away from the body's midline is called what?",
+   "of": [
+    "اداکشن (نزدیک‌سازی)",
+    "ابداکشن (دورسازی)",
+    "سوپینیشن چرخشی",
+    "هایپر اکستنشن"
+   ],
+   "oe": [
+    "Adduction",
+    "Abduction",
+    "Supination",
+    "Hyperextension"
+   ],
+   "c": 1,
+   "wf": "ویدیو ابدوکشن را حرکت یک ساختار دور شونده از یک نقطه مرجع خط میانی معرفی می‌کند (همان‌طور که در اخبار، ربودن یعنی دور کردن) و اداکشن را حرکت «افزوده شدن» دوباره به سمت خط میانی می‌داند.",
+   "we": "The video defines abduction as movement of a structure away from a midline reference point (linking it to the news term 'abduct'), while adduction is the structure being added back toward the midline.",
+   "ts": 1686
+  },
+  {
+   "type": "cloze",
+   "qf": "ربع‌های چهارگانه شکم با تقاطع یک صفحه عرضی {0} و یک صفحه میانی ایجاد می‌شوند؛ همچنین هنگام تعیین راست و چپ، مرجع باید {1} باشد نه معاینه‌گر.",
+   "qe": "The four abdominal quadrants are formed by the intersection of a {0} plane and a median plane; also, right and left must be identified from the perspective of the {1}, not the examiner.",
+   "blanks": [
+    {
+     "of": [
+      "ترانسامبیلیکال",
+      "ترانسفرس قدامی",
+      "پاراساژیتال"
+     ],
+     "oe": [
+      "transumbilical",
+      "anterior transverse",
+      "parasagittal"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "بیمار (خود فرد)",
+      "معاینه‌گر",
+      "تصویر آینه‌ای"
+     ],
+     "oe": [
+      "patient",
+      "examiner",
+      "mirror image"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "ربع‌های چهارگانه توسط تقاطع صفحه عرضی ترانسامبیلیکال (در سطح ناف) و یک صفحه میانی ساخته می‌شوند و ویدیو تأکید می‌کند که راست و چپ از دید خود بیمار تعیین می‌شود، نه از دید معاینه‌گر.",
+   "we": "The video explains that the four quadrants are created by an intersecting transumbilical (transverse) plane and a median plane, and stresses that right and left refer to the patient's own perspective.",
+   "ts": 3242
+  },
+  {
+   "type": "dnd",
+   "qf": "کدامیک از موارد زیر جزء ناحیه محوری (محور تنه) بدن محسوب می‌شوند؟",
+   "qe": "Which of these belong to the axial region of the body?",
+   "items": [
+    {
+     "fa": "سر",
+     "en": "Head"
+    },
+    {
+     "fa": "گردن",
+     "en": "Neck"
+    },
+    {
+     "fa": "تنه",
+     "en": "Trunk"
+    },
+    {
+     "fa": "اندام فوقانی",
+     "en": "Upper limb"
+    },
+    {
+     "fa": "اندام تحتانی",
+     "en": "Lower limb"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "به گفته ویدیو، ناحیه محوری شامل سر، گردن و تنه است (برای به‌خاطر سپسدن با کلمه axe یا تبر یاد می‌شود)، در حالی که ناحیه اندامی شامل اندام‌های فوقانی و تحتانی است.",
+   "we": "According to the video, the axial region covers the head, neck, and trunk (remembered via 'axe'), whereas the appendicular region includes the upper and lower limbs.",
+   "ts": 464
+  }
+ ],
+ "video": "-6zD6em2oGk",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "پرستاری در بخش اورژانس بیماری مبتلا به آنفلوانزا را ارزیابی می‌کند که ۳۰ ساعت از شروع علائم می‌گذرد. برای بهترین اثر درمانی، درمان ضدویروسی آنفلوانزا باید کی آغاز شود؟",
+   "qe": "A nurse is caring for a patient with influenza whose symptoms began 30 hours ago. For the best treatment effect, when should influenza antiviral therapy ideally be started?",
+   "of": [
+    "طی ۴۸ ساعت از شروع علائم",
+    "پس از گذشت ۵ روز از شروع علائم",
+    "فقط پس از مثبت شدن کشت خون",
+    "بلافاصله پس از تب قطعی"
+   ],
+   "oe": [
+    "Within 48 hours of symptom onset",
+    "After 5 days from symptom onset",
+    "Only after a positive blood culture",
+    "Immediately after fever resolves"
+   ],
+   "c": 0,
+   "wf": "پنجره ۴۸ ساعتی از شروع علائم برای مؤثر بودن ضدویروسی حیاتی است؛ چون ضدویروسی‌ها برخلاف آنتی‌بیوتیک‌ها مستقیماً عامل را نمی‌کشند و با جلوگیری از تکثیر ویروس کار می‌کنند و در اوایل بیماری که تعداد ویروس کمتر است بهتر عمل می‌کنند.",
+   "we": "There is an essential 48-hour window from symptom onset for antivirals to be effective. Because antivirals prevent viral replication rather than directly killing the bug, they work best when started early in the illness when there are fewer viruses around.",
+   "ts": 52
+  },
+  {
+   "type": "mc",
+   "qf": "پیش از شروع پاکس‌لوید (Paxlovid) برای کووید-۱۹، کدام ارزیابی بیمار برای تعیین دوز مناسب اهمیت ویژه دارد؟",
+   "qe": "Before starting Paxlovid for COVID-19, which patient assessment is particularly important for determining the appropriate dose?",
+   "of": [
+    "عملکرد کلیه (eGFR)",
+    "عملکرد کبدی (AST/ALT)",
+    "تعداد پلاکت‌ها",
+    "سطح ویتامین B12"
+   ],
+   "oe": [
+    "Renal function (eGFR)",
+    "Liver function (AST/ALT)",
+    "Platelet count",
+    "Vitamin B12 level"
+   ],
+   "c": 0,
+   "wf": "اگر eGFR بین ۳۰ تا ۶۰ باشد دوز تعدیل‌شده کلیوی داده می‌شود و اگر زیر ۳۰ باشد دارو توصیه نمی‌شود؛ بنابراین بررسی eGFR پیش از شروع دارو حیاتی است.",
+   "we": "If the eGFR is between 30 and 60 a renally adjusted dose is used, and if it is below 30 the medication is not recommended, so assessing eGFR before starting the drug is essential.",
+   "ts": 115
+  },
+  {
+   "type": "mc",
+   "qf": "کدام سلول‌های خونی اولین گروهی هستند که تحت تأثیر سرکوب مغز استخوان ناشی از شیمی‌درمانی قرار می‌گیرند؟",
+   "qe": "Which blood cells are the first group to be affected by chemotherapy-induced bone marrow suppression?",
+   "of": [
+    "نوتروفیل‌ها (گلبول‌های سفید)",
+    "پلاکت‌ها (ترومبوسیت‌ها)",
+    "گلبول‌های قرمز",
+    "منوسیت‌ها"
+   ],
+   "oe": [
+    "Neutrophils (white blood cells)",
+    "Platelets (thrombocytes)",
+    "Red blood cells",
+    "Monocytes"
+   ],
+   "c": 0,
+   "wf": "طبق ویدیو، اول نوتروفیل‌ها (لوکوپنی) کاهش می‌یابند و خطر عفونت بالا می‌رود، سپس پلاکت‌ها (ترومبوسیتوپنی و خونریزی) و در آخر گلبول‌های قرمز (کم‌خونی) آسیب می‌بینند.",
+   "we": "The video states that neutrophils (white blood cells) are affected first, causing leukopenia and poor infection fighting; platelets follow next (thrombocytopenia and bleeding risk), and red blood cells are hit last.",
+   "ts": 571
+  },
+  {
+   "type": "cloze",
+   "qf": "بیمار مبتلا به دیابت نوع ۲ که انسولین و درمان مبتنی بر اینکرتین دریافت می‌کند، قند خون ناشتاش ۵۲ mg/dL است. طبق آموزش ویدیو، هیپوگلیسمی کمتر از {0} و هیپوگلیسمی شدید کمتر از {1} طبقه‌بندی می‌شود.",
+   "qe": "A patient with type 2 diabetes receiving insulin and incretin-based therapy has a fasting blood glucose of 52 mg/dL. According to the video, hypoglycemia is classified as less than {0} and severe hypoglycemia as less than {1}.",
+   "blanks": [
+    {
+     "of": [
+      "۷۰ mg/dL",
+      "۱۰۰ mg/dL",
+      "۱۲۶ mg/dL"
+     ],
+     "oe": [
+      "70 mg/dL",
+      "100 mg/dL",
+      "126 mg/dL"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "۵۴ mg/dL",
+      "۷۰ mg/dL",
+      "۹۰ mg/dL"
+     ],
+     "oe": [
+      "54 mg/dL",
+      "70 mg/dL",
+      "90 mg/dL"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "بیمارانی که انسولین یا سولفونیل‌اوره مصرف می‌کنند بیشتر در معرض خطر هستند؛ هیپوگلیسمی کمتر از ۷۰ و هیپوگلیسمی شدید کمتر از ۵۴ تعریف می‌شود، بنابراین مقدار ۵۲ هیپوگلیسمی شدید محسوب می‌شود.",
+   "we": "Patients on insulin or sulfonylureas are especially at risk: hypoglycemia is anything less than 70 and severe hypoglycemia is less than 54, so a value of 52 is severe hypoglycemia.",
+   "ts": 306
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام یافته‌ها/شرایط زیر در بیمار، دریافت ملین محرک را منع می‌کند؟ (موارد درست را نگه دارید)",
+   "qe": "Which of the following findings/conditions contraindicate giving a stimulant laxative? (Keep the correct items)",
+   "items": [
+    {
+     "fa": "بیماری التهابی روده",
+     "en": "Inflammatory bowel disease"
+    },
+    {
+     "fa": "انسداد روده",
+     "en": "Intestinal obstruction"
+    },
+    {
+     "fa": "درد شکم با منشاء ناشناخته",
+     "en": "Abdominal pain of unknown origin"
+    },
+    {
+     "fa": "یبوست حاد نیازمند تسکین سریع",
+     "en": "Acute constipation needing rapid relief"
+    },
+    {
+     "fa": "آماده‌سازی روده پیش از عمل",
+     "en": "Bowel preparation before a procedure"
+    },
+    {
+     "fa": "یبوست کوتاه‌مدت پس از جراحی یا بی‌حرکتی",
+     "en": "Short-term use after surgery or immobility"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "ملین‌های محرک نباید در بیماری التهابی روده، انسداد روده (خطر سوراخ شدن روده) و درد شکم با منشاء ناشناخته استفاده شوند و در مدیریت طولانی‌مدت یبوست نیز نباید به کار روند؛ اما در یبوست حاد، آماده‌سازی روده و به‌صورت کوتاه‌مدت پس از جراحی/بی‌حرکتی مناسب‌اند.",
+   "we": "Stimulant laxatives should be avoided in inflammatory bowel disease, intestinal obstruction (risk of perforation), and abdominal pain of unknown origin, and must not be used for long-term constipation management; they are appropriate for acute constipation, bowel prep, and short-term post-surgery or immobility use.",
+   "ts": 418
+  }
+ ],
+ "video": "8l1LBMGa7LI",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

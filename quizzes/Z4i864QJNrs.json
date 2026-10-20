@@ -1,0 +1,148 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بر اساس مقایسه‌ی لگن زن و مرد، زاویه‌ی زیرشقه‌ای (subpubic angle) در لگن زنان به‌طور کلی چه ویژگی‌ای دارد؟",
+   "qe": "According to the male-versus-female pelvis comparison, what is generally true of the subpubic angle in the female pelvis?",
+   "of": [
+    "حدود ۶۰ تا ۷۰ درجه است و زاویه‌ای حاد محسوب می‌شود",
+    "حدود ۸۰ تا ۹۰ درجه است و زاویه‌ای بیش‌زاویه (obtuse) محسوب می‌شود",
+    "دقیقاً ۴۵ درجه است و زاویه‌ای قائم محسوب می‌شود",
+    "بین ۵۰ تا ۶۰ درجه است و از مردان باریک‌تر است"
+   ],
+   "oe": [
+    "It is about 60 to 70 degrees and is considered an acute angle",
+    "It is about 80 to 90 degrees and is considered an obtuse angle",
+    "It is exactly 45 degrees and is considered a right angle",
+    "It is between 50 and 60 degrees and is narrower than in males"
+   ],
+   "c": 1,
+   "wf": "در ویدیو اشاره شد که زاویه‌ی زیرشقه‌ای در زن‌ها عموماً حدود ۸۰ تا ۹۰ درجه (بیش‌زاویه) و در مردان حدود ۶۰ تا ۷۰ درجه (حاد) است و این ویژگی به زایمان کمک می‌کند.",
+   "we": "The video states that the female subpubic angle is generally around 80 to 90 degrees (obtuse) while the male angle is about 60 to 70 degrees (acute), which facilitates childbirth.",
+   "ts": 3713
+  },
+  {
+   "type": "mc",
+   "qf": "کدام گزاره درباره‌ی استخوان هومروس (بازو) صحیح است؟",
+   "qe": "Which statement about the humerus is correct?",
+   "of": [
+    "گردن جراحی (surgical neck) شایع‌ترین نقطه‌ی شکستگی هومروس است",
+    "شیار شعاعی (radial groove) عصب زیربغلی را در خود جای می‌دهد",
+    "تروکانتر کوچک در سمت کاندیل داخلی قرار دارد",
+    "گردن آناتومیک همان بخش باریک زیر تنه‌ی استخوان است"
+   ],
+   "oe": [
+    "The surgical neck is the most common fracture site of the humerus",
+    "The radial groove houses the axillary nerve",
+    "The lesser tubercle is located on the side of the medial condyle",
+    "The anatomical neck is the narrow region below the shaft"
+   ],
+   "c": 0,
+   "wf": "در ویدیو گفته شد گردن جراحی، یعنی محل اتصال سر استخوان به تنه‌ی باریک‌تر، یکی از شایع‌ترین نقاط شکستگی هومروس است، در حالی که شیار شعاعی عصب شعاعی را عبور می‌دهد.",
+   "we": "The video explains that the surgical neck—where the head meets the narrower shaft—is one of the most common fracture points of the humerus, and that the radial groove houses the radial nerve.",
+   "ts": 2201
+  },
+  {
+   "type": "mc",
+   "qf": "در هنگام انجام احیای قلبی ریوی (CPR) به کدام بخش استرنوم باید توجه ویژه داشت و محل فشردن سینه را تعیین می‌کند؟",
+   "qe": "During CPR, which part of the sternum requires special attention because it serves as a landmark for chest compressions?",
+   "of": [
+    "زایده‌ی گوه‌ای‌شکل (xiphoid process)",
+    "شکاف گردنی (jugular notch)",
+    "زاویه‌ی استرنوم (sernal angle)",
+    "تنه‌ی استرنوم (body/gladiolus)"
+   ],
+   "oe": [
+    "The xiphoid process",
+    "The jugular notch",
+    "The sternal angle",
+    "The body of the sternum (gladiolus)"
+   ],
+   "c": 0,
+   "wf": "ویدیو بیان کرد زایده‌ی گوه‌ای‌شکل در انتهای تحتانی جناق یک نشانگر مهم CPR است؛ دو انگشت روی آن قرار می‌گیرد و کف دست در کنار آن فشار می‌آورد.",
+   "we": "The video notes that the xiphoid process at the inferior end of the sternum is an important CPR landmark: two fingers are placed over it and the heel of the hand is positioned beside those fingers.",
+   "ts": 1617
+  },
+  {
+   "type": "cloze",
+   "qf": "ستون فقرات در سنین جوانی از {0} استخوان جدا تشکیل شده است و ناحیه‌ی سینه‌ای (توراکیک) شامل {1} مهره است که با تعداد جفت دنده‌ها برابری می‌کند.",
+   "qe": "In youth, the vertebral column consists of {0} separate bones, and the thoracic region includes {1} vertebrae, matching the number of pairs of ribs.",
+   "blanks": [
+    {
+     "of": [
+      "۲۶",
+      "۳۳",
+      "۲۰۶"
+     ],
+     "oe": [
+      "26",
+      "33",
+      "206"
+     ],
+     "c": 1
+    },
+    {
+     "of": [
+      "۵",
+      "۷",
+      "۱۲"
+     ],
+     "oe": [
+      "5",
+      "7",
+      "12"
+     ],
+     "c": 2
+    }
+   ],
+   "wf": "ویدیو گفت ستون فقرات در جوانی ۳۳ استخوان جدا دارد که حدود ۹ استخوان انتهایی آن در بزرگسالی به هم جوش می‌خورند؛ همچنین ناحیه‌ی توراسیک با ۱۲ مهره (T1 تا T12) با ۱۲ جفت دنده متناظر است.",
+   "we": "The video states the vertebral column has 33 separate bones in youth, about 9 of the lower ones fusing in adulthood; the thoracic region has 12 vertebrae (T1–T12) matching the 12 rib pairs.",
+   "ts": 1405
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از این استخوان‌ها جزء هشت استخوان جمجمه‌ای (cranial bones) هستند؟ موارد درست را نگه دارید.",
+   "qe": "Which of these bones belong to the eight cranial bones? Keep the correct items.",
+   "items": [
+    {
+     "fa": "پیشانی (Frontal)",
+     "en": "Frontal"
+    },
+    {
+     "fa": "قوشکی / پروانه‌ای (Sphenoid)",
+     "en": "Sphenoid"
+    },
+    {
+     "fa": "گیجگاهی (Temporal)",
+     "en": "Temporal"
+    },
+    {
+     "fa": "فک بالا (Maxilla)",
+     "en": "Maxilla"
+    },
+    {
+     "fa": "گونه‌ای (Zygomatic)",
+     "en": "Zygomatic"
+    },
+    {
+     "fa": "فک پایین (Mandible)",
+     "en": "Mandible"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "هشت استخوان جمجمه‌ای شامل دو استخوان پیشانی، دو گیجگاهی، دو آهیانه‌ای، قوشکی و غربالی است؛ فک بالا، گونه و فک پایین استخوان‌های صورت هستند.",
+   "we": "The eight cranial bones are the paired frontal, temporal, and parietal bones plus the single sphenoid and ethmoid; the maxilla, zygomatic, and mandible are facial bones.",
+   "ts": 55
+  }
+ ],
+ "video": "Z4i864QJNrs",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5,
+  "fixed": "cloze stem corrected: 33 bones = youth, not adult"
+ }
+}

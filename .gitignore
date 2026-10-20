@@ -8,3 +8,6 @@ api/config.php
 .data/
 api/uploads/
 .work/
+
+# scratch output from gen_quiz.py
+scripts/.gen_quiz_bad_output.json

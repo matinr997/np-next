@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "پرستار محتویات آسپیره‌شده از لوله G بیمار را روی نوار pH قرار می‌دهد و عدد ۳ به دست می‌آید. تفسیر صحیح کدام است؟",
+   "qe": "A nurse places aspirate from a patient's G-tube on a pH strip and gets a value of 3. What is the correct interpretation?",
+   "of": [
+    "محلول در معده است زیرا pH بین ۱ تا ۵ در معده یافت می‌شود.",
+    "محلول در روده است زیرا pH بین ۶ تا ۷ در روده یافت می‌شود.",
+    "لوله جابه‌جا شده و نباید از آن استفاده شود.",
+    "عدد نشان‌دهنده عفونت محل استوما است."
+   ],
+   "oe": [
+    "The solution is in the stomach, because a pH of 1 to 5 is found in the stomach.",
+    "The solution is in the intestine, because a pH of 6 to 7 is found in the intestine.",
+    "The tube has displaced and must not be used.",
+    "The value indicates infection at the stoma site."
+   ],
+   "c": 0,
+   "wf": "طبق ویدیو، pH بین ۱ تا ۵ نشان می‌دهد لوله در معده است و pH بین ۶ تا ۷ نشان‌دهنده روده است؛ بنابراین عدد ۳ تأییدکننده جای صحیح لوله در معده است.",
+   "we": "The video states that a pH of 1 to 5 indicates the tube is in the stomach, while a pH of 6 to 7 indicates the intestine; therefore a value of 3 confirms correct gastric placement.",
+   "ts": 1031
+  },
+  {
+   "type": "mc",
+   "qf": "در مورد چرخش روزانه لوله‌های تغذیه جراحی، کدام گزینه صحیح است؟",
+   "qe": "Regarding daily rotation of surgically placed feeding tubes, which statement is correct?",
+   "of": [
+    "چرخش فقط برای لوله G و پس از بهبودی محل انجام می‌شود، نه لوله J.",
+    "چرخش باید برای لوله J انجام شود چون خطر جابه‌جایی آن را کاهش می‌دهد.",
+    "چرخش برای هر دو لوله G و J به یک اندازه ضروری است.",
+    "چرخش از طریق پورت G لوله GJ و بدون توجه به بهبودی محل انجام می‌شود."
+   ],
+   "oe": [
+    "Rotation is performed only for the G-tube and only after the site has healed, not for the J-tube.",
+    "Rotation should be performed for the J-tube because it reduces the risk of dislodgement.",
+    "Rotation is equally essential for both the G-tube and the J-tube.",
+    "Rotation is done through the G port of a GJ-tube regardless of site healing."
+   ],
+   "c": 0,
+   "wf": "ویدیو صراحتاً بیان می‌کند که منظور از چرخش فقط لوله G است نه لوله J، چون چرخاندن لوله J خطر جابه‌جایی آن را افزایش می‌دهد و چرخش معمولاً پس از بهبودی محل انجام می‌شود.",
+   "we": "The video explicitly states that rotation refers to the G-tube, not the J-tube, because rotating a J-tube increases the risk of dislodgement, and rotation is typically done once the site has healed.",
+   "ts": 753
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار در حال ارزیابی پورت بالون لوله G بیمار است. کدام اقدام صحیح است؟",
+   "qe": "A nurse is assessing the balloon port of a patient's G-tube. Which action is correct?",
+   "of": [
+    "پورت بالون فقط با آب استریل یا آب مقطر پر می‌شود؛ هرگز هوا یا سرم نمکی استفاده نمی‌شود.",
+    "بالون با هوا پر می‌شود چون حجم آن را دقیق‌تر می‌توان تنظیم کرد.",
+    "بالون با سرم نمکی پر می‌شود چون در دسترس‌ترین محلول است.",
+    "تغذیه و دارو نیز از همین پورت بالون داده می‌شود تا پورت تغذیه آزاد بماند."
+   ],
+   "oe": [
+    "The balloon port is filled only with sterile water or distilled water; air or normal saline is never used.",
+    "The balloon is filled with air because its volume can be regulated more accurately.",
+    "The balloon is filled with normal saline because it is the most accessible solution.",
+    "Feedings and medications are also given through the balloon port to keep the feeding port free."
+   ],
+   "c": 0,
+   "wf": "ویدیو تأکید می‌کند که بالون با آب استریل یا آب مقطر پر می‌شود و هرگز نباید از هوا یا سرم نمکی استفاده شود و این پورت فقط برای آب استریل است.",
+   "we": "The video emphasizes that the balloon is filled with sterile or distilled water and that air or normal saline must never be used, and that this port is for sterile water only.",
+   "ts": 859
+  },
+  {
+   "type": "cloze",
+   "qf": "برای پیشگیری از آسپیراسیون، سر تخت بیمار در حین تغذیه باید حداقل {0} درجه بالا باشد و پس از قطع تغذیه متناوب لوله G، بیمار باید حداقل {1} دقیقه در وضعیت بالا نگه داشته شود.",
+   "qe": "To prevent aspiration, the head of the bed must be elevated at least {0} degrees during feedings, and after intermittent G-tube feedings the patient must remain upright for at least {1} minutes.",
+   "blanks": [
+    {
+     "of": [
+      "۱۵ تا ۲۰",
+      "۳۰ تا ۴۵",
+      "۶۰ تا ۹۰"
+     ],
+     "oe": [
+      "15 to 20",
+      "30 to 45",
+      "60 to 90"
+     ],
+     "c": 1
+    },
+    {
+     "of": [
+      "۱۵",
+      "۶۰",
+      "۱۲۰"
+     ],
+     "oe": [
+      "15",
+      "60",
+      "120"
+     ],
+     "c": 1
+    }
+   ],
+   "wf": "ویدیو بیان می‌کند سر تخت باید حین تغذیه بین ۳۰ تا ۴۵ درجه باشد و پس از تغذیه متناوب یا بولوس لوله G، بیمار حداقل ۶۰ دقیقه بالا نگه داشته شود.",
+   "we": "The video states the head of the bed should be 30 to 45 degrees during feedings and that after intermittent or bolus G-tube feedings the patient should stay upright for at least 60 minutes.",
+   "ts": 926
+  },
+  {
+   "type": "dnd",
+   "qf": "کدامیک از اقدامات زیر برای رفع گرفتگی لوله تغذیه مناسب است؟ (موارد درست را نگه دارید)",
+   "qe": "Which of the following are appropriate actions for relieving a clogged feeding tube? (keep the correct items)",
+   "items": [
+    {
+     "fa": "استفاده از آب گرم با حرکت ملایم رفت‌وبرگشت با سرنگ ۶۰ میلی‌لیتری",
+     "en": "Using warm water with a gentle push-pull motion of a 60 mL syringe"
+    },
+    {
+     "fa": "اطلاع‌رسانی به پزشک برای تجویز آنزیم‌هایی که محل انسداد را تجزیه کنند",
+     "en": "Notifying the provider so ordered enzymes can be instilled to break down the clogged area"
+    },
+    {
+     "fa": "خودداری از وارد کردن هرگونه جسم تیز داخل لوله",
+     "en": "Avoiding inserting any sharp object into the tubing"
+    },
+    {
+     "fa": "فشار مداوم و محکم روی سرنگ تا انسداد رد شود",
+     "en": "Applying continuous, forceful pressure on the syringe until the blockage clears"
+    },
+    {
+     "fa": "استفاده از نوشابه مانند کوکاکولا یا نرم‌کننده گوشت برای باز کردن لوله",
+     "en": "Using soda such as Coca-Cola or meat tenderizer to clear the tube"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    2
+   ],
+   "wf": "ویدیو توصیه می‌کند هنگام مقاومت از آب گرم و حرکت ملایم رفت‌وبرگشت با سرنگ ۶۰ میلی‌لیتری استفاده شود، در صورت عدم موفقیت پزشک را مطلع کرد و آنزیم‌های تجویزی بهترین‌اند؛ ضمناً هرگز جسم تیز استفاده نشود و نوشابه یا نرم‌کننده گوشت توصیه نمی‌شود.",
+   "we": "The video advises a gentle push-pull with warm water using a 60 mL syringe, notifying the provider for ordered enzymes if that fails, and never using sharp objects, while soda and meat tenderizer are no longer recommended.",
+   "ts": 1245
+  }
+ ],
+ "video": "3eKThL40ORQ",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

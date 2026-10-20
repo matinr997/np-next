@@ -1,0 +1,143 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "کدام لوله آزمایش خون‌گیری حاوی افزودنی EDTA است؟",
+   "qe": "Which blood collection tube contains the additive EDTA?",
+   "of": [
+    "لوله بنفش (لاوندر)",
+    "لوله آبی حاوی سدیم سیترات",
+    "لوله خاکستری حاوی فلوراید سدیم",
+    "لوله سفید بدون افزودنی"
+   ],
+   "oe": [
+    "Purple (lavender) tube",
+    "Blue tube containing sodium citrate",
+    "Gray tube containing sodium fluoride",
+    "White tube with no additive"
+   ],
+   "c": 0,
+   "wf": "مدرس در ویدیو تصریح می‌کند که لوله بنفش که به آن لاوندر هم می‌گویند، حاوی EDTA است؛ سدیم سیترات در لوله آبی و بدون افزودنی در لوله سفید قرار دارد.",
+   "we": "The instructor states that the purple tube, also called lavender, contains EDTA; sodium citrate is in the blue tube and the white tube has no additive.",
+   "ts": 2850
+  },
+  {
+   "type": "mc",
+   "qf": "نکته صحیح درباره استفاده از تورنیکت هنگام خون‌گیری وریدی چیست؟",
+   "qe": "What is the correct practice regarding tourniquet use during venipuncture?",
+   "of": [
+    "باید حداکثر ۱ دقیقه روی اندام بماند",
+    "تا پایان نمونه‌گیری و بستن همه لوله‌ها روی بازو بماند",
+    "هرچه سفت‌تر بسته شود، دقت نمونه بیشتر است",
+    "برای پر شدن بهتر ورید باید بیش از ۵ دقیقه بماند"
+   ],
+   "oe": [
+    "It should remain on the limb for no more than 1 minute",
+    "It should stay on until all tubes are filled and the draw is complete",
+    "The tighter it is applied, the more accurate the sample",
+    "It should stay on more than 5 minutes to fill the vein better"
+   ],
+   "c": 0,
+   "wf": "در بخش خطاهای خون‌گیری آمده است که تورنیکت بیش از ۱ دقیقه روی بازو بماند می‌تواند نتایج آزمایش را تغییر دهد و در صورت باقی ماندن باید آن را برداشت و ۲ دقیقه صبر کرد.",
+   "we": "The video's common mistakes section states that leaving the tourniquet on longer than one minute can alter lab results, and it should be removed with a two-minute wait if overdone.",
+   "ts": 3442
+  },
+  {
+   "type": "mc",
+   "qf": "هنگام سوندگذاری فولی در بیمار زن، پرستار پس از دیدن بازگشت ادرار در لوله کاتتر چه اقدامی انجام می‌دهد؟",
+   "qe": "During Foley catheterization of a female patient, after urine return is seen in the tubing, what does the nurse do?",
+   "of": [
+    "حدود ۲ اینچ دیگر کاتتر را پیش می‌برد و سپس بادکنک را باد می‌کند",
+    "بلافاصله بادکنک را باد می‌کند و کاتتر را رها می‌کند",
+    "کاتتر را تا چند سانتی‌متر عقب می‌کشد و سپس باد می‌کند",
+    "کاتتر را رها کرده و بادکنک را هرگز باد نمی‌کند"
+   ],
+   "oe": [
+    "Advances the catheter about 2 more inches and then inflates the balloon",
+    "Immediately inflates the balloon and releases the catheter",
+    "Withdraws the catheter several centimeters before inflating",
+    "Releases the catheter and never inflates the balloon"
+   ],
+   "c": 0,
+   "wf": "ویدیو نشان می‌دهد که پس از مشاهده بازگشت ادرار در زن، ۲ اینچ دیگر کاتتر پیش برده می‌شود و سپس بادکنک با ۱۰ میلی‌لیتر آب باد می‌کند و با کشیدن ملایم مقاومت بررسی می‌شود.",
+   "we": "The video shows that after urine return in a female, the catheter is advanced another 2 inches, then the balloon is inflated with 10 mL of water and gentle tugging confirms placement.",
+   "ts": 6918
+  },
+  {
+   "type": "cloze",
+   "qf": "طبق ویدیو، محدوده طبیعی ضربان قلب در بزرگسال {0} و محدوده طبیعی تعداد تنفس در بزرگسال {1} است.",
+   "qe": "According to the video, the normal adult heart rate is {0} and the normal adult respiratory rate is {1}.",
+   "blanks": [
+    {
+     "of": [
+      "۶۰ تا ۱۰۰ ضربه در دقیقه",
+      "۱۲ تا ۲۰ ضربه در دقیقه",
+      "۱۰۰ تا ۱۲۰ ضربه در دقیقه"
+     ],
+     "oe": [
+      "60 to 100 beats per minute",
+      "12 to 20 beats per minute",
+      "100 to 120 beats per minute"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "۸ تا ۱۶ تنفس در دقیقه",
+      "۱۲ تا ۲۰ تنفس در دقیقه",
+      "۲۰ تا ۳۰ تنفس در دقیقه"
+     ],
+     "oe": [
+      "8 to 16 breaths per minute",
+      "12 to 20 breaths per minute",
+      "20 to 30 breaths per minute"
+     ],
+     "c": 1
+    }
+   ],
+   "wf": "مدرس پس از شمارش نبض اعلام می‌کند نبض طبیعی بزرگسال ۶۰ تا ۱۰۰ در دقیقه است و بلافاصله بعد از آن می‌گوید نرمال تنفس بزرگسال ۱۲ تا ۲۰ در دقیقه است.",
+   "we": "After counting the pulse, the instructor states a normal adult heart rate is 60 to 100 beats per minute and then states a normal adult breathing rate is 12 to 20 breaths per minute.",
+   "ts": 9772
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌ها از تکنیک صحیح بهداشت دست با آب و صابون است؟ (موارد درست را نگه دارید)",
+   "qe": "Which of these are part of correct handwashing technique with soap and water? (keep the correct items)",
+   "items": [
+    {
+     "fa": "استفاده از حدود یک قاشق چایخوری (حدود ۵ میلی‌لیتر) صابون",
+     "en": "Using about one teaspoon (about 5 milliliters) of soap"
+    },
+    {
+     "fa": "استفاده از آب بسیار داغ که باعث خشکی و ترک خوردگی پوست می‌شود",
+     "en": "Using very hot water that dries and cracks the skin"
+    },
+    {
+     "fa": "مالش کامل نواحی بین انگشتان و زیر ناخن‌ها",
+     "en": "Thoroughly rubbing between the fingers and under the nails"
+    },
+    {
+     "fa": "پوشیدن انگشتر و دستبند در حین شستن دست‌ها",
+     "en": "Wearing rings and bracelets while washing hands"
+    },
+    {
+     "fa": "انجام شستن دست‌ها فقط با آب بدون استفاده از صابون",
+     "en": "Washing hands with water only, without soap"
+    }
+   ],
+   "keep": [
+    0,
+    2
+   ],
+   "wf": "ویدیو تأکید می‌کند حدود ۵ میلی‌لیتر صابون استفاده شود، همه نواحی از جمله شیارهای کوچک و زیر ناخن‌ها پوشش یابند و آب ولرم (نه خیلی داغ) به کار رود تا پوست ترک نخورد.",
+   "we": "The video specifies using about 5 mL of soap, covering all areas including crevices and under the nails, and using warm—not too hot—water so the skin does not crack.",
+   "ts": 187
+  }
+ ],
+ "video": "j75cjaVPZJw",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5,
+  "fixed": "cloze ts re-pointed to the transcript cue that states both ranges"
+ }
+}

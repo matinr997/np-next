@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "بیماری پس از ترومای سر با نمره کلی GCS برابر ۷ معاینه شده است. کدام اقدام بالینی مبتنی مستقیم بر همین نمره ضروری است؟",
+   "qe": "A patient is assessed after head trauma with a total GCS of 7. Which clinical action is directly indicated by this score?",
+   "of": [
+    "حفظ راه هوایی و آمادگی برای انتوباسیون چون نمره کمتر از ۸ است",
+    "بررسی جداگانه مردمک‌ها به‌عنوان تنها اقدام لازم در این نمره",
+    "استفاده از NIHSS زیرا نمره پایین GCS نشانه سکته مغزی است",
+    "افزایش محرک فیزیکی تا زمانی که نمره به ۱۵ برسد"
+   ],
+   "oe": [
+    "Secure the airway and prepare for intubation because the score is below 8",
+    "Check pupils separately as the only necessary action at this score",
+    "Use the NIHSS because a low GCS score indicates stroke",
+    "Keep escalating physical stimulation until the score reaches 15"
+   ],
+   "c": 0,
+   "wf": "نمره کمتر از ۸ (در اینجا ۷) یعنی بیمار احتمالاً نمی‌تواند راه هوایی‌اش را محافظت کند و رفلکس‌های سرفه و گاگ از دست رفته‌اند؛ قاعده «کمتر از ۸، انتوباسیون» اینجاست.",
+   "we": "A score below 8 (here 7) means the client likely cannot protect the airway and has lost gag and cough reflexes, which is why the rhyme 'less than eight, intubate' applies.",
+   "ts": 561
+  },
+  {
+   "type": "mc",
+   "qf": "بیماری در معاینه وضعیت دکورتیکیت (خم‌شدن غیرطبیعی، دست‌ها روی سینه) با نمره حرکتی ۳ نشان می‌دهد. اگر وضعیت او به دسربریت (باز شدن غیرطبیعی اندام‌ها) تغییر کند، کدام تفسیر درست است؟",
+   "qe": "A patient shows decorticate posturing (abnormal flexion, hands held to chest) with a motor score of 3. If the posture changes to decerebrate (abnormal extension), which interpretation is correct?",
+   "of": [
+    "نمره حرکتی به ۲ کاهش می‌یابد و آسیب به ساقه مغز را نشان می‌دهد",
+    "نمره حرکتی به ۵ افزایش می‌یابد چون واکنش سریع‌تری دارد",
+    "نشان‌دهنده بهبود عملکرد نیم‌کره‌های قشری مغز است",
+    "فقط در بیماران دارای راه هوایی مصنوعی رخ می‌دهد و اهمیتی ندارد"
+   ],
+   "oe": [
+    "The motor score drops to 2 and indicates brainstem damage",
+    "The motor score rises to 5 because the response is faster",
+    "It indicates improving function of the cerebral hemispheres",
+    "It only occurs in patients with an artificial airway and has no significance"
+   ],
+   "c": 0,
+   "wf": "دکورتیکیت نمره ۳ و ناشی از آسیب ساختارهای بالاتر مغز است، در حالی که دسربریت نمره ۲ دارد و نشانه آسیب ساقه مغز و پیشرفت عمیق‌تر نورولوژیک است.",
+   "we": "Decorticate scores 3 and reflects damage to higher brain structures, whereas decerebrate scores 2 and indicates brainstem damage, a deeper level of neurological failure.",
+   "ts": 800
+  },
+  {
+   "type": "mc",
+   "qf": "بیماری با لوله تنفسی در راه هوایی و فلج ناشی از دارو در بخش مراقبت ویژه است. پرستار برای بخش پاسخ کلامی GCS چه باید ثبت کند؟",
+   "qe": "A patient has an endotracheal tube and drug-induced paralysis in the ICU. What should the nurse document for the verbal component of the GCS?",
+   "of": [
+    "NT (غیرقابل ارزیابی) به‌جای نمره ۱",
+    "نمره ۱ چون بیمار هیچ کلمه‌ای بیان نکرده است",
+    "نمره ۵ چون بیمار از نظر هوشیاری کامل است",
+    "نمره ۳ چون پاسخ کلامی نامناسب دارد"
+   ],
+   "oe": [
+    "NT (not testable) instead of a score of 1",
+    "A score of 1 because the patient did not say any word",
+    "A score of 5 because the patient is fully alert",
+    "A score of 3 because the patient gives inappropriate words"
+   ],
+   "c": 0,
+   "wf": "NT برای موانع دارویی یا فیزیکی مانند فلج، آرام‌بخشی شدید و انتوباسیون به کار می‌رود؛ نمره ۱ یعنی شکست کامل مغز در پاسخ‌دهی، نه مانع مصنوعی.",
+   "we": "NT is used when a pharmacological or physical barrier such as paralysis, heavy sedation, or intubation prevents testing; a 1 implies total neurological failure, not an artificial barrier.",
+   "ts": 656
+  },
+  {
+   "type": "cloze",
+   "qf": "در مولفه باز شدن چشم، بیماری که چشم‌هایش را {0} باز می‌کند نمره ۴ می‌گیرد؛ و در مولفه پاسخ کلامی، تولید صداهای غیرقابل‌فهم مانند ناله و زمزمه نمره {1} را به همراه دارد.",
+   "qe": "In the eye-opening component, a patient who opens their eyes {0} receives 4 points; in the verbal component, making incomprehensible sounds such as moaning or groaning earns {1} points.",
+   "blanks": [
+    {
+     "of": [
+      "خودبه‌خودی",
+      "به فرمان کلامی",
+      "به فشار فیزیکی"
+     ],
+     "oe": [
+      "spontaneously",
+      "to a verbal command",
+      "to physical pressure"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "۱",
+      "۲",
+      "۳"
+     ],
+     "oe": [
+      "1",
+      "2",
+      "3"
+     ],
+     "c": 1
+    }
+   ],
+   "wf": "نمره ۴ چشم باز شدن خودبه‌خودی هنگام ورود به اتاق است؛ صداهای غیرقابل‌فهم (ناله، غر زدن، نالیدن) در پاسخ کلامی نمره ۲ می‌گیرد، چون مغز دیگر واکنش را به زبان قابل‌شناسایی سازمان‌دهی نمی‌کند.",
+   "we": "Eye opening scores 4 when the patient opens their eyes spontaneously, and incomprehensible sounds like moaning, groaning, or grunting score 2 because the reaction can no longer be organized into recognizable language.",
+   "ts": 237
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام یک از موارد زیر به مولفه پاسخ کلامی GCS و به‌ویژه نمره‌های ۳ و پایین‌تر (زبان معیوب یا نبود پاسخ) تعلق دارد؟",
+   "qe": "Which of the following belong to the verbal component of the GCS, specifically scores of 3 and below (impaired language or no response)?",
+   "items": [
+    {
+     "fa": "کلمات نامناسب (مثلاً پاسخ «آسمان آبی» به سؤال حال بیمار)",
+     "en": "Inappropriate words (e.g., answering 'blue sky' to how the patient feels)"
+    },
+    {
+     "fa": "هوشیاری کامل و پاسخ سازگار با مکان، زمان و هویت",
+     "en": "Fully oriented with responses consistent to place, time, and identity"
+    },
+    {
+     "fa": "صداهای غیرقابل‌فهم مانند ناله و نالیدن",
+     "en": "Incomprehensible sounds such as moaning and groaning"
+    },
+    {
+     "fa": "سردرگمی: پاسخ‌ها در کل قابل‌فهم اما گیج‌کننده",
+     "en": "Confusion: responses are understandable overall but disorganized"
+    },
+    {
+     "fa": "عدم هیچ‌گونه پاسخ کلامی",
+     "en": "No verbal response at all"
+    },
+    {
+     "fa": "اجرای صحیح فرمان‌های کلامی پرستار",
+     "en": "Correctly carrying out the nurse's verbal commands"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    4
+   ],
+   "wf": "کلمات نامناسب نمره ۳، صداهای غیرقابل‌فهم نمره ۲ و عدم پاسخ نمره ۱ را در مولفه کلامی می‌دهند؛ هوشیاری کامل (۵)، سردرگمی (۴) و اطاعت از فرمان‌ها (بخش حرکتی، نمره ۶) جزء این بازه نیستند.",
+   "we": "Inappropriate words score 3, incomprehensible sounds score 2, and no response scores 1 in the verbal scale; being oriented (5), confused (4), and obeying commands (motor, 6) fall outside this range.",
+   "ts": 283
+  }
+ ],
+ "video": "V3ad8hoQVf8",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

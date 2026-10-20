@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "پرستار از بیماری مراقبت می‌کند که ۲۴ ساعت پس از آرتروپلاستی کامل زانو بوده است. کدام مداخله برای پیشگیری از شایع‌ترین عوارض بی‌حرکتی اولویت دارد؟",
+   "qe": "A nurse is caring for a client 24 hours after a total knee arthroplasty. Which intervention is the priority to prevent the most common complications of immobility?",
+   "of": [
+    "کمک به بیمار برای استفاده از کمد کنار تخت به جای روتختی",
+    "تشویق به استفاده از اسپیرومتر تشویقی ۱۰ بار در ساعت در ساعات بیداری",
+    "اعمال دستگاه فشرده‌سازی متوالی (SCD) هر زمان بیمار در بستر است",
+    "انجام تمرینات غیرفعال دامنه حرکتی روی زانوی آسیب‌دیده"
+   ],
+   "oe": [
+    "Assist the client to use a bedside commode instead of a bedpan",
+    "Encourage use of an incentive spirometer 10 times every hour while awake",
+    "Apply sequential compression devices whenever the client is in bed",
+    "Perform passive range of motion exercises on the affected knee"
+   ],
+   "c": 2,
+   "wf": "چون بیمار به تازگی جراحی ارتوپدی انجام داده، ترومبوز ورید عمقی (DVT) یکی از شایع‌ترین عوارض است و اعمال دستگاه فشرده‌سازی متوالی اولویت دارد؛ بقیه گزینه‌ها مهم‌اند اما این گزینه اولویت اصلی است.",
+   "we": "Because the client just had orthopedic surgery, deep vein thrombosis is one of the most common complications, so sequential compression devices are the priority; the other options are important but not the priority here.",
+   "ts": 114
+  },
+  {
+   "type": "mc",
+   "qf": "بیمار بزرگسال مسن مبتلا به دمانس مرحله پایانی، کاهش اشتها دارد و از خوردن امتناع می‌کند. پرستار ابتدا باید کدام اقدام را انجام دهد؟",
+   "qe": "An older adult client with end-stage dementia has a decreased appetite and refuses to eat. Which action should the nurse take first?",
+   "of": [
+    "درخواست نسخه برای لوله تغذیه بینی-معده‌ای",
+    "ارائه غذاهای مورد علاقه بیمار در وعده‌های کوچک و مکرر",
+    "انجام ارزیابی دهانی برای بررسی زخم یا دندان مصنوعی نامناسب",
+    "مستندسازی امتناع و اطلاع‌رسانی به ارائه‌دهنده خدمات بهداشتی"
+   ],
+   "oe": [
+    "Request a prescription for a nasogastric feeding tube",
+    "Offer the client's favorite foods in small, frequent portions",
+    "Perform an oral assessment to check for sores or ill-fitting dentures",
+    "Document the refusal and notify the health care provider"
+   ],
+   "c": 2,
+   "wf": "کلمه «اول» در سؤال یعنی ابتدا ارزیابی کنیم؛ چون اطلاعاتی درباره علت امتناع نداریم، بررسی دهان برای یافتن علت قابل درمان ضروری است.",
+   "we": "The word first signals assessment; since the cause of the refusal is unknown, checking the mouth for treatable problems comes before any intervention.",
+   "ts": 194
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار در حال اجرای برنامه آموزش مثانه برای بیمار مبتلا به بی‌اختیاری ادراری فوری (urge) است. کدام دستورالعمل باید در برنامه آموزش گنجانده شود؟",
+   "qe": "A nurse is implementing a bladder training program for a client with urge incontinence. Which instruction should the nurse include in the teaching plan?",
+   "of": [
+    "مصرف کافئین خود را برای تحریک عضلات مثانه افزایش دهید",
+    "هر ۲ ساعت در ساعات بیداری حتی در صورت نداشتن احساس نیاز، ادرار کنید",
+    "مصرف کل مایعات را به کمتر از ۱۰۰۰ میلی‌لیتر در روز محدود کنید",
+    "پیش از رفتن به دستشویی صبر کنید تا احساس نیاز به ادرار کردن پیدا کنید"
+   ],
+   "oe": [
+    "Increase your caffeine intake to stimulate the bladder muscles",
+    "Urinate every 2 hours while awake even if you do not feel the urge",
+    "Restrict your total fluid intake to less than 1,000 mL per day",
+    "Wait until you feel the urge to urinate before going to the bathroom"
+   ],
+   "c": 1,
+   "wf": "تخلیه منظم مثانه هر ۲ ساعت باعث می‌شود مثانه خالی بماند، بنابراین حتی در صورت اسپاسم، بی‌اختیاری رخ نمی‌دهد؛ کافئین اسپاسم را بدتر و محدود کردن مایعات باعث کم‌آبی می‌شود.",
+   "we": "Keeping the bladder empty every 2 hours prevents incontinence even if spasms occur; caffeine worsens spasms and fluid restriction causes dehydration.",
+   "ts": 244
+  },
+  {
+   "type": "cloze",
+   "qf": "در حمام بستری برای بیماری با تحرک محدود که پوستش خشک و پوسته‌پوسته است، پرستار باید از {0} استفاده کند و در حالی که پوست هنوز مرطوب است {1} بزند.",
+   "qe": "During a bed bath for a client with limited mobility whose skin is dry and flaky, the nurse should use {0} and apply {1} while the skin is still damp.",
+   "blanks": [
+    {
+     "of": [
+      "آب داغ با صابون آنتی‌باکتریال",
+      "آب ولرم",
+      "آب سخنگو با دمای اتاق برای سریع‌تر خشک شدن"
+     ],
+     "oe": [
+      "Hot water with antibacterial soap",
+      "Tepid water",
+      "Room-temperature water to dry faster"
+     ],
+     "c": 1
+    },
+    {
+     "of": [
+      "مرطوب‌کننده نرم‌کننده (emollient) موضعی",
+      "صابون آنتی‌باکتریال بیشتر",
+      "اسکراب لایه‌بردار برای برداشتن پوست مرده"
+     ],
+     "oe": [
+      "A topical emollient moisturizer",
+      "More antibacterial soap",
+      "An exfoliating scrub to remove dead skin"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "آب داغ و صابون پوست را خشک‌تر می‌کنند و شستشوی شدید پوست آسیب‌دیده را تحریک می‌کند؛ پرستار باید از آب ولرم استفاده کند و مرطوب‌کننده را روی پوست مرطوب بزند تا رطوبت حفظ شود.",
+   "we": "Hot water and soap further dry the skin and vigorous scrubbing traumatizes it; the nurse should use tepid water and apply a moisturizer while the skin is still damp to lock in moisture.",
+   "ts": 476
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از موارد زیر درباره استفاده از عصا صحیح است؟ (موارد درست را انتخاب کنید)",
+   "qe": "Which of the following statements about using a cane are correct? (Select the correct items)",
+   "items": [
+    {
+     "fa": "عصا را در سمت قوی بدن نگه می‌دارم",
+     "en": "I hold the cane on the strong side of my body"
+    },
+    {
+     "fa": "عصا و پای ضعیف را همزمان به جلو می‌برم",
+     "en": "I advance the cane and my weak leg at the same time"
+    },
+    {
+     "fa": "هنگام بالا رفتن از پله‌ها ابتدا با پای ضعیف جلو می‌روم",
+     "en": "When going upstairs, I lead with my weak leg first"
+    },
+    {
+     "fa": "عصا را در دست ضعیف می‌گیرم",
+     "en": "I hold the cane in my weak hand"
+    },
+    {
+     "fa": "هنگام بالا رفتن از پله‌ها ابتدا با پای قوی جلو می‌روم",
+     "en": "When going upstairs, I lead with my strong leg first"
+    },
+    {
+     "fa": "برای ثبات، عصا را ۱۲ اینچ جلوتر از پاهایم نگه می‌دارم",
+     "en": "For stability, I keep the cane 12 inches in front of my feet"
+    }
+   ],
+   "keep": [
+    0,
+    1,
+    4
+   ],
+   "wf": "پرستار توضیح می‌دهد عصا در سمت قوی نگه داشته می‌شود و همراه با پای ضعیف جلو می‌رود و هنگام بالا رفتن از پله‌ها همیشه با پای قوی شروع می‌کنیم؛ بنابراین عبارت‌های مربوط به پای ضعیف یا دست ضعیح غلط هستند.",
+   "we": "The instructor explains that the cane is held on the strong side and advanced with the weak leg, and that you always lead upstairs with the strong leg, so the statements involving the weak side are wrong.",
+   "ts": 502
+  }
+ ],
+ "video": "8nkJZ3g4B4Q",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}

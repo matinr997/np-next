@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "شیمی‌درمانی سیتوتوکسیک عمدتاً کدام سلول‌ها یا بافت‌ها را هدف قرار می‌دهد؟",
+   "qe": "Cytotoxic chemotherapy primarily targets which cells or tissues?",
+   "of": [
+    "سلول‌هایی با کسر رشد بالا",
+    "سلول‌هایی با کسر رشد پایین",
+    "فقط سلول‌های عصبی محیطی",
+    "فقط سلول‌های عضلانی اسکلتی"
+   ],
+   "oe": [
+    "Cells with a high growth fraction",
+    "Cells with a low growth fraction",
+    "Only peripheral nerve cells",
+    "Only skeletal muscle cells"
+   ],
+   "c": 0,
+   "wf": "داروهای شیمی‌درمانی به سلول‌ها و بافت‌هایی با کسر رشد بالا سمی‌ترند، زیرا سلول‌های سرطانی کسر رشد بالایی دارند.",
+   "we": "Chemotherapy drugs are more toxic to cells and tissues with a high growth fraction because cancer cells have a high growth fraction.",
+   "ts": 82
+  },
+  {
+   "type": "mc",
+   "qf": "پرستار در حال توضیح شیمی‌درمانی متناوب به بیماری است که به شدت دچار سرکوب مغز استخوان شده است. هدف از این روش تجویز چیست؟",
+   "qe": "A nurse is explaining intermittent chemotherapy to a client with severe bone marrow suppression. What is the purpose of this administration approach?",
+   "of": [
+    "این روش شامل یک دوز بالا و سپس فرصتی برای بهبودی بیمار پیش از دوز بعدی است",
+    "دارو با پایین‌ترین دوز ممکن به‌صورت پیوسته داده می‌شود",
+    "دارو فقط به‌صورت موضعی روی تومور استفاده می‌شود",
+    "بیش از یک داروی شیمی‌درمانی هم‌زمان داده می‌شود"
+   ],
+   "oe": [
+    "It gives a large dose followed by a recovery period before the next dose",
+    "The drug is given continuously at the lowest possible dose",
+    "The drug is applied only topically to the tumor",
+    "More than one chemotherapy drug is given at the same time"
+   ],
+   "c": 0,
+   "wf": "در شیمی‌درمانی متناوب چون بر مغز استخوان سخت است، یک دوز بالا داده می‌شود، بیمار بهبود می‌یابد و سپس دوز بعدی داده می‌شود.",
+   "we": "Because intermittent chemotherapy is hard on the bone marrow, a large dose is given, the client recovers, and then another dose is given.",
+   "ts": 397
+  },
+  {
+   "type": "mc",
+   "qf": "کدام یک از ویژگی‌های شناخته‌شده سرطان است؟",
+   "qe": "Which of the following is a recognized characteristic of cancer?",
+   "of": [
+    "رشد سلولی کنترل‌نشده با تهاجم و توانایی متاستاز",
+    "پیروی از مکانیسم‌های بازخوردی طبیعی بدن",
+    "محدود شدن به بافت اولیه و بدون گسترش",
+    "توقف خودکار رشد پس از چند تقسیم"
+   ],
+   "oe": [
+    "Uncontrolled cellular proliferation with invasion and the ability to metastasize",
+    "Following the body's normal feedback mechanisms",
+    "Remaining confined to the original tissue with no spread",
+    "Self-limiting growth after a few divisions"
+   ],
+   "c": 0,
+   "wf": "سرطان تکثیر سلولی کنترل‌نشده است، از قوانین و بازخورد پیروی نمی‌کند، تهاجمی است و می‌تواند متاستاز دهد.",
+   "we": "Cancer is unregulated cellular proliferation; it does not follow the rules or feedback, it is invasive, and it can metastasize.",
+   "ts": 16
+  },
+  {
+   "type": "cloze",
+   "qf": "طبق مرور ویدیو، بافت‌های پررشد که در بیماران تحت شیمی‌درمانی سیتوتوکسیک بیشترین آسیب را می‌بینند شامل {0} و {1} هستند.",
+   "qe": "According to the video review, the rapidly growing tissues most affected in clients receiving cytotoxic chemotherapy include {0} and {1}.",
+   "blanks": [
+    {
+     "of": [
+      "مو",
+      "رگ‌های خونی مغز",
+      "غضروف مفصلی"
+     ],
+     "oe": [
+      "Hair",
+      "Cerebral blood vessels",
+      "Joint cartilage"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "مغز استخوان",
+      "بافت چربی زیرجلدی",
+      "سلول‌های عضلات قلبی"
+     ],
+     "oe": [
+      "Bone marrow",
+      "Subcutaneous fat",
+      "Cardiac muscle cells"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "پنج بافت پررشد بدن که شیمی‌درمانی آن‌ها را می‌زند عبارتند از مو، دستگاه گوارش، پوست، دستگاه تناسلی و مغز استخوان.",
+   "we": "The five rapidly growing tissues that chemotherapy targets are hair, GI, skin, reproductive tissues, and bone marrow.",
+   "ts": 154
+  },
+  {
+   "type": "dnd",
+   "qf": "کدامیک از موارد زیر روش‌های تجویز شیمی‌درمانی هستند که در ویدیو ذکر شده‌اند؟ موارد درست را نگه دارید.",
+   "qe": "Which of the following are methods of delivering chemotherapy mentioned in the video? Keep the correct items.",
+   "items": [
+    {
+     "fa": "شیمی‌درمانی متناوب",
+     "en": "Intermittent chemotherapy"
+    },
+    {
+     "fa": "جراحی برداشتن تومور",
+     "en": "Surgical tumor removal"
+    },
+    {
+     "fa": "شیمی‌درمانی ترکیبی",
+     "en": "Combination chemotherapy"
+    },
+    {
+     "fa": "هورمون‌درمانی",
+     "en": "Hormone therapy"
+    },
+    {
+     "fa": "تحویل دارو به‌صورت ناحیه‌ای",
+     "en": "Regional drug delivery"
+    },
+    {
+     "fa": "پرتو درمانی",
+     "en": "Radiation therapy"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    4
+   ],
+   "wf": "روش‌های تجویز شیمی‌درمانی عبارتند از متناوب، ترکیبی (دادن بیش از یک شیمی‌درمانی) و ناحیه‌ای (رساندن دارو به‌طور خاص به محل مورد نظر).",
+   "we": "The ways to deliver chemotherapy are intermittent, combination (giving more than one chemotherapy), and regional delivery (getting the drug specifically to the needed site).",
+   "ts": 389
+  }
+ ],
+ "video": "WJcFIjv6LkE",
+ "gen": {
+  "model": "oc/mimo-v2.6-flash-free",
+  "n": 5
+ }
+}
