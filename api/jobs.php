@@ -64,6 +64,16 @@ if ($act === 'create') {
 
 if ($act === 'claim') {
     $worker = np_str($b, 'worker', 'worker');
+
+    // Reap abandoned jobs. If a worker dies mid-job (killed, laptop asleep,
+    // host reboot) the row stays 'running' for ever and, because the claim is
+    // FIFO, it blocks every job behind it. Anything untouched for 15 minutes
+    // is considered abandoned and goes back into the queue.
+    $cutoff = gmdate('Y-m-d H:i:s', time() - 900);
+    np_q("UPDATE pipeline_jobs SET status = 'queued', stage = 'discover', progress = 0,
+          log = ?, updated_at = ? WHERE status = 'running' AND updated_at < ?",
+         ['requeued: the previous worker stopped responding', np_now(), $cutoff]);
+
     $rows = np_all("SELECT id, yt_id, url, kind, stage, status, progress, title_fa, title_en
                     FROM pipeline_jobs WHERE status = 'queued' ORDER BY created_at ASC LIMIT 10");
     foreach ($rows as $r) {

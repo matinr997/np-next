@@ -25,6 +25,7 @@ The worker token is the shared secret from api/config.php ('worker_token').
 import argparse
 import json
 import shutil
+import threading
 import os
 import re
 import subprocess
@@ -647,6 +648,18 @@ def publish_video(info, llm, git=True, push=True):
 # --------------------------------------------------------------------------
 # the pipeline
 # --------------------------------------------------------------------------
+
+def _heartbeat(site, jid, every=120):
+    """Touch the job row while a long step runs (the agent path can take
+    minutes). Without this the reaper would treat a healthy job as abandoned."""
+    while True:
+        time.sleep(every)
+        try:
+            site.update(jid, status="running", log="working")
+        except Exception:
+            return
+
+
 def process_job(site, llm, job, git=True, push=True):
     jid = job["id"]
     yt_id = job.get("yt_id") or extract_yt_id(job.get("url") or "")
@@ -656,6 +669,9 @@ def process_job(site, llm, job, git=True, push=True):
     try:
         site.update(jid, status="running", yt_id=yt_id, stage="discover", progress=5,
                     error="", log="started")
+        # heartbeat: keeps a long job from being reaped as abandoned
+        _hb = threading.Thread(target=_heartbeat, args=(site, jid), daemon=True)
+        _hb.start()
 
         log("job %s  video %s" % (jid, yt_id))
         info = stage_discover(yt_id, llm)
