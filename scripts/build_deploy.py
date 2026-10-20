@@ -69,12 +69,31 @@ if _lint.returncode != 0:
     for l in _err:
         print('    ' + l.strip())
 
-# ---------- 2. backend stub (kept in sync, never uploaded by accident) ----------
+# ---------- 2. the API + the admin panel ----------
+# The panel is useless without the API next to it, so both travel together.
+# config.php holds the database credentials: it is gitignored, blocked by
+# api/.htaccess, and must never be copied into a package.
 os.makedirs(PUB + '/api', exist_ok=True)
-for name in ('index.php', 'config.example.php', '.htaccess', 'README.txt', 'account-endpoints.md'):
+for src in sorted(glob.glob(os.path.join(ROOT, 'api', '*.php'))):
+    name = os.path.basename(src)
+    if name in ('config.php', 'config.local.php'):
+        print('  ! refusing to package %s (secrets)' % name)
+        continue
+    shutil.copy(src, PUB + '/api/' + name)
+for name in ('.htaccess', 'README.txt', 'account-endpoints.md'):
     src = os.path.join(ROOT, 'api', name)
     if os.path.exists(src):
         shutil.copy(src, PUB + '/api/' + name)
+# the MySQL schema has to travel with the code: api/setup.php creates the
+# tables on the host, and docs/ is not deployed.
+shutil.copy(os.path.join(ROOT, 'docs', 'schema.sql'), PUB + '/api/schema.mysql.sql')
+if os.path.isdir(os.path.join(ROOT, 'api', 'db')):
+    shutil.copytree(os.path.join(ROOT, 'api', 'db'), PUB + '/api/db', dirs_exist_ok=True)
+
+# the admin panel (its head is already injected with noindex by gen_seo.py)
+if os.path.isdir(os.path.join(ROOT, 'admin')):
+    shutil.copytree(os.path.join(ROOT, 'admin'), PUB + '/admin', dirs_exist_ok=True)
+    print('  admin panel: %d file(s)' % len(glob.glob(os.path.join(ROOT, 'admin', '*'))))
 
 # ---------- 3. server config ----------
 open(PUB + '/.htaccess', 'w', encoding='utf-8').write('''# ============ NursePlus static hosting (Netafraz / DirectAdmin) ============

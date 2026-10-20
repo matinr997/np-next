@@ -12,7 +12,10 @@ $driver = strtolower((string)($db['driver'] ?? 'mysql'));
 
 $schema = $driver === 'sqlite'
     ? __DIR__ . '/db/schema.sqlite.sql'
-    : (__DIR__ . '/../docs/schema.sql');
+    : (__DIR__ . '/schema.mysql.sql');           // packaged next to the code
+if ($driver !== 'sqlite' && !is_file($schema)) {
+    $schema = __DIR__ . '/../docs/schema.sql';     // running from the repo
+}
 
 $out = ['ok' => true, 'driver' => $driver, 'schema' => basename((string)$schema)];
 try {
