@@ -1,0 +1,117 @@
+/* NursePlus admin — dashboard, checklist, error centre, audit, activity log.
+   Same tokens as admin.css. */
+
+/* ---- the dashboard ---- */
+.adm-dgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:10px;margin-bottom:14px;
+}
+.adm-dstat{
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:10px 12px;background:var(--adm-wash);
+}
+.adm-dstat span{display:block;font-size:.68rem;color:var(--adm-muted);font-weight:700;margin-bottom:4px}
+.adm-dstat b{font-size:1.05rem;color:var(--adm-ink);font-weight:800;line-height:1}
+.adm-dstat em{display:block;font-style:normal;font-size:.64rem;color:var(--adm-muted);margin-top:3px}
+.adm-dllm{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:10px 14px;margin-bottom:14px;font-size:.78rem;
+}
+.adm-dllm.ok{background:#e9f9f0;border-color:#b9e6cd}
+.adm-dllm.bad{background:#fdecef;border-color:#F0728D}
+.adm-dllm.warn{background:var(--adm-cream);border-color:#E9DDB4}
+.adm-dllm b{color:var(--adm-ink);font-weight:800}
+.adm-dllm span, .adm-dllm em{color:var(--adm-muted);font-style:normal}
+.adm-dsec{margin-top:12px}
+.adm-dsec h4{margin:0 0 7px;font-size:.78rem;color:var(--adm-accent)}
+.adm-dlist{list-style:none;margin:0;padding:0}
+.adm-dlist li{
+  font-size:.75rem;color:var(--adm-ink);padding:6px 10px;border-bottom:1px solid var(--adm-line);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.adm-dlist li b{color:var(--adm-accent);font-weight:800;margin-inline-end:5px}
+
+/* ---- the stage checklist ---- */
+.adm-cl{display:flex;flex-direction:column;gap:6px}
+.adm-clrow{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  border:1px solid var(--adm-line);border-inline-start-width:4px;border-radius:var(--adm-r-ctl);
+  padding:9px 12px;background:#fff;font-size:.78rem;
+}
+.adm-clrow.ok{border-inline-start-color:#16a34a}
+.adm-clrow.bad{border-inline-start-color:#dc2626;background:#fff8f9}
+.adm-clrow.run{border-inline-start-color:#4D8DBA;background:#f4faff}
+.adm-clrow.skip{border-inline-start-color:#cbd5e1;opacity:.75}
+.adm-clrow.wait{border-inline-start-color:#E3EEF7}
+.adm-clrow.warn{border-inline-start-color:#eab308;background:#fffdf3}
+.adm-clseq{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--adm-wash);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.68rem;font-weight:800;color:var(--adm-muted);
+}
+.adm-clname{flex:0 0 auto;min-width:150px;font-weight:800;color:var(--adm-ink)}
+.adm-clst{
+  flex:0 0 auto;font-size:.68rem;font-weight:800;padding:2px 9px;border-radius:999px;
+  background:var(--adm-wash);color:var(--adm-accent);
+}
+.adm-clrow.bad .adm-clst{background:#fdecef;color:#b3123a}
+.adm-clrow.ok .adm-clst{background:#e9f9f0;color:#0f7a3d}
+.adm-clmeta{flex:0 0 auto;font-size:.68rem;color:var(--adm-muted)}
+.adm-clwhy,.adm-clerr{flex:1 1 220px;font-size:.7rem;color:var(--adm-muted)}
+.adm-clerr{color:#b3123a}
+.adm-clretry{margin-inline-start:auto}
+
+/* ---- the error centre ---- */
+.adm-etable,.adm-itable,.adm-atable{display:flex;flex-direction:column;gap:5px}
+.adm-erow,.adm-irow,.adm-arow{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:8px 12px;font-size:.75rem;background:#fff;
+}
+.adm-isev,.adm-esev{
+  flex:0 0 auto;font-size:.62rem;font-weight:900;text-transform:uppercase;
+  padding:2px 8px;border-radius:999px;background:var(--adm-wash);color:var(--adm-muted);
+}
+.adm-esev.error,.adm-isev.high{background:#fdecef;color:#b3123a}
+.adm-esev.warning,.adm-isev.medium{background:var(--adm-cream);color:#7A5A18}
+.adm-isev.info{background:#EAF5FB;color:var(--adm-accent)}
+.adm-ecat,.adm-icat{flex:0 0 auto;font-weight:800;color:var(--adm-accent);min-width:130px}
+.adm-emsg,.adm-iev{flex:1 1 240px;min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--adm-ink)}
+.adm-irec{flex:1 1 200px;font-size:.7rem;color:var(--adm-muted)}
+.adm-emeta,.adm-iid{flex:0 0 auto;font-size:.68rem;color:var(--adm-muted)}
+.adm-efix{
+  flex:0 0 auto;font-size:.64rem;font-weight:800;padding:2px 8px;border-radius:999px;
+  background:var(--adm-wash);color:var(--adm-accent-2);
+}
+.adm-aact{flex:0 0 auto;font-weight:800;color:var(--adm-accent);min-width:150px}
+.adm-atgt{flex:1 1 180px;min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--adm-ink)}
+.adm-atime{flex:0 0 auto;font-size:.68rem;color:var(--adm-muted)}
+
+/* ---- the fix panel ---- */
+.adm-fixpanel{
+  border:1px solid var(--adm-accent-2);border-radius:var(--adm-r-ctl);
+  padding:14px;background:#fbfdff;margin-top:12px;
+}
+.adm-fixerr{
+  font-size:.8rem;color:#b3123a;background:#fdecef;border-radius:var(--adm-r-ctl);
+  padding:9px 12px;margin-bottom:10px;word-break:break-word;
+}
+.adm-fixp{border-top:1px solid var(--adm-line);padding-top:10px;margin-top:10px}
+.adm-fixp>b{font-size:.82rem;color:var(--adm-ink)}
+.adm-diff{
+  max-height:260px;overflow:auto;background:#0f1b24;color:#cfe3f0;
+  border-radius:var(--adm-r-ctl);padding:10px 12px;font-size:.7rem;line-height:1.6;
+  direction:ltr;text-align:left;white-space:pre;margin:8px 0;
+}
+.adm-fixchecks{display:flex;flex-wrap:wrap;gap:6px}
+.adm-fixchecks span{
+  font-size:.68rem;font-weight:800;padding:2px 9px;border-radius:999px;
+}
+.adm-fixchecks .ok{background:#e9f9f0;color:#0f7a3d}
+.adm-fixchecks .bad{background:#fdecef;color:#b3123a}
+
+@media(max-width:640px){
+  .adm-clname{min-width:110px}
+  .adm-clrow{gap:7px}
+  .adm-ecat,.adm-aact{min-width:0}
+}

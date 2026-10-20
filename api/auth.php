@@ -4,6 +4,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/security.php';
 
 $act = $_SERVER['REQUEST_METHOD'] === 'POST' ? np_str(np_body(), 'action') : '';
 
@@ -25,7 +26,8 @@ if ($act === 'login') {
     session_regenerate_id(true);
     $_SESSION['admin_email'] = (string)$u['email'];
     $_SESSION['admin_name']  = (string)($u['name'] !== '' ? $u['name'] : $u['email']);
-    np_json(['ok' => true, 'user' => ['email' => $u['email'], 'name' => $_SESSION['admin_name'], 'role' => 'admin']]);
+    np_json(['ok' => true, 'user' => ['email' => $u['email'], 'name' => $_SESSION['admin_name'], 'role' => 'admin'],
+             'csrf' => np_csrf_token()]);
 }
 
 if ($act === 'logout') {
@@ -40,4 +42,8 @@ if ($act === 'logout') {
 }
 
 $a = np_admin();
-np_json(['ok' => true, 'user' => $a]);
+if (($_GET['action'] ?? '') === 'csrf') {
+    // the panel needs a token before it may write anything
+    np_json(['ok' => true, 'user' => $a, 'csrf' => np_csrf_token()]);
+}
+np_json(['ok' => true, 'user' => $a, 'csrf' => np_csrf_token()]);

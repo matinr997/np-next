@@ -7,6 +7,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/security.php';
 require_once __DIR__ . '/catalogue.php';
 
 const NP_STAGES  = ['discover', 'transcript', 'translate', 'quiz', 'publish'];

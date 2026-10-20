@@ -131,15 +131,34 @@ h1,h2,h3{color:var(--adm-accent);margin:0}
 .adm-grid{
   display:grid;gap:18px;margin-top:20px;
   grid-template-columns:minmax(0,1fr) 400px;
-  grid-template-areas:"add side" "queue side" "videos videos";
+  grid-template-areas:
+    "dash dash"
+    "add side"
+    "queue side"
+    "checklist checklist"
+    "errors errors"
+    "audit audit"
+    "activity activity"
+    "models models"
+    "usage usage"
+    "videos videos";
   align-items:start;
 }
+.adm-area-dash{grid-area:dash}
+.adm-area-checklist{grid-area:checklist}
+.adm-area-errors{grid-area:errors}
+.adm-area-audit{grid-area:audit}
+.adm-area-activity{grid-area:activity}
+.adm-area-models{grid-area:models}
+.adm-area-usage{grid-area:usage}
 .adm-area-add{grid-area:add}
 .adm-area-queue{grid-area:queue}
 .adm-area-side{grid-area:side;position:sticky;top:76px}
 .adm-area-videos{grid-area:videos}
 @media(max-width:1020px){
-  .adm-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"add" "queue" "side" "videos"}
+  .adm-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:
+    "dash" "add" "queue" "side" "checklist" "errors" "audit" "activity"
+    "models" "usage" "videos"}
   .adm-area-side{position:static}
 }
 

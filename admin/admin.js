@@ -52,7 +52,19 @@
   }
   ApiError.prototype = Object.create(Error.prototype);
 
-  function api(file, opts) {
+  /* The CSRF token for writes. The server hands it out with the login and
+   with GET /api/auth.php; it is refreshed whenever a write is refused. */
+var CSRF = '';
+
+function setCsrf(token) {
+  if (token) {
+    CSRF = token;
+    /* models.js is a separate file and needs the same token */
+    window.__npCsrf = token;
+  }
+}
+
+function api(file, opts) {
     opts = opts || {};
     var init = {
       method: opts.method || 'GET',
@@ -62,8 +74,16 @@
     if (opts.body !== undefined) {
       init.headers['Content-Type'] = 'application/json';
       init.body = JSON.stringify(opts.body);
+      if (CSRF) init.headers['X-CSRF-Token'] = CSRF;
     }
     return fetch(API_BASE + file, init).then(function (res) {
+      if (res.status === 403 && init.method === 'POST') {
+        /* the token expired — fetch a new one so the next attempt works */
+        fetch(API_BASE + 'auth.php?action=csrf', { credentials: 'same-origin' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) { setCsrf(d && d.csrf); })
+          .catch(function () { });
+      }
       return res.text().then(function (text) {
         var data = null;
         if (text) {
@@ -175,6 +195,7 @@
       api('auth.php', { method: 'POST', body: { action: 'login', email: em, password: pw } })
         .then(function (data) {
           state.user = data.user || null;
+          setCsrf(data.csrf);
           pass.value = '';
           showApp(state.user);
           loadAll();
@@ -662,33 +683,12 @@
   /* ------------------------------------------------------------------ */
   /* LLM settings                                                       */
   /* ------------------------------------------------------------------ */
+  /* The model picker is drawn by models.js: it shows the capability icons,
+     the context window and the usage of every model, which a native
+     <select> cannot do. The list of ids is still kept here for the
+     connection test. */
   function renderModelOptions() {
-    var sel = $('modelSelect');
-    var filter = (state.modelFilter || '').trim().toLowerCase();
-    var list = state.models;
-    if (filter) {
-      list = list.filter(function (m) { return String(m.id).toLowerCase().indexOf(filter) !== -1; });
-    }
-    clear(sel);
-    var frag = document.createDocumentFragment();
-    /* a native <select> handles ~600 options without lag; the filter is what
-       keeps the list short while the user types */
-    list.forEach(function (m) {
-      var opt = el('option', null, m.id);
-      opt.value = m.id;
-      if (m.owned_by) opt.title = m.owned_by;
-      frag.appendChild(opt);
-    });
-    sel.appendChild(frag);
-    if (!list.length) {
-      var none = el('option', null, filter ? 'موردی یافت نشد' : 'فهرست مدل‌ها خالی است');
-      none.value = '';
-      sel.appendChild(none);
-    }
-    var total = state.models.length;
-    var note = total ? fa(total) + ' مدل' : '';
-    if (filter) note += ' · ' + fa(list.length) + ' نتیجه';
-    $('modelCount').textContent = note;
+    if (window.npModels && window.npModels.render) window.npModels.render();
   }
 
   function setModels(models) {
@@ -716,17 +716,13 @@
       this.textContent = showing ? 'نمایش' : 'پنهان';
     });
 
+    /* The filter input is shared with models.js, which owns the list.
+       Keep the raw value here for the connection test. */
     $('modelFilter').addEventListener('input', function () {
-      /* Render synchronously: filling a <select> with ~600 options costs a
-         couple of milliseconds, and a debounce timer is clamped to 1s in a
-         backgrounded tab — which would freeze the list for the user. */
       state.modelFilter = this.value;
-      renderModelOptions();
     });
 
-    $('modelSelect').addEventListener('change', function () {
-      if (this.value) $('llmModel').value = this.value;
-    });
+
 
     $('testBtn').addEventListener('click', function () {
       var btn = this;
@@ -743,6 +739,10 @@
       }).then(function (data) {
         var models = data.models || [];
         setModels(models);
+        /* the capability metadata lives in its own table — read it again so
+           the icons and the context sizes are the provider's, not stale */
+        return api('models.php', { method: 'POST', body: { action: 'refresh' } })
+          .then(function () { return data; });
         msg.className = 'adm-alert adm-alert-ok';
         msg.textContent = 'اتصال برقرار است — ' + fa(models.length) + ' مدل دریافت شد.';
         toast('اتصال به endpoint موفق بود.', 'ok');
@@ -822,9 +822,18 @@
   /* boot                                                               */
   /* ------------------------------------------------------------------ */
   function loadAll() {
+    /* an already signed-in session still needs a token for the writes */
+    api('auth.php?action=csrf').then(function (d) { setCsrf(d.csrf); }).catch(function () { });
     loadJobs();
     loadVideos();
     loadLlm();
+    /* the operational modules need the session, so they load after the
+       login — not on DOMContentLoaded */
+    if (window.npOps) {
+      window.npOps.load();
+      window.npOps.loadErrors();
+    }
+    if (window.npModels) window.npModels.load();
   }
 
   /* ------------------------------------------------------------------ */
@@ -906,12 +915,43 @@
     });
   }
 
+
+  /* ---- /compress: summarise the session, keep the key points ---- */
+  function chatCompress() {
+    chat.busy = true;
+    chatStatus('در حال فشرده‌سازی گفتگو…');
+    api('chat.php', { method: 'POST', body: { action: 'compress', lang: 'fa' } })
+      .then(function (d) {
+        var log = $('chatLog');
+        if (log) {
+          var b = chatBubble('agent', d.summary || '');
+          if (b) log.appendChild(b);
+          chatScroll();
+        }
+        chatStatus('گفتگو فشرده شد (' + (d.messages || 0) + ' پیام).', 'ok');
+        toast('گفتگو فشرده شد.', 'ok');
+      })
+      .catch(function (e) {
+        chatStatus('فشرده‌سازی ناموفق بود: ' + e.message, 'err');
+        toast('فشرده‌سازی ناموفق بود.', 'err');
+      })
+      .then(function () { chat.busy = false; });
+  }
+
   function chatSend() {
     if (chat.busy) { toast('یک کار در حال اجراست؛ کمی صبر کن.', 'warn'); return; }
     var input = $('chatInput');
     var text = (input.value || '').trim();
     var file = chat.file;
     if (!text && !file) { toast('پیام یا فایلی لازم است.', 'warn'); return; }
+
+    /* /compress summarises the conversation and keeps the important parts.
+       It is a command, not a question, so it never reaches the agent. */
+    if (!file && /^\/compress(\s|$)/i.test(text)) {
+      input.value = '';
+      chatCompress();
+      return;
+    }
 
     chat.busy = true;
     chat.seen = 0;

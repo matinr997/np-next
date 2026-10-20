@@ -5,61 +5,8 @@
 declare(strict_types=1);
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/db.php';
-
-function np_llm_get(): array {
-    $r = np_one('SELECT endpoint, api_key, model FROM llm_settings WHERE id = 1');
-    if (!$r) return ['endpoint' => '', 'api_key' => '', 'model' => ''];
-    return ['endpoint' => (string)$r['endpoint'], 'api_key' => (string)$r['api_key'], 'model' => (string)$r['model']];
-}
-
-function np_llm_save(array $s): void {
-    $now = np_now();
-    np_upsert('llm_settings',
-        ['id' => 1, 'endpoint' => $s['endpoint'], 'api_key' => $s['api_key'],
-         'model' => $s['model'], 'updated_at' => $now], ['id']);
-}
-
-function np_http_json(string $url, array $headers = [], int $timeout = 20): array {
-    if (function_exists('curl_init')) {
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => $timeout, CURLOPT_CONNECTTIMEOUT => 8,
-            CURLOPT_HTTPHEADER => $headers,
-        ]);
-        $body = curl_exec($ch);
-        $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $err  = curl_error($ch);
-        if ($body === false) return ['ok' => false, 'error' => $err !== '' ? $err : 'request failed', 'code' => 0];
-        $j = json_decode((string)$body, true);
-        if ($code < 200 || $code >= 300) return ['ok' => false, 'error' => 'HTTP ' . $code, 'code' => $code, 'body' => substr((string)$body, 0, 300)];
-        return ['ok' => true, 'json' => is_array($j) ? $j : [], 'code' => $code];
-    }
-    $ctx = stream_context_create(['http' => ['method' => 'GET', 'timeout' => $timeout, 'ignore_errors' => true,
-        'header' => implode("\r\n", $headers)]]);
-    $body = @file_get_contents($url, false, $ctx);
-    if ($body === false) return ['ok' => false, 'error' => 'request failed', 'code' => 0];
-    $j = json_decode((string)$body, true);
-    if (!is_array($j)) return ['ok' => false, 'error' => 'bad response', 'code' => 0];
-    return ['ok' => true, 'json' => $j, 'code' => 200];
-}
-
-/** Try <ep>/models then <ep>/v1/models — users type the base URL in many ways. */
-function np_fetch_models(string $endpoint, string $key): array {
-    $ep = rtrim(trim($endpoint), '/');
-    if ($ep === '') return ['ok' => false, 'error' => 'endpoint is empty'];
-    $cands = [$ep . '/models'];
-    if (!preg_match('#/v\d+$#', $ep)) $cands[] = $ep . '/v1/models';
-    $hdr = ['Accept: application/json'];
-    if ($key !== '') $hdr[] = 'Authorization: Bearer ' . $key;
-    $last = ['ok' => false, 'error' => 'no endpoint answered'];
-    foreach ($cands as $u) {
-        $r = np_http_json($u, $hdr);
-        if ($r['ok'] && isset($r['json']['data']) && is_array($r['json']['data'])) return $r;
-        $last = $r;
-    }
-    return $last;
-}
+require_once __DIR__ . '/security.php';
+require_once __DIR__ . '/provider.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     np_require_admin();
@@ -100,6 +47,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ['model_id' => $id, 'owned_by' => $m['owned_by'], 'updated_at' => $now], ['model_id']);
         }
         np_json(['ok' => true, 'models' => array_values($list), 'count' => count($list)]);
+    }
+
+
+    // ---- a chat call with the context guard, and usage accounting -------
+    if ($act === 'chat' || $act === 'compress') {
+        np_require_admin();
+        $s = np_llm_get();
+        $model = np_str($b, 'model', $s['model']);
+        $messages = is_array($b['messages'] ?? null) ? $b['messages'] : [];
+        $task = np_str($b, 'task', $act === 'compress' ? 'compress' : 'panel');
+        $site = np_str($b, 'site', 'ir');
+        $prefs = np_prefs_get();
+        $epId = np_endpoint_id($s['endpoint']);
+
+        $meta = np_one('SELECT ctx_max FROM llm_model_meta WHERE endpoint_id = ? AND model_id = ?',
+                       [$epId, $model]);
+        $ctxMax = $meta ? (int)$meta['ctx_max'] : 0;
+
+        $plan = np_context_plan($messages, $ctxMax, $prefs + ['strategy' => $prefs['strategy']]);
+        $compressed = null;
+
+        if ($act === 'compress') {
+            // the explicit /compress command: always summarise the history
+            $c = np_compress_history($s['endpoint'], $s['api_key'], $model, $messages,
+                                     $prefs + ['lang' => np_str($b, 'lang', 'fa')]);
+            if (!$c['ok']) {
+                np_json(['ok' => false, 'error' => $c['error'] ?? 'compress_failed',
+                         'message' => 'فشرده‌سازی گفتگو انجام نشد: ' . ($c['error'] ?? '')], 502);
+            }
+            np_models_record($epId, $model, 'compress', $site, $c['usage'] ?? [], 0, $ctxMax, 0, true, 0, '');
+            np_json(['ok' => true, 'summary' => $c['summary'], 'messages' => $c['messages'],
+                     'removed' => (int)($c['removed'] ?? 0), 'usage' => $c['usage'] ?? [],
+                     'context' => ['est' => np_estimate_request_tokens($c['messages']),
+                                   'ctx_max' => $ctxMax, 'source' => 'estimated']]);
+        }
+
+        if ($plan['action'] === 'warn') {
+            np_json(['ok' => false, 'error' => 'context_limit', 'action' => 'warn',
+                     'message' => $plan['note'], 'context' => $plan], 409);
+        }
+        if ($plan['action'] === 'summarize') {
+            $c = np_compress_history($s['endpoint'], $s['api_key'], $model, $messages,
+                                     $prefs + ['lang' => np_str($b, 'lang', 'fa')]);
+            if ($c['ok']) {
+                $messages = $c['messages'];
+                $compressed = ['summary' => $c['summary'], 'removed' => (int)($c['removed'] ?? 0)];
+                $plan = np_context_plan($messages, $ctxMax, $prefs);
+                $plan['action'] = 'summarized';
+                $plan['note'] = 'The history was compressed before the request was sent.';
+            } else {
+                // compression failed: fall back to trimming so the request still goes through
+                $plan = np_context_plan($messages, $ctxMax,
+                                        $prefs + ['strategy' => 'trim']);
+            }
+        }
+
+        $payload = ['model' => $model, 'messages' => $messages];
+        if (isset($b['max_tokens'])) $payload['max_tokens'] = (int)$b['max_tokens'];
+        if (isset($b['temperature'])) $payload['temperature'] = (float)$b['temperature'];
+        $r = np_provider_chat($s['endpoint'], $s['api_key'], $payload, 240);
+        $usage = $r['usage'] ?? [];
+        $est = $plan['est'] ?? np_estimate_request_tokens($messages);
+        $pct = $ctxMax > 0 ? round((($usage['prompt_tokens'] ?? $est) / $ctxMax) * 100, 1) : 0.0;
+        np_models_record($epId, $model, $task, $site, $usage, $est, $ctxMax, $pct,
+                         (bool)$r['ok'], (int)($r['latency'] ?? 0), (string)($r['error'] ?? ''));
+
+        if (!$r['ok']) {
+            np_json(['ok' => false, 'error' => $r['error'] ?? 'failed',
+                     'message' => 'درخواست به مدل نرسید: ' . ($r['error'] ?? ''),
+                     'context' => $plan, 'usage' => $usage], 502);
+        }
+        $ctxOut = [
+            'est' => $est, 'actual_prompt' => (int)($usage['prompt_tokens'] ?? 0),
+            'completion' => (int)($usage['completion_tokens'] ?? 0),
+            'total' => (int)($usage['prompt_tokens'] ?? 0) + (int)($usage['completion_tokens'] ?? 0),
+            'ctx_max' => $ctxMax, 'pct' => $pct,
+            'remaining' => $ctxMax > 0 ? max(0, $ctxMax - (int)($usage['prompt_tokens'] ?? 0)) : null,
+            'source' => ((int)($usage['prompt_tokens'] ?? 0) > 0) ? 'actual' : 'estimated',
+            'action' => $plan['action'], 'note' => $plan['note'],
+        ];
+        np_json(['ok' => true, 'content' => $r['content'], 'usage' => $usage,
+                 'context' => $ctxOut, 'compressed' => $compressed]);
     }
 
     np_json(['ok' => false, 'error' => 'unknown_action'], 400);

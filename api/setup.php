@@ -23,6 +23,25 @@ try {
 } catch (Throwable $e) {
     np_json(['ok' => false, 'error' => 'schema_failed', 'message' => $e->getMessage()], 500);
 }
+// the model metadata / usage tables live in their own portable file
+$modelsSchema = __DIR__ . '/db/schema_models.sql';
+if (is_file($modelsSchema)) {
+    try {
+        $out['model_statements'] = np_run_schema($modelsSchema);
+    } catch (Throwable $e) {
+        $out['model_schema_error'] = $e->getMessage();
+    }
+}
+// the operational tables: stage checklist, error centre, activity log,
+// content audit and bug-fix patches
+$opsSchema = __DIR__ . '/db/schema_ops.sql';
+if (is_file($opsSchema)) {
+    try {
+        $out['ops_statements'] = np_run_schema($opsSchema);
+    } catch (Throwable $e) {
+        $out['ops_schema_error'] = $e->getMessage();
+    }
+}
 // A table that already existed does NOT get new columns from CREATE TABLE IF NOT EXISTS.
 $out['migrated'] = np_migrate([
     'pipeline_jobs' => [
@@ -41,6 +60,20 @@ $out['migrated'] = np_migrate([
     ],
     'llm_models' => [
         'owned_by' => "VARCHAR(120) NOT NULL DEFAULT ''",
+    ],
+    'llm_model_meta' => [
+        'provider' => "VARCHAR(120) NOT NULL DEFAULT ''",
+        'display_name' => "VARCHAR(190) NOT NULL DEFAULT ''",
+        'cap_vision' => "VARCHAR(10) NOT NULL DEFAULT 'unknown'",
+        'cap_reasoning' => "VARCHAR(10) NOT NULL DEFAULT 'unknown'",
+        'cap_tools' => "VARCHAR(10) NOT NULL DEFAULT 'unknown'",
+        'cap_image_gen' => "VARCHAR(10) NOT NULL DEFAULT 'unknown'",
+        'cap_audio' => "VARCHAR(10) NOT NULL DEFAULT 'unknown'",
+        'ctx_max' => 'INTEGER NOT NULL DEFAULT 0',
+        'out_max' => 'INTEGER NOT NULL DEFAULT 0',
+        'verify_status' => "VARCHAR(16) NOT NULL DEFAULT 'unknown'",
+        'meta_source' => "VARCHAR(32) NOT NULL DEFAULT 'none'",
+        'meta_updated' => "VARCHAR(32) NOT NULL DEFAULT ''",
     ],
 ]);
 

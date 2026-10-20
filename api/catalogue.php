@@ -24,12 +24,20 @@ function np_catalogue(): array {
         $id = (string)($v['id'] ?? '');
         if ($id === '') continue;
         $out[$id] = [
-            'id'          => $id,
-            'title_fa'    => (string)($v['fa'] ?? $v['title_fa'] ?? ''),
-            'title_en'    => (string)($v['en'] ?? $v['title_en'] ?? ''),
-            'channel'     => (string)($v['src'] ?? $v['channel'] ?? ''),
-            'dur_seconds' => np_dur_sec((string)($v['dur_sec'] ?? $v['dur'] ?? '')),
-            'status'      => (string)($v['status'] ?? 'published'),
+            'id'            => $id,
+            'title_fa'      => (string)($v['fa'] ?? $v['title_fa'] ?? ''),
+            'title_en'      => (string)($v['en'] ?? $v['title_en'] ?? ''),
+            'summary_fa'    => (string)($v['sum'] ?? $v['summary_fa'] ?? ''),
+            'summary_en'    => (string)($v['sum_en'] ?? $v['summary_en'] ?? ''),
+            'topic'         => (string)($v['cat'] ?? $v['topic'] ?? ''),
+            'topic_en'      => (string)($v['cat_en'] ?? $v['topic_en'] ?? ''),
+            'channel'       => (string)($v['src'] ?? $v['channel'] ?? ''),
+            'dur_seconds'   => np_dur_sec((string)($v['dur_sec'] ?? $v['dur'] ?? '')),
+            'views'         => (int)($v['views'] ?? 0),
+            'has_transcript' => !empty($v['tr']) || is_file(__DIR__ . '/../subs/' . $id . '.json'),
+            'has_quiz'      => is_file(__DIR__ . '/../quizzes/' . $id . '.json'),
+            'published_at'  => (string)($v['publishedAt'] ?? $v['published_at'] ?? ''),
+            'status'        => (string)($v['status'] ?? 'published'),
         ];
     }
     try {
@@ -41,7 +49,13 @@ function np_catalogue(): array {
             }
             $out[$id] = [
                 'id' => $id, 'title_fa' => (string)$r['title_fa'], 'title_en' => (string)$r['title_en'],
+                'summary_fa' => (string)($r['summary_fa'] ?? ''), 'summary_en' => (string)($r['summary_en'] ?? ''),
+                'topic' => (string)($r['topic'] ?? ''), 'topic_en' => (string)($r['topic_en'] ?? ''),
                 'channel' => (string)$r['channel'], 'dur_seconds' => (int)$r['dur_seconds'],
+                'views' => (int)($r['views'] ?? 0),
+                'has_transcript' => (int)($r['has_transcript'] ?? 0) === 1,
+                'has_quiz' => is_file(__DIR__ . '/../quizzes/' . $id . '.json'),
+                'published_at' => (string)($r['published_at'] ?? ''),
                 'status' => (string)$r['status'],
             ];
         }

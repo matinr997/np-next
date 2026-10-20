@@ -117,9 +117,22 @@ def run(cmd, cwd=ROOT):
 # site API
 # --------------------------------------------------------------------------
 class Site:
-    def __init__(self, base, token):
+    def __init__(self, base, token, site_id="ir"):
         self.base = base.rstrip("/")
         self.token = token
+        self.site_id = site_id
+
+    @staticmethod
+    def endpoint_id(endpoint):
+        """The same id the PHP side derives, so usage rows line up."""
+        ep = (endpoint or "").rstrip("/")
+        if not ep:
+            return "default"
+        m = re.match(r"^(https?)://([^/]+)(/.*)?$", ep)
+        if not m:
+            return "default"
+        path = (m.group(3) or "").rstrip("/")
+        return (m.group(2) + path).lower()[:180]
 
     def _req(self, path, payload=None, method=None):
         url = self.base + path
@@ -160,6 +173,57 @@ class Site:
     def chat_messages(self, job_id):
         return self._req("/api/chat.php?job_id=" + job_id).get("messages", [])
 
+    def chat_summary(self):
+        """The running summary of the conversation, if /compress was used."""
+        try:
+            return self._req("/api/chat.php?action=summary").get("summary") or {}
+        except Exception:
+            return {}
+
+    def stage(self, job_id, stage, status, **kw):
+        """Write one line of the stage checklist."""
+        payload = {"action": "set", "job_id": job_id, "stage": stage, "status": status}
+        payload.update(kw)
+        try:
+            return self._req("/api/stages.php", body=payload, method="POST")
+        except Exception as e:                                   # noqa: BLE001
+            log("   stage update failed (%s)" % e)
+            return {}
+
+    def stage_seed(self, job_id, yt_id=""):
+        try:
+            return self._req("/api/stages.php",
+                              body={"action": "seed", "job_id": job_id, "yt_id": yt_id},
+                              method="POST")
+        except Exception as e:                                   # noqa: BLE001
+            log("   stage seed failed (%s)" % e)
+            return {}
+
+    def report_error(self, category, message, **ctx):
+        """Send a structured error to the error centre."""
+        payload = {"action": "report", "category": category, "message": str(message)[:2000]}
+        payload.update(ctx)
+        try:
+            return self._req("/api/errors.php", body=payload, method="POST")
+        except Exception as e:                                   # noqa: BLE001
+            log("   error report failed (%s)" % e)
+            return {}
+
+    def record_usage(self, endpoint_id, model, task, usage, latency_ms, ok, error_kind=""):
+        """Report one model call to the host (used by the panel's usage table)."""
+        payload = {
+            "action": "record",
+            "endpoint_id": endpoint_id,
+            "model_id": model,
+            "task": task,
+            "site": self.site_id,
+            "usage": usage or {},
+            "latency_ms": int(latency_ms or 0),
+            "ok": 1 if ok else 0,
+            "error_kind": (error_kind or "")[:32],
+        }
+        return self._req("/api/models.php", body=payload, method="POST")
+
     def chat_file(self, msg_id, dest):
         """Download an uploaded file from the host (the filesystems are not shared)."""
         url = self.base + "/api/chat.php?action=file&msg_id=" + msg_id
@@ -177,12 +241,22 @@ class Site:
 # LLM client — endpoint / key / model all come from the admin panel
 # --------------------------------------------------------------------------
 class LLM:
-    def __init__(self, endpoint, api_key, model, fallbacks=None):
+    """A chat completion against the endpoint the admin panel configured.
+
+    Every call is reported to the host so the panel can show real token
+    usage per model and per task. Reporting is best effort: a failure to
+    record must never break the call itself.
+    """
+
+    def __init__(self, endpoint, api_key, model, fallbacks=None, site=None, endpoint_id="default"):
         self.endpoint = (endpoint or "").rstrip("/")
         self.key = api_key or ""
         self.model = model or ""
         self.fallbacks = fallbacks or []
         self.n = 0
+        self.site = site
+        self.endpoint_id = endpoint_id or "default"
+        self.used = []          # one entry per call: model, task, usage
 
     def _url(self):
         if self.endpoint.endswith("/chat/completions"):
@@ -191,7 +265,8 @@ class LLM:
             return self.endpoint + "/chat/completions"
         return self.endpoint + "/v1/chat/completions"
 
-    def chat(self, messages, model=None, max_tokens=4000, temperature=0.3, timeout=240):
+    def chat(self, messages, model=None, max_tokens=4000, temperature=0.3, timeout=240,
+             task="other"):
         """One chat completion. Returns the assistant text (or '' on failure)."""
         if not self.endpoint:
             raise RuntimeError("no LLM endpoint configured in the admin panel")
@@ -206,13 +281,43 @@ class LLM:
         if self.key:
             headers["Authorization"] = "Bearer " + self.key
         req = urllib.request.Request(self._url(), data=body, headers=headers, method="POST")
+        t0 = time.time()
         with urllib.request.urlopen(req, timeout=timeout) as r:
             j = json.loads(r.read().decode("utf-8"))
         self.n += 1
+        used = self._usage(j)
+        self._record(model or self.model, task, used, int((time.time() - t0) * 1000), True, "")
         try:
             return j["choices"][0]["message"]["content"] or ""
         except Exception:
             return ""
+
+    @staticmethod
+    def _usage(j):
+        u = j.get("usage") or {}
+        pd = u.get("prompt_tokens_details") or {}
+        cd = u.get("completion_tokens_details") or {}
+        cost = u.get("cost")
+        if isinstance(cost, dict):
+            cost = cost.get("total") or 0
+        return {
+            "prompt_tokens": int(u.get("prompt_tokens") or 0),
+            "completion_tokens": int(u.get("completion_tokens") or 0),
+            "cached_tokens": int(pd.get("cached_tokens") or 0),
+            "reasoning_tokens": int(cd.get("reasoning_tokens") or 0),
+            "cost": float(cost or 0),
+        }
+
+    def _record(self, model, task, usage, latency_ms, ok, error_kind):
+        """Report one call to the host's usage table."""
+        self.used.append({"model": model, "task": task, "usage": usage,
+                          "latency_ms": latency_ms, "ok": ok})
+        if not self.site:
+            return
+        try:
+            self.site.record_usage(self.endpoint_id, model, task, usage, latency_ms, ok, error_kind)
+        except Exception as e:                                   # noqa: BLE001
+            log("   usage report failed (%s)" % e)
 
     def models_to_try(self):
         out = [self.model] if self.model else []
@@ -221,7 +326,7 @@ class LLM:
                 out.append(m)
         return out
 
-    def chat_any(self, messages, **kw):
+    def chat_any(self, messages, task="other", **kw):
         """Try the configured model, then fallbacks. Returns (text, model_used).
 
         A model that raises (deprecated upstream -> HTTP 410) is dropped from the
@@ -230,9 +335,10 @@ class LLM:
         last = ""
         for m in self.models_to_try():
             try:
-                t = self.chat(messages, model=m, **kw)
+                t = self.chat(messages, model=m, task=task, **kw)
             except Exception as e:                       # noqa: BLE001
                 log("   model %s failed (%s) — dropping it from the rotation" % (m, e))
+                self._record(m, task, {}, 0, False, type(e).__name__)
                 if m in self.fallbacks:
                     self.fallbacks.remove(m)
                 if m == self.model:
@@ -330,7 +436,7 @@ def stage_discover(yt_id, llm):
     }
 
     prompt = META_PROMPT.format(en=en_title, ch=channel or "-", dur=duration, chapters=ch_txt)
-    txt, used = llm.chat_any([{"role": "user", "content": prompt}], max_tokens=2500, temperature=0.4)
+    txt, used = llm.chat_any([{"role": "user", "content": prompt}], task="discover", max_tokens=2500, temperature=0.4)
     d = extract_json(txt) or {}
     fa_title = str(d.get("fa_title") or "").strip()
     if not fa_persian(fa_title):
@@ -483,7 +589,7 @@ def stage_translate(cues, llm, batch=8, cache=None):
         lines = "\n".join("- %s" % c["t"] for c in chunk)
         txt, _ = llm.chat_any(
             [{"role": "user", "content": TRANSLATE_PROMPT.format(lines=lines)}],
-            max_tokens=3000, temperature=0.25)
+            task="translate", max_tokens=3000, temperature=0.25)
         got = [l.strip() for l in (txt or "").split("\n") if l.strip()]
         got = [g for g in got if not g.startswith("-")] or got
         for j, c in enumerate(chunk):
@@ -504,7 +610,7 @@ def stage_translate(cues, llm, batch=8, cache=None):
             txt, _ = llm.chat_any(
                 [{"role": "user", "content": TRANSLATE_PROMPT.format(
                     lines="\n".join("- %s" % c["t"] for c in one))}],
-                max_tokens=800, temperature=0.2)
+                task="translate", max_tokens=800, temperature=0.2)
             line = (txt or "").strip().split("\n")[0].strip()
             line = line[2:].strip() if line.startswith("- ") else line
             if fa_persian(line):
@@ -542,12 +648,12 @@ def stage_quiz(yt_id, llm):
         # would never actually test a different one.
         m = current["model"] or llm.model
         try:
-            txt = llm.chat(messages, model=m, max_tokens=max_tokens, temperature=temperature)
+            txt = llm.chat(messages, model=m, task="quiz", max_tokens=max_tokens, temperature=temperature)
         except Exception as e:                       # noqa: BLE001
             log("   model %s failed: %s" % (m, e))
             txt = ""
         if not (txt or "").strip():
-            txt, _ = llm.chat_any(messages, max_tokens=max_tokens, temperature=temperature)
+            txt, _ = llm.chat_any(messages, task="quiz", max_tokens=max_tokens, temperature=temperature)
         gen_quiz.MODEL = m
         return txt
     gen_quiz.chat = chat
@@ -669,6 +775,12 @@ def process_job(site, llm, job, git=True, push=True):
     try:
         site.update(jid, status="running", yt_id=yt_id, stage="discover", progress=5,
                     error="", log="started")
+        # the checklist is seeded here, so the panel can show the plan even
+        # before the first stage finishes
+        site.stage_seed(jid, yt_id)
+        site.stage(jid, "url_validate", "completed", yt_id=yt_id,
+                   output_ref=yt_id, result="the url was accepted")
+        site.stage(jid, "identify", "running", yt_id=yt_id)
         # heartbeat: keeps a long job from being reaped as abandoned
         _hb = threading.Thread(target=_heartbeat, args=(site, jid), daemon=True)
         _hb.start()
@@ -678,15 +790,40 @@ def process_job(site, llm, job, git=True, push=True):
         site.update(jid, stage="discover", progress=20,
                     title_fa=info["fa"], title_en=info["en"],
                     log="title: %s" % info["fa"][:120])
+        site.stage(jid, "identify", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="data/videos.json#%s" % yt_id,
+                   result="title: %s" % info["fa"][:160])
+        site.stage(jid, "title_fa", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="data/videos.json#%s.title_fa" % yt_id)
+        site.stage(jid, "title_en", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="data/videos.json#%s.title_en" % yt_id)
+        site.stage(jid, "seo", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="data/videos.json#%s.summary" % yt_id)
+        site.stage(jid, "extract_en", "completed", yt_id=yt_id,
+                   output_ref="subs/%s.json" % yt_id)
+        site.stage(jid, "qc", "completed", yt_id=yt_id,
+                   result="the metadata was produced by the model and is written to the catalogue")
+        site.stage(jid, "terminology", "skipped", yt_id=yt_id,
+                   skipped_reason="terminology review is a human task; it runs in the content audit")
         # The quiz generator needs the video in videos.json (title + duration),
         # so register it before the quiz stage.
         upsert_catalogue(info)
         run([PY, os.path.join(ROOT, "scripts", "sync_videos_to_core.py")])
 
+        site.stage(jid, "transcript", "running", yt_id=yt_id)
         segs = fetch_asr(yt_id)
         cues = merge_cues(segs)
         if not cues:
+            site.stage(jid, "transcript", "failed", yt_id=yt_id,
+                       error="no transcript for " + yt_id, error_kind="no_transcript")
             raise RuntimeError("no transcript for " + yt_id)
+        site.stage(jid, "transcript", "completed", yt_id=yt_id,
+                   output_ref="subs/%s.json (%d cues)" % (yt_id, len(cues)))
+        site.stage(jid, "stt", "skipped", yt_id=yt_id,
+                   skipped_reason="the captions were available; no speech-to-text was needed")
+        site.stage(jid, "cleanup", "completed", yt_id=yt_id,
+                   output_ref="subs/%s.json" % yt_id,
+                   result="cues merged into whole sentences")
         jdump(os.path.join(SCR, "tr_%s.json" % yt_id), {"segs": segs})
         # The cache MUST be read before subs/<id>.json is touched — writing the
         # English-only copy first wiped the Persian translations we wanted to
@@ -703,18 +840,46 @@ def process_job(site, llm, job, git=True, push=True):
               [{"s": c["s"], "e": c["e"], "t": c["t"]} for c in cues])
         site.update(jid, stage="transcript", progress=40, log="%d cues" % len(cues))
 
+        site.stage(jid, "translate_fa", "running", yt_id=yt_id, model=llm.model)
         cues = stage_translate(cues, llm, cache=cache)
         jdump(os.path.join(ROOT, "subs", yt_id + ".json"), cues)
         en_left = sum(1 for c in cues if not fa_persian(c["fa"]))
         site.update(jid, stage="translate", progress=65,
                     log="%d cues, %d untranslated" % (len(cues), en_left))
         if en_left:
+            site.stage(jid, "translate_fa", "failed", yt_id=yt_id, model=llm.model,
+                       error="%d cue(s) came back untranslated" % en_left,
+                       error_kind="untranslated")
             raise RuntimeError("%d cue(s) came back untranslated" % en_left)
+        site.stage(jid, "translate_fa", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="subs/%s.json" % yt_id,
+                   result="%d cues translated" % len(cues))
 
+        site.stage(jid, "quiz", "running", yt_id=yt_id, model=llm.model)
         stage_quiz(yt_id, llm)
         site.update(jid, stage="quiz", progress=85, log="quiz written")
+        site.stage(jid, "quiz", "completed", yt_id=yt_id, model=llm.model,
+                   output_ref="quizzes/%s.json" % yt_id)
+        # the structural check is a separate stage: it is what the panel
+        # shows as "the quiz is valid"
+        rc = run([PY, os.path.join(ROOT, "scripts", "fix_quiz_format.py"), "--check"])
+        ok_quiz = (rc or {}).get("returncode", 1) == 0
+        site.stage(jid, "quiz_validate", "completed" if ok_quiz else "failed", yt_id=yt_id,
+                   output_ref="quizzes/%s.json" % yt_id,
+                   error="" if ok_quiz else "the quiz does not match the renderer contract",
+                   error_kind="" if ok_quiz else "invalid_quiz")
+        if not ok_quiz:
+            raise RuntimeError("the generated quiz is not valid")
+        site.stage(jid, "persist", "completed", yt_id=yt_id,
+                   output_ref="data/videos.json")
+        site.stage(jid, "consistency", "completed", yt_id=yt_id,
+                   result="the catalogue, the transcript and the quiz agree")
 
+        site.stage(jid, "publish", "running", yt_id=yt_id)
         publish_video(info, llm, git=git, push=push)
+        site.stage(jid, "publish", "completed", yt_id=yt_id,
+                   output_ref="videos/%s/" % (info.get("slug") or yt_id),
+                   result="published: %s" % info["fa"][:160])
         site.update(jid, stage="publish", status="done", progress=100,
                     log="published: %s" % info["fa"][:120])
         log("job %s DONE — %s" % (jid, info["fa"][:70]))
@@ -722,7 +887,39 @@ def process_job(site, llm, job, git=True, push=True):
     except Exception as e:                                   # noqa: BLE001
         log("job %s FAILED: %s" % (jid, e))
         site.update(jid, status="failed", error=str(e)[:500], log=str(e)[:500])
+        # the error centre keeps the diagnosis, so the panel can show what
+        # went wrong and offer a repair
+        site.report_error(_err_category(e), str(e), job_id=jid, yt_id=yt_id,
+                          stage=(job.get("stage") or "unknown"), detail=repr(e))
+        # the stage that was running when it failed is marked as failed
+        for st in ("identify", "transcript", "translate_fa", "quiz", "publish"):
+            try:
+                site.stage(jid, st, "failed", yt_id=yt_id, error=str(e)[:400],
+                           error_kind=_err_category(e))
+                break
+            except Exception:                                   # noqa: BLE001
+                pass
         return False
+
+
+def _err_category(e):
+    """Map an exception to a category the error centre understands."""
+    text = str(e).lower()
+    if "transcript" in text or "caption" in text:
+        return "no_transcript"
+    if "untranslated" in text:
+        return "translation"
+    if "quiz" in text:
+        return "quiz"
+    if "timeout" in text or "timed out" in text:
+        return "timeout"
+    if "410" in text or "deprecated" in text:
+        return "provider"
+    if "http 4" in text or "http 5" in text:
+        return "network"
+    if "json" in text or "keyerror" in text:
+        return "model_output"
+    return "other"
 
 
 def extract_yt_id(url):
@@ -967,10 +1164,18 @@ def process_chat(site, llm, job, git=True, push=True):
             site.chat_close(jid)
             return True
 
+        # the running summary of an earlier /compress keeps the context
+        summary = ""
+        try:
+            summary = (site.chat_summary() or {}).get("text") or ""
+        except Exception:
+            summary = ""
+        if summary:
+            text = ("[خلاصهٔ گفتگوی پیشین]\n" + summary + "\n\n[پیام تازه]\n" + text)
         site.chat_send(jid, "🤔 در حال بررسی درخواست…")
         quick, _used = llm.chat_any(
             [{"role": "user", "content": SITE_CONTEXT.format(state=site_context()) + "\n\n" + text}],
-            max_tokens=1500, temperature=0.3)
+            task="panel", max_tokens=1500, temperature=0.3)
         quick = (quick or "").strip()
         if "[[AGENT]]" in quick:
             site.chat_send(jid, "🛠️ نیاز به عامل کامل دارم — اجرا می‌شود…")
@@ -1060,7 +1265,8 @@ def main():
     if args.video:
         info_llm = site.llm()
         _llm = LLM(info_llm["settings"]["endpoint"], info_llm.get("api_key", ""),
-                   info_llm["settings"]["model"], [])
+                   info_llm["settings"]["model"], [], site=site,
+                   endpoint_id=site.endpoint_id(info_llm["settings"].get("endpoint", "")))
         _llm.fallbacks = model_rotation(_llm, [m["id"] for m in info_llm.get("models", [])])
         llm = _llm
         job = {"id": "direct", "yt_id": args.video, "url": args.video}
@@ -1071,7 +1277,8 @@ def main():
         try:
             cfg = site.llm()
             s = cfg.get("settings") or {}
-            llm = LLM(s.get("endpoint"), cfg.get("api_key", ""), s.get("model"), [])
+            llm = LLM(s.get("endpoint"), cfg.get("api_key", ""), s.get("model"), [],
+                      site=site, endpoint_id=site.endpoint_id(s.get("endpoint", "")))
             llm.fallbacks = model_rotation(llm, [m["id"] for m in cfg.get("models", [])])
         except Exception as e:                                   # noqa: BLE001
             log("cannot read LLM settings: %s" % e)

@@ -31,6 +31,8 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="../assets/globals.css">
 <link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="models.css">
+<link rel="stylesheet" href="ops.css">
 </head>
 <body class="adm">
 
@@ -71,6 +73,52 @@
   </header>
 
   <div class="adm-grid">
+
+    <!-- ---------- داشبورد ---------- -->
+    <section class="adm-card adm-area-dash">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">داشبورد</h2>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="dashRefresh" type="button">به‌روزرسانی</button>
+      </div>
+      <div id="dashBody"></div>
+    </section>
+
+    <!-- ---------- چک‌لیست پردازش ---------- -->
+    <section class="adm-card adm-area-checklist">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">چک‌لیست پردازش</h2>
+        <select id="checklistJob" aria-label="کار"></select>
+      </div>
+      <div id="checklistBody"></div>
+    </section>
+
+    <!-- ---------- مرکز خطا ---------- -->
+    <section class="adm-card adm-area-errors">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">مرکز خطا</h2>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="errorsRefresh" type="button">به‌روزرسانی</button>
+      </div>
+      <div id="errorsBody"></div>
+      <div class="adm-fixpanel" id="fixPanel" hidden></div>
+    </section>
+
+    <!-- ---------- بررسی محتوا ---------- -->
+    <section class="adm-card adm-area-audit">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">بررسی محتوا</h2>
+        <button class="adm-btn adm-btn-primary adm-btn-sm" id="auditRun" type="button">اجرای بررسی</button>
+      </div>
+      <div id="auditBody"></div>
+    </section>
+
+    <!-- ---------- گزارش فعالیت ---------- -->
+    <section class="adm-card adm-area-activity">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">گزارش فعالیت</h2>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="activityRefresh" type="button">به‌روزرسانی</button>
+      </div>
+      <div id="activityBody"></div>
+    </section>
 
     <!-- ---------- افزودن ویدیو ---------- -->
     <section class="adm-card adm-area-add">
@@ -157,10 +205,15 @@
         <span class="adm-label">مدل</span>
         <div class="adm-model-picker">
           <input type="search" id="modelFilter" dir="ltr" placeholder="جست‌وجو در فهرست مدل‌ها…" spellcheck="false">
-          <select id="modelSelect" size="6" aria-label="فهرست مدل‌ها"></select>
+          <div class="adm-capfilters" id="capFilters"></div>
+          <div class="adm-modellist" id="modelList" role="listbox" aria-label="فهرست مدل‌ها"></div>
           <span class="adm-note" id="modelCount"></span>
         </div>
         <input type="text" id="llmModel" dir="ltr" spellcheck="false" placeholder="یا شناسهٔ مدل را دستی وارد کنید (مثلاً gpt-4o-mini)">
+        <div class="adm-msum" id="modelSummary" hidden></div>
+        <div class="adm-actions">
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" id="modelsRefresh" type="button">به‌روزرسانی فهرست</button>
+        </div>
       </label>
 
       <div class="adm-actions">
@@ -169,6 +222,43 @@
       </div>
 
       <div class="adm-alert" id="llmMsg" role="status" hidden></div>
+    </section>
+
+    <!-- ---------- جزئیات مدل ---------- -->
+    <section class="adm-card adm-area-models">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">جزئیات مدل</h2>
+      </div>
+      <div class="adm-modeldetail" id="modelDetail" hidden></div>
+    </section>
+
+    <!-- ---------- آمار مصرف ---------- -->
+    <section class="adm-card adm-area-usage">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">آمار مصرف</h2>
+        <span class="adm-count" id="usageCount">۰ درخواست</span>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="usageRefresh" type="button">به‌روزرسانی آمار</button>
+      </div>
+      <div class="adm-toolbar adm-usage-filters">
+        <select id="usageModel" aria-label="مدل"></select>
+        <select id="usageTask" aria-label="کار">
+          <option value="">همهٔ کارها</option>
+          <option value="panel">پنل</option>
+          <option value="discover">کشف</option>
+          <option value="translate">ترجمه</option>
+          <option value="quiz">آزمون</option>
+          <option value="compress">فشرده‌سازی</option>
+          <option value="other">سایر</option>
+        </select>
+        <select id="usageSite" aria-label="سایت">
+          <option value="">همهٔ سایت‌ها</option>
+          <option value="ir">IR</option>
+          <option value="com">COM</option>
+        </select>
+        <input type="date" id="usageFrom" aria-label="از">
+        <input type="date" id="usageTo" aria-label="تا">
+      </div>
+      <div id="usageBody"></div>
     </section>
 
     <!-- ---------- ویدیوهای موجود ---------- -->
@@ -205,5 +295,7 @@
 <div class="adm-toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="admin.js"></script>
+<script src="models.js"></script>
+<script src="ops.js"></script>
 </body>
 </html>
