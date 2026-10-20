@@ -10,6 +10,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+# the local server port (the worker talks to the API over it)
+export NP_PORT="${NP_PORT:-8125}"
+
 if [ ! -f api/config.php ]; then
   echo "api/config.php is missing — copy api/config.example.php and fill it in." >&2
   exit 1

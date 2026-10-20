@@ -64,6 +64,28 @@ function setCsrf(token) {
   }
 }
 
+/* ------------------------------------------------------------------ */
+  /* is the API actually there?                                          */
+  /*                                                                     */
+  /* GitHub Pages serves the panel as static files, so a POST to         */
+  /* ../api/auth.php comes back 405 and the login can never work.        */
+  /* Detect it once and say so plainly instead of showing a raw code.   */
+  /* ------------------------------------------------------------------ */
+  var API_MISSING = false;
+  function apiMissingMessage() {
+    return 'This panel is open on a static host (GitHub Pages), which has no API; sign-in only works on the server or on the local machine. Local: http://127.0.0.1:8131/com/admin/ — or install the panel on Netafraz.';
+  }
+  function checkApi() {
+    return fetch(API_BASE + 'auth.php?action=csrf', { credentials: 'same-origin' })
+      .then(function (res) {
+        if (res.status === 405 || res.status === 404) { API_MISSING = true; }
+        return res.text().then(function (t) {
+          try { return JSON.parse(t); } catch (e) { return null; }
+        });
+      })
+      .catch(function () { /* the network is down; the real error shows later */ });
+  }
+
 function api(file, opts) {
     opts = opts || {};
     var init = {
@@ -90,8 +112,9 @@ function api(file, opts) {
           try { data = JSON.parse(text); } catch (e) { data = null; }
         }
         if (data === null) {
+          if (res.status === 405 || res.status === 404) { API_MISSING = true; }
           throw new ApiError(
-            res.ok ? 'The server sent an unreadable response.' : 'The server returned an error (code ' + res.status + ').',
+            API_MISSING ? apiMissingMessage() : (res.ok ? 'The server sent an unreadable response.' : 'The server returned an error (code ' + res.status + ').'),
             res.status, null
           );
         }
@@ -931,6 +954,15 @@ function api(file, opts) {
 
     renderDetected();
     $('llmEndpoint').value = 'http://localhost:20128/v1';
+
+    /* is there an API at all? A static host answers 405 and the panel
+       must say so plainly instead of failing with a raw code. */
+    checkApi().then(function () {
+      if (API_MISSING) {
+        var box = document.getElementById('apiMissing');
+        if (box) { box.textContent = apiMissingMessage(); box.hidden = false; }
+      }
+    });
 
     /* restore the session if the cookie is still alive */
     api('auth.php').then(function (data) {

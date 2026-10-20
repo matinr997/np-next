@@ -1396,7 +1396,7 @@ def load_site(args):
     # config.php's 'site' key holds a PATH ('/'), not a URL — only absolute
     # http(s) URLs are usable as an API base.
     if not site.startswith("http://") and not site.startswith("https://"):
-        site = "http://127.0.0.1:8125"
+        site = "http://127.0.0.1:" + (os.environ.get("NP_PORT") or "8125")
     if not token:
         cfg = os.path.join(ROOT, "api", "config.php")
         if os.path.isfile(cfg):

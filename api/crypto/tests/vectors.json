@@ -1,0 +1,139 @@
+{
+  "keccakVectors": [
+    {
+      "input": "",
+      "hash": "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+    },
+    {
+      "input": "abc",
+      "hash": "4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45"
+    },
+    {
+      "input": "The quick brown fox jumps over the lazy dog",
+      "hash": "4d741b6f1eb29cb2a9b9911c82f56fa8d73b04959d3d9d222895df6c0b28aa15"
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "hash": "96ea54061def936c4be90b518992fdc6f12f535068a256229aca54267b4d084d"
+    }
+  ],
+  "chains": {
+    "evm": {
+      "acctPath": "m/44'/60'/0'/0",
+      "addrPath": "m/44'/60'/0'/0/{i}",
+      "xpub": "xpub6Dua7vAfRL5kKxW4zCU2NibxBuDfMc3JVNPx7BoXvZ6L7taUHz6kXfRkL39bFLHWDSmRx44CYGSZufthp5xTY63BUmgTGdKZnx2Qt85Kt78",
+      "children": [
+        {
+          "index": 0,
+          "pub33": "0292df2f2c31a5c4b0d4946e922cc3bd25ad7196ffeb049905b0952b9ac48ef25f",
+          "evm": "0x10680d0ee5ce8f86f3deda70bec3ce69d4b36ebe",
+          "tron": "TBTxTifKeJg2mhaFD2nWBXeeLwjvuDVCLM",
+          "btc": "bc1q230qyjfhvk4uwh27ev997x4p9hnk087275czdn",
+          "hash160": "545e02493765abc75d5ecb0a5f1aa12de7679fca"
+        },
+        {
+          "index": 1,
+          "pub33": "034ecbfc86f7447c8bfd1a5f71b13600d767ccb58d290c7b146632090f3a05c66c",
+          "evm": "0x6b1829eb78536de320626721dd66e908b6363adf",
+          "tron": "TKjUFWdE1VTr5iRakp9CDXuSiYdUk7pG5p",
+          "btc": "bc1qc9c7ugulsmt6puzmqyazkrlf57hxum50yfkkv9",
+          "hash160": "c171ee239f86d7a0f05b013a2b0fe9a7ae6e6e8f"
+        },
+        {
+          "index": 7,
+          "pub33": "025fc5704451ddbc6aeb495f977f0e9f304c53c6ca8b608d2babb1c0502a819cbb",
+          "evm": "0x1006b5a01cbbbfa86517a3fa7024aa27ce0f3564",
+          "tron": "TBRwrJyaNVvwF2PSMnU4jeYyvmP4a2FHDy",
+          "btc": "bc1qzxu2nkep8xxrnzwtqrzw2v009sfhnkeadcxyrq",
+          "hash160": "11b8a9db21398c3989cb00c4e531ef2c1379db3d"
+        },
+        {
+          "index": 42,
+          "pub33": "023df5f31cd8485c32cad947b5a90cf4379c9878c885e95b32722f7f83e6f43ceb",
+          "evm": "0xa4d6771d0c43cf86b01b625ddf4316c0944a597f",
+          "tron": "TQznjq1YjU22YWzdB3hCd1wKi88QrDAP7L",
+          "btc": "bc1qlp4fmvtj4xdcrkexn4ezzans7l0qwz9jfeug70",
+          "hash160": "f86a9db172a99b81db269d72217670f7de0708b2"
+        }
+      ]
+    },
+    "tron": {
+      "acctPath": "m/44'/195'/0'/0",
+      "addrPath": "m/44'/195'/0'/0/{i}",
+      "xpub": "xpub6E5Ad98cs3hLRC4Mm7vesGLN2d2oyyczjbSADPeCY8hkoP7EUKR7BJTpqYMUi12xSznjWG8ZwWisFKXjfKByex7ZDo5Y9anaJUFipwXKcV5",
+      "children": [
+        {
+          "index": 0,
+          "pub33": "02f793979eaa0fc8a113fd383b1eceafaf9d64b8cfb92d5ce6690b7306865abaea",
+          "evm": "0x9a0fe1a4b7c04ef544f11075dc8c064eda08a8dc",
+          "tron": "TQ1p64WMMra7oCHL27nQ6CfqkfCerLr1W7",
+          "btc": "bc1qkqlk4f4f4eghjel2yk79xmscus7paey6zqs6vd",
+          "hash160": "b03f6aa6a9ae517967ea25bc536e18e43c1ee49a"
+        },
+        {
+          "index": 1,
+          "pub33": "03146bc08d1187538be0a5999ce46adabc0b3a0c0559775349404a854f37ccb929",
+          "evm": "0x2b6127df84c7c3ab54cbde9ed0b1336c24d4f93d",
+          "tron": "TDvaSoouvwLnKsmuY9iHSwc2R9V5NLBNiz",
+          "btc": "bc1qckwm8kmrawrxy8whjljs4pgqsgxd7feq00pu9g",
+          "hash160": "c59db3db63eb86621dd797e50a8500820cdf2720"
+        },
+        {
+          "index": 7,
+          "pub33": "020665f3b75ce7ed8def3d2a3dcc4a3f9e436c500d64af420113768f7b78a71245",
+          "evm": "0x51052c39e596d1044eb15bd1b70b37864aa0f31d",
+          "tron": "THMbw1MCPtmWuiGjjR5imU2h9BX9Q7fPgr",
+          "btc": "bc1qdsdfgr37v8uwte6ss6pn8d4dpukumav8dv2j9j",
+          "hash160": "6c1a940e3e61f8e5e750868333b6ad0f2dcdf587"
+        },
+        {
+          "index": 42,
+          "pub33": "02511c2e1c691ce9aa13af843787f062f7f187314ea656f71bf6043bfe72ee0a1b",
+          "evm": "0xeed56bf63750312e5a48c953da67f46a36d321e6",
+          "tron": "TXk3VWtSW87ixShncEqtePC9De1pB5jmLZ",
+          "btc": "bc1qurvzhgfdhka0066jeyy8d7t5v4ndt9cd4tsrxa",
+          "hash160": "e0d82ba12dbdbaf7eb52c90876f9746566d5970d"
+        }
+      ]
+    },
+    "btc": {
+      "acctPath": "m/84'/0'/0'/0",
+      "addrPath": "m/84'/0'/0'/0/{i}",
+      "xpub": "xpub6EGctir4qkaRC9sXUSoGJyfJEBZLpieUu8re3M9aynpXp5UMENHYAwiaVucunTWKY6VdGgoyRXd8QZjyq1s8M2ZE3jZZ77zdP7uLePHBWf1",
+      "children": [
+        {
+          "index": 0,
+          "pub33": "02dc51b7952812014869f634dfe6694bea3aa801c94a1d96c0a67385e438c2305a",
+          "evm": "0x73fc501994afc000b1dfd3f3eb73a3563e0e580b",
+          "tron": "TLYUy8Hext2aq2vF6nU3mrFNF4hP2jeqj6",
+          "btc": "bc1q7z737v8seg9qdghtj9qpf3q8jte82nynyfq6kc",
+          "hash160": "f0bd1f30f0ca0a06a2eb914014c40792f2754c93"
+        },
+        {
+          "index": 1,
+          "pub33": "03e6d2a45d822865913d56388e3e6f3b3e5c1de9bae6547fcb18be94eeb92524ff",
+          "evm": "0x6195a6b184f43e15231c64cdfdd46621ff3a20ce",
+          "tron": "TJsBpcMuKXJiWSwEp7GWTfARSccLSLTCk6",
+          "btc": "bc1q83mqu4exrw5kjlcu89v6aksk4u9h7hecajwwlj",
+          "hash160": "3c760e57261ba9697f1c3959aeda16af0b7f5f38"
+        },
+        {
+          "index": 7,
+          "pub33": "02b22f5afd63c9379b69a99b53661b8ca23ea220d6dc93377accaa074b5023ceb0",
+          "evm": "0xa984db744b8846ee5148badb009dd2871833ac0d",
+          "tron": "TRRYMZWvHWp69zAfYN1jGML5FiNjG3QfHs",
+          "btc": "bc1qu4pykngznx02547r0he7revdx6d2tsmlyajq94",
+          "hash160": "e5424b4d02999eaa57c37df3e1e58d369aa5c37f"
+        },
+        {
+          "index": 42,
+          "pub33": "02c0e892bead71393db4e315afe451f22bc3c6d51604ba3ad8dc6d102638a3a3df",
+          "evm": "0x83b8ef93052d4b645e47694b293c862b730949b1",
+          "tron": "TMyh4koV6XV9Yx9QCSUTmCDfwKrXvgF8EK",
+          "btc": "bc1quruql772263rkxm62lqud6u63e2wcpp84pzpg8",
+          "hash160": "e0f80ffbca56a23b1b7a57c1c6eb9a8e54ec0427"
+        }
+      ]
+    }
+  }
+}

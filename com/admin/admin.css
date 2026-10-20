@@ -349,3 +349,10 @@ h1,h2,h3{color:var(--adm-accent);margin:0}
   border-bottom:1px solid transparent;transition:border-color .15s var(--adm-ease);
 }
 a.adm-job-name:hover{color:var(--adm-accent);border-bottom-color:var(--adm-light)}
+
+/* the panel is open somewhere with no API behind it */
+.adm-api-missing{
+  margin:14px 0 0;padding:11px 13px;border-radius:10px;
+  background:#fdecef;border:1px solid #F0728D;color:#b3123a;
+  font-size:.86rem;line-height:1.7;
+}

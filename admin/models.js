@@ -185,7 +185,7 @@
 
   function renderList(st) {
     st = st || S;
-    var box = document.getElementById(st === C ? 'chatModelList' : 'modelList');
+    var box = document.getElementById('modelList');
     if (!box) return;
     var rows = visible(st);
     if (!st.models.length) {
@@ -211,12 +211,12 @@
       box.innerHTML = html;
       Array.prototype.forEach.call(box.querySelectorAll('.adm-mrow'), function (b) {
         b.addEventListener('click', function () {
-          if (st === C) pickChat(b.getAttribute('data-model'));
-          else pick(b.getAttribute('data-model'));
+          pick(b.getAttribute('data-model'));
+          pick(b.getAttribute('data-model'));
         });
       });
     }
-    var c = document.getElementById(st === C ? 'chatModelCount' : 'modelCount');
+    var c = document.getElementById('modelCount');
     if (c) c.textContent = plain(rows.length) + ' / ' + plain(st.models.length) + ' ' + t('modelsCount');
   }
 
@@ -485,10 +485,6 @@
     var mi = document.getElementById('llmModel');
     if (mi) {
       mi.addEventListener('change', function () { pick(mi.value.trim()); });
-    }
-    var cm = document.getElementById('chatModel');
-    if (cm) {
-      cm.addEventListener('change', function () { pickChat(cm.value.trim()); });
     }
     /* the catalogue needs the session — the panel calls load() again once
        the administrator is signed in */
