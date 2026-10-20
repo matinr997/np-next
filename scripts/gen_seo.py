@@ -517,10 +517,20 @@ def inject_static(site):
                 ld.append(ld_breadcrumb(site, dep, [(site['brand'][dep], ''), (meta['h1'], path)]))
             desc = meta["desc"]
             block = head_tags(site, dep, path, meta['title'], desc, img, 'website', ld)
-            new = re.sub(r'%s.*?%s' % (marks[0], marks[1]), '', src, flags=re.S)
-            new = re.sub(r'(</title>)',
-                         lambda m: m.group(1) + '\n' + marks[0] + '\n' + block + '\n' + marks[1],
-                         new, count=1)
+            # The block is removed and put back in the same place, so the
+            # generator is idempotent: running it twice changes nothing.
+            m = re.search(r'%s.*?%s' % (marks[0], marks[1]), src, flags=re.S)
+            if m:
+                # the block is replaced where it was
+                new = src[:m.start()] + marks[0] + '\n' + block + '\n' + marks[1] + src[m.end():]
+            else:
+                # first run: the block goes after the hand-written title
+                new = re.sub(r'(</title>)',
+                             lambda mm: mm.group(1) + '\n' + marks[0] + '\n' + block + '\n' + marks[1],
+                             src, count=1)
+            # the block leaves a run of blank lines behind; collapse them so
+            # the tree stays clean
+            new = re.sub(r'(<!--seo:end-->)\n{2,}', r'\1\n', new)
             assert marks[0] in new and block in new, 'head injection failed for %s' % rel
             open(fp, 'w', encoding='utf-8').write(new)
 
