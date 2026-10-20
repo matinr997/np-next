@@ -342,3 +342,10 @@ h1,h2,h3{color:var(--adm-accent);margin:0}
 
 /* ---------- دستیار (چت) ---------- */
 .adm-area-chat{grid-column:1/-1}
+
+/* the title of a queue card opens the video on YouTube */
+.adm-job-name{
+  color:var(--adm-ink);text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .15s var(--adm-ease);
+}
+a.adm-job-name:hover{color:var(--adm-accent);border-bottom-color:var(--adm-light)}

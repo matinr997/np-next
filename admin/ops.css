@@ -164,3 +164,39 @@
 .adm-spin-sm{width:11px;height:11px;border-width:2px}
 @keyframes adm-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.adm-spin{animation-duration:2.4s}}
+
+/* ---- the stage strip on a queue card ---- */
+.adm-stages{
+  display:flex;flex-wrap:wrap;gap:4px;margin-top:9px;
+}
+.adm-stg{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:6px;
+  font-size:.68rem;font-weight:900;line-height:1;
+  border:1px solid var(--adm-line);background:#fff;color:var(--adm-muted);
+}
+.adm-stg b{font-weight:900}
+/* done -> a green tick */
+.adm-stg-done{background:#e9f9f0;border-color:#b9e6cd;color:#0f7a3d}
+/* running -> a blue spinner */
+.adm-stg-run{background:#eaf5fb;border-color:var(--adm-light);color:var(--adm-accent)}
+/* failed -> a red warning */
+.adm-stg-bad{background:#fdecef;border-color:#F0728D;color:#b3123a}
+/* skipped -> a quiet dash */
+.adm-stg-skip{background:var(--adm-wash);opacity:.7}
+/* waiting for a human -> amber */
+.adm-stg-wait{background:var(--adm-cream);border-color:#E9DDB4;color:#7A5A18}
+/* not yet */
+.adm-stg-todo{background:#fff;color:#b3c2cf}
+
+/* a failed stage in the strip can be clicked to retry it */
+.adm-stg-click{cursor:pointer;transition:transform .15s var(--adm-ease),box-shadow .15s var(--adm-ease)}
+.adm-stg-click:hover{transform:scale(1.14);box-shadow:0 0 0 3px rgba(240,114,141,.25)}
+.adm-stg-click:focus-visible{outline:2px solid var(--adm-accent);outline-offset:2px}
+
+/* the title of a queue card opens the video */
+.adm-job-name{
+  color:var(--adm-ink);text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .15s var(--adm-ease);
+}
+a.adm-job-name:hover{color:var(--adm-accent);border-bottom-color:var(--adm-light)}
