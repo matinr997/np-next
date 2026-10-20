@@ -115,3 +115,52 @@
   .adm-clrow{gap:7px}
   .adm-ecat,.adm-aact{min-width:0}
 }
+
+
+/* ---- the checklist as a todo list ---- */
+.adm-todo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.adm-todo li{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:8px 12px;border-radius:var(--adm-r-ctl);font-size:.8rem;
+  border:1px solid transparent;background:var(--adm-wash);
+}
+.adm-todo-mark{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:900;background:#fff;color:var(--adm-muted);
+  border:1px solid var(--adm-line);
+}
+.adm-todo-name{flex:0 0 auto;min-width:160px;font-weight:700;color:var(--adm-ink)}
+.adm-todo-st{
+  flex:0 0 auto;font-size:.68rem;font-weight:800;padding:2px 9px;border-radius:999px;
+  background:#fff;color:var(--adm-muted);border:1px solid var(--adm-line);
+}
+.adm-todo-meta{flex:0 0 auto;font-size:.67rem;color:var(--adm-muted)}
+.adm-todo-why,.adm-todo-err{flex:1 1 200px;font-size:.7rem;color:var(--adm-muted)}
+.adm-todo-err{color:#b3123a}
+.adm-todo-retry{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px}
+
+/* a tick for the finished stages */
+.adm-todo-done{background:#f2fcf6}
+.adm-todo-done .adm-todo-mark{background:#16a34a;border-color:#16a34a;color:#fff}
+.adm-todo-done .adm-todo-name{color:#0f7a3d}
+/* the stage that is running right now */
+.adm-todo-run{background:#f2f9ff;border-color:#bfe3f7}
+.adm-todo-run .adm-todo-mark{border-color:var(--adm-accent-2);color:var(--adm-accent)}
+/* the stage that failed */
+.adm-todo-bad{background:#fff5f6;border-color:#f3c3cd}
+.adm-todo-bad .adm-todo-mark{background:#dc2626;border-color:#dc2626;color:#fff}
+.adm-todo-bad .adm-todo-name{color:#b3123a}
+.adm-todo-bad .adm-todo-st{background:#fdecef;border-color:#F0728D;color:#b3123a}
+.adm-todo-skip{opacity:.6}
+.adm-todo-todo{opacity:.85}
+
+/* the spinner */
+.adm-spin{
+  display:inline-block;width:13px;height:13px;border-radius:50%;
+  border:2px solid currentColor;border-top-color:transparent;
+  animation:adm-spin .8s linear infinite;vertical-align:-2px;
+}
+.adm-spin-sm{width:11px;height:11px;border-width:2px}
+@keyframes adm-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.adm-spin{animation-duration:2.4s}}

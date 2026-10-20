@@ -19,9 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $key  = array_key_exists('api_key', $b) ? np_str($b, 'api_key') : '';
         if ($key === '' || $key === '••••••••') $key = $cur['api_key'];   // keep the stored key
         $model = np_str($b, 'model', $cur['model']);
-        np_llm_save(['endpoint' => $ep, 'api_key' => $key, 'model' => $model]);
+        // the chat may run on its own model, apart from the video pipeline
+        $chatModel = array_key_exists('chat_model', $b) ? np_str($b, 'chat_model') : $cur['chat_model'];
+        np_llm_save(['endpoint' => $ep, 'api_key' => $key, 'model' => $model,
+                     'chat_model' => $chatModel]);
         np_json(['ok' => true, 'settings' => ['endpoint' => $ep, 'model' => $model,
-            'has_key' => $key !== '', 'model_count' => (int)np_val('SELECT COUNT(*) FROM llm_models')]]);
+            'chat_model' => $chatModel, 'has_key' => $key !== '',
+            'model_count' => (int)np_val('SELECT COUNT(*) FROM llm_models')]]);
     }
 
     if ($act === 'refresh_models') {
@@ -145,6 +149,7 @@ $models = np_all('SELECT model_id AS id, owned_by FROM llm_models ORDER BY model
 $isWorker = np_worker_ok();
 $out = ['ok' => true, 'authed' => true,
     'settings' => ['endpoint' => $s['endpoint'], 'model' => $s['model'],
+                   'chat_model' => $s['chat_model'],
                    'has_key' => $s['api_key'] !== '', 'model_count' => count($models)],
     'models' => $models];
 // The worker token is a shared secret and the worker NEEDS the key to call the

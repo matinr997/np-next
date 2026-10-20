@@ -28,8 +28,10 @@ function np_dash_counters(): array {
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 if ($method !== 'GET') np_json(['ok' => false, 'error' => 'method_not_allowed'], 405);
 
+/* The dashboard is the administrator's view. The worker may write the
+   pipeline state, but it does not read the panel. */
 $admin = np_admin();
-if ($admin === null && !np_worker_ok()) np_json(['ok' => false, 'error' => 'forbidden'], 403);
+if ($admin === null) np_json(['ok' => false, 'error' => 'forbidden'], 403);
 
 $counters = np_dash_counters();
 

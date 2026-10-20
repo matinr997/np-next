@@ -57,6 +57,7 @@ $out['migrated'] = np_migrate([
         'endpoint' => "VARCHAR(255) NOT NULL DEFAULT ''",
         'api_key'  => "VARCHAR(255) NOT NULL DEFAULT ''",
         'model'    => "VARCHAR(190) NOT NULL DEFAULT ''",
+        'chat_model' => "VARCHAR(190) NOT NULL DEFAULT ''",
     ],
     'llm_models' => [
         'owned_by' => "VARCHAR(120) NOT NULL DEFAULT ''",

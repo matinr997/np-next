@@ -338,15 +338,20 @@ function np_prefs_get(): array {
 /* ---------- stored settings (endpoint, key, model) ---------- */
 
 function np_llm_get(): array {
-    $r = np_one('SELECT endpoint, api_key, model FROM llm_settings WHERE id = 1');
-    if (!$r) return ['endpoint' => '', 'api_key' => '', 'model' => ''];
-    return ['endpoint' => (string)$r['endpoint'], 'api_key' => (string)$r['api_key'], 'model' => (string)$r['model']];
+    $r = np_one('SELECT endpoint, api_key, model, chat_model FROM llm_settings WHERE id = 1');
+    if (!$r) return ['endpoint' => '', 'api_key' => '', 'model' => '', 'chat_model' => ''];
+    return ['endpoint' => (string)$r['endpoint'], 'api_key' => (string)$r['api_key'],
+            'model' => (string)$r['model'],
+            // the chat may run on a different model than the video pipeline
+            'chat_model' => (string)($r['chat_model'] ?? '')];
 }
 
 function np_llm_save(array $s): void {
     np_upsert('llm_settings',
         ['id' => 1, 'endpoint' => $s['endpoint'], 'api_key' => $s['api_key'],
-         'model' => $s['model'], 'updated_at' => np_now()], ['id']);
+         'model' => $s['model'],
+         'chat_model' => (string)($s['chat_model'] ?? ''),
+         'updated_at' => np_now()], ['id']);
 }
 
 /** A short, stable id for an endpoint so the same model on two endpoints

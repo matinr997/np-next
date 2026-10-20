@@ -79,7 +79,7 @@ if ($method === 'POST') {
         // reset only this stage — the completed ones stay untouched
         np_q('UPDATE job_stages SET status = ?, error = NULL, error_kind = ?,'
             . ' finished_at = ?, skipped_reason = ?, updated_at = ? WHERE id = ?',
-             ['pending', '', '', '', '', np_now(), (string)$row['id']]);
+             ['pending', '', '', '', np_now(), (string)$row['id']]);
         np_q("UPDATE pipeline_jobs SET status = 'queued', stage = ?, error = NULL, updated_at = ?"
             . " WHERE id = ?", [$stage, np_now(), $jobId]);
         np_activity('stage_retry', $jobId . ':' . $stage, 'retried stage ' . $stage);

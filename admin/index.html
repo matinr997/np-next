@@ -111,15 +111,6 @@
       <div id="auditBody"></div>
     </section>
 
-    <!-- ---------- گزارش فعالیت ---------- -->
-    <section class="adm-card adm-area-activity">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">گزارش فعالیت</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="activityRefresh" type="button">به‌روزرسانی</button>
-      </div>
-      <div id="activityBody"></div>
-    </section>
-
     <!-- ---------- افزودن ویدیو ---------- -->
     <section class="adm-card adm-area-add">
       <div class="adm-card-head">
@@ -171,6 +162,18 @@
         <span class="adm-drop-label">فایل را اینجا رها کن یا</span>
         <button class="adm-btn adm-btn-ghost adm-btn-sm" id="chatPick" type="button">انتخاب فایل</button>
         <span class="adm-drop-file" id="chatFileName"></span>
+      </div>
+
+      <div class="adm-chat-model">
+        <span class="adm-label">مدل چت (مستقل از مدل پردازش ویدیو)</span>
+        <div class="adm-model-picker">
+          <input type="search" id="chatModelFilter" dir="ltr" placeholder="جست‌وجو در مدل‌های چت…" spellcheck="false">
+          <div class="adm-capfilters" id="chatCapFilters"></div>
+          <div class="adm-modellist" id="chatModelList" role="listbox" aria-label="مدل چت"></div>
+          <span class="adm-note" id="chatModelCount"></span>
+        </div>
+        <input type="text" id="chatModel" dir="ltr" spellcheck="false" placeholder="خالی بگذارید تا مدل پردازش استفاده شود">
+        <span class="adm-note" id="chatModelNote"></span>
       </div>
 
       <div class="adm-chat-compose">

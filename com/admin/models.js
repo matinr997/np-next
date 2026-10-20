@@ -17,30 +17,6 @@
   var LANG = (document.documentElement.lang || 'fa').toLowerCase() === 'en' ? 'en' : 'fa';
 
   var T = {
-    fa: {
-      models: 'مدل‌ها', modelsCount: 'مدل', refresh: 'به‌روزرسانی فهرست',
-      search: 'جست‌وجو در نام مدل…', allModels: 'همه',
-      vision: 'بینایی', reasoning: 'استدلال', tools: 'ابزار', image_gen: 'تولید تصویر', audio: 'صدا',
-      yes: 'پشتیبانی می‌شود', no: 'پشتیبانی نمی‌شود', unknown: 'نامشخص — تأییدنشده',
-      context: 'پنجرهٔ متن', maxOut: 'حداکثر خروجی', provider: 'ارائه‌دهنده',
-      source: 'منبع metadata', sourceProvider: 'اعلام ارائه‌دهنده', sourceNone: 'بدون metadata',
-      sourceManual: 'دستی', verified: 'تأییدشده', unverified: 'تأییدنشده',
-      usage: 'آمار مصرف', usageTitle: 'آمار مصرف مدل', refreshUsage: 'به‌روزرسانی آمار',
-      requests: 'درخواست', failures: 'خطا', promptTok: 'توکن ورودی', completionTok: 'توکن خروجی',
-      cachedTok: 'توکن کش‌شده', reasoningTok: 'توکن استدلال', cost: 'هزینه', latency: 'تأخیر',
-      lastUsed: 'آخرین استفاده', model: 'مدل', task: 'کار', site: 'سایت', time: 'زمان',
-      noUsage: 'هنوز درخواستی ثبت نشده است.', noModels: 'مدلی پیدا نشد.',
-      details: 'جزئیات مدل', close: 'بستن', override: 'بازنویسی دستی',
-      overrideHint: 'بازنویسی‌ها جدا از metadata خودکار ذخیره می‌شوند و با به‌روزرسانی پاک نمی‌شوند.',
-      save: 'ذخیره', reset: 'بازگشت به مقدار ارائه‌دهنده', saved: 'ذخیره شد.',
-      auto: 'خودکار', total: 'مجموع', byModel: 'بر اساس مدل', byTask: 'بر اساس کار',
-      ctxUsed: 'استفاده‌شده', ctxFree: 'باقی‌مانده', estimated: 'تخمینی', actual: 'واقعی',
-      allTasks: 'همهٔ کارها', allSites: 'همهٔ سایت‌ها', from: 'از', to: 'تا',
-      lastRequest: 'آخرین درخواست', of: 'از', selectModel: 'مدل را انتخاب کن',
-      filterCaps: 'فیلتر قابلیت', detailsOf: 'جزئیات', usageOf: 'آمار',
-      warnContext: 'متن گفتگو به سقف context نزدیک می‌شود.',
-      lastUpdated: 'آخرین به‌روزرسانی', refreshNeeded: 'فهرست مدل‌ها هنوز به‌روز نشده — دکمهٔ به‌روزرسانی را بزن.'
-    },
     en: {
       models: 'Models', modelsCount: 'models', refresh: 'Refresh the list',
       search: 'Search the model name…', allModels: 'All',
@@ -112,6 +88,9 @@
     models: [], prefs: {}, q: '', caps: {}, selected: '',
     usage: null, detail: null, lastContext: null, loaded: false
   };
+  /* The chat runs on its own model, apart from the video pipeline. The two
+     pickers share the code but keep their own state. */
+  var C = { models: [], q: '', caps: {}, selected: '', filter: '', capsBox: null };
   /* The API always lives at the site root — the COM deployment shares it.
    * The panel sits at /admin/ on IR and at /com/admin/ on COM, so the depth
    * is worked out from the path instead of being hard-coded. */
@@ -146,12 +125,13 @@
   }
 
   /* ------------------------------------------------- capability filters */
-  function renderFilters() {
-    var box = document.getElementById('capFilters');
+  function renderFilters(st, boxId) {
+    st = st || S;
+    var box = document.getElementById(boxId || 'capFilters');
     if (!box) return;
     var html = '<span class="adm-flabel">' + esc(t('filterCaps')) + '</span>';
     CAPS.forEach(function (f) {
-      var on = !!S.caps[f];
+      var on = !!st.caps[f];
       html += '<button type="button" class="adm-chip' + (on ? ' on' : '') + '" data-cap="' + f + '"'
         + ' aria-pressed="' + (on ? 'true' : 'false') + '">'
         + capIcon(f, on ? 'yes' : 'unknown') + '<span>' + esc(t(f)) + '</span></button>';
@@ -160,41 +140,43 @@
     Array.prototype.forEach.call(box.querySelectorAll('.adm-chip'), function (b) {
       b.addEventListener('click', function () {
         var f = b.getAttribute('data-cap');
-        S.caps[f] = !S.caps[f];
-        renderFilters();
-        renderList();
+        st.caps[f] = !st.caps[f];
+        renderFilters(st, boxId);
+        renderList(st);
       });
     });
   }
 
   /* -------------------------------------------------------- the list */
-  function visible() {
-    var q = S.q.trim().toLowerCase();
-    return S.models.filter(function (m) {
+  function visible(st) {
+    st = st || S;
+    var q = st.q.trim().toLowerCase();
+    return st.models.filter(function (m) {
       if (q && String(m.id).toLowerCase().indexOf(q) === -1
         && String(m.provider || '').toLowerCase().indexOf(q) === -1) return false;
-      var caps = Object.keys(S.caps);
+      var caps = Object.keys(st.caps);
       for (var i = 0; i < caps.length; i++) {
-        if (S.caps[caps[i]] && m.caps[caps[i]] !== 'yes') return false;
+        if (st.caps[caps[i]] && m.caps[caps[i]] !== 'yes') return false;
       }
       return true;
     });
   }
 
-  function renderList() {
-    var box = document.getElementById('modelList');
+  function renderList(st) {
+    st = st || S;
+    var box = document.getElementById(st === C ? 'chatModelList' : 'modelList');
     if (!box) return;
-    var rows = visible();
-    if (!S.models.length) {
+    var rows = visible(st);
+    if (!st.models.length) {
       box.innerHTML = '<div class="adm-empty">' + esc(t('refreshNeeded')) + '</div>';
     } else if (!rows.length) {
       box.innerHTML = '<div class="adm-empty">' + esc(t('noModels')) + '</div>';
     } else {
       var html = '';
       rows.slice(0, 300).forEach(function (m) {
-        var sel = m.id === S.selected ? ' sel' : '';
+        var sel = m.id === st.selected ? ' sel' : '';
         html += '<button type="button" class="adm-mrow' + sel + '" data-model="' + esc(m.id) + '" role="option"'
-          + ' aria-selected="' + (m.id === S.selected ? 'true' : 'false') + '">'
+          + ' aria-selected="' + (m.id === st.selected ? 'true' : 'false') + '">'
           + '<span class="adm-mname" dir="ltr">' + esc(m.id) + '</span>'
           + '<span class="adm-mcaps">'
           + CAPS.map(function (f) { return capIcon(f, m.caps[f] || 'unknown'); }).join('')
@@ -207,14 +189,36 @@
       }
       box.innerHTML = html;
       Array.prototype.forEach.call(box.querySelectorAll('.adm-mrow'), function (b) {
-        b.addEventListener('click', function () { pick(b.getAttribute('data-model')); });
+        b.addEventListener('click', function () {
+          if (st === C) pickChat(b.getAttribute('data-model'));
+          else pick(b.getAttribute('data-model'));
+        });
       });
     }
-    var c = document.getElementById('modelCount');
-    if (c) c.textContent = plain(rows.length) + ' / ' + plain(S.models.length) + ' ' + t('modelsCount');
+    var c = document.getElementById(st === C ? 'chatModelCount' : 'modelCount');
+    if (c) c.textContent = plain(rows.length) + ' / ' + plain(st.models.length) + ' ' + t('modelsCount');
   }
 
   /* ----------------------------------------------- the selected model */
+  /** The chat runs on its own model, apart from the video pipeline. */
+  function pickChat(id) {
+    C.selected = id;
+    var inp = document.getElementById('chatModel');
+    if (inp) inp.value = id;
+    renderList(C);
+    var note = document.getElementById('chatModelNote');
+    if (note) {
+      var m = null;
+      for (var i = 0; i < C.models.length; i++) if (C.models[i].id === id) m = C.models[i];
+      note.textContent = m
+        ? (m.caps.vision === 'yes' ? '\u{1F441} ' : '') +
+          (m.caps.reasoning === 'yes' ? '\u{1F9E0} ' : '') +
+          (m.caps.tools === 'yes' ? '\u{1F527} ' : '') +
+          (m.ctx_max ? nfmt(m.ctx_max) + ' ctx' : '')
+        : '';
+    }
+  }
+
   function byId(id) {
     for (var i = 0; i < S.models.length; i++) if (S.models[i].id === id) return S.models[i];
     return null;
@@ -430,6 +434,7 @@
   function loadModels() {
     return api('models.php?action=list').then(function (d) {
       S.models = d.models || [];
+      C.models = d.models || [];
       S.prefs = d.prefs || {};
       S.endpointId = d.endpoint_id || 'default';
       S.loaded = true;
@@ -439,6 +444,8 @@
       renderFilters();
       renderList();
       renderSummary();
+      renderFilters(C, 'chatCapFilters');
+      renderList(C);
       fillUsageFilters();
       return loadUsage();
     }).catch(function () { });
@@ -457,6 +464,20 @@
   }
 
   /* ------------------------------------------------------------- init */
+  /** The chat model comes from the settings, apart from the pipeline model. */
+  function loadChatModel() {
+    return api('llm.php').then(function (d) {
+      var st = (d && d.settings) || {};
+      var inp = document.getElementById('chatModel');
+      if (inp) {
+        inp.value = st.chat_model || '';
+        C.selected = st.chat_model || '';
+        renderList(C);
+        if (st.chat_model) pickChat(st.chat_model);
+      }
+    }).catch(function () { });
+  }
+
   function init() {
     var f = document.getElementById('modelFilter');
     if (f) {
@@ -480,9 +501,21 @@
     if (mi) {
       mi.addEventListener('change', function () { pick(mi.value.trim()); });
     }
+    /* the chat model picker */
+    var cf = document.getElementById('chatModelFilter');
+    if (cf) {
+      cf.addEventListener('input', function () { C.q = cf.value || ''; renderList(C); });
+    }
+    var cm = document.getElementById('chatModel');
+    if (cm) {
+      cm.addEventListener('change', function () { pickChat(cm.value.trim()); });
+    }
     /* the catalogue needs the session — the panel calls load() again once
        the administrator is signed in */
-    if (document.getElementById('appView') && !document.getElementById('appView').hidden) loadModels();
+    if (document.getElementById('appView') && !document.getElementById('appView').hidden) {
+      loadModels();
+      loadChatModel();
+    }
     // keep the list fresh if the panel is open for a long time
     setInterval(function () { if (!document.hidden) loadUsage(); }, 30000);
   }
@@ -490,7 +523,12 @@
   // expose a tiny hook so the main panel script can report the context of
   // the last request it made
   window.npModels = {
-    render: function () { renderFilters(); renderList(); renderSummary(); },
+    render: function () {
+      renderFilters(); renderList(); renderSummary();
+      renderFilters(C, 'chatCapFilters'); renderList(C);
+    },
+    chatModel: function () { return C.selected; },
+    loadChatModel: loadChatModel,
     setContext: function (ctx) { S.lastContext = ctx; renderSummary(); },
     selected: function () { return S.selected; },
     load: loadModels

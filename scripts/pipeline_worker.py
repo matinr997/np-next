@@ -257,6 +257,8 @@ class LLM:
         self.site = site
         self.endpoint_id = endpoint_id or "default"
         self.used = []          # one entry per call: model, task, usage
+        # the model the panel chose for the chat, apart from the pipeline one
+        self.chat_model = ""
 
     def _url(self):
         if self.endpoint.endswith("/chat/completions"):
@@ -766,7 +768,46 @@ def _heartbeat(site, jid, every=120):
             return
 
 
+# Which checklist stages each pipeline phase covers. A phase whose stages are
+# all completed is skipped, so a retry only redoes what actually failed.
+PHASES = [
+    ("discover",  ["url_validate", "identify", "title_fa", "title_en", "seo",
+                   "extract_en", "qc", "terminology"]),
+    ("transcript", ["transcript", "stt", "cleanup"]),
+    ("translate",  ["translate_fa"]),
+    ("quiz",       ["quiz", "quiz_validate"]),
+    ("publish",    ["persist", "consistency", "publish"]),
+]
+
+
+def stage_map(site, job_id):
+    """The checklist of a job, as a dict of stage -> row."""
+    try:
+        rows = site._req("/api/stages.php?job_id=" + job_id).get("stages") or []
+    except Exception:                                           # noqa: BLE001
+        return {}
+    return {str(r.get("stage")): r for r in rows}
+
+
+def phase_done(site, job_id, stages):
+    """True when every stage of the phase is already done."""
+    m = stage_map(site, job_id)
+    if not m:
+        return False
+    for s in stages:
+        row = m.get(s) or {}
+        if str(row.get("status")) not in ("completed", "skipped"):
+            return False
+    return True
+
+
 def process_job(site, llm, job, git=True, push=True):
+    """Run the pipeline for one job.
+
+    The checklist decides what runs: a phase whose stages are all completed is
+    skipped. A retry of a failed stage therefore redoes that stage and
+    everything after it, and nothing before it.
+    """
     jid = job["id"]
     yt_id = job.get("yt_id") or extract_yt_id(job.get("url") or "")
     if not yt_id:
@@ -778,103 +819,149 @@ def process_job(site, llm, job, git=True, push=True):
         # the checklist is seeded here, so the panel can show the plan even
         # before the first stage finishes
         site.stage_seed(jid, yt_id)
-        site.stage(jid, "url_validate", "completed", yt_id=yt_id,
-                   output_ref=yt_id, result="the url was accepted")
-        site.stage(jid, "identify", "running", yt_id=yt_id)
         # heartbeat: keeps a long job from being reaped as abandoned
         _hb = threading.Thread(target=_heartbeat, args=(site, jid), daemon=True)
         _hb.start()
 
         log("job %s  video %s" % (jid, yt_id))
-        info = stage_discover(yt_id, llm)
-        site.update(jid, stage="discover", progress=20,
-                    title_fa=info["fa"], title_en=info["en"],
-                    log="title: %s" % info["fa"][:120])
-        site.stage(jid, "identify", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="data/videos.json#%s" % yt_id,
-                   result="title: %s" % info["fa"][:160])
-        site.stage(jid, "title_fa", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="data/videos.json#%s.title_fa" % yt_id)
-        site.stage(jid, "title_en", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="data/videos.json#%s.title_en" % yt_id)
-        site.stage(jid, "seo", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="data/videos.json#%s.summary" % yt_id)
-        site.stage(jid, "extract_en", "completed", yt_id=yt_id,
-                   output_ref="subs/%s.json" % yt_id)
-        site.stage(jid, "qc", "completed", yt_id=yt_id,
-                   result="the metadata was produced by the model and is written to the catalogue")
-        site.stage(jid, "terminology", "skipped", yt_id=yt_id,
-                   skipped_reason="terminology review is a human task; it runs in the content audit")
-        # The quiz generator needs the video in videos.json (title + duration),
-        # so register it before the quiz stage.
-        upsert_catalogue(info)
-        run([PY, os.path.join(ROOT, "scripts", "sync_videos_to_core.py")])
+        # which phases still have work to do?
+        todo = [ph for ph, _st in PHASES if not phase_done(site, jid, _st)]
+        if not todo:
+            # everything is already done — the job only needs publishing
+            todo = [ph for ph, _st in PHASES if ph == "publish"]
+        log("   phases to run: %s" % ", ".join(ph for ph, _ in todo))
 
-        site.stage(jid, "transcript", "running", yt_id=yt_id)
-        segs = fetch_asr(yt_id)
-        cues = merge_cues(segs)
-        if not cues:
-            site.stage(jid, "transcript", "failed", yt_id=yt_id,
-                       error="no transcript for " + yt_id, error_kind="no_transcript")
-            raise RuntimeError("no transcript for " + yt_id)
-        site.stage(jid, "transcript", "completed", yt_id=yt_id,
-                   output_ref="subs/%s.json (%d cues)" % (yt_id, len(cues)))
-        site.stage(jid, "stt", "skipped", yt_id=yt_id,
-                   skipped_reason="the captions were available; no speech-to-text was needed")
-        site.stage(jid, "cleanup", "completed", yt_id=yt_id,
-                   output_ref="subs/%s.json" % yt_id,
-                   result="cues merged into whole sentences")
-        jdump(os.path.join(SCR, "tr_%s.json" % yt_id), {"segs": segs})
-        # The cache MUST be read before subs/<id>.json is touched — writing the
-        # English-only copy first wiped the Persian translations we wanted to
-        # reuse and every re-run paid for the whole transcript again.
-        cache = {}
-        prev = jload(os.path.join(ROOT, "subs", yt_id + ".json"), [])
-        if isinstance(prev, list):
-            for c in prev:
-                if isinstance(c, dict) and c.get("t") and fa_persian(str(c.get("fa") or "")):
-                    cache[str(c["t"])] = str(c["fa"])
-        if cache:
-            log("   reusing %d already-translated cue(s)" % len(cache))
-        jdump(os.path.join(SCR, "en_%s.json" % yt_id),
-              [{"s": c["s"], "e": c["e"], "t": c["t"]} for c in cues])
-        site.update(jid, stage="transcript", progress=40, log="%d cues" % len(cues))
+        info = None
+        phases = dict(PHASES)
 
-        site.stage(jid, "translate_fa", "running", yt_id=yt_id, model=llm.model)
-        cues = stage_translate(cues, llm, cache=cache)
-        jdump(os.path.join(ROOT, "subs", yt_id + ".json"), cues)
-        en_left = sum(1 for c in cues if not fa_persian(c["fa"]))
-        site.update(jid, stage="translate", progress=65,
-                    log="%d cues, %d untranslated" % (len(cues), en_left))
-        if en_left:
-            site.stage(jid, "translate_fa", "failed", yt_id=yt_id, model=llm.model,
-                       error="%d cue(s) came back untranslated" % en_left,
-                       error_kind="untranslated")
-            raise RuntimeError("%d cue(s) came back untranslated" % en_left)
-        site.stage(jid, "translate_fa", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="subs/%s.json" % yt_id,
-                   result="%d cues translated" % len(cues))
+        # ---------------------------------------------------- discover
+        if "discover" in todo:
+            site.stage(jid, "url_validate", "completed", yt_id=yt_id,
+                       output_ref=yt_id, result="the url was accepted")
+            site.stage(jid, "identify", "running", yt_id=yt_id)
+            info = stage_discover(yt_id, llm)
+            site.update(jid, stage="discover", progress=20,
+                        title_fa=info["fa"], title_en=info["en"],
+                        log="title: %s" % info["fa"][:120])
+            site.stage(jid, "identify", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="data/videos.json#%s" % yt_id,
+                       result="title: %s" % info["fa"][:160])
+            site.stage(jid, "title_fa", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="data/videos.json#%s.title_fa" % yt_id)
+            site.stage(jid, "title_en", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="data/videos.json#%s.title_en" % yt_id)
+            site.stage(jid, "seo", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="data/videos.json#%s.summary" % yt_id)
+            site.stage(jid, "extract_en", "completed", yt_id=yt_id,
+                       output_ref="subs/%s.json" % yt_id)
+            site.stage(jid, "qc", "completed", yt_id=yt_id,
+                       result="the metadata was produced by the model and is written to the catalogue")
+            site.stage(jid, "terminology", "skipped", yt_id=yt_id,
+                       skipped_reason="terminology review is a human task; it runs in the content audit")
+            # The quiz generator needs the video in videos.json (title + duration),
+            # so register it before the quiz stage.
+            upsert_catalogue(info)
+            run([PY, os.path.join(ROOT, "scripts", "sync_videos_to_core.py")])
+        else:
+            # the metadata is already in the catalogue — read it back so the
+            # later phases can use it
+            info = catalogue_entry(yt_id)
+            if info is None:
+                info = stage_discover(yt_id, llm)
+                upsert_catalogue(info)
+            log("   discover already done — reusing the catalogue entry")
 
-        site.stage(jid, "quiz", "running", yt_id=yt_id, model=llm.model)
-        stage_quiz(yt_id, llm)
-        site.update(jid, stage="quiz", progress=85, log="quiz written")
-        site.stage(jid, "quiz", "completed", yt_id=yt_id, model=llm.model,
-                   output_ref="quizzes/%s.json" % yt_id)
-        # the structural check is a separate stage: it is what the panel
-        # shows as "the quiz is valid"
-        rc = run([PY, os.path.join(ROOT, "scripts", "fix_quiz_format.py"), "--check"])
-        ok_quiz = (rc or {}).get("returncode", 1) == 0
-        site.stage(jid, "quiz_validate", "completed" if ok_quiz else "failed", yt_id=yt_id,
-                   output_ref="quizzes/%s.json" % yt_id,
-                   error="" if ok_quiz else "the quiz does not match the renderer contract",
-                   error_kind="" if ok_quiz else "invalid_quiz")
-        if not ok_quiz:
-            raise RuntimeError("the generated quiz is not valid")
+        # --------------------------------------------------- transcript
+        cues = None
+        if "transcript" in todo:
+            site.stage(jid, "transcript", "running", yt_id=yt_id)
+            segs = fetch_asr(yt_id)
+            cues = merge_cues(segs)
+            if not cues:
+                site.stage(jid, "transcript", "failed", yt_id=yt_id,
+                           error="no transcript for " + yt_id, error_kind="no_transcript")
+                raise RuntimeError("no transcript for " + yt_id)
+            site.stage(jid, "transcript", "completed", yt_id=yt_id,
+                       output_ref="subs/%s.json (%d cues)" % (yt_id, len(cues)))
+            site.stage(jid, "stt", "skipped", yt_id=yt_id,
+                       skipped_reason="the captions were available; no speech-to-text was needed")
+            site.stage(jid, "cleanup", "completed", yt_id=yt_id,
+                       output_ref="subs/%s.json" % yt_id,
+                       result="cues merged into whole sentences")
+            jdump(os.path.join(SCR, "tr_%s.json" % yt_id), {"segs": segs})
+        else:
+            cues = load_cues(yt_id)
+            log("   transcript already done — %d cue(s) on disk"
+                % (len(cues) if cues else 0))
+
+        # ----------------------------------------------------- translate
+        if "translate" in todo or cues is None:
+            if cues is None:
+                segs = fetch_asr(yt_id)
+                cues = merge_cues(segs)
+                if not cues:
+                    site.stage(jid, "transcript", "failed", yt_id=yt_id,
+                               error="no transcript for " + yt_id, error_kind="no_transcript")
+                    raise RuntimeError("no transcript for " + yt_id)
+            # The cache MUST be read before subs/<id>.json is touched — writing
+            # the English-only copy first wiped the Persian translations we
+            # wanted to reuse and every re-run paid for the whole transcript.
+            cache = {}
+            prev = jload(os.path.join(ROOT, "subs", yt_id + ".json"), [])
+            if isinstance(prev, list):
+                for c in prev:
+                    if isinstance(c, dict) and c.get("t") and fa_persian(str(c.get("fa") or "")):
+                        cache[str(c["t"])] = str(c["fa"])
+            if cache:
+                log("   reusing %d already-translated cue(s)" % len(cache))
+            jdump(os.path.join(SCR, "en_%s.json" % yt_id),
+                  [{"s": c["s"], "e": c["e"], "t": c["t"]} for c in cues])
+            site.update(jid, stage="transcript", progress=40,
+                        log="%d cues" % len(cues))
+            site.stage(jid, "translate_fa", "running", yt_id=yt_id, model=llm.model)
+            cues = stage_translate(cues, llm, cache=cache)
+            jdump(os.path.join(ROOT, "subs", yt_id + ".json"), cues)
+            en_left = sum(1 for c in cues if not fa_persian(c["fa"]))
+            site.update(jid, stage="translate", progress=65,
+                        log="%d cues, %d untranslated" % (len(cues), en_left))
+            if en_left:
+                site.stage(jid, "translate_fa", "failed", yt_id=yt_id, model=llm.model,
+                           error="%d cue(s) came back untranslated" % en_left,
+                           error_kind="untranslated")
+                raise RuntimeError("%d cue(s) came back untranslated" % en_left)
+            site.stage(jid, "translate_fa", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="subs/%s.json" % yt_id,
+                       result="%d cues translated" % len(cues))
+        else:
+            cues = load_cues(yt_id)
+            site.update(jid, stage="translate", progress=65,
+                        log="translation already done")
+
+        # --------------------------------------------------------- quiz
+        if "quiz" in todo:
+            site.stage(jid, "quiz", "running", yt_id=yt_id, model=llm.model)
+            stage_quiz(yt_id, llm)
+            site.update(jid, stage="quiz", progress=85, log="quiz written")
+            site.stage(jid, "quiz", "completed", yt_id=yt_id, model=llm.model,
+                       output_ref="quizzes/%s.json" % yt_id)
+            # the structural check is a separate stage: it is what the panel
+            # shows as "the quiz is valid"
+            rc = run([PY, os.path.join(ROOT, "scripts", "fix_quiz_format.py"), "--check"])
+            ok_quiz = (rc or {}).get("returncode", 1) == 0
+            site.stage(jid, "quiz_validate", "completed" if ok_quiz else "failed", yt_id=yt_id,
+                       output_ref="quizzes/%s.json" % yt_id,
+                       error="" if ok_quiz else "the quiz does not match the renderer contract",
+                       error_kind="" if ok_quiz else "invalid_quiz")
+            if not ok_quiz:
+                raise RuntimeError("the generated quiz is not valid")
+        else:
+            site.update(jid, stage="quiz", progress=85, log="quiz already written")
+
+        # ------------------------------------------------------ publish
         site.stage(jid, "persist", "completed", yt_id=yt_id,
                    output_ref="data/videos.json")
         site.stage(jid, "consistency", "completed", yt_id=yt_id,
                    result="the catalogue, the transcript and the quiz agree")
-
         site.stage(jid, "publish", "running", yt_id=yt_id)
         publish_video(info, llm, git=git, push=push)
         site.stage(jid, "publish", "completed", yt_id=yt_id,
@@ -902,24 +989,29 @@ def process_job(site, llm, job, git=True, push=True):
         return False
 
 
-def _err_category(e):
-    """Map an exception to a category the error centre understands."""
-    text = str(e).lower()
-    if "transcript" in text or "caption" in text:
-        return "no_transcript"
-    if "untranslated" in text:
-        return "translation"
-    if "quiz" in text:
-        return "quiz"
-    if "timeout" in text or "timed out" in text:
-        return "timeout"
-    if "410" in text or "deprecated" in text:
-        return "provider"
-    if "http 4" in text or "http 5" in text:
-        return "network"
-    if "json" in text or "keyerror" in text:
-        return "model_output"
-    return "other"
+def catalogue_entry(yt_id):
+    """The catalogue entry of a video, in the shape the pipeline expects."""
+    data = jload(os.path.join(ROOT, "data", "videos.json"), [])
+    if isinstance(data, dict):
+        data = data.get("videos", [])
+    for v in data:
+        if not isinstance(v, dict) or v.get("id") != yt_id:
+            continue
+        return {
+            "id": v.get("id", yt_id), "fa": v.get("fa", ""), "en": v.get("en", ""),
+            "cat": v.get("cat", ""), "cat_en": v.get("cat_en", ""),
+            "src": v.get("src", ""), "dur": v.get("dur", ""),
+            "ch": v.get("ch", []), "ch_en": v.get("ch_en", []),
+            "views": v.get("views", 0), "slug": v.get("slug", ""),
+            "summary": v.get("sum", ""), "summary_en": v.get("sum_en", ""),
+        }
+    return None
+
+
+def load_cues(yt_id):
+    """The cues already on disk for a video, or None."""
+    cues = jload(os.path.join(ROOT, "subs", yt_id + ".json"), None)
+    return cues if isinstance(cues, list) and cues else None
 
 
 def extract_yt_id(url):
@@ -1159,7 +1251,7 @@ def process_chat(site, llm, job, git=True, push=True):
         if looks_like_coding_task(text):
             site.chat_send(jid, "🛠️ این درخواست کدنویسی است — عامل کامل اجرا می‌شود "
                               "(ممکن است چند دقیقه طول بکشد)…")
-            answer = run_hermes(text, llm.model)
+            answer = run_hermes(text, chat_llm.model)
             site.chat_send(jid, answer or "(بدون پاسخ)")
             site.chat_close(jid)
             return True
@@ -1172,14 +1264,19 @@ def process_chat(site, llm, job, git=True, push=True):
             summary = ""
         if summary:
             text = ("[خلاصهٔ گفتگوی پیشین]\n" + summary + "\n\n[پیام تازه]\n" + text)
+        # the chat runs on the chat model, the pipeline on the processing one
+        chat_llm = llm
+        if getattr(llm, "chat_model", ""):
+            chat_llm = LLM(llm.endpoint, llm.key, llm.chat_model, list(llm.fallbacks),
+                           site=llm.site, endpoint_id=llm.endpoint_id)
         site.chat_send(jid, "🤔 در حال بررسی درخواست…")
-        quick, _used = llm.chat_any(
+        quick, _used = chat_llm.chat_any(
             [{"role": "user", "content": SITE_CONTEXT.format(state=site_context()) + "\n\n" + text}],
             task="panel", max_tokens=1500, temperature=0.3)
         quick = (quick or "").strip()
         if "[[AGENT]]" in quick:
             site.chat_send(jid, "🛠️ نیاز به عامل کامل دارم — اجرا می‌شود…")
-            answer = run_hermes(text, llm.model)
+            answer = run_hermes(text, chat_llm.model)
             site.chat_send(jid, answer or "(بدون پاسخ)")
         else:
             site.chat_send(jid, quick or "(بدون پاسخ)")
@@ -1279,6 +1376,9 @@ def main():
             s = cfg.get("settings") or {}
             llm = LLM(s.get("endpoint"), cfg.get("api_key", ""), s.get("model"), [],
                       site=site, endpoint_id=site.endpoint_id(s.get("endpoint", "")))
+            # the chat may run on its own model, apart from the video pipeline
+            if s.get("chat_model"):
+                llm.chat_model = s.get("chat_model")
             llm.fallbacks = model_rotation(llm, [m["id"] for m in cfg.get("models", [])])
         except Exception as e:                                   # noqa: BLE001
             log("cannot read LLM settings: %s" % e)

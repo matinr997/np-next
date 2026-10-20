@@ -699,7 +699,9 @@ function api(file, opts) {
   function llmSettingsPayload() {
     var endpoint = ($('llmEndpoint').value || '').trim();
     var model = ($('llmModel').value || '').trim();
-    return { endpoint: endpoint, model: model };
+    /* the chat may run on a different model than the video pipeline */
+    var chatModel = ($('chatModel') ? ($('chatModel').value || '').trim() : '');
+    return { endpoint: endpoint, model: model, chat_model: chatModel };
   }
 
   /* An untouched key field must never overwrite the stored key: the API treats
@@ -777,6 +779,7 @@ function api(file, opts) {
           toast('تنظیمات ذخیره شد.', 'ok');
           if (s.endpoint) $('llmEndpoint').value = s.endpoint;
           if (s.model) $('llmModel').value = s.model;
+    if (s.chat_model && $('chatModel')) $('chatModel').value = s.chat_model;
           if (s.has_key) {
             state.hasKey = true;
             $('keyNote').textContent = 'یک کلید ذخیره شده است. برای تغییر، کلید جدید را بنویسید؛ در غیر این صورت کلید قبلی حفظ می‌شود.';
@@ -804,6 +807,7 @@ function api(file, opts) {
       if (s) {
         $('llmEndpoint').value = s.endpoint || 'http://localhost:20128/v1';
         if (s.model) $('llmModel').value = s.model;
+    if (s.chat_model && $('chatModel')) $('chatModel').value = s.chat_model;
         state.hasKey = !!s.has_key;
         $('keyNote').textContent = s.has_key
           ? 'یک کلید ذخیره شده است. برای تغییر، کلید جدید را بنویسید؛ در غیر این صورت کلید قبلی حفظ می‌شود.'

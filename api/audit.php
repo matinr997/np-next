@@ -126,7 +126,8 @@ function np_audit_run(): array {
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($method === 'GET') {
-    if (np_admin() === null && !np_worker_ok()) np_json(['ok' => false, 'error' => 'forbidden'], 403);
+    /* the findings are the administrator's view */
+    if (np_admin() === null) np_json(['ok' => false, 'error' => 'forbidden'], 403);
     $act = (string)($_GET['action'] ?? 'list');
     if ($act === 'list') {
         $w = "status = 'open'"; $a = [];

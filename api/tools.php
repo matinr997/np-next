@@ -302,7 +302,8 @@ function np_tool_run(string $name, array $args): array {
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($method === 'GET') {
-    if (np_admin() === null && !np_worker_ok()) np_json(['ok' => false, 'error' => 'forbidden'], 403);
+    /* the tool catalogue is for the panel, not for the worker */
+    if (np_admin() === null) np_json(['ok' => false, 'error' => 'forbidden'], 403);
     np_json(['ok' => true, 'tools' => np_tool_defs()]);
 }
 

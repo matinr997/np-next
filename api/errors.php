@@ -64,9 +64,9 @@ function np_error_summary(): array {
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($method === 'GET') {
+    /* the error centre is for the administrator; the worker only reports */
     $admin = np_admin();
-    $isWorker = np_worker_ok();
-    if ($admin === null && !$isWorker) np_json(['ok' => false, 'error' => 'forbidden'], 403);
+    if ($admin === null) np_json(['ok' => false, 'error' => 'forbidden'], 403);
     $act = (string)($_GET['action'] ?? 'list');
 
     if ($act === 'list') {

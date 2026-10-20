@@ -74,50 +74,45 @@
 
   <div class="adm-grid">
 
-    <!-- ---------- داشبورد ---------- -->
+
+
+
+
+
+
+
+    <!-- ---------- Dashboard ---------- -->
     <section class="adm-card adm-area-dash">
       <div class="adm-card-head">
-        <h2 class="adm-card-title">داشبورد</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="dashRefresh" type="button">به‌روزرسانی</button>
+        <h2 class="adm-card-title">Dashboard</h2>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="dashRefresh" type="button">Refresh</button>
       </div>
       <div id="dashBody"></div>
     </section>
-
-    <!-- ---------- چک‌لیست پردازش ---------- -->
+    <!-- ---------- Processing checklist ---------- -->
     <section class="adm-card adm-area-checklist">
       <div class="adm-card-head">
-        <h2 class="adm-card-title">چک‌لیست پردازش</h2>
-        <select id="checklistJob" aria-label="کار"></select>
+        <h2 class="adm-card-title">Processing checklist</h2>
+        <select id="checklistJob" aria-label="Job"></select>
       </div>
       <div id="checklistBody"></div>
     </section>
-
-    <!-- ---------- مرکز خطا ---------- -->
+    <!-- ---------- Error centre ---------- -->
     <section class="adm-card adm-area-errors">
       <div class="adm-card-head">
-        <h2 class="adm-card-title">مرکز خطا</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="errorsRefresh" type="button">به‌روزرسانی</button>
+        <h2 class="adm-card-title">Error centre</h2>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="errorsRefresh" type="button">Refresh</button>
       </div>
       <div id="errorsBody"></div>
       <div class="adm-fixpanel" id="fixPanel" hidden></div>
     </section>
-
-    <!-- ---------- بررسی محتوا ---------- -->
+    <!-- ---------- Content audit ---------- -->
     <section class="adm-card adm-area-audit">
       <div class="adm-card-head">
-        <h2 class="adm-card-title">بررسی محتوا</h2>
-        <button class="adm-btn adm-btn-primary adm-btn-sm" id="auditRun" type="button">اجرای بررسی</button>
+        <h2 class="adm-card-title">Content audit</h2>
+        <button class="adm-btn adm-btn-primary adm-btn-sm" id="auditRun" type="button">Run the audit</button>
       </div>
       <div id="auditBody"></div>
-    </section>
-
-    <!-- ---------- گزارش فعالیت ---------- -->
-    <section class="adm-card adm-area-activity">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">گزارش فعالیت</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="activityRefresh" type="button">به‌روزرسانی</button>
-      </div>
-      <div id="activityBody"></div>
     </section>
 
     <!-- ---------- Add a video ---------- -->
@@ -171,6 +166,18 @@
         <span class="adm-drop-label">Drop a file here or</span>
         <button class="adm-btn adm-btn-ghost adm-btn-sm" id="chatPick" type="button">Choose a file</button>
         <span class="adm-drop-file" id="chatFileName"></span>
+      </div>
+
+      <div class="adm-chat-model">
+        <span class="adm-label">Chat model (separate from the video processing model)</span>
+        <div class="adm-model-picker">
+          <input type="search" id="chatModelFilter" dir="ltr" placeholder="Search the chat models…" spellcheck="false">
+          <div class="adm-capfilters" id="chatCapFilters"></div>
+          <div class="adm-modellist" id="chatModelList" role="listbox" aria-label="Chat model"></div>
+          <span class="adm-note" id="chatModelCount"></span>
+        </div>
+        <input type="text" id="chatModel" dir="ltr" spellcheck="false" placeholder="Leave empty to use the processing model">
+        <span class="adm-note" id="chatModelNote"></span>
       </div>
 
       <div class="adm-chat-compose">

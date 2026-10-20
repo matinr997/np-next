@@ -10,33 +10,6 @@
   var LANG = (document.documentElement.lang || 'fa').toLowerCase() === 'en' ? 'en' : 'fa';
 
   var T = {
-    fa: {
-      dashboard: 'داشبورد', totalVideos: 'کل ویدیوها', published: 'منتشرشده',
-      draft: 'پیش‌نویس', withQuiz: 'دارای آزمون', withSubs: 'دارای زیرنویس',
-      awaiting: 'در انتظار بررسی', queued: 'در صف', running: 'در حال اجرا',
-      done: 'انجام‌شده', failed: 'ناموفق', stuck: 'گیرکرده', aiStatus: 'وضعیت اتصال هوش مصنوعی',
-      reachable: 'متصل', unreachable: 'قطع', unknown: 'نامشخص', modelCount: 'مدل',
-      lastUpdate: 'آخرین به‌روزرسانی', recentErrors: 'خطاهای اخیر', recentActions: 'اقدامات اخیر',
-      checklist: 'چک‌لیست پردازش', noJob: 'کاری را انتخاب کنید تا چک‌لیست آن را ببینید.',
-      stage: 'مرحله', status: 'وضعیت', attempts: 'تعداد تلاش', started: 'شروع',
-      finished: 'پایان', model: 'مدل', tokens: 'توکن', retry: 'تلاش دوباره',
-      cancel: 'لغو', skipped: 'رد شد', pending: 'در انتظار', completed: 'کامل',
-      error: 'خطا', retryable: 'قابل تلاش', notRetryable: 'غیرقابل تلاش',
-      waiting_review: 'در انتظار بررسی', cancelled: 'لغو شد',
-      errorCenter: 'مرکز خطا', fixBug: 'رفع باگ', resolve: 'حل‌شده', ignore: 'نادیده',
-      category: 'دسته', severity: 'شدت', attempts2: 'تلاش‌ها', fixState: 'وضعیت رفع',
-      noErrors: 'خطایی ثبت نشده است.', proposed: 'پیشنهاد شده', tested: 'تست‌شده',
-      testFailed: 'تست ناموفق', approved: 'تأییدشده', rejected: 'ردشده', applied: 'اعمال‌شد',
-      diff: 'تغییرات', noDiff: 'تغییری برای نمایش نیست.', checks: 'بررسی‌ها',
-      passed: 'قبول', failed: 'مردود', propose: 'ساخت پیشنهاد', risk: 'ریسک',
-      high: 'بالا', low: 'پایین', forbidden: 'ممنوع', approve: 'تأیید و اعمال',
-      audit: 'بررسی محتوا', runAudit: 'اجرای بررسی', findings: 'یافته',
-      evidence: 'شاهد', recommended: 'اقدام پیشنهادی', noIssues: 'مشکلی پیدا نشد.',
-      activity: 'گزارش فعالیت', action: 'اقدام', target: 'هدف', actor: 'کاربر', time: 'زمان',
-      refresh: 'به‌روزرسانی', nothing: 'چیزی برای نمایش نیست.', job: 'کار',
-      fixNote: 'پیشنهاد رفع باگ در یک کپی جداگانه ساخته و تست می‌شود؛ روی سایت اصلی اعمال نمی‌شود.',
-      approveNote: 'تأیید این پیشنهاد باعث اعمال آن روی کد اصلی می‌شود.'
-    },
     en: {
       dashboard: 'Dashboard', totalVideos: 'Total videos', published: 'Published',
       draft: 'Draft', withQuiz: 'With a quiz', withSubs: 'With a transcript',
@@ -166,12 +139,7 @@
       terminology: 'Terminology check', persist: 'Persistence', consistency: 'Consistency check',
       publish: 'Publication' };
     if (LANG === 'en') return m[st] || st;
-    var f = { url_validate: 'اعتبارسنجی لینک', identify: 'شناسایی و اطلاعات',
-      transcript: 'دریافت زیرنویس', stt: 'گفتار به متن', cleanup: 'پاک‌سازی متن',
-      extract_en: 'استخراج انگلیسی', translate_fa: 'ترجمهٔ فارسی', title_fa: 'عنوان فارسی',
-      title_en: 'عنوان انگلیسی', seo: 'سئو', qc: 'کنترل کیفیت', quiz: 'ساخت آزمون',
-      quiz_validate: 'اعتبارسنجی آزمون', terminology: 'اصطلاحات پزشکی', persist: 'ذخیره',
-      consistency: 'کنترل سازگاری', publish: 'انتشار' };
+    
     return f[st] || st;
   }
   function renderStages() {
@@ -179,27 +147,40 @@
     if (!box) return;
     if (!S.jobId) { box.innerHTML = '<div class="adm-empty">' + esc(t('noJob')) + '</div>'; return; }
     if (!S.stages.length) { box.innerHTML = '<div class="adm-empty">' + esc(t('noJob')) + '</div>'; return; }
-    var html = '<div class="adm-cl">';
+    var html = '<ul class="adm-todo">';
     S.stages.forEach(function (s) {
-      var cls = STATUS_CLASS[s.status] || 'wait';
-      html += '<div class="adm-clrow ' + cls + '">'
-        + '<span class="adm-clseq">' + s.seq + '</span>'
-        + '<span class="adm-clname">' + esc(stageLabel(s.stage)) + '</span>'
-        + '<span class="adm-clst">' + esc(t(s.status)) + '</span>'
-        + '<span class="adm-clmeta" dir="ltr">' + esc(s.attempts || 0) + '×'
+      var st = s.status;
+      var mark = st === 'completed' ? '\u2713'                       // a tick
+        : st === 'running' ? '<i class="adm-spin"></i>'              // a spinner
+        : st === 'failed' ? '!'                                       // a problem
+        : st === 'skipped' ? '\u2013'                                // a dash
+        : st === 'waiting_for_review' ? '?'
+        : '\u25cb';                                                 // an empty circle
+      var cls = st === 'completed' ? 'done'
+        : st === 'running' ? 'run'
+        : st === 'failed' ? 'bad'
+        : st === 'skipped' ? 'skip'
+        : st === 'waiting_for_review' ? 'warn' : 'todo';
+      html += '<li class="adm-todo-' + cls + '">'
+        + '<span class="adm-todo-mark">' + mark + '</span>'
+        + '<span class="adm-todo-name">' + esc(stageLabel(s.stage)) + '</span>'
+        + '<span class="adm-todo-st">' + esc(t(st)) + '</span>'
+        + '<span class="adm-todo-meta" dir="ltr">'
+        + (s.attempts ? esc(s.attempts) + '\u00d7' : '')
         + (s.model ? ' · ' + esc(s.model) : '')
-        + (s.tokens ? ' · ' + plain(s.tokens) + ' tok' : '') + '</span>'
-        + (s.skipped_reason ? '<span class="adm-clwhy">' + esc(s.skipped_reason) + '</span>' : '')
-        + (s.error ? '<span class="adm-clerr">' + esc(s.error) + '</span>' : '')
-        + (s.status === 'failed' && s.retryable
-            ? '<button type="button" class="adm-btn adm-btn-ghost adm-btn-sm adm-clretry"'
-              + ' data-job="' + esc(s.job_id || S.jobId) + '" data-stage="' + esc(s.stage) + '">'
-              + esc(t('retry')) + '</button>' : '')
-        + '</div>';
+        + (s.tokens ? ' · ' + plain(s.tokens) + ' tok' : '')
+        + '</span>'
+        + (s.skipped_reason ? '<span class="adm-todo-why">' + esc(s.skipped_reason) + '</span>' : '')
+        + (s.error ? '<span class="adm-todo-err">' + esc(s.error) + '</span>' : '')
+        + (st === 'failed' && s.retryable
+            ? '<button type="button" class="adm-btn adm-btn-primary adm-btn-sm adm-todo-retry"'
+              + ' data-job="' + esc(S.jobId) + '" data-stage="' + esc(s.stage) + '">'
+              + '<span class="adm-spin adm-spin-sm"></span>' + esc(t('retry')) + '</button>' : '')
+        + '</li>';
     });
-    html += '</div>';
+    html += '</ul>';
     box.innerHTML = html;
-    Array.prototype.forEach.call(box.querySelectorAll('.adm-clretry'), function (b) {
+    Array.prototype.forEach.call(box.querySelectorAll('.adm-todo-retry'), function (b) {
       b.addEventListener('click', function () {
         b.disabled = true;
         api('stages.php', { action: 'retry', job_id: b.getAttribute('data-job'),
@@ -209,6 +190,7 @@
       });
     });
   }
+
   function loadStages(jobId) {
     S.jobId = jobId || '';
     if (!S.jobId) { renderStages(); return Promise.resolve(); }
@@ -378,10 +360,16 @@
     return api('jobs.php').then(function (d) {
       var jobs = d.jobs || [];
       jobSel.innerHTML = '<option value="">\u2014</option>' + jobs.map(function (j) {
-        return '<option value="' + esc(j.id) + '" dir="ltr">' + esc(j.yt_id || j.id)
+        /* the title must follow the panel's language */
+        var label = LANG === 'en' ? (j.title_en || j.yt_id || j.id)
+                                 : (j.title_fa || j.yt_id || j.id);
+        return '<option value="' + esc(j.id) + '" dir="ltr">' + esc(label)
           + ' (' + esc(j.status) + ')</option>';
       }).join('');
-      if (jobs.length && !S.jobId) { jobSel.value = jobs[0].id; loadStages(jobs[0].id); }
+      if (jobs.length) {
+        jobSel.value = jobs[0].id;
+        loadStages(jobs[0].id);
+      }
     }).catch(function () { });
   }
 

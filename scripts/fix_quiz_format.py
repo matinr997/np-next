@@ -204,6 +204,7 @@ def main():
                   [m["id"] for m in cfg.get("models", [])][:40])
 
     changed = 0
+    bad = []
     for name in targets:
         path = os.path.join(QUIZ_DIR, name)
         if not os.path.isfile(path):
@@ -216,6 +217,7 @@ def main():
         print("%-22s %d problem(s):" % (name, len(errs)))
         for e in errs:
             print("    - %s" % e)
+        bad.append(name)
         if check_only or llm is None:
             continue
         for i, q in enumerate(d.get("questions", [])):
@@ -238,6 +240,11 @@ def main():
         print("    -> FIXED")
         changed += 1
     print("\n%d quiz file(s) rewritten" % changed)
+    # --check must fail the process when something is wrong, otherwise the
+    # pipeline's quiz_validate stage would always look like a pass.
+    if bad:
+        print("%d quiz file(s) need attention" % len(bad))
+        return 1
     return 0
 
 
