@@ -23,6 +23,7 @@ Usage
 The worker token is the shared secret from api/config.php ('worker_token').
 """
 import argparse
+import datetime
 import json
 import shutil
 import threading
@@ -312,11 +313,15 @@ class LLM:
         cost = u.get("cost")
         if isinstance(cost, dict):
             cost = cost.get("total") or 0
+        # "zero reasoning tokens" and "the provider sent no reasoning-token
+        # count" are different facts. The flag keeps them apart.
+        has_reasoning = "reasoning_tokens" in cd or "reasoning_tokens" in u
         return {
             "prompt_tokens": int(u.get("prompt_tokens") or 0),
             "completion_tokens": int(u.get("completion_tokens") or 0),
             "cached_tokens": int(pd.get("cached_tokens") or 0),
             "reasoning_tokens": int(cd.get("reasoning_tokens") or 0),
+            "reasoning_known": 1 if has_reasoning else 0,
             "cost": float(cost or 0),
         }
 
@@ -750,6 +755,10 @@ def upsert_catalogue(info):
         "cat_en": info["cat_en"], "src": info["src"], "dur": fmt_dur(info["dur"]),
         "tr": True, "ch": info["ch"], "ch_en": info["ch_en"], "views": info.get("views", 0),
         "status": "published", "indexable": True,
+        # When the record entered the catalogue. publishedAt is the date the
+        # video was uploaded to YouTube, which is a different fact; the panel
+        # sorts "recently added" by this one.
+        "createdAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
     }
     if info.get("upload"):
         # ISO 8601 date — yt-dlp gives YYYYMMDD and the JSON-LD uploaderDate

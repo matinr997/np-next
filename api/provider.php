@@ -311,12 +311,13 @@ function np_models_record(string $epId, string $model, string $task, string $sit
                           int $est, int $ctxMax, float $pct, bool $ok, int $latency, string $err): void {
     try {
         np_q('INSERT INTO llm_usage (id, endpoint_id, model_id, task, site, prompt_tokens,'
-            . ' completion_tokens, cached_tokens, reasoning_tokens, est_prompt_tokens, ctx_max,'
-            . ' ctx_pct, cost, ok, latency_ms, error_kind, created_at)'
-            . ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            . ' completion_tokens, cached_tokens, reasoning_tokens, reasoning_known,'
+            . ' est_prompt_tokens, ctx_max, ctx_pct, cost, ok, latency_ms, error_kind, created_at)'
+            . ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             ['u' . gmdate('YmdHis') . '_' . bin2hex(random_bytes(4)), $epId, $model, $task, $site,
              (int)($usage['prompt_tokens'] ?? 0), (int)($usage['completion_tokens'] ?? 0),
              (int)($usage['cached_tokens'] ?? 0), (int)($usage['reasoning_tokens'] ?? 0),
+             (int)($usage['reasoning_known'] ?? 0) === 1 ? 1 : 0,
              $est, $ctxMax, $pct, (float)($usage['cost'] ?? 0), $ok ? 1 : 0, $latency,
              substr($err, 0, 32), np_now()]);
     } catch (Throwable $e) {

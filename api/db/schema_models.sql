@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS llm_usage (
   completion_tokens INTEGER NOT NULL DEFAULT 0,
   cached_tokens     INTEGER NOT NULL DEFAULT 0,
   reasoning_tokens  INTEGER NOT NULL DEFAULT 0,
+  reasoning_known   INTEGER NOT NULL DEFAULT 0,
   est_prompt_tokens INTEGER NOT NULL DEFAULT 0,
   ctx_max           INTEGER NOT NULL DEFAULT 0,
   ctx_pct           REAL NOT NULL DEFAULT 0,

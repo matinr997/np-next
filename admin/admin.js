@@ -150,6 +150,12 @@ function api(file, opts) {
     skipped: 'تکراری',
     canceled: 'لغو شد'
   };
+  /* The language of this panel, and the labels that differ. */
+  var FA = (document.documentElement.lang || 'fa').toLowerCase() === 'fa';
+  var VIDEO_EMPTY_SEARCH = 'ویدیویی با این عبارت پیدا نشد.';
+  var VIDEO_EMPTY = 'ویدیویی برای نمایش نیست.';
+  var VIDEOS_COUNT_LABEL = 'ویدیو';
+
   var VIDEO_STATUS_LABEL = {
     published: 'منتشر شده',
     draft: 'پیش‌نویس',
@@ -736,6 +742,11 @@ function api(file, opts) {
   /* ------------------------------------------------------------------ */
   /* videos                                                             */
   /* ------------------------------------------------------------------ */
+  /* The recently added videos.
+   *
+   * The order comes from the server: the newest record first, by the real
+   * creation time. The table shows ten of them, and the search filters what
+   * is already on the screen. */
   function renderVideos() {
     var body = $('videosBody');
     var empty = $('videosEmpty');
@@ -747,29 +758,58 @@ function api(file, opts) {
       if (q && hay.indexOf(q) === -1) return;
       shown++;
       var tr = el('tr');
-      tr.appendChild(el('td', 'adm-c-id', v.id || '—'));
-      tr.appendChild(el('td', 'adm-c-fa', v.title_fa || '—'));
-      tr.appendChild(el('td', 'adm-c-en', v.title_en || '—'));
+      tr.appendChild(el('td', 'adm-cell-id', v.id || '—'));
+      /* The Persian panel shows both titles; the English panel shows only
+         the English one — no Persian text is allowed on the .com side. */
+      if (FA) {
+        var tdFa = el('td', 'adm-cell-title');
+        tdFa.title = v.title_fa || '';
+        if (v.id) {
+          var a = el('a', null, v.title_fa || '—');
+          a.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id);
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          tdFa.appendChild(a);
+        } else {
+          tdFa.appendChild(document.createTextNode(v.title_fa || '—'));
+        }
+        tr.appendChild(tdFa);
+      }
+      var tdEn = el('td', 'adm-cell-title');
+      tdEn.title = v.title_en || '';
+      tdEn.appendChild(document.createTextNode(v.title_en || '—'));
+      tr.appendChild(tdEn);
       tr.appendChild(el('td', 'adm-c-ch', v.channel || '—'));
       var td = el('td');
       var st = v.status || '';
-      var badge = el('span', 'adm-badge adm-badge-other', VIDEO_STATUS_LABEL[st] || st || '—');
-      td.appendChild(badge);
+      td.appendChild(el('span', 'adm-badge adm-badge-other', VIDEO_STATUS_LABEL[st] || st || '—'));
       tr.appendChild(td);
+      tr.appendChild(el('td', 'adm-cell-time', fmtStamp(v.created_at)));
       body.appendChild(tr);
     });
     empty.hidden = shown > 0;
     if (!shown && state.videos.length) {
-      empty.textContent = 'ویدیویی با این عبارت پیدا نشد.';
+      empty.textContent = VIDEO_EMPTY_SEARCH;
     } else if (!shown) {
-      empty.textContent = 'ویدیویی برای نمایش نیست.';
+      empty.textContent = VIDEO_EMPTY;
     }
-    $('videosCount').textContent = fa(shown) + ' ویدیو';
+    $('videosCount').textContent = fa(shown) + ' ' + VIDEOS_COUNT_LABEL;
+  }
+
+  /* A short timestamp. The database stores UTC. */
+  function fmtStamp(s) {
+    if (!s) return '—';
+    var d = new Date(String(s).replace(' ', 'T') + (String(s).indexOf('Z') < 0 ? 'Z' : ''));
+    if (isNaN(d.getTime())) return String(s);
+    /* the Gregorian calendar in both languages, for the same reason */
+    return d.toLocaleDateString('en-GB',
+      { year: 'numeric', month: '2-digit', day: '2-digit' });
   }
 
   function loadVideos() {
     if (!state.user) return Promise.resolve();
-    return api('videos.php').then(function (data) {
+    /* The server does the sorting and sends only the newest records. */
+    return api('videos.php?recent=10').then(function (data) {
       state.videos = data.videos || [];
       renderVideos();
     }).catch(function (err) {
@@ -922,6 +962,13 @@ function api(file, opts) {
   /* ------------------------------------------------------------------ */
   /* boot                                                               */
   /* ------------------------------------------------------------------ */
+  /* The AI panel draws the connection state; models.js owns that panel. */
+  function loadConn() {
+    if (window.npModels && typeof window.npModels.renderConn === 'function') {
+      window.npModels.renderConn(window.__npDash);
+    }
+  }
+
   function loadAll() {
     /* an already signed-in session still needs a token for the writes */
     api('auth.php?action=csrf').then(function (d) { setCsrf(d.csrf); }).catch(function () { });

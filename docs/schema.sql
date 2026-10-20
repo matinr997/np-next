@@ -58,6 +58,7 @@ CREATE TABLE videos (
   KEY idx_topic (topic),
   KEY idx_status (status),
   CONSTRAINT v_topic FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE SET NULL
+  created_at     VARCHAR(32) NOT NULL DEFAULT '',
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE video_progress (

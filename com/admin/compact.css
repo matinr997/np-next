@@ -1,0 +1,349 @@
+/* NursePlus admin — the compact redesign.
+ *
+ * A separate file so the two panels stay in step: whatever is added here is
+ * copied into both trees (admin/ and com/admin/) by the same script that
+ * writes the HTML.
+ *
+ * White cards, subtle blue borders, a light neutral background, the
+ * NursePlus blue as the accent. Logical properties only, so the Persian
+ * tree (RTL) and the English tree (LTR) both work without a second set.
+ */
+
+/* ============================ the tokens ============================ */
+/* These extend the tokens of admin.css; the values that already exist are
+   not repeated here, only the new ones are. */
+.adm{
+  --adm-ok:#0f7a3d;      --adm-ok-bg:#e9f9f0;  --adm-ok-line:#b9e6cd;
+  --adm-bad:#b3123a;     --adm-bad-bg:#fdecef; --adm-bad-line:#F0728D;
+  --adm-warn:#7A5A18;    --adm-warn-bg:#FFEFC4; --adm-warn-line:#E9DDB4;
+  --adm-run:#086288;     --adm-run-bg:#EAF4FA; --adm-run-line:#CFE3F2;
+  --adm-mute:#8a99a8;
+}
+
+/* ============================ the compact card ============================ */
+.adm-card{padding:16px 18px}
+.adm-card-title{font-size:.95rem}
+.adm-card-head{margin-bottom:10px}
+.adm-count{
+  margin-inline-start:auto;font-size:.72rem;font-weight:800;color:var(--adm-accent);
+  background:var(--adm-wash);border:1px solid var(--adm-line);border-radius:999px;
+  padding:3px 11px;white-space:nowrap;
+}
+.adm-hint{font-size:.77rem;line-height:1.9;margin:4px 0 10px}
+.adm-hint-tight{margin:2px 0 8px}
+.adm-auto{margin:0;margin-inline-start:auto;white-space:nowrap;font-size:.7rem}
+.adm-empty{padding:20px 10px;font-size:.8rem}
+
+/* ============================ the dashboard metrics ============================ */
+/* Small cards, as many per row as the width allows, no wrapping labels. */
+.adm-dgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+  gap:8px;margin-bottom:12px;
+}
+.adm-dstat{
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:8px 10px;background:var(--adm-wash);
+}
+.adm-dstat span{
+  display:block;font-size:.66rem;color:var(--adm-muted);font-weight:700;
+  margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.adm-dstat b{display:block;font-size:1.05rem;color:var(--adm-ink);font-weight:800;line-height:1.15}
+.adm-dstat em{display:block;font-style:normal;font-size:.63rem;color:var(--adm-muted);margin-top:2px}
+.adm-dstat-bad b{color:var(--adm-bad)}
+.adm-dstat-run b{color:var(--adm-run)}
+.adm-dstat-ok b{color:var(--adm-ok)}
+
+/* ============================ the dashboard summaries ============================ */
+/* Three recent errors and three recent actions, each a compact row. */
+.adm-dsec{margin-top:12px}
+.adm-dsec h4{
+  margin:0 0 6px;font-size:.74rem;font-weight:800;color:var(--adm-accent);
+  display:flex;align-items:center;gap:6px;
+}
+.adm-dsec h4 .adm-count{margin-inline-start:0;font-size:.64rem}
+.adm-dlist{list-style:none;margin:0;padding:0;border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);overflow:hidden}
+.adm-dlist li{
+  display:flex;align-items:center;gap:9px;
+  font-size:.74rem;color:var(--adm-ink);padding:6px 10px;
+  border-bottom:1px solid var(--adm-line);
+}
+.adm-dlist li:last-child{border-bottom:0}
+.adm-dlist .adm-dl-main{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-dlist .adm-dl-kind{
+  flex:none;font-size:.64rem;font-weight:800;padding:2px 7px;border-radius:999px;
+  background:#fff;border:1px solid var(--adm-line);color:var(--adm-muted);
+}
+.adm-dlist .adm-dl-kind.bad{background:var(--adm-bad-bg);border-color:var(--adm-bad-line);color:var(--adm-bad)}
+.adm-dlist .adm-dl-kind.warn{background:var(--adm-warn-bg);border-color:var(--adm-warn-line);color:var(--adm-warn)}
+.adm-dlist .adm-dl-meta{flex:none;font-size:.64rem;color:var(--adm-muted);white-space:nowrap}
+.adm-dsec-empty{font-size:.74rem;color:var(--adm-muted);padding:10px 2px}
+.adm-dllm{
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:8px 12px;margin-bottom:12px;font-size:.76rem;
+}
+.adm-dllm.ok{background:var(--adm-ok-bg);border-color:var(--adm-ok-line)}
+.adm-dllm.bad{background:var(--adm-bad-bg);border-color:var(--adm-bad-line)}
+.adm-dllm.warn{background:var(--adm-warn-bg);border-color:var(--adm-warn-line)}
+.adm-dllm b{color:var(--adm-ink);font-weight:800}
+.adm-dllm span,.adm-dllm em{color:var(--adm-muted);font-style:normal}
+
+/* ============================ the AI connection line ============================ */
+.adm-conn{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:7px 11px;border-radius:var(--adm-r-ctl);margin-bottom:12px;
+  border:1px solid var(--adm-line);background:var(--adm-wash);font-size:.75rem;
+}
+.adm-conn b{font-weight:800;color:var(--adm-ink)}
+.adm-conn .adm-conn-meta{color:var(--adm-muted);font-size:.67rem;margin-inline-start:auto;text-align:end}
+.adm-conn.ok{background:var(--adm-ok-bg);border-color:var(--adm-ok-line)}
+.adm-conn.ok .adm-dot{background:var(--adm-ok)}
+.adm-conn.bad{background:var(--adm-bad-bg);border-color:var(--adm-bad-line)}
+.adm-conn.bad .adm-dot{background:var(--adm-bad)}
+.adm-conn.warn{background:var(--adm-warn-bg);border-color:var(--adm-warn-line)}
+.adm-conn.warn .adm-dot{background:var(--adm-warn)}
+
+/* ============================ the model picker ============================ */
+.adm-model-picker{gap:7px;margin-top:6px}
+.adm-model-picker input{font-size:.79rem;padding:8px 11px}
+
+/* the capability filters — the icon stays visible in both states */
+.adm-capfilters{display:flex;flex-wrap:wrap;gap:5px}
+/* The filter chip. The icon stays visible when the filter is off — only
+   its colour changes, so the user still knows the capability exists. */
+.adm-flabel{font-size:.68rem;font-weight:800;color:var(--adm-muted);align-self:center}
+.adm-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.68rem;font-weight:800;line-height:1;
+  padding:4px 9px;border-radius:999px;cursor:pointer;user-select:none;
+  border:1px solid var(--adm-line);background:#fff;color:var(--adm-mute);
+  transition:background .15s var(--adm-ease),border-color .15s var(--adm-ease),color .15s var(--adm-ease);
+}
+.adm-chip:hover{border-color:var(--adm-light)}
+.adm-chip:focus-visible{box-shadow:0 0 0 3px rgba(151,215,255,.55)}
+/* off: the icon is muted but still there. on: the icon is in full colour. */
+.adm-chip .adm-ic{opacity:.55;filter:grayscale(1)}
+.adm-chip.on{background:var(--adm-accent);border-color:var(--adm-accent);color:#fff}
+.adm-chip.on .adm-ic{opacity:1;filter:none;background:rgba(255,255,255,.92);border-color:transparent;color:var(--adm-accent)}
+
+.adm-modellist{
+  max-height:250px;overflow-y:auto;border:1px solid var(--adm-line);
+  border-radius:var(--adm-r-ctl);background:#fff;
+  /* the last row is not cut in half: the list scrolls and the scrollbar
+     shows there is more below */
+  scrollbar-width:thin;
+}
+.adm-modellist::-webkit-scrollbar{width:6px}
+.adm-modellist::-webkit-scrollbar-thumb{background:var(--adm-line);border-radius:999px}
+.adm-modellist::-webkit-scrollbar-track{background:transparent}
+.adm-mrow{
+  display:flex;align-items:center;gap:7px;width:100%;
+  padding:6px 10px;border:0;border-bottom:1px solid var(--adm-line);
+  background:#fff;cursor:pointer;text-align:start;font:inherit;
+}
+.adm-mrow:last-child{border-bottom:0}
+.adm-mrow:hover{background:#F7FBFE}
+.adm-mrow:focus-visible{box-shadow:inset 0 0 0 2px var(--adm-accent)}
+.adm-mname{
+  flex:1 1 auto;min-width:0;font-size:.73rem;font-weight:700;color:var(--adm-ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr;text-align:start;
+}
+.adm-mcaps{flex:none;display:inline-flex;gap:3px}
+.adm-mctx{flex:none;font-size:.63rem;color:var(--adm-muted);white-space:nowrap;direction:ltr}
+.adm-mrow.sel{background:#F7FBFE}
+.adm-mrow.sel .adm-mname{color:var(--adm-accent)}
+.adm-mmore{padding:6px 10px;font-size:.68rem;color:var(--adm-muted);text-align:center}
+
+/* the model summary and the model detail, both inside the AI panel */
+.adm-msum,.adm-modeldetail{
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  background:var(--adm-wash);padding:9px 11px;font-size:.72rem;margin-top:6px;
+}
+.adm-msum dl,.adm-modeldetail dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0}
+.adm-msum dt,.adm-modeldetail dt{color:var(--adm-muted);font-weight:700;white-space:nowrap}
+.adm-msum dd,.adm-modeldetail dd{margin:0;color:var(--adm-ink);font-weight:700;overflow-wrap:anywhere}
+.adm-msum .adm-msrc,.adm-modeldetail .adm-mdsrc{
+  grid-column:1/-1;font-size:.63rem;color:var(--adm-muted);font-weight:400;padding-top:4px;
+}
+.adm-una{color:var(--adm-mute);font-weight:400}
+
+/* ============================ the queue cards ============================ */
+.adm-jobs{gap:8px}
+.adm-job{padding:10px 13px;box-shadow:none}
+.adm-job-top{align-items:center}
+.adm-job-title{flex:1 1 240px;font-size:.84rem;line-height:1.7}
+.adm-job-name{
+  color:var(--adm-ink);text-decoration:none;font-weight:800;
+  border-bottom:1px solid transparent;transition:border-color .15s var(--adm-ease);
+}
+a.adm-job-name:hover{color:var(--adm-accent);border-bottom-color:var(--adm-light)}
+.adm-job-url{display:none}
+.adm-job-meta{gap:6px;margin-top:6px}
+.adm-job-foot{gap:8px;margin-top:6px}
+.adm-job-time{font-size:.68rem}
+
+/* the progress bar */
+.adm-track{height:5px;margin-top:7px}
+.adm-fill{background:linear-gradient(90deg,var(--adm-accent-2),var(--adm-accent))}
+.adm-fill.bad{background:linear-gradient(90deg,#F0728D,#b3123a)}
+
+/* ============================ the stage strip ============================ */
+/*
+ * The seventeen stages of one job, in a single horizontal row. A narrow
+ * screen scrolls inside this box; the page itself never overflows.
+ *   done -> a green tick
+ *   run  -> a blue spinner
+ *   bad  -> a red warning sign, clickable to retry that one stage
+ *   skip -> a dash
+ *   wait -> a question mark
+ *   todo -> an empty circle
+ */
+.adm-stages{
+  display:flex;align-items:center;gap:5px;flex-wrap:nowrap;
+  margin-top:8px;padding-bottom:3px;
+  overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:thin;-webkit-overflow-scrolling:touch;
+}
+.adm-stages::-webkit-scrollbar{height:5px}
+.adm-stages::-webkit-scrollbar-thumb{background:var(--adm-line);border-radius:999px}
+.adm-stg{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:6px;
+  border:1px solid var(--adm-line);background:#fff;
+  font-size:.68rem;font-weight:800;line-height:1;color:var(--adm-mute);
+}
+.adm-stg b{font-style:normal;font-weight:800}
+.adm-stg-done{background:var(--adm-ok-bg);border-color:var(--adm-ok-line);color:var(--adm-ok)}
+.adm-stg-run{background:var(--adm-run-bg);border-color:var(--adm-run-line);color:var(--adm-run)}
+.adm-stg-bad{background:var(--adm-bad-bg);border-color:var(--adm-bad-line);color:var(--adm-bad)}
+.adm-stg-skip{background:var(--adm-wash);border-color:var(--adm-line);color:var(--adm-mute)}
+.adm-stg-wait{background:var(--adm-warn-bg);border-color:var(--adm-warn-line);color:var(--adm-warn)}
+.adm-stg-todo{background:#fff;border-color:var(--adm-line);color:var(--adm-mute)}
+.adm-stg-click{cursor:pointer}
+.adm-stg-click:hover{filter:brightness(.97)}
+.adm-stg-click:focus-visible{box-shadow:0 0 0 2px var(--adm-bad)}
+.adm-spin{
+  width:11px;height:11px;border-radius:50%;
+  border:2px solid currentColor;border-top-color:transparent;
+  animation:adm-spin .8s linear infinite;
+}
+@keyframes adm-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.adm-spin{animation-duration:2.4s}}
+
+/* ============================ the usage ============================ */
+.adm-usg-tot{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(82px,1fr));
+  gap:7px;margin-bottom:10px;
+}
+.adm-usg-stat{
+  border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  padding:7px 9px;background:var(--adm-wash);
+}
+.adm-usg-stat span{display:block;font-size:.63rem;color:var(--adm-muted);font-weight:700;white-space:nowrap}
+.adm-usg-stat b{display:block;font-size:.94rem;font-weight:800;line-height:1.25;margin-top:1px}
+.adm-usg-break{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px}
+.adm-usg-break h4{margin:0 0 5px;font-size:.7rem;font-weight:800;color:var(--adm-accent)}
+.adm-mini{width:100%;border-collapse:collapse;font-size:.7rem}
+.adm-mini td{padding:4px 7px;border-bottom:1px solid var(--adm-line)}
+.adm-mini tr:last-child td{border-bottom:0}
+.adm-una{color:var(--adm-mute)}
+.adm-usage-filters{margin-bottom:10px;gap:7px}
+.adm-usage-filters input,.adm-usage-filters select{font-size:.75rem;height:30px;padding:5px 9px}
+
+/* ============================ the errors ============================ */
+.adm-err{
+  display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;
+  padding:8px 11px;border:1px solid var(--adm-line);border-radius:var(--adm-r-ctl);
+  background:#fff;margin-bottom:7px;
+}
+.adm-err-bad{border-color:var(--adm-bad-line);background:var(--adm-bad-bg)}
+.adm-err-warn{border-color:var(--adm-warn-line);background:var(--adm-warn-bg)}
+.adm-err-main{flex:1 1 240px;min-width:0}
+.adm-err-title{font-size:.77rem;font-weight:800;color:var(--adm-ink)}
+.adm-err-msg{font-size:.73rem;color:var(--adm-ink);margin-top:2px;overflow-wrap:anywhere}
+.adm-err-meta{font-size:.65rem;color:var(--adm-muted);margin-top:3px}
+.adm-err-side{display:flex;align-items:center;gap:6px;flex:none;flex-wrap:wrap}
+/* the stack trace lives in its own expandable box */
+.adm-err-detail{
+  margin-top:6px;font-size:.67rem;color:var(--adm-muted);
+  background:#fff;border:1px solid var(--adm-line);border-radius:6px;padding:6px 9px;
+}
+.adm-err-detail summary{cursor:pointer;font-weight:700;color:var(--adm-muted)}
+.adm-err-detail pre{
+  margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;
+  max-height:180px;overflow:auto;font-size:.66rem;line-height:1.7;
+}
+.adm-err-empty{font-size:.76rem;color:var(--adm-muted);padding:14px 2px;text-align:center}
+
+/* ============================ the audit ============================ */
+.adm-audit{
+  display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;
+  padding:7px 11px;border-bottom:1px solid var(--adm-line);font-size:.74rem;
+}
+.adm-audit:last-child{border-bottom:0}
+.adm-audit-main{flex:1 1 240px;min-width:0}
+.adm-audit-title{font-weight:700;color:var(--adm-ink)}
+.adm-audit-msg{color:var(--adm-muted);margin-top:2px}
+/* the long explanation is shared, not repeated in every row */
+.adm-audit-why{
+  color:var(--adm-muted);font-size:.67rem;margin-top:4px;
+  border-inline-start:2px solid var(--adm-line);padding-inline-start:8px;
+}
+.adm-audit-side{display:flex;align-items:center;gap:6px;flex:none}
+
+/* ============================ the tables ============================ */
+.adm-table-wrap{max-width:100%;overflow-x:auto}
+.adm-table{font-size:.77rem;min-width:560px}
+.adm-table th,.adm-table td{padding:7px 11px}
+.adm-table thead th{font-size:.7rem;position:sticky;top:0}
+.adm-cell-title{max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-cell-title a{color:var(--adm-ink);text-decoration:none;font-weight:600}
+.adm-cell-title a:hover{color:var(--adm-accent);text-decoration:underline}
+.adm-cell-id{font-size:.68rem;color:var(--adm-muted);direction:ltr;text-align:start;white-space:nowrap}
+.adm-cell-time{font-size:.68rem;color:var(--adm-muted);white-space:nowrap;direction:ltr;text-align:start}
+
+/* ============================ the responsive ============================ */
+@media(max-width:640px){
+  .adm-card{padding:14px 12px}
+  .adm-dgrid{grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:6px}
+  .adm-dstat{padding:6px 8px}
+  .adm-dstat b{font-size:.94rem}
+  .adm-usum{grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:6px}
+  .adm-ustat b{font-size:.86rem}
+  .adm-stg{width:20px;height:20px;font-size:.64rem}
+  .adm-job-title{flex:1 1 100%}
+}
+
+/* the note that a video goes to both sites */
+.adm-bothsites{
+  display:flex;align-items:flex-start;gap:7px;
+  margin:0 0 10px;padding:7px 10px;border-radius:var(--adm-r-ctl);
+  background:var(--adm-run-bg);border:1px solid var(--adm-run-line);
+  color:var(--adm-accent);font-size:.73rem;line-height:1.8;
+}
+.adm-bothsites .adm-dot{margin-top:6px}
+
+/* ============================ the sidebar position ============================ */
+/*
+ * The AI panel belongs in the upper-right area on a desktop screen, in both
+ * languages. The grid columns are physical, so the sidebar takes the first
+ * column when the page is RTL (where the first column is the right one) and
+ * the second column when it is LTR.
+ */
+html[dir="ltr"] .adm-grid{grid-template-columns:minmax(0,1fr) 360px}
+html[dir="rtl"] .adm-grid{grid-template-columns:360px minmax(0,1fr)}
+html[dir="rtl"] .adm-side{order:-1}
+@media(max-width:1080px){
+  html[dir="ltr"] .adm-grid,
+  html[dir="rtl"] .adm-grid{grid-template-columns:minmax(0,1fr)}
+  html[dir="rtl"] .adm-side{order:0}
+}
+
+/* the capability icon: the shape never changes, only the colour */
+.adm-ic{width:16px;height:16px}
+.adm-ic svg{width:11px;height:11px;display:block}
+.adm-ic-yes{background:var(--adm-ok-bg)!important;border-color:var(--adm-ok-line)!important;color:var(--adm-ok)!important;opacity:1;filter:none}
+.adm-ic-no{background:var(--adm-bad-bg)!important;border-color:var(--adm-bad-line)!important;color:var(--adm-bad)!important;opacity:1;filter:none}
+.adm-ic-unknown{background:var(--adm-warn-bg)!important;border-color:var(--adm-warn-line)!important;color:var(--adm-warn)!important;opacity:1;filter:none}
+.adm-chip .adm-ic-unknown{background:var(--adm-warn-bg)!important;border-color:var(--adm-warn-line)!important;color:var(--adm-warn)!important}

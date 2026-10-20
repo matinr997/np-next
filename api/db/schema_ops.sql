@@ -105,3 +105,11 @@ CREATE TABLE IF NOT EXISTS bugfix_patches (
   updated_at    VARCHAR(32) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 );
+
+-- ------------------------------------------------------------- indexes
+-- The queries that run on every panel refresh.
+CREATE INDEX IF NOT EXISTS idx_videos_created ON videos (created_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_error_created ON error_log (created_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_activity_created ON activity_log (created_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_stages_job ON job_stages (job_id, seq);
+CREATE INDEX IF NOT EXISTS idx_jobs_status ON pipeline_jobs (status, created_at);

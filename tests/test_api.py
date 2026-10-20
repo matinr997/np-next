@@ -338,6 +338,42 @@ def main():
           st == 200 and isinstance(r.get("videos"), dict) and r["videos"].get("videos", 0) > 0,
           str(r)[:160])
 
+    # --- 18: the dashboard summaries --------------------------------------
+    st, r = call("/api/dashboard.php")
+    errs = r.get("recent_errors") or []
+    acts = r.get("recent_actions") or []
+    check("18 the dashboard shows three recent errors",
+          st == 200 and len(errs) <= 3, "%d errors" % len(errs))
+    check("19 the dashboard shows three recent actions",
+          st == 200 and len(acts) <= 3, "%d actions" % len(acts))
+    if errs:
+        stamps = [str(e.get("created_at") or "") for e in errs]
+        check("20 the recent errors are the newest first",
+              stamps == sorted(stamps, reverse=True), str(stamps)[:120])
+    if acts:
+        stamps = [str(a.get("created_at") or "") for a in acts]
+        check("21 the recent actions are the newest first",
+              stamps == sorted(stamps, reverse=True), str(stamps)[:120])
+
+    # --- 22: the recently added videos ------------------------------------
+    st, r = call("/api/videos.php?recent=10")
+    recent = r.get("videos") or []
+    check("22 the recently added videos are limited to ten",
+          st == 200 and len(recent) <= 10, "%d videos" % len(recent))
+    stamps = [str(v.get("created_at") or "") for v in recent]
+    check("23 the recent videos are the newest first",
+          stamps == sorted(stamps, reverse=True), str(stamps)[:120])
+    check("24 the recent videos carry a creation time",
+          all(v.get("created_at") for v in recent),
+          str([v.get("created_at") for v in recent])[:120])
+
+    # --- 25: the whole catalogue is still there ---------------------------
+    st, r = call("/api/videos.php")
+    allv = r.get("videos") or []
+    check("25 the whole catalogue is still available",
+          st == 200 and len(allv) >= len(recent),
+          "%d in the catalogue, %d recent" % (len(allv), len(recent)))
+
     # --- the AI provider, only if it is reachable -------------------------
     st, r = call("/api/models.php?action=list")
     if st == 200 and (r.get("count") or 0) > 0:

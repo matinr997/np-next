@@ -14,7 +14,7 @@ CORE = os.path.join(ROOT, 'lib', 'player-core.js')
 DATA = os.path.join(ROOT, 'data', 'videos.json')
 
 ORDER = ['id', 'dur', 'tr', 'cat', 'cat_en', 'src', 'views', 'publishedAt',
-         'fa', 'en', 'sum', 'sum_en', 'ch', 'ch_en']
+         'createdAt', 'fa', 'en', 'sum', 'sum_en', 'ch', 'ch_en']
 
 START = 'const VIDEOS = [\n'
 END = '\n];\n'

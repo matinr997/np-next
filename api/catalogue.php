@@ -17,8 +17,38 @@ function np_dur_sec(string $s): int {
     return 0;
 }
 
+/**
+ * Make sure the videos table can answer "which were added last?".
+ *
+ * The column did not exist, so the ten newest videos could only be guessed
+ * from the publication date. created_at is the real insertion time; the
+ * existing rows are backfilled from published_at, which is the closest true
+ * value the old records have.
+ */
+function np_videos_schema(): void {
+    static $done = false;
+    if ($done) return;
+    $done = true;
+    np_migrate(['videos' => ['created_at' => "VARCHAR(32) NOT NULL DEFAULT ''"]]);
+    try {
+        // the rows that were there before the column existed
+        np_q("UPDATE videos SET created_at = published_at
+              WHERE (created_at IS NULL OR created_at = '') AND published_at IS NOT NULL AND published_at <> ''");
+        // and the ones with no publication date at all
+        np_q("UPDATE videos SET created_at = ? WHERE created_at IS NULL OR created_at = ''",
+             [gmdate('Y-m-d H:i:s')]);
+    } catch (Throwable $e) { /* the table may not exist yet */ }
+    try {
+        $idx = np_driver() === 'sqlite'
+            ? 'CREATE INDEX IF NOT EXISTS idx_videos_created ON videos (created_at DESC, id DESC)'
+            : 'CREATE INDEX idx_videos_created ON videos (created_at DESC, id DESC)';
+        np_db()->exec($idx);
+    } catch (Throwable $e) { /* the index may already exist */ }
+}
+
 /** The catalogue the site actually shows: DB rows merged with data/videos.json. */
 function np_catalogue(): array {
+    np_videos_schema();
     $out = [];
     foreach (np_static_videos() as $v) {
         $id = (string)($v['id'] ?? '');
@@ -37,6 +67,7 @@ function np_catalogue(): array {
             'has_transcript' => !empty($v['tr']) || is_file(__DIR__ . '/../subs/' . $id . '.json'),
             'has_quiz'      => is_file(__DIR__ . '/../quizzes/' . $id . '.json'),
             'published_at'  => (string)($v['publishedAt'] ?? $v['published_at'] ?? ''),
+            'created_at'    => (string)($v['created_at'] ?? $v['createdAt'] ?? ''),
             'status'        => (string)($v['status'] ?? 'published'),
         ];
     }
@@ -56,6 +87,7 @@ function np_catalogue(): array {
                 'has_transcript' => (int)($r['has_transcript'] ?? 0) === 1,
                 'has_quiz' => is_file(__DIR__ . '/../quizzes/' . $id . '.json'),
                 'published_at' => (string)($r['published_at'] ?? ''),
+                'created_at'   => (string)($r['created_at'] ?? ''),
                 'status' => (string)$r['status'],
             ];
         }

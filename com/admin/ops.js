@@ -23,6 +23,8 @@
       cancel: 'Cancel', skipped: 'Skipped', pending: 'Pending', completed: 'Completed',
       error: 'Error', retryable: 'Retryable', notRetryable: 'Not retryable',
       waiting_review: 'Awaiting review', cancelled: 'Cancelled',
+      details: 'Details',
+      details: 'Details',
       errorCenter: 'Error centre', fixBug: 'Fix bug', resolve: 'Resolve', ignore: 'Ignore',
       category: 'Category', severity: 'Severity', attempts2: 'Attempts', fixState: 'Fix state',
       noErrors: 'No error has been recorded.', proposed: 'Proposed', tested: 'Tested',
@@ -77,52 +79,106 @@
   var S = { dash: null, jobId: '', stages: [], errors: [], issues: [], patches: [] };
 
   /* ------------------------------------------------------- the dashboard */
+  /* ------------------------------------------------------- the dashboard */
   function renderDash() {
     var box = document.getElementById('dashBody');
     if (!box || !S.dash) return;
     var d = S.dash, v = d.videos || {}, j = d.jobs || {}, l = d.llm || {};
-    var stat = function (k, val, sub) {
-      return '<div class="adm-dstat"><span>' + esc(k) + '</span><b dir="ltr">' + esc(val) + '</b>'
-        + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</div>';
+
+    /* Small metric cards. Every number is a real count from the database. */
+    var stat = function (key, val, cls) {
+      return '<div class="adm-dstat' + (cls ? ' adm-dstat-' + cls : '') + '">'
+        + '<span>' + esc(t(key)) + '</span><b dir="ltr">' + esc(val) + '</b></div>';
     };
     var html = '<div class="adm-dgrid">'
-      + stat(t('totalVideos'), plain(v.videos))
-      + stat(t('published'), plain(v.published))
-      + stat(t('draft'), plain(v.draft))
-      + stat(t('withQuiz'), plain(v.with_quiz))
-      + stat(t('withSubs'), plain(v.with_transcript))
-      + stat(t('awaiting'), plain((d.review || {}).awaiting))
-      + stat(t('queued'), plain(j.queued))
-      + stat(t('running'), plain(j.running))
-      + stat(t('done'), plain(j.done))
-      + stat(t('failed'), plain(j.failed))
-      + stat(t('stuck'), plain((j.stuck || []).length))
+      + stat('totalVideos', plain(v.videos))
+      + stat('published', plain(v.published), 'ok')
+      + stat('draft', plain(v.draft))
+      + stat('withQuiz', plain(v.with_quiz))
+      + stat('withSubs', plain(v.with_transcript))
+      + stat('awaiting', plain((d.review || {}).awaiting))
+      + stat('queued', plain(j.queued))
+      + stat('running', plain(j.running), 'run')
+      + stat('done', plain(j.done), 'ok')
+      + stat('failed', plain(j.failed), 'bad')
+      + stat('stuck', plain((j.stuck || []).length), 'bad')
       + '</div>';
-    // the AI connection, as it actually is
-    var llmState = l.reachable === true ? t('reachable') : (l.reachable === false ? t('unreachable') : t('unknown'));
-    var llmClass = l.reachable === true ? 'ok' : (l.reachable === false ? 'bad' : 'warn');
-    html += '<div class="adm-dllm ' + llmClass + '"><span class="adm-ai-pill">AI</span>'
-      + '<b>' + esc(t('aiStatus')) + ': ' + esc(llmState) + '</b>'
-      + '<span dir="ltr">' + esc(l.model || '—') + ' · ' + plain(l.model_count) + ' ' + esc(t('modelCount')) + '</span>'
-      + '<em>' + esc(t('lastUpdate')) + ': ' + esc(d.generated_at || '') + '</em></div>';
 
-    if ((d.recent_errors || []).length) {
-      html += '<div class="adm-dsec"><h4>' + esc(t('recentErrors')) + '</h4><ul class="adm-dlist">'
-        + d.recent_errors.slice(0, 6).map(function (e) {
-          return '<li><b>' + esc(e.category) + '</b> ' + esc(e.stage || '') + ' — ' + esc(e.message || '') + '</li>';
-        }).join('') + '</ul></div>';
+    /* The AI connection, as it actually is. A stored URL proves nothing, so
+       the state comes from the last real check. */
+    var conn = 'warn', label = t('unknown');
+    if (l.reachable === true) { conn = 'ok'; label = t('reachable'); }
+    else if (l.reachable === false) { conn = 'bad'; label = t('unreachable'); }
+    var meta = [];
+    if (l.model_count) meta.push(plain(l.model_count) + ' ' + t('modelCount'));
+    if (l.model) meta.push(l.model);
+    if (l.checked_at) meta.push(t('lastUpdate') + ': ' + l.checked_at);
+    html += '<div class="adm-conn ' + conn + '"><span class="adm-dot"></span>'
+      + '<b>' + esc(t('aiStatus')) + ': ' + esc(label) + '</b>'
+      + '<span class="adm-conn-meta" dir="ltr">' + esc(meta.join(' · ')) + '</span></div>';
+    if (l.reachable === false && l.error) {
+      html += '<div class="adm-alert adm-alert-error">' + esc(l.error) + '</div>';
     }
-    if ((d.recent_actions || []).length) {
-      html += '<div class="adm-dsec"><h4>' + esc(t('recentActions')) + '</h4><ul class="adm-dlist">'
-        + d.recent_actions.slice(0, 8).map(function (a) {
-          return '<li><b>' + esc(a.action) + '</b> ' + esc(a.target || '') + ' — ' + esc(a.actor || '') + '</li>';
-        }).join('') + '</ul></div>';
+
+    /* Three recent errors, newest first, and a way into the Error Centre. */
+    var errs = d.recent_errors || [];
+    html += '<div class="adm-dsec"><h4>' + esc(t('recentErrors')) + '</h4>';
+    if (!errs.length) {
+      html += '<div class="adm-dsec-empty">' + esc(t('noErrors')) + '</div>';
+    } else {
+      html += '<ul class="adm-dlist">' + errs.map(function (e) {
+        var kind = e.severity === 'error' ? 'bad' : 'warn';
+        var who = e.job_id || e.yt_id || '';
+        return '<li>'
+          + '<span class="adm-dl-kind ' + kind + '">' + esc(e.category || 'other') + '</span>'
+          + '<span class="adm-dl-main" title="' + esc(e.message || '') + '">'
+          + esc(e.stage ? e.stage + ' — ' : '') + esc(e.message || '') + '</span>'
+          + '<span class="adm-dl-meta" dir="ltr">' + esc(who) + '</span>'
+          + '<span class="adm-dl-meta">' + esc(fmtTime(e.created_at)) + '</span>'
+          + '</li>';
+      }).join('') + '</ul>';
     }
+    html += '</div>';
+
+    /* Three recent actions — the administrative history, not the errors. */
+    var acts = d.recent_actions || [];
+    html += '<div class="adm-dsec"><h4>' + esc(t('recentActions')) + '</h4>';
+    if (!acts.length) {
+      html += '<div class="adm-dsec-empty">' + esc(t('nothing')) + '</div>';
+    } else {
+      html += '<ul class="adm-dlist">' + acts.map(function (a) {
+        return '<li>'
+          + '<span class="adm-dl-kind">' + esc(a.action || '') + '</span>'
+          + '<span class="adm-dl-main" title="' + esc(a.target || '') + '">'
+          + esc(a.target || '') + (a.detail ? ' — ' + esc(a.detail) : '') + '</span>'
+          + '<span class="adm-dl-meta">' + esc(a.actor || '') + '</span>'
+          + '<span class="adm-dl-meta">' + esc(fmtTime(a.created_at)) + '</span>'
+          + '</li>';
+      }).join('') + '</ul>';
+    }
+    html += '</div>';
+
     box.innerHTML = html;
   }
 
+  /* A short, local timestamp. The database stores UTC. */
+  function fmtTime(s) {
+    if (!s) return '';
+    var d = new Date(String(s).replace(' ', 'T') + (String(s).indexOf('Z') < 0 ? 'Z' : ''));
+    if (isNaN(d.getTime())) return String(s);
+    /* The Gregorian calendar, in both languages: a Jalali date in one
+       place and a Gregorian date in the next is worse than either one. */
+    return d.toLocaleString(LANG === 'en' ? 'en-GB' : 'en-GB',
+      { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+  }
+
   function loadDash() {
-    return api('dashboard.php').then(function (d) { S.dash = d; renderDash(); }).catch(function () { });
+    return api('dashboard.php').then(function (d) {
+      S.dash = d;
+      /* the AI panel reads the connection state from here */
+      window.__npDash = d;
+      renderDash();
+    }).catch(function () { });
   }
 
   /* ------------------------------------------------- the stage checklist */
@@ -142,81 +198,42 @@
     
     return f[st] || st;
   }
-  function renderStages() {
-    var box = document.getElementById('checklistBody');
-    if (!box) return;
-    if (!S.jobId) { box.innerHTML = '<div class="adm-empty">' + esc(t('noJob')) + '</div>'; return; }
-    if (!S.stages.length) { box.innerHTML = '<div class="adm-empty">' + esc(t('noJob')) + '</div>'; return; }
-    var html = '<ul class="adm-todo">';
-    S.stages.forEach(function (s) {
-      var st = s.status;
-      var mark = st === 'completed' ? '\u2713'                       // a tick
-        : st === 'running' ? '<i class="adm-spin"></i>'              // a spinner
-        : st === 'failed' ? '!'                                       // a problem
-        : st === 'skipped' ? '\u2013'                                // a dash
-        : st === 'waiting_for_review' ? '?'
-        : '\u25cb';                                                 // an empty circle
-      var cls = st === 'completed' ? 'done'
-        : st === 'running' ? 'run'
-        : st === 'failed' ? 'bad'
-        : st === 'skipped' ? 'skip'
-        : st === 'waiting_for_review' ? 'warn' : 'todo';
-      html += '<li class="adm-todo-' + cls + '">'
-        + '<span class="adm-todo-mark">' + mark + '</span>'
-        + '<span class="adm-todo-name">' + esc(stageLabel(s.stage)) + '</span>'
-        + '<span class="adm-todo-st">' + esc(t(st)) + '</span>'
-        + '<span class="adm-todo-meta" dir="ltr">'
-        + (s.attempts ? esc(s.attempts) + '\u00d7' : '')
-        + (s.model ? ' · ' + esc(s.model) : '')
-        + (s.tokens ? ' · ' + plain(s.tokens) + ' tok' : '')
-        + '</span>'
-        + (s.skipped_reason ? '<span class="adm-todo-why">' + esc(s.skipped_reason) + '</span>' : '')
-        + (s.error ? '<span class="adm-todo-err">' + esc(s.error) + '</span>' : '')
-        + (st === 'failed' && s.retryable
-            ? '<button type="button" class="adm-btn adm-btn-primary adm-btn-sm adm-todo-retry"'
-              + ' data-job="' + esc(S.jobId) + '" data-stage="' + esc(s.stage) + '">'
-              + '<span class="adm-spin adm-spin-sm"></span>' + esc(t('retry')) + '</button>' : '')
-        + '</li>';
-    });
-    html += '</ul>';
-    box.innerHTML = html;
-    Array.prototype.forEach.call(box.querySelectorAll('.adm-todo-retry'), function (b) {
-      b.addEventListener('click', function () {
-        b.disabled = true;
-        api('stages.php', { action: 'retry', job_id: b.getAttribute('data-job'),
-                            stage: b.getAttribute('data-stage') })
-          .then(function () { return loadStages(S.jobId); })
-          .catch(function (e) { window.alert(String(e.message || e)); b.disabled = false; });
-      });
-    });
-  }
-
-  function loadStages(jobId) {
-    S.jobId = jobId || '';
-    if (!S.jobId) { renderStages(); return Promise.resolve(); }
-    return api('stages.php?job_id=' + encodeURIComponent(S.jobId))
-      .then(function (d) { S.stages = d.stages || []; renderStages(); })
-      .catch(function () { S.stages = []; renderStages(); });
-  }
-
   /* ---------------------------------------------------- the error centre */
   function renderErrors() {
     var box = document.getElementById('errorsBody');
     if (!box) return;
-    if (!S.errors.length) { box.innerHTML = '<div class="adm-empty">' + esc(t('noErrors')) + '</div>'; return; }
-    var html = '<div class="adm-etable">';
+    if (!S.errors.length) {
+      box.innerHTML = '<div class="adm-err-empty">' + esc(t('noErrors')) + '</div>';
+      return;
+    }
+    /* One compact row per error. The technical detail — the stack trace —
+       lives in its own expandable box, so a long trace never breaks the
+       layout. */
+    var html = '';
     S.errors.forEach(function (e) {
-      html += '<div class="adm-erow" data-err="' + esc(e.id) + '">'
-        + '<span class="adm-esev ' + esc(e.severity) + '">' + esc(e.severity) + '</span>'
-        + '<span class="adm-ecat">' + esc(e.category) + '</span>'
-        + '<span class="adm-emsg">' + esc(e.message || '') + '</span>'
-        + '<span class="adm-emeta" dir="ltr">' + esc(e.stage || '') + ' · ' + esc(e.created_at || '') + '</span>'
-        + '<span class="adm-efix">' + esc(e.fix_state || 'none') + '</span>'
+      var sev = e.severity === 'error' ? 'bad' : 'warn';
+      var who = e.job_id || e.yt_id || '';
+      html += '<div class="adm-err adm-err-' + sev + '" data-err="' + esc(e.id) + '">'
+        + '<div class="adm-err-main">'
+        + '<div class="adm-err-title">'
+        + '<span class="adm-dl-kind ' + sev + '">' + esc(e.category || 'other') + '</span> '
+        + esc(e.severity || 'error') + '</div>'
+        + '<div class="adm-err-msg">' + esc(e.message || '') + '</div>'
+        + '<div class="adm-err-meta">'
+        + (e.stage ? esc(e.stage) + ' · ' : '')
+        + (who ? '<span dir="ltr">' + esc(who) + '</span> · ' : '')
+        + esc(fmtTime(e.created_at))
+        + (e.fix_state && e.fix_state !== 'none' ? ' · ' + esc(e.fix_state) : '')
+        + '</div>'
+        + (e.detail ? '<details class="adm-err-detail"><summary>' + esc(t('details'))
+            + '</summary><pre>' + esc(e.detail) + '</pre></details>' : '')
+        + '</div>'
+        + '<div class="adm-err-side">'
         + '<button type="button" class="adm-btn adm-btn-ghost adm-btn-sm" data-fix="' + esc(e.id) + '">'
         + esc(t('fixBug')) + '</button>'
+        + '</div>'
         + '</div>';
     });
-    html += '</div>';
     box.innerHTML = html;
     Array.prototype.forEach.call(box.querySelectorAll('[data-fix]'), function (b) {
       b.addEventListener('click', function () { openFix(b.getAttribute('data-fix')); });
@@ -281,20 +298,33 @@
   function renderAudit() {
     var box = document.getElementById('auditBody');
     if (!box) return;
-    if (!S.issues.length) { box.innerHTML = '<div class="adm-empty">' + esc(t('noIssues')) + '</div>'; return; }
-    var html = '<div class="adm-itable">';
+    if (!S.issues.length) {
+      box.innerHTML = '<div class="adm-err-empty">' + esc(t('noIssues')) + '</div>';
+      return;
+    }
+    /* One compact row per finding. The long recommendation text is the same
+       for many findings, so it sits in an expandable box instead of being
+       repeated in every row. The finding itself stays attached to its
+       video. */
+    var html = '';
     S.issues.forEach(function (i) {
-      html += '<div class="adm-irow">'
-        + '<span class="adm-isev ' + esc(i.severity) + '">' + esc(i.severity) + '</span>'
-        + '<span class="adm-icat">' + esc(i.category) + '</span>'
-        + '<span class="adm-iid" dir="ltr">' + esc(i.yt_id || i.video_id) + '</span>'
-        + '<span class="adm-iev">' + esc(i.evidence || '') + '</span>'
-        + '<span class="adm-irec">' + esc(i.recommended || '') + '</span>'
+      var sev = i.severity === 'error' ? 'bad' : 'warn';
+      html += '<div class="adm-audit" data-issue="' + esc(i.id) + '">'
+        + '<div class="adm-audit-main">'
+        + '<div class="adm-audit-title">'
+        + '<span class="adm-dl-kind ' + sev + '">' + esc(i.category || '') + '</span> '
+        + esc(i.severity || '') + '</div>'
+        + '<div class="adm-audit-msg">' + esc(i.evidence || '') + '</div>'
+        + '<div class="adm-audit-msg" dir="ltr">' + esc(i.yt_id || i.video_id || '') + '</div>'
+        + (i.recommended ? '<details class="adm-audit-why"><summary>' + esc(t('recommended'))
+            + '</summary>' + esc(i.recommended) + '</details>' : '')
+        + '</div>'
+        + '<div class="adm-audit-side">'
         + '<button type="button" class="adm-btn adm-btn-ghost adm-btn-sm" data-resolve="' + esc(i.id) + '">'
         + esc(t('resolve')) + '</button>'
+        + '</div>'
         + '</div>';
     });
-    html += '</div>';
     box.innerHTML = html;
     Array.prototype.forEach.call(box.querySelectorAll('[data-resolve]'), function (b) {
       b.addEventListener('click', function () {
@@ -305,6 +335,7 @@
       });
     });
   }
+
   function loadAudit() {
     return api('audit.php?action=list&limit=100').then(function (d) {
       S.issues = d.issues || []; renderAudit();
@@ -330,10 +361,6 @@
 
   /* ----------------------------------------------------------------- init */
   function init() {
-    var jobSel = document.getElementById('checklistJob');
-    if (jobSel) {
-      jobSel.addEventListener('change', function () { loadStages(jobSel.value); });
-    }
     var rb = document.getElementById('dashRefresh');
     if (rb) rb.addEventListener('click', function () { loadDash(); loadActivity(); });
     var re = document.getElementById('errorsRefresh');
@@ -354,24 +381,6 @@
   }
 
   /** The job list for the checklist picker. */
-  function loadJobList() {
-    var jobSel = document.getElementById('checklistJob');
-    if (!jobSel) return Promise.resolve();
-    return api('jobs.php').then(function (d) {
-      var jobs = d.jobs || [];
-      jobSel.innerHTML = '<option value="">\u2014</option>' + jobs.map(function (j) {
-        /* the title must follow the panel's language */
-        var label = LANG === 'en' ? (j.title_en || j.yt_id || j.id)
-                                 : (j.title_fa || j.yt_id || j.id);
-        return '<option value="' + esc(j.id) + '" dir="ltr">' + esc(label)
-          + ' (' + esc(j.status) + ')</option>';
-      }).join('');
-      if (jobs.length) {
-        jobSel.value = jobs[0].id;
-        loadStages(jobs[0].id);
-      }
-    }).catch(function () { });
-  }
 
   /** Everything the operational modules need, after the session exists. */
   function loadAll() {
@@ -379,11 +388,10 @@
     loadErrors();
     loadAudit();
     loadActivity();
-    loadJobList();
   }
 
   window.npOps = {
-    load: loadAll, loadAll: loadAll, loadStages: loadStages, loadErrors: loadErrors,
+    load: loadAll, loadAll: loadAll, loadErrors: loadErrors,
     loadAudit: loadAudit, loadActivity: loadActivity
   };
 

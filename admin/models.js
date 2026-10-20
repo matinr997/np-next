@@ -18,6 +18,9 @@
 
   var T = {
     fa: {
+      shownOf: 'نمایش',
+      of: 'از',
+      lastCheck: 'آخرین بررسی',
       models: 'مدل‌ها', modelsCount: 'مدل', refresh: 'به‌روزرسانی فهرست',
       search: 'جست‌وجو در نام مدل…', allModels: 'همه',
       vision: 'بینایی', reasoning: 'استدلال', tools: 'ابزار', image_gen: 'تولید تصویر', audio: 'صدا',
@@ -66,6 +69,8 @@
       lastUpdated: 'Last updated', refreshNeeded: 'The model list has not been refreshed yet — press refresh.'
     }
   };
+  /* The language of this panel. */
+  var FA = (document.documentElement.lang || 'fa').toLowerCase() === 'fa';
   function t(k) { return (T[LANG] && T[LANG][k]) || k; }
 
   /* ---------------------------------------------------------------- icons
@@ -85,12 +90,16 @@
   };
   var CAPS = ['vision', 'reasoning', 'tools', 'image_gen', 'audio'];
 
+  /*
+   * The capability icon is always the same shape. What changes is its
+   * colour: green when the model really supports it, red when it really
+   * does not, and muted amber when the provider never said. The icon is
+   * never replaced by a question mark — the user must still see that the
+   * capability exists.
+   */
   function capIcon(field, state) {
     var cls = 'adm-ic adm-ic-' + state;
     var label = t(field) + ' — ' + t(state === 'yes' ? 'yes' : state === 'no' ? 'no' : 'unknown');
-    if (state === 'unknown') {
-      return '<span class="' + cls + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" role="img">?</span>';
-    }
     return '<span class="' + cls + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" role="img">'
       + ICON[field] + '</span>';
   }
@@ -168,6 +177,45 @@
     });
   }
 
+/* ------------------------------------------------------- the connection */
+  /*
+   * The connection state is never guessed from the configuration. It comes
+   * from the last real request to the provider, and it says which kind of
+   * problem it is when the request failed.
+   */
+  var CONN_LABEL = {
+    connected: 'متصل', checking: 'در حال بررسی', disconnected: 'قطع',
+    auth_error: 'خطای احراز هویت', provider_error: 'خطای ارائه‌دهنده',
+    network_error: 'خطای شبکه', no_endpoint: 'endpoint تنظیم نشده',
+    no_key: 'کلید API تنظیم نشده', unknown: 'نامشخص'
+  };
+  function renderConn(d) {
+    var box = document.getElementById('connState');
+    if (!box) return;
+    var l = (d && d.llm) || {};
+    var kind = 'unknown', label = CONN_LABEL.unknown;
+    if (l.reachable === true) { kind = 'ok'; label = CONN_LABEL.connected; }
+    else if (l.reachable === false) {
+      kind = 'bad';
+      label = CONN_LABEL[l.error_kind] || CONN_LABEL.disconnected;
+    } else if (l.error_kind && l.error_kind !== 'unknown') {
+      kind = 'warn';
+      label = CONN_LABEL[l.error_kind] || CONN_LABEL.unknown;
+    }
+    box.className = 'adm-conn ' + kind;
+    var lab = document.getElementById('connLabel');
+    if (lab) lab.textContent = label;
+    var meta = document.getElementById('connMeta');
+    if (meta) {
+      var bits = [];
+      if (l.endpoint) bits.push(l.endpoint);
+      if (l.model_count) bits.push(plain(l.model_count) + ' ' + t('modelCount'));
+      if (l.checked_at) bits.push(t('lastCheck') + ': ' + l.checked_at);
+      meta.textContent = bits.join(' · ');
+      meta.dir = 'ltr';
+    }
+  }
+
   /* -------------------------------------------------------- the list */
   function visible(st) {
     st = st || S;
@@ -217,7 +265,8 @@
       });
     }
     var c = document.getElementById('modelCount');
-    if (c) c.textContent = plain(rows.length) + ' / ' + plain(st.models.length) + ' ' + t('modelsCount');
+    if (c) c.textContent = t('shownOf') + ' ' + plain(rows.length)
+      + ' ' + t('of') + ' ' + plain(st.models.length) + ' ' + t('modelsCount');
   }
 
   /* ----------------------------------------------- the selected model */
@@ -393,7 +442,8 @@
       + stat(t('promptTok'), plain(tot.prompt_tokens || 0))
       + stat(t('completionTok'), plain(tot.completion_tokens || 0))
       + stat(t('cachedTok'), plain(tot.cached_tokens || 0))
-      + stat(t('reasoningTok'), plain(tot.reasoning_tokens || 0))
+      + stat(t('reasoningTok'), (tot.reasoning_known || 0) > 0
+          ? plain(tot.reasoning_tokens || 0) : '<span class="adm-una">N/A</span>')
       + stat(t('failures'), plain(tot.failures || 0))
       + stat(t('latency'), plain(tot.avg_latency_ms || 0) + ' ms')
       + '</div>';
@@ -407,7 +457,8 @@
         return '<tr><td dir="ltr">' + esc(r.created_at) + '</td><td dir="ltr">' + esc(r.model_id)
           + '</td><td dir="ltr">' + esc(r.task) + '</td><td dir="ltr">' + esc(r.site)
           + '</td><td dir="ltr">' + plain(r.prompt_tokens) + '</td><td dir="ltr">' + plain(r.completion_tokens)
-          + '</td><td dir="ltr">' + plain(r.cached_tokens) + '</td><td dir="ltr">' + plain(r.reasoning_tokens)
+          + '</td><td dir="ltr">' + plain(r.cached_tokens) + '</td><td dir="ltr">'
+          + ((r.reasoning_known || 0) > 0 ? plain(r.reasoning_tokens) : '<span class="adm-una">N/A</span>')
           + '</td><td dir="ltr">' + plain(r.latency_ms) + ' ms</td><td>' + (r.ok ? '—' : '⚠') + '</td></tr>';
       }).join('') + '</tbody></table></div>'
       : '<div class="adm-empty">' + esc(t('noUsage')) + '</div>';
@@ -428,8 +479,11 @@
     var c = document.getElementById('usageCount');
     if (c) c.textContent = plain(tot.requests || 0) + ' ' + t('requests');
   }
+  /* The value may already be markup — the N/A note is a span — so it is
+     not escaped here. Every caller passes a number or a string it built
+     itself, never raw user input. */
   function stat(k, v) {
-    return '<div class="adm-usg-stat"><span>' + esc(k) + '</span><b dir="ltr">' + esc(v) + '</b></div>';
+    return '<div class="adm-usg-stat"><span>' + esc(k) + '</span><b dir="ltr">' + v + '</b></div>';
   }
 
   /* ----------------------------------------------------------- loading */
@@ -445,6 +499,8 @@
       renderFilters();
       renderList();
       renderSummary();
+      /* the connection state lives on the dashboard response */
+      if (window.__npDash) renderConn(window.__npDash);
       fillUsageFilters();
       return loadUsage();
     }).catch(function () { });
@@ -501,7 +557,9 @@
     },
     setContext: function (ctx) { S.lastContext = ctx; renderSummary(); },
     selected: function () { return S.selected; },
-    load: loadModels
+    load: loadModels,
+    /* the connection state, drawn in the AI panel */
+    renderConn: renderConn
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

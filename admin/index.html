@@ -23,13 +23,6 @@
 <!--seo:end-->
 
 
-
-
-
-
-
-
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
@@ -37,6 +30,7 @@
 <link rel="stylesheet" href="admin.css">
 <link rel="stylesheet" href="models.css">
 <link rel="stylesheet" href="ops.css">
+<link rel="stylesheet" href="compact.css">
 </head>
 <body class="adm">
 
@@ -61,7 +55,7 @@
 
     <button class="adm-btn adm-btn-primary adm-btn-block" id="loginBtn" type="submit">ورود</button>
   </form>
-    <p class="adm-api-missing" id="apiMissing" hidden>این پنل روی آدرس ایستا باز شده و به API دسترسی ندارد.</p>
+    <p class="adm-api-missing" id="apiMissing" hidden>این پنل روی آدرس ایستا (GitHub Pages) باز شده و API ندارد؛ ورود فقط روی هاست یا سرور محلی ممکن است.</p>
 </div>
 
 <!-- ============================ APP ============================ -->
@@ -79,194 +73,195 @@
 
   <div class="adm-grid">
 
-    <!-- ---------- داشبورد ---------- -->
-    <section class="adm-card adm-area-dash">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">داشبورد</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="dashRefresh" type="button">به‌روزرسانی</button>
-      </div>
-      <div id="dashBody"></div>
-    </section>
+    <!-- ---------- the main workspace ---------- -->
+    <div class="adm-main">
 
-    <!-- ---------- چک‌لیست پردازش ---------- -->
-    <section class="adm-card adm-area-checklist">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">چک‌لیست پردازش</h2>
-        <select id="checklistJob" aria-label="کار"></select>
-      </div>
-      <div id="checklistBody"></div>
-    </section>
-
-    <!-- ---------- مرکز خطا ---------- -->
-    <section class="adm-card adm-area-errors">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">مرکز خطا</h2>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="errorsRefresh" type="button">به‌روزرسانی</button>
-      </div>
-      <div id="errorsBody"></div>
-      <div class="adm-fixpanel" id="fixPanel" hidden></div>
-    </section>
-
-    <!-- ---------- بررسی محتوا ---------- -->
-    <section class="adm-card adm-area-audit">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">بررسی محتوا</h2>
-        <button class="adm-btn adm-btn-primary adm-btn-sm" id="auditRun" type="button">اجرای بررسی</button>
-      </div>
-      <div id="auditBody"></div>
-    </section>
-
-    <!-- ---------- افزودن ویدیو ---------- -->
-    <section class="adm-card adm-area-add">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">افزودن ویدیو</h2>
-        <span class="adm-count" id="linkCount">۰ لینک شناسایی شد</span>
-      </div>
-      <p class="adm-hint">لینک‌های یوتیوب را هر کدام در یک خط (یا با فاصله) بچسبانید. لینک‌های تکراری پیش از افزوده‌شدن شناسایی و رد می‌شوند.</p>
-
-      <textarea class="adm-textarea" id="urlInput" rows="5" spellcheck="false"
-        placeholder="https://www.youtube.com/watch?v=..."></textarea>
-
-      <div class="adm-detected" id="detected"></div>
-
-      <div class="adm-actions">
-        <button class="adm-btn adm-btn-primary" id="addBtn" type="button">افزودن به صف</button>
-        <button class="adm-btn adm-btn-ghost" id="clearBtn" type="button">پاک کردن نتایج</button>
-      </div>
-
-      <div class="adm-result-summary" id="addSummary" hidden></div>
-      <ul class="adm-results" id="addResults" aria-live="polite"></ul>
-    </section>
-
-    <!-- ---------- صف پایپ‌لاین ---------- -->
-    <section class="adm-card adm-area-queue">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">صف پایپ‌لاین</h2>
-        <span class="adm-count" id="queueCount">۰ کار</span>
-      </div>
-      <p class="adm-hint adm-hint-tight">به‌روزرسانی خودکار هر ۴ ثانیه</p>
-      <div class="adm-jobs" id="jobsList"></div>
-      <div class="adm-empty" id="jobsEmpty">هنوز کاری در صف نیست.</div>
-    </section>
-
-    <!-- ---------- دستیار (چت) ---------- -->
-    
-    <!-- ---------- تنظیمات مدل هوش مصنوعی ---------- -->
-    <section class="adm-card adm-card-ai adm-area-side">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">تنظیمات مدل هوش مصنوعی</h2>
-        <span class="adm-ai-pill">AI</span>
-      </div>
-
-      <label class="adm-field">
-        <span class="adm-label">آدرس endpoint</span>
-        <input type="text" id="llmEndpoint" dir="ltr" spellcheck="false" placeholder="http://localhost:20128/v1">
-      </label>
-
-      <label class="adm-field">
-        <span class="adm-label">کلید API</span>
-        <div class="adm-in-row">
-          <input type="password" id="llmKey" dir="ltr" autocomplete="off" spellcheck="false" placeholder="••••••••">
-          <button class="adm-btn adm-btn-ghost adm-btn-sm adm-btn-noflex" id="toggleKey" type="button">نمایش</button>
+      <!-- ---------- dashboard ---------- -->
+      <section class="adm-card adm-area-dash">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">داشبورد</h2>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" id="dashRefresh" type="button">به‌روزرسانی</button>
         </div>
-        <span class="adm-note" id="keyNote"></span>
-      </label>
+        <div id="dashBody"></div>
+      </section>
 
-      <label class="adm-field">
-        <span class="adm-label">مدل</span>
-        <div class="adm-model-picker">
-          <input type="search" id="modelFilter" dir="ltr" placeholder="جست‌وجو در فهرست مدل‌ها…" spellcheck="false">
-          <div class="adm-capfilters" id="capFilters"></div>
-          <div class="adm-modellist" id="modelList" role="listbox" aria-label="فهرست مدل‌ها"></div>
-          <span class="adm-note" id="modelCount"></span>
+      <!-- ---------- the pipeline queue ---------- -->
+      <section class="adm-card adm-area-queue">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">صف پایپ‌لاین</h2>
+          <span class="adm-count" id="queueCount">۰ کار</span>
+          <span class="adm-hint adm-hint-tight adm-auto">به‌روزرسانی خودکار</span>
         </div>
-        <input type="text" id="llmModel" dir="ltr" spellcheck="false" placeholder="یا شناسهٔ مدل را دستی وارد کنید (مثلاً gpt-4o-mini)">
-        <div class="adm-msum" id="modelSummary" hidden></div>
+        <div class="adm-jobs" id="jobsList"></div>
+        <div class="adm-empty" id="jobsEmpty">هنوز کاری در صف نیست.</div>
+      </section>
+
+      <!-- ---------- add a video ---------- -->
+      <section class="adm-card adm-area-add">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">افزودن ویدیو</h2>
+          <span class="adm-count" id="linkCount">۰ لینک شناسایی شد</span>
+        </div>
+        <p class="adm-hint">لینک‌های یوتیوب را هر کدام در یک خط (یا با فاصله) بچسبانید. لینک‌های تکراری پیش از افزوده‌شدن شناسایی و رد می‌شوند.</p>
+        <p class="adm-bothsites"><span class="adm-dot"></span>هر ویدیویی که از اینجا اضافه شود خودکار روی هر دو سایت فارسی (IR) و انگلیسی (COM) منتشر می‌شود.</p>
+
+        <textarea class="adm-textarea" id="urlInput" rows="4" spellcheck="false"
+          placeholder="https://www.youtube.com/watch?v=..."></textarea>
+
+        <div class="adm-detected" id="detected"></div>
+
         <div class="adm-actions">
-          <button class="adm-btn adm-btn-ghost adm-btn-sm" id="modelsRefresh" type="button">به‌روزرسانی فهرست</button>
+          <button class="adm-btn adm-btn-primary" id="addBtn" type="button">افزودن به صف</button>
+          <button class="adm-btn adm-btn-ghost" id="clearBtn" type="button">پاک کردن نتایج</button>
         </div>
-      </label>
 
-      <div class="adm-actions">
-        <button class="adm-btn adm-btn-ghost" id="testBtn" type="button">تست اتصال</button>
-        <button class="adm-btn adm-btn-primary" id="saveLlmBtn" type="button">ذخیره تنظیمات</button>
-      </div>
+        <div class="adm-result-summary" id="addSummary" hidden></div>
+        <ul class="adm-results" id="addResults" aria-live="polite"></ul>
+      </section>
 
-      <div class="adm-alert" id="llmMsg" role="status" hidden></div>
-    </section>
+      <!-- ---------- the error centre ---------- -->
+      <section class="adm-card adm-area-errors">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">مرکز خطا</h2>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" id="errorsRefresh" type="button">به‌روزرسانی</button>
+        </div>
+        <div id="errorsBody"></div>
+        <div class="adm-fixpanel" id="fixPanel" hidden></div>
+      </section>
 
-    <!-- ---------- جزئیات مدل ---------- -->
-    <section class="adm-card adm-area-models">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">جزئیات مدل</h2>
-      </div>
-      <div class="adm-modeldetail" id="modelDetail" hidden></div>
-    </section>
+      <!-- ---------- the content audit ---------- -->
+      <section class="adm-card adm-area-audit">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">بررسی محتوا</h2>
+          <button class="adm-btn adm-btn-primary adm-btn-sm" id="auditRun" type="button">اجرای بررسی</button>
+        </div>
+        <div id="auditBody"></div>
+      </section>
 
-    <!-- ---------- آمار مصرف ---------- -->
-    <section class="adm-card adm-area-usage">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">آمار مصرف</h2>
-        <span class="adm-count" id="usageCount">۰ درخواست</span>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="usageRefresh" type="button">به‌روزرسانی آمار</button>
-      </div>
-      <div class="adm-toolbar adm-usage-filters">
-        <select id="usageModel" aria-label="مدل"></select>
-        <select id="usageTask" aria-label="کار">
-          <option value="">همهٔ کارها</option>
-          <option value="panel">پنل</option>
-          <option value="discover">کشف</option>
-          <option value="translate">ترجمه</option>
-          <option value="quiz">آزمون</option>
-          <option value="compress">فشرده‌سازی</option>
-          <option value="other">سایر</option>
-        </select>
-        <select id="usageSite" aria-label="سایت">
-          <option value="">همهٔ سایت‌ها</option>
-          <option value="ir">IR</option>
-          <option value="com">COM</option>
-        </select>
-        <input type="date" id="usageFrom" aria-label="از">
-        <input type="date" id="usageTo" aria-label="تا">
-      </div>
-      <div id="usageBody"></div>
-    </section>
+      <!-- ---------- the model usage ---------- -->
+      <section class="adm-card adm-area-usage">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">آمار مصرف</h2>
+          <span class="adm-count" id="usageCount">۰ درخواست</span>
+          <button class="adm-btn adm-btn-ghost adm-btn-sm" id="usageRefresh" type="button">به‌روزرسانی آمار</button>
+        </div>
+        <div class="adm-toolbar adm-usage-filters">
+          <select id="usageModel" aria-label="مدل"></select>
+          <select id="usageTask" aria-label="کار">
+            <option value="">همهٔ کارها</option>
+            <option value="panel">پنل</option>
+            <option value="discover">discover</option>
+            <option value="translate">translate</option>
+            <option value="quiz">quiz</option>
+            <option value="compress">compress</option>
+            <option value="other">other</option>
+          </select>
+          <select id="usageSite" aria-label="سایت">
+            <option value="">همهٔ سایت‌ها</option>
+            <option value="ir">IR</option>
+            <option value="com">COM</option>
+          </select>
+          <input type="date" id="usageFrom" aria-label="از">
+          <input type="date" id="usageTo" aria-label="تا">
+        </div>
+        <div id="usageBody"></div>
+      </section>
 
-    <!-- ---------- ویدیوهای موجود ---------- -->
-    <section class="adm-card adm-area-videos">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">ویدیوهای موجود</h2>
-        <span class="adm-count" id="videosCount">۰ ویدیو</span>
-      </div>
+      <!-- ---------- the recently added videos ---------- -->
+      <section class="adm-card adm-area-videos">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">ویدیوهای اخیر</h2>
+          <span class="adm-count" id="videosCount">۰ ویدیو</span>
+        </div>
 
-      <div class="adm-toolbar">
-        <input type="search" id="videoSearch" placeholder="جست‌وجو در عنوان یا کانال…" spellcheck="false">
-      </div>
+        <div class="adm-toolbar">
+          <input type="search" id="videoSearch" placeholder="جست‌وجو در عنوان یا کانال…" spellcheck="false">
+        </div>
 
-      <div class="adm-table-wrap">
-        <table class="adm-table">
-          <thead>
-            <tr>
-              <th scope="col">شناسه</th>
-              <th scope="col">عنوان فارسی</th>
-              <th scope="col">عنوان انگلیسی</th>
-              <th scope="col">کانال</th>
-              <th scope="col">وضعیت</th>
-            </tr>
-          </thead>
-          <tbody id="videosBody"></tbody>
-        </table>
-      </div>
-      <div class="adm-empty" id="videosEmpty">ویدیویی برای نمایش نیست.</div>
-    </section>
+        <div class="adm-table-wrap">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th scope="col">شناسه</th>
+                <th scope="col">عنوان فارسی</th>
+                <th scope="col">عنوان انگلیسی</th>
+                <th scope="col">کانال</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">زمان افزودن</th>
+              </tr>
+            </thead>
+            <tbody id="videosBody"></tbody>
+          </table>
+        </div>
+        <div class="adm-empty" id="videosEmpty">ویدیویی برای نمایش نیست.</div>
+      </section>
+
+    </div>
+
+    <!-- ---------- the AI panel, on the right ---------- -->
+    <div class="adm-side">
+      <section class="adm-card adm-card-ai adm-area-side">
+        <div class="adm-card-head">
+          <h2 class="adm-card-title">تنظیمات مدل هوش مصنوعی</h2>
+          <span class="adm-ai-pill">AI</span>
+        </div>
+
+        <div class="adm-conn" id="connState">
+          <span class="adm-dot"></span>
+          <b id="connLabel">—</b>
+          <span class="adm-conn-meta" id="connMeta"></span>
+        </div>
+
+        <label class="adm-field">
+          <span class="adm-label">آدرس endpoint</span>
+          <input type="text" id="llmEndpoint" dir="ltr" spellcheck="false" placeholder="http://localhost:20128/v1">
+        </label>
+
+        <label class="adm-field">
+          <span class="adm-label">کلید API</span>
+          <div class="adm-in-row">
+            <input type="password" id="llmKey" dir="ltr" autocomplete="off" spellcheck="false" placeholder="••••••••">
+            <button class="adm-btn adm-btn-ghost adm-btn-sm adm-btn-noflex" id="toggleKey" type="button">نمایش</button>
+          </div>
+          <span class="adm-note" id="keyNote"></span>
+        </label>
+
+        <label class="adm-field">
+          <span class="adm-label">مدل</span>
+          <div class="adm-model-picker">
+            <input type="search" id="modelFilter" dir="ltr" placeholder="جست‌وجو در فهرست مدل‌ها…" spellcheck="false">
+            <div class="adm-capfilters" id="capFilters"></div>
+            <div class="adm-modellist" id="modelList" role="listbox" aria-label="جست‌وجو در فهرست مدل‌ها…"></div>
+            <span class="adm-note" id="modelCount"></span>
+          </div>
+          <input type="text" id="llmModel" dir="ltr" spellcheck="false" placeholder="یا شناسهٔ مدل را دستی وارد کنید (مثلاً gpt-4o-mini)">
+          <div class="adm-msum" id="modelSummary" hidden></div>
+          <div class="adm-actions">
+            <button class="adm-btn adm-btn-ghost adm-btn-sm" id="modelsRefresh" type="button">به‌روزرسانی فهرست</button>
+          </div>
+        </label>
+
+        <!-- the model detail lives inside the AI panel now -->
+        <div class="adm-modeldetail" id="modelDetail" hidden></div>
+
+        <div class="adm-actions">
+          <button class="adm-btn adm-btn-ghost" id="testBtn" type="button">تست اتصال</button>
+          <button class="adm-btn adm-btn-primary" id="saveLlmBtn" type="button">ذخیره تنظیمات</button>
+        </div>
+
+        <div class="adm-alert" id="llmMsg" role="status" hidden></div>
+      </section>
+    </div>
 
   </div>
 </div>
 
 <div class="adm-toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="admin.js"></script>
+<!-- The modules first: admin.js drives them, so they must be defined
+     before it runs. Each one is self-contained and waits for the session. -->
 <script src="models.js"></script>
 <script src="ops.js"></script>
+<script src="admin.js"></script>
 </body>
 </html>

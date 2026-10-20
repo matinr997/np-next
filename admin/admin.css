@@ -128,37 +128,35 @@ h1,h2,h3{color:var(--adm-accent);margin:0}
 .adm-user b{font-weight:700}
 
 /* ============================ grid ============================ */
+/* ============================ the layout ============================ */
+/*
+ * Two columns: the processing workspace on the left, the AI panel on the
+ * right. The AI panel is sticky so the model settings stay reachable while
+ * the operator works through the queue. It has a maximum width and never
+ * overlaps the workspace.
+ */
 .adm-grid{
-  display:grid;gap:18px;margin-top:20px;
-  grid-template-columns:minmax(0,1fr) 400px;
-  grid-template-areas:
-    "dash dash"
-    "add side"
-    "queue side"
-    "checklist checklist"
-    "errors errors"
-    "audit audit"
-    "models models"
-    "usage usage"
-    "videos videos";
+  display:grid;gap:16px;margin-top:16px;
   align-items:start;
+  /* the column widths are set per direction in compact.css */
 }
-.adm-area-dash{grid-area:dash}
-.adm-area-checklist{grid-area:checklist}
-.adm-area-errors{grid-area:errors}
-.adm-area-audit{grid-area:audit}
-.adm-area-activity{grid-area:activity}
-.adm-area-models{grid-area:models}
-.adm-area-usage{grid-area:usage}
-.adm-area-add{grid-area:add}
-.adm-area-queue{grid-area:queue}
-.adm-area-side{grid-area:side;position:sticky;top:76px}
-.adm-area-videos{grid-area:videos}
-@media(max-width:1020px){
-  .adm-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:
-    "dash" "add" "queue" "side" "checklist" "errors" "audit"
-    "models" "usage" "videos"}
-  .adm-area-side{position:static}
+.adm-main{display:grid;gap:16px;min-width:0}
+.adm-side{position:sticky;top:70px;min-width:0}
+.adm-area-side{position:static}
+
+/* the sections no longer live in a grid area — they are in a flow */
+.adm-area-dash,.adm-area-queue,.adm-area-add,.adm-area-errors,
+.adm-area-audit,.adm-area-usage,.adm-area-videos{min-width:0}
+
+/* On a narrow screen the panels stack; the AI panel comes right after the
+   dashboard so the model is still reachable without scrolling far. */
+@media(max-width:1080px){
+  .adm-side{position:static}
+}
+@media(max-width:640px){
+  .adm-grid{gap:12px;margin-top:12px}
+  .adm-main{gap:12px}
+  .adm-card{padding:14px}
 }
 
 /* ============================ cards ============================ */
@@ -253,8 +251,12 @@ h1,h2,h3{color:var(--adm-accent);margin:0}
 .adm-job-foot{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
 .adm-job-time{font-size:.72rem;color:var(--adm-muted);direction:ltr;unicode-bidi:embed;text-align:left}
 .adm-job-err{
-  margin-top:8px;font-size:.76rem;color:#b3123a;background:#fdecef;border:1px solid #F0728D;
-  border-radius:8px;padding:7px 11px;line-height:1.9;word-break:break-word;
+  margin-top:8px;font-size:.72rem;color:#b3123a;background:#fdecef;border:1px solid #F0728D;
+  border-radius:8px;padding:7px 11px;line-height:1.8;word-break:break-word;
+  /* the raw log wraps and scrolls inside its own box, so a long stack
+     trace never breaks the card or the page */
+  white-space:pre-wrap;overflow-wrap:anywhere;max-height:170px;overflow:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 .adm-job-actions{margin-inline-start:auto;display:flex;gap:8px}
 .adm-cancel{background:#fff;color:#b3123a;border-color:#F0728D}

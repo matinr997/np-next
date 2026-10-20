@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS videos (
   tags           TEXT,
   objectives_fa  TEXT,
   objectives_en  TEXT,
-  active         INTEGER NOT NULL DEFAULT 1
+  active         INTEGER NOT NULL DEFAULT 1,
+  created_at     TEXT NOT NULL DEFAULT ''
 );
 CREATE TABLE IF NOT EXISTS llm_settings (
   id         INTEGER PRIMARY KEY,

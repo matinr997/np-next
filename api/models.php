@@ -66,6 +66,7 @@ function np_models_schema(): void {
             'completion_tokens' => 'INTEGER NOT NULL DEFAULT 0',
             'cached_tokens' => 'INTEGER NOT NULL DEFAULT 0',
             'reasoning_tokens' => 'INTEGER NOT NULL DEFAULT 0',
+            'reasoning_known' => 'INTEGER NOT NULL DEFAULT 0',
             'est_prompt_tokens' => 'INTEGER NOT NULL DEFAULT 0',
             'ctx_max' => 'INTEGER NOT NULL DEFAULT 0',
             'ctx_pct' => 'REAL NOT NULL DEFAULT 0',
@@ -200,13 +201,14 @@ if ($method === 'POST') {
         // time-ordered id: sorts correctly on MySQL and SQLite alike
         $id = 'u' . gmdate('YmdHis') . '_' . bin2hex(random_bytes(4));
         np_q('INSERT INTO llm_usage (id, endpoint_id, model_id, task, site, prompt_tokens,'
-            . ' completion_tokens, cached_tokens, reasoning_tokens, est_prompt_tokens, ctx_max,'
-            . ' ctx_pct, cost, ok, latency_ms, error_kind, created_at)'
-            . ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            . ' completion_tokens, cached_tokens, reasoning_tokens, reasoning_known,'
+            . ' est_prompt_tokens, ctx_max, ctx_pct, cost, ok, latency_ms, error_kind, created_at)'
+            . ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [$id, np_str($b, 'endpoint_id', 'default'), $model,
              np_str($b, 'task', 'other'), np_str($b, 'site', 'ir'),
              (int)($u['prompt_tokens'] ?? 0), (int)($u['completion_tokens'] ?? 0),
              (int)($u['cached_tokens'] ?? 0), (int)($u['reasoning_tokens'] ?? 0),
+             (int)($u['reasoning_known'] ?? 0) === 1 ? 1 : 0,
              (int)($b['est_prompt_tokens'] ?? 0), (int)($b['ctx_max'] ?? 0),
              (float)($b['ctx_pct'] ?? 0), (float)($u['cost'] ?? 0),
              (int)($b['ok'] ?? 1) ? 1 : 0, (int)($b['latency_ms'] ?? 0),
@@ -315,6 +317,16 @@ if ($action === 'usage') {
     $tot = $tot ?: [];
     foreach (['requests','prompt_tokens','completion_tokens','cached_tokens','reasoning_tokens','failures'] as $k) {
         $tot[$k] = (int)($tot[$k] ?? 0);
+    }
+    // A reasoning-token count of zero and a provider that never sent a
+    // reasoning-token count are different facts. The flag says which one it
+    // is, so the panel can show N/A instead of a misleading zero.
+    try {
+        $known = np_one('SELECT COUNT(*) AS n FROM llm_usage WHERE ' . $w
+            . ' AND reasoning_known = 1', $args);
+        $tot['reasoning_known'] = (int)($known['n'] ?? 0);
+    } catch (Throwable $e) {
+        $tot['reasoning_known'] = 0;
     }
     $tot['cost'] = (float)($tot['cost'] ?? 0);
     $tot['avg_latency_ms'] = (int)round((float)($tot['avg_latency_ms'] ?? 0));

@@ -11,6 +11,22 @@ require_once __DIR__ . '/stage_lib.php';
 require_once __DIR__ . '/provider.php';
 require_once __DIR__ . '/catalogue.php';
 
+/**
+ * Why did the provider call fail? The panel shows this so the operator knows
+ * whether to fix the key, the URL or wait for the provider.
+ */
+function np_llm_error_kind(int $status, string $error): string {
+    $e = strtolower($error);
+    if ($status === 401 || $status === 403 || strpos($e, 'unauthorized') !== false
+        || strpos($e, 'invalid api key') !== false || strpos($e, 'api key') !== false) {
+        return 'auth_error';
+    }
+    if ($status === 404 || $status === 400) return 'provider_error';
+    if ($status >= 500) return 'provider_error';
+    if ($status > 0) return 'provider_error';
+    return 'network_error';
+}
+
 function np_dash_counters(): array {
     $published = 0; $draft = 0; $withQuiz = 0; $withSubs = 0;
     $catalogue = np_catalogue();
@@ -42,18 +58,31 @@ foreach ($jobs as $r) $byStatus[(string)$r['status']] = (int)$r['n'];
 // the AI endpoint, as it is actually configured
 $s = np_llm_get();
 $llm = ['endpoint' => $s['endpoint'], 'model' => $s['model'],
-        'has_key' => $s['api_key'] !== '', 'model_count' => 0, 'reachable' => null];
+        'has_key' => $s['api_key'] !== '', 'model_count' => 0, 'reachable' => null,
+        'error' => '', 'error_kind' => 'unknown', 'checked_at' => ''];
 try {
     $n = np_val('SELECT COUNT(*) FROM llm_model_meta WHERE endpoint_id = ?',
                 [np_endpoint_id($s['endpoint'])]);
     $llm['model_count'] = (int)$n;
 } catch (Throwable $e) { /* the table may not exist yet */ }
 
-// the endpoint is only "reachable" if a request actually succeeds; a stored
-// URL proves nothing
+// The endpoint is only "reachable" if a request actually succeeds; a stored
+// URL proves nothing. The kind of failure matters too: a bad key is not the
+// same problem as a provider that is down.
 if ($s['endpoint'] !== '' && $s['api_key'] !== '') {
     $r = np_fetch_models($s['endpoint'], $s['api_key']);
     $llm['reachable'] = (bool)$r['ok'];
+    $llm['checked_at'] = gmdate('Y-m-d H:i:s') . ' UTC';
+    if ($r['ok']) {
+        $llm['error'] = '';
+        $llm['error_kind'] = '';
+    } else {
+        $llm['error'] = (string)($r['error'] ?? '');
+        $llm['error_kind'] = np_llm_error_kind((int)($r['code'] ?? 0), (string)($r['error'] ?? ''));
+    }
+} else {
+    $llm['error_kind'] = $s['endpoint'] === '' ? 'no_endpoint' : 'no_key';
+    $llm['checked_at'] = '';
 }
 
 $errSum = null;
@@ -69,16 +98,18 @@ try {
     $review = (int)($r['n'] ?? 0);
 } catch (Throwable $e) { /* no table yet */ }
 
+// The dashboard shows the three newest records only. The Error Centre shows
+// the whole history. The order is the real timestamp, newest first.
 $recentErrors = [];
 try {
-    $recentErrors = np_all('SELECT id, job_id, yt_id, stage, category, severity, message,'
-        . ' created_at FROM error_log ORDER BY created_at DESC LIMIT 10');
+    $recentErrors = np_all('SELECT id, job_id, yt_id, stage, category, severity, message, status,'
+        . ' created_at FROM error_log ORDER BY created_at DESC, id DESC LIMIT 3');
 } catch (Throwable $e) { /* no table yet */ }
 
 $recentActions = [];
 try {
     $recentActions = np_all('SELECT id, actor, action, target, detail, created_at'
-        . ' FROM activity_log ORDER BY created_at DESC LIMIT 15');
+        . ' FROM activity_log ORDER BY created_at DESC, id DESC LIMIT 3');
 } catch (Throwable $e) { /* no table yet */ }
 
 $stuck = [];
