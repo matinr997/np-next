@@ -192,3 +192,55 @@ function np_stages_retryable(string $jobId): array {
     return $out;
 }
 
+
+/**
+ * The stages of many jobs, in one query.
+ * The queue shows the checklist of every card, so this is the hot path.
+ */
+function np_stages_for_jobs(array $jobIds): array {
+    $out = [];
+    if (!$jobIds) return $out;
+    $ph = implode(',', array_fill(0, count($jobIds), '?'));
+    $rows = np_all('SELECT job_id, stage, seq, status, error, skipped_reason, attempts'
+        . ' FROM job_stages WHERE job_id IN (' . $ph . ') ORDER BY seq ASC', $jobIds);
+    foreach ($rows as $r) {
+        $jid = (string)$r['job_id'];
+        if (!isset($out[$jid])) $out[$jid] = [];
+        $out[$jid][] = [
+            'stage'  => (string)$r['stage'],
+            'seq'    => (int)$r['seq'],
+            'status' => (string)$r['status'],
+            'error'  => (string)($r['error'] ?? ''),
+            'skipped_reason' => (string)($r['skipped_reason'] ?? ''),
+            'attempts' => (int)$r['attempts'],
+        ];
+    }
+    return $out;
+}
+
+/** The checklist of a job as a compact list for the queue card. */
+function np_stage_strip(string $jobId): array {
+    $rows = np_all('SELECT stage, seq, status, error, skipped_reason, attempts'
+        . ' FROM job_stages WHERE job_id = ? ORDER BY seq ASC', [$jobId]);
+    $defs = np_stage_defs();
+    $byKey = [];
+    foreach ($rows as $r) $byKey[(string)$r['stage']] = $r;
+    $out = [];
+    $seq = 0;
+    foreach ($defs as $d) {
+        $seq++;
+        $key = (string)$d['key'];
+        $r = $byKey[$key] ?? null;
+        $status = $r ? (string)$r['status'] : 'pending';
+        $out[] = [
+            'stage'  => $key,
+            'label'  => (string)$d['en'],
+            'label_fa' => (string)$d['fa'],
+            'seq'    => $seq,
+            'status' => $status,
+            'error'  => $r ? (string)($r['error'] ?? '') : '',
+            'attempts' => $r ? (int)$r['attempts'] : 0,
+        ];
+    }
+    return $out;
+}

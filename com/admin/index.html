@@ -26,6 +26,7 @@
 
 
 
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
@@ -149,44 +150,7 @@
     </section>
 
     <!-- ---------- Assistant (chat) ---------- -->
-    <section class="adm-card adm-card-ai adm-area-chat">
-      <div class="adm-card-head">
-        <h2 class="adm-card-title">Panel assistant</h2>
-        <span class="adm-ai-pill">AI</span>
-      </div>
-      <p class="adm-hint">Send a YouTube link and the whole job — subtitles, translation, quiz and publishing — runs on its own.
-        You can drop a file too (any format). Any other request goes to the full agent, which writes code when it is needed.</p>
-
-      <div class="adm-chat-status" id="chatStatus" hidden></div>
-      <div class="adm-chat" id="chatLog" aria-live="polite"></div>
-      <div class="adm-empty" id="chatEmpty">No messages yet. Send a video link or drop a file.</div>
-
-      <div class="adm-drop" id="chatDrop">
-        <input type="file" id="chatFile" hidden>
-        <span class="adm-drop-label">Drop a file here or</span>
-        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="chatPick" type="button">Choose a file</button>
-        <span class="adm-drop-file" id="chatFileName"></span>
-      </div>
-
-      <div class="adm-chat-model">
-        <span class="adm-label">Chat model (separate from the video processing model)</span>
-        <div class="adm-model-picker">
-          <input type="search" id="chatModelFilter" dir="ltr" placeholder="Search the chat models…" spellcheck="false">
-          <div class="adm-capfilters" id="chatCapFilters"></div>
-          <div class="adm-modellist" id="chatModelList" role="listbox" aria-label="Chat model"></div>
-          <span class="adm-note" id="chatModelCount"></span>
-        </div>
-        <input type="text" id="chatModel" dir="ltr" spellcheck="false" placeholder="Leave empty to use the processing model">
-        <span class="adm-note" id="chatModelNote"></span>
-      </div>
-
-      <div class="adm-chat-compose">
-        <textarea class="adm-textarea" id="chatInput" rows="3" spellcheck="false"
-          placeholder="A message, a YouTube link, or what you want done…"></textarea>
-        <button class="adm-btn adm-btn-primary" id="chatSend" type="button">Send</button>
-      </div>
-    </section>
-
+    
     <!-- ---------- AI model settings ---------- -->
     <section class="adm-card adm-card-ai adm-area-side">
       <div class="adm-card-head">

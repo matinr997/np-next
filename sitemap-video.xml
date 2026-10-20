@@ -301,6 +301,21 @@
     </video:video>
   </url>
   <url>
+    <loc>https://matinr997.github.io/np-next/videos/rick-astley---never-gonna-give-you-up-official-video-4k-remaster/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>ریک آستلی؛ هرگز تو را رها نمی‌کنم؛ ویدیوی رسمی چهارکی</video:title>
+      <video:description>این ویدیو نسخهٔ رسمی و بازسازی‌شدهٔ چهارکیِ ویدیوی آهنگ «هرگز تو را رها نمی‌کنم» اثر ریک آستلی است. نماهای آن شامل اجرای پرانرژی خواننده، رقص و فضاهای…</video:description>
+      <video:player_loc allow_embed="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</video:player_loc>
+      <video:duration>213</video:duration>
+      <video:publication_date>2009-10-25</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@RickAstley">Rick Astley</video:uploader>
+      <video:tag>موسیقی و رقص</video:tag>
+    </video:video>
+  </url>
+  <url>
     <loc>https://matinr997.github.io/np-next/com/videos/amiodarone-class-iii-antiarrhythmic-mechanism-side-effects-black-box/</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/gYajexY55hM/maxresdefault.jpg</video:thumbnail_loc>
@@ -598,6 +613,21 @@
       <video:live>no</video:live>
       <video:uploader info="https://www.youtube.com/@LevelUpRN">Level Up RN</video:uploader>
       <video:tag>Nursing Theory Foundations</video:tag>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://matinr997.github.io/np-next/com/videos/rick-astley---never-gonna-give-you-up-official-video-4k-remaster/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)</video:title>
+      <video:description>This is the official 4K-remastered music video for Rick Astley&#x27;s song Never Gonna Give You Up. It features energetic performances, dancing, and colorful…</video:description>
+      <video:player_loc allow_embed="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</video:player_loc>
+      <video:duration>213</video:duration>
+      <video:publication_date>2009-10-25</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@RickAstley">Rick Astley</video:uploader>
+      <video:tag>Music and Dance</video:tag>
     </video:video>
   </url>
 </urlset>

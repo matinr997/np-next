@@ -7,6 +7,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/stage_lib.php';
 require_once __DIR__ . '/security.php';
 require_once __DIR__ . '/catalogue.php';
 
@@ -15,9 +16,35 @@ const NP_STATUSES = ['queued', 'running', 'done', 'failed', 'skipped', 'canceled
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     np_require_admin();
+    // The queue is for the video pipeline. The chat jobs are not shown:
+    // the panel has no chat section any more.
     $rows = np_all('SELECT id, yt_id, url, kind, channel, stage, status, progress, title_fa, title_en,
                            error, log, created_by, created_at, updated_at
-                    FROM pipeline_jobs ORDER BY created_at DESC LIMIT 300');
+                    FROM pipeline_jobs WHERE kind <> ? ORDER BY created_at DESC LIMIT 300', ['chat']);
+    // every card of the queue shows its own checklist, so the stages travel
+    // with the job — one query, not one per job
+    $ids = array_map(function ($r) { return (string)$r['id']; }, $rows);
+    $strips = [];
+    foreach ($ids as $jid) $strips[$jid] = np_stage_strip($jid);
+    foreach ($rows as &$r) {
+        $r['stages'] = $strips[(string)$r['id']] ?? [];
+        $r['done'] = 0;
+        $r['total'] = 0;
+        foreach ($r['stages'] as $st) {
+            $r['total']++;
+            if ($st['status'] === 'completed' || $st['status'] === 'skipped') $r['done']++;
+        }
+        $r['pct'] = $r['total'] > 0 ? (int)round($r['done'] * 100 / $r['total']) : 0;
+        // the link that opens the video on YouTube
+        $yt = (string)$r['yt_id'];
+        if ($yt === '') {
+            // an older job may only have the url
+            $guess = np_yt_id((string)$r['url']);
+            $yt = (string)($guess ?? '');
+        }
+        $r['watch_url'] = $yt !== '' ? 'https://www.youtube.com/watch?v=' . $yt : '';
+    }
+    unset($r);
     np_json(['ok' => true, 'jobs' => $rows]);
 }
 

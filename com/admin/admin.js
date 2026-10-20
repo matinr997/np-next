@@ -468,9 +468,11 @@ function api(file, opts) {
 
     var top = el('div', 'adm-job-top');
     var titleBox = el('div', 'adm-job-title');
-    titleBox.appendChild(el('span', 'adm-job-name'));
-    titleBox.appendChild(el('span', 'adm-job-url'));
-    top.appendChild(titleBox);
+    /* the title opens the video on YouTube */
+    var link = el('a', 'adm-job-name');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener');
+    titleBox.appendChild(link);    top.appendChild(titleBox);
     var badge = el('span', 'adm-badge');
     top.appendChild(badge);
     node.appendChild(top);
@@ -487,6 +489,9 @@ function api(file, opts) {
     track.appendChild(fill);
     node.appendChild(track);
 
+    /* the checklist as a strip of stages */
+    var strip = el('div', 'adm-stages');
+    node.appendChild(strip);
     var foot = el('div', 'adm-job-foot');
     var created = el('span', 'adm-job-time');
     foot.appendChild(created);
@@ -516,17 +521,83 @@ function api(file, opts) {
     return node;
   }
 
+  /* The checklist as a strip of stages.
+   * done -> a green tick, running -> a blue spinner, failed -> a red
+   * warning, waiting -> an empty circle. */
+  function stageMark(status) {
+    if (status === 'completed') return { cls: 'done', glyph: '\u2713', label: 'Completed' };
+    if (status === 'running') return { cls: 'run', glyph: '', label: 'Running' };
+    if (status === 'failed') return { cls: 'bad', glyph: '\u26A0', label: 'Failed' };
+    if (status === 'skipped') return { cls: 'skip', glyph: '\u2013', label: 'Skipped' };
+    if (status === 'waiting_for_review') return { cls: 'wait', glyph: '?', label: 'Awaiting review' };
+    if (status === 'cancelled') return { cls: 'skip', glyph: '\u2715', label: 'Cancelled' };
+    return { cls: 'todo', glyph: '', label: 'Pending' };
+  }
+
+  function renderStageStrip(node, job) {
+    var strip = node.__parts.strip;
+    if (!strip) return;
+    var stages = job.stages || [];
+    if (!stages.length) { strip.hidden = true; return; }
+    strip.hidden = false;
+    clear(strip);
+    stages.forEach(function (st) {
+      var m = stageMark(st.status);
+      var item = el('span', 'adm-stg adm-stg-' + m.cls);
+      item.title = st.label + ' — ' + m.label;
+      item.setAttribute('aria-label', st.label + ' — ' + m.label);
+      if (m.cls === 'run') {
+        var sp = el('i', 'adm-spin');
+        item.appendChild(sp);
+      } else {
+        item.appendChild(el('b', null, m.glyph));
+      }
+      /* a failed stage can be retried on its own */
+      if (m.cls === 'bad') {
+        item.className += ' adm-stg-click';
+        item.setAttribute('data-retry-stage', st.stage);
+        item.setAttribute('data-retry-job', job.id);
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+      }
+      strip.appendChild(item);
+    });
+    /* a failed stage: click it to retry that stage */
+    Array.prototype.forEach.call(strip.querySelectorAll('[data-retry-stage]'), function (it) {
+      var go = function () {
+        var jobId = it.getAttribute('data-retry-job');
+        var stage = it.getAttribute('data-retry-stage');
+        api('stages.php', { method: 'POST',
+                            body: { action: 'retry', job_id: jobId, stage: stage } })
+          .then(function () { return loadJobs(); })
+          .catch(function (e) { toast(String(e.message || e), 'err'); });
+      };
+      it.addEventListener('click', go);
+      it.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+      });
+    });
+  }
+
   function updateJobNode(node, job) {
     var p = node.__parts;
-    var name = job.title_en || job.title_fa || job.url || job.yt_id || job.id;
+    var name = job.title_en || job.title_fa || job.yt_id || job.id;
     p.name.textContent = name;
-    p.url.textContent = job.url || job.yt_id || '';
+    /* the title opens the video on YouTube */
+    p.name.href = job.watch_url || (job.yt_id ? 'https://www.youtube.com/watch?v=' + job.yt_id : '#');
+    p.name.title = job.watch_url ? 'Open the video on YouTube' : '';
+    p.url.textContent = job.yt_id ? ('youtube.com/watch?v=' + job.yt_id) : (job.url || '');
     p.badge.className = statusClass(job.status);
     p.badge.textContent = STATUS_LABEL[job.status] || job.status || '—';
     p.stage.textContent = stageLabel(job.stage);
-    var prog = Math.max(0, Math.min(100, parseInt(job.progress, 10) || 0));
+    /* the checklist decides the percentage, not the rough job progress */
+    var prog = job.pct;
+    if (prog === undefined || prog === null) {
+      prog = Math.max(0, Math.min(100, parseInt(job.progress, 10) || 0));
+    }
     p.fill.style.width = prog + '%';
     p.pct.textContent = fa(prog) + '%';
+    renderStageStrip(node, job);
     p.created.textContent = job.created_at ? String(job.created_at).replace('T', ' ').slice(0, 16) : '';
     var cancellable = job.status === 'queued' || job.status === 'running';
     p.cancel.hidden = !cancellable;
@@ -699,7 +770,6 @@ function api(file, opts) {
   function llmSettingsPayload() {
     var endpoint = ($('llmEndpoint').value || '').trim();
     var model = ($('llmModel').value || '').trim();
-    /* the chat may run on a different model than the video pipeline */
     var chatModel = ($('chatModel') ? ($('chatModel').value || '').trim() : '');
     return { endpoint: endpoint, model: model, chat_model: chatModel };
   }
@@ -839,207 +909,15 @@ function api(file, opts) {
   }
 
   /* ------------------------------------------------------------------ */
-  /* chat — the assistant                                               */
   /* ------------------------------------------------------------------ */
-  /* The panel queues a chat job; scripts/pipeline_worker.py picks it up,
-     runs it and writes the answer back as chat_messages. The browser only
-     sends and polls — the heavy lifting never happens in the page. */
   var CHAT_POLL_MS = 1500;
-  var chat = { jobId: null, seen: 0, timer: null, busy: false, file: null };
-
-  function chatStatus(text, kind) {
-    var box = $('chatStatus');
-    if (!box) return;
-    if (!text) { box.hidden = true; return; }
-    box.hidden = false;
-    box.textContent = text;
-    box.className = 'adm-chat-status' + (kind ? ' ' + kind : '');
-  }
-
-  function chatScroll() {
-    var log = $('chatLog');
-    if (log) log.scrollTop = log.scrollHeight;
-  }
-
-  function chatBubble(role, text) {
-    var box = el('div', 'adm-msg adm-msg-' + (role === 'user' ? 'user' : 'agent'));
-    var head = el('div', 'adm-msg-head');
-    head.appendChild(el('span', null, role === 'user' ? 'You' : 'Assistant'));
-    box.appendChild(head);
-    box.appendChild(el('div', 'adm-msg-body', text || ''));
-    return box;
-  }
-
-  function chatRender(messages) {
-    var log = $('chatLog');
-    if (!log) return;
-    if (!messages.length) return;
-    $('chatEmpty').hidden = true;
-    for (var i = chat.seen; i < messages.length; i++) {
-      var m = messages[i] || {};
-      var text = m.text || '';
-      if (m.file_name && text.indexOf(m.file_name) === -1) {
-        text = '📎 ' + m.file_name + (text ? '\n' + text : '');
-      }
-      log.appendChild(chatBubble(m.role, text));
-    }
-    chat.seen = messages.length;
-    chatScroll();
-  }
-
-  function chatPoll() {
-    if (!chat.jobId) return;
-    api('chat.php?job_id=' + encodeURIComponent(chat.jobId)).then(function (data) {
-      chatRender(data.messages || []);
-      return api('jobs.php');
-    }).then(function (d) {
-      var job = null;
-      (d.jobs || []).forEach(function (j) { if (j.id === chat.jobId) job = j; });
-      if (!job) return;
-      if (job.status === 'done') {
-        chat.busy = false; chat.jobId = null;
-        chatStatus('Done.', null);
-        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
-      } else if (job.status === 'failed') {
-        chat.busy = false; chat.jobId = null;
-        chatStatus('Error: ' + (job.error || 'failed'), 'err');
-        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
-      } else if (job.status === 'canceled') {
-        chat.busy = false; chat.jobId = null;
-        chatStatus('Cancelled.', 'err');
-        if (chat.timer) { clearInterval(chat.timer); chat.timer = null; }
-      } else {
-        chatStatus('Working — stage: ' + stageLabel(job.stage) + ' (' + fa(job.progress || 0) + '%)');
-      }
-    }).catch(function (e) {
-      chat.busy = false;
-      chatStatus('Lost the connection to the server: ' + e.message, 'err');
-    });
-  }
-
 
   /* ---- /compress: summarise the session, keep the key points ---- */
-  function chatCompress() {
-    chat.busy = true;
-    chatStatus('در حال فشرده‌سازی گفتگو…');
-    api('chat.php', { method: 'POST', body: { action: 'compress', lang: 'en' } })
-      .then(function (d) {
-        var log = $('chatLog');
-        if (log) {
-          var b = chatBubble('agent', d.summary || '');
-          if (b) log.appendChild(b);
-          chatScroll();
-        }
-        chatStatus('The conversation was compressed (' + (d.messages || 0) + ' messages).', 'ok');
-        toast('The conversation was compressed.', 'ok');
-      })
-      .catch(function (e) {
-        chatStatus('Could not compress: ' + e.message, 'err');
-        toast('Could not compress the conversation.', 'err');
-      })
-      .then(function () { chat.busy = false; });
-  }
-
-  function chatSend() {
-    if (chat.busy) { toast('A job is already running; give it a moment.', 'warn'); return; }
-    var input = $('chatInput');
-    var text = (input.value || '').trim();
-    var file = chat.file;
-    if (!text && !file) { toast('A message or a file is required.', 'warn'); return; }
-
-    /* /compress summarises the conversation and keeps the important parts.
-       It is a command, not a question, so it never reaches the agent. */
-    if (!file && /^\/compress(\s|$)/i.test(text)) {
-      input.value = '';
-      chatCompress();
-      return;
-    }
-
-    chat.busy = true;
-    chat.seen = 0;
-    chat.jobId = null;
-    chatStatus('Sending…');
-
-    var p;
-    if (file) {
-      var fd = new FormData();
-      fd.append('file', file);
-      if (text) fd.append('message', text);
-      p = fetch(API_BASE + 'chat.php', {
-        method: 'POST', credentials: 'same-origin', body: fd
-      }).then(function (res) {
-        return res.text().then(function (t) {
-          var data = null;
-          try { data = JSON.parse(t); } catch (e) { data = null; }
-          if (!data || data.ok === false) {
-            throw new ApiError((data && data.message) || 'The upload failed.', res.status, data);
-          }
-          return data;
-        });
-      });
-    } else {
-      p = api('chat.php', { method: 'POST', body: { action: 'send', message: text } });
-    }
-
-    p.then(function (d) {
-      chat.jobId = d.job_id;
-      input.value = '';
-      chat.file = null;
-      $('chatFileName').textContent = '';
-      clear($('chatLog'));
-      chatScroll();
-      chatPoll();
-      if (chat.timer) clearInterval(chat.timer);
-      chat.timer = setInterval(chatPoll, CHAT_POLL_MS);
-    }).catch(function (e) {
-      chat.busy = false;
-      chatStatus('Could not send: ' + e.message, 'err');
-      toast('Could not send: ' + e.message, 'error');
-    });
-  }
-
-  function chatSetFile(file) {
-    if (!file) return;
-    chat.file = file;
-    $('chatFileName').textContent = '📎 ' + file.name + ' (' + Math.max(1, Math.round(file.size / 1024)) + ' KB)';
-  }
-
-  function initChat() {
-    var input = $('chatInput');
-    var drop = $('chatDrop');
-    var picker = $('chatFile');
-    if (!input || !drop || !picker) return;
-
-    $('chatSend').addEventListener('click', chatSend);
-    input.addEventListener('keydown', function (e) {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); chatSend(); }
-    });
-
-    $('chatPick').addEventListener('click', function () { picker.click(); });
-    picker.addEventListener('change', function () { chatSetFile(picker.files && picker.files[0]); });
-
-    ['dragenter', 'dragover'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); });
-    });
-    ['dragleave', 'drop'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); });
-    });
-    drop.addEventListener('drop', function (e) {
-      var dt = e.dataTransfer;
-      if (dt && dt.files && dt.files.length) {
-        chatSetFile(dt.files[0]);
-        /* the browser must not navigate to the dropped file */
-        e.preventDefault();
-      }
-    });
-  }
-
   function init() {
     initLogin();
     initLogout();
     initJobs();
     initLlm();
-    initChat();
 
     $('urlInput').addEventListener('input', renderDetected);
     $('addBtn').addEventListener('click', addToQueue);

@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "در بند نخست آهنگ، خواننده می‌گوید به چه چیزی فکر می‌کند؟",
+   "qe": "In the opening verse, what does the singer say he is thinking of?",
+   "of": [
+    "یک تعهد کامل و همه‌جانبه به رابطه",
+    "اینکه هرگز از کسی دلخور نخواهد شد",
+    "اینکه به‌زودی از این شهر نقل مکان خواهد کرد",
+    "اینکه آشنایی آن‌ها کاملاً تصادفی بوده است"
+   ],
+   "oe": [
+    "A full commitment to the relationship",
+    "That he will never be disappointed by anyone",
+    "That he will soon move away from this city",
+    "That their meeting was entirely accidental"
+   ],
+   "c": 0,
+   "wf": "در ثانیهٔ ۱ خواننده می‌خواند «به یک تعهد کامل فکر می‌کنم»؛ بنابراین گزینهٔ نخست با متن آهنگ مطابقت دارد.",
+   "we": "At second 1 the singer sings 'A full commitment's what I'm thinking of,' which directly supports the first option.",
+   "ts": 1
+  },
+  {
+   "type": "mc",
+   "qf": "کدام وعده در کورس آهنگ (بخش تکرارشونده) به خواننده نسبت داده نشده است؟",
+   "qe": "Which promise does the singer NOT make in the chorus of the song?",
+   "of": [
+    "هرگز فراموشت نمی‌کنم",
+    "هرگز تو را رها نمی‌کنم",
+    "هرگز گریه‌انت نمی‌اندازم",
+    "هرگز دروغ نمی‌گویم و آزارت نمی‌دهم"
+   ],
+   "oe": [
+    "Never gonna forget you",
+    "Never gonna give you up",
+    "Never gonna make you cry",
+    "Never gonna tell a lie and hurt you"
+   ],
+   "c": 0,
+   "wf": "کورس از ثانیهٔ ۴۳ شامل «هرگز تو را رها نمی‌کنم»، «هرگز گریه‌انت نمی‌اندازم» و «هرگز دروغ نمی‌گویم و آزارت نمی‌دهم» است، اما وعدهٔ «هرگز فراموشت نمی‌کنم» در متن آهنگ نیامده است.",
+   "we": "From second 43 the chorus includes 'Never gonna give you up,' 'Never gonna make you cry,' and 'Never gonna tell a lie and hurt you,' while 'Never gonna forget you' never appears in the transcript.",
+   "ts": 43
+  },
+  {
+   "type": "mc",
+   "qf": "در بند دوم، خواننده دلیل درد کشیدن قلب طرف مقابل را چه می‌داند؟",
+   "qe": "In the second verse, what does the singer say is the reason the other person's heart is aching?",
+   "of": [
+    "چون از بیان کردن آن خجالت می‌کشد",
+    "چون مدت زیادی با بیماری دست‌وپنجه نرم می‌کند",
+    "چون دوستانش او را نادیده گرفته‌اند",
+    "چون از خانوادهٔ خود دوری می‌کند"
+   ],
+   "oe": [
+    "Because they are too shy to say it",
+    "Because they have been ill for a long time",
+    "Because their friends have ignored them",
+    "Because they are estranged from their family"
+   ],
+   "c": 0,
+   "wf": "در ثانیهٔ ۵۳ خواننده می‌گوید «قلبت درد کشیده، اما از گفتنش خجالت می‌کشی»؛ بنابراین دلیل، خجالت دانستن احساس است.",
+   "we": "At second 53 the singer sings 'Your heart's been aching but you're too shy to say it,' identifying shyness as the cause.",
+   "ts": 53
+  },
+  {
+   "type": "cloze",
+   "qf": "در کورس آهنگ، خواننده قول می‌دهد «هرگز تو را {0}» و همچنین «هرگز {1}».",
+   "qe": "In the chorus, the singer promises 'Never gonna {0}' and also 'Never gonna {1}'.",
+   "blanks": [
+    {
+     "of": [
+      "رها نمی‌کنم",
+      "فراموش نمی‌کنم",
+      "قضاوت نمی‌کنم"
+     ],
+     "oe": [
+      "give you up",
+      "forget you",
+      "judge you"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "گریه‌انت نمی‌اندازم",
+      "بیمارت نمی‌کنم",
+      "تنها نمی‌گذارم"
+     ],
+     "oe": [
+      "make you cry",
+      "make you ill",
+      "leave you alone"
+     ],
+     "c": 0
+    }
+   ],
+   "wf": "متن کورس در ثانیهٔ ۴۳ عبارت‌های «هرگز تو را رها نمی‌کنم» و «هرگز گریه‌انت نمی‌اندازم» را بیان می‌کند که هر دو با گزینه‌های صحیح هم‌خوان است.",
+   "we": "The chorus at second 43 contains 'Never gonna give you up' and 'Never gonna make you cry,' matching the correct options for both blanks.",
+   "ts": 43
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از عبارت‌های زیر بخشی از کورس آهنگ هستند؟",
+   "qe": "Which of the following lines are part of the song's chorus?",
+   "items": [
+    {
+     "fa": "هرگز تو را رها نمی‌کنم",
+     "en": "Never gonna give you up"
+    },
+    {
+     "fa": "ما به عشق بیگانه نیستیم",
+     "en": "We're no strangers to love"
+    },
+    {
+     "fa": "هرگز خداحافظ نمی‌گویم",
+     "en": "Never gonna say goodbye"
+    },
+    {
+     "fa": "قلبت درد کشیده، اما از گفتنش خجالت می‌کشی",
+     "en": "Your heart's been aching, but you're too shy to say it"
+    },
+    {
+     "fa": "هرگز گریه‌انت نمی‌اندازم",
+     "en": "Never gonna make you cry"
+    },
+    {
+     "fa": "بازی را می‌شناسیم و حالا آن را بازی می‌کنیم",
+     "en": "We know the game and we're gonna play it"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    4
+   ],
+   "wf": "کورس آهنگ از ثانیهٔ ۴۳ شامل «هرگز تو را رها نمی‌کنم»، «هرگز خداحافظ نمی‌گویم» و «هرگز گریه‌انت نمی‌اندازم» است؛ سه عبارت دیگر به بندهای روایی آهنگ تعلق دارند.",
+   "we": "The chorus beginning at second 43 contains 'Never gonna give you up,' 'Never gonna say goodbye,' and 'Never gonna make you cry'; the remaining three lines come from the narrative verses.",
+   "ts": 43
+  }
+ ],
+ "video": "dQw4w9WgXcQ",
+ "gen": {
+  "model": "freeeeee",
+  "n": 5
+ }
+}

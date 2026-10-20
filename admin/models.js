@@ -112,9 +112,6 @@
     models: [], prefs: {}, q: '', caps: {}, selected: '',
     usage: null, detail: null, lastContext: null, loaded: false
   };
-  /* The chat runs on its own model, apart from the video pipeline. The two
-     pickers share the code but keep their own state. */
-  var C = { models: [], q: '', caps: {}, selected: '', filter: '', capsBox: null };
   /* The API always lives at the site root — the COM deployment shares it.
    * The panel sits at /admin/ on IR and at /com/admin/ on COM, so the depth
    * is worked out from the path instead of being hard-coded. */
@@ -224,25 +221,6 @@
   }
 
   /* ----------------------------------------------- the selected model */
-  /** The chat runs on its own model, apart from the video pipeline. */
-  function pickChat(id) {
-    C.selected = id;
-    var inp = document.getElementById('chatModel');
-    if (inp) inp.value = id;
-    renderList(C);
-    var note = document.getElementById('chatModelNote');
-    if (note) {
-      var m = null;
-      for (var i = 0; i < C.models.length; i++) if (C.models[i].id === id) m = C.models[i];
-      note.textContent = m
-        ? (m.caps.vision === 'yes' ? '\u{1F441} ' : '') +
-          (m.caps.reasoning === 'yes' ? '\u{1F9E0} ' : '') +
-          (m.caps.tools === 'yes' ? '\u{1F527} ' : '') +
-          (m.ctx_max ? nfmt(m.ctx_max) + ' ctx' : '')
-        : '';
-    }
-  }
-
   function byId(id) {
     for (var i = 0; i < S.models.length; i++) if (S.models[i].id === id) return S.models[i];
     return null;
@@ -458,7 +436,6 @@
   function loadModels() {
     return api('models.php?action=list').then(function (d) {
       S.models = d.models || [];
-      C.models = d.models || [];
       S.prefs = d.prefs || {};
       S.endpointId = d.endpoint_id || 'default';
       S.loaded = true;
@@ -468,8 +445,6 @@
       renderFilters();
       renderList();
       renderSummary();
-      renderFilters(C, 'chatCapFilters');
-      renderList(C);
       fillUsageFilters();
       return loadUsage();
     }).catch(function () { });
@@ -488,20 +463,6 @@
   }
 
   /* ------------------------------------------------------------- init */
-  /** The chat model comes from the settings, apart from the pipeline model. */
-  function loadChatModel() {
-    return api('llm.php').then(function (d) {
-      var st = (d && d.settings) || {};
-      var inp = document.getElementById('chatModel');
-      if (inp) {
-        inp.value = st.chat_model || '';
-        C.selected = st.chat_model || '';
-        renderList(C);
-        if (st.chat_model) pickChat(st.chat_model);
-      }
-    }).catch(function () { });
-  }
-
   function init() {
     var f = document.getElementById('modelFilter');
     if (f) {
@@ -525,21 +486,13 @@
     if (mi) {
       mi.addEventListener('change', function () { pick(mi.value.trim()); });
     }
-    /* the chat model picker */
-    var cf = document.getElementById('chatModelFilter');
-    if (cf) {
-      cf.addEventListener('input', function () { C.q = cf.value || ''; renderList(C); });
-    }
     var cm = document.getElementById('chatModel');
     if (cm) {
       cm.addEventListener('change', function () { pickChat(cm.value.trim()); });
     }
     /* the catalogue needs the session — the panel calls load() again once
        the administrator is signed in */
-    if (document.getElementById('appView') && !document.getElementById('appView').hidden) {
-      loadModels();
-      loadChatModel();
-    }
+    if (document.getElementById('appView') && !document.getElementById('appView').hidden) loadModels();
     // keep the list fresh if the panel is open for a long time
     setInterval(function () { if (!document.hidden) loadUsage(); }, 30000);
   }
@@ -549,10 +502,7 @@
   window.npModels = {
     render: function () {
       renderFilters(); renderList(); renderSummary();
-      renderFilters(C, 'chatCapFilters'); renderList(C);
     },
-    chatModel: function () { return C.selected; },
-    loadChatModel: loadChatModel,
     setContext: function (ctx) { S.lastContext = ctx; renderSummary(); },
     selected: function () { return S.selected; },
     load: loadModels
