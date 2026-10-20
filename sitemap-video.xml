@@ -286,6 +286,21 @@
     </video:video>
   </url>
   <url>
+    <loc>https://matinr997.github.io/np-next/videos/theoretical-foundations-kohlberg-maslow---fundamentals-of-nursing/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/pzzpgC8SzUU/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>بنیان‌های نظری: کولبرگ و ماسلو در اصول پرستاری</video:title>
+      <video:description>در این ویدیو مبانی نظری پرستاری از طریق دو نظریه کلاسیک معرفی می‌شود: نظریه رشد اخلاقی کولبرگ با سه سطح پیش‌قرونری، قراردادی و پس‌قرونری، و سلسله‌مراتب…</video:description>
+      <video:player_loc allow_embed="https://www.youtube-nocookie.com/embed/pzzpgC8SzUU">https://www.youtube.com/watch?v=pzzpgC8SzUU</video:player_loc>
+      <video:duration>615</video:duration>
+      <video:publication_date>2026-07-02</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@LevelUpRN">Level Up RN</video:uploader>
+      <video:tag>مبانی نظری پرستاری</video:tag>
+    </video:video>
+  </url>
+  <url>
     <loc>https://matinr997.github.io/np-next/com/videos/amiodarone-class-iii-antiarrhythmic-mechanism-side-effects-black-box/</loc>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/gYajexY55hM/maxresdefault.jpg</video:thumbnail_loc>
@@ -568,6 +583,21 @@
       <video:live>no</video:live>
       <video:uploader info="https://www.youtube.com/@KlimekReviews">Klimek Reviews</video:uploader>
       <video:tag>Pharmacology</video:tag>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://matinr997.github.io/np-next/com/videos/theoretical-foundations-kohlberg-maslow---fundamentals-of-nursing/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/pzzpgC8SzUU/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Theoretical Foundations: Kohlberg &amp; Maslow - Fundamentals of Nursing Principles</video:title>
+      <video:description>This video presents the theoretical foundations of nursing through two classic frameworks: Kohlberg&#x27;s stages of moral development (preconventional…</video:description>
+      <video:player_loc allow_embed="https://www.youtube-nocookie.com/embed/pzzpgC8SzUU">https://www.youtube.com/watch?v=pzzpgC8SzUU</video:player_loc>
+      <video:duration>615</video:duration>
+      <video:publication_date>2026-07-02</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+      <video:uploader info="https://www.youtube.com/@LevelUpRN">Level Up RN</video:uploader>
+      <video:tag>Nursing Theory Foundations</video:tag>
     </video:video>
   </url>
 </urlset>

@@ -21,11 +21,15 @@ MODEL = "oc/mimo-v2.6-flash-free"
 FALLBACK_MODELS = ["Opencode", "oc/deepseek-v4.1-flash-free", "oc/glm-5.3-flash-free", "openrouter/z-ai/glm-5.2"]
 BASE_URL = "http://localhost:20128/v1/chat/completions"
 KEY: str = ""
-for line in open(os.path.expanduser("~/.hermes/profiles/brain-hub/.env"), encoding="utf-8"):
-    if line.startswith("HERMES_CUSTOM_LOCALHOST_20128_API_KEY="):
-        KEY = line.split("=", 1)[1].strip().strip('"').strip("'")
-if not KEY:
-    sys.exit("router API key not found in .env")
+try:
+    for line in open(os.path.expanduser("~/.hermes/profiles/brain-hub/.env"), encoding="utf-8"):
+        if line.startswith("HERMES_CUSTOM_LOCALHOST_20128_API_KEY="):
+            KEY = line.split("=", 1)[1].strip().strip('"').strip("'")
+except OSError:
+    pass
+# NOTE: no sys.exit here. scripts/pipeline_worker.py imports this module and
+# replaces chat()/MODEL/BASE_URL with the endpoint configured in the admin
+# panel, so a missing local .env must not kill the import.
 
 VIDEOS = {v["id"]: v for v in json.load(open(os.path.join(ROOT, "data", "videos.json"), encoding="utf-8"))}
 MAX_TRANSCRIPT_CHARS = 45000
@@ -100,13 +104,83 @@ def chat(messages, timeout=180, max_tokens=6000, temperature=0.4):
     raise RuntimeError(f"all models failed: {last}")
 
 
+def _scan_object(t):
+    """First balanced {...} block — a naive find('{')/rfind('}') pair breaks when
+    the model writes a preamble or a trailing note containing braces."""
+    start = t.find("{")
+    while start >= 0:
+        depth = 0
+        instr = esc = False
+        for i in range(start, len(t)):
+            c = t[i]
+            if instr:
+                if esc:
+                    esc = False
+                elif c == "\\":
+                    esc = True
+                elif c == '"':
+                    instr = False
+                continue
+            if c == '"':
+                instr = True
+            elif c == "{":
+                depth += 1
+            elif c == "}":
+                depth -= 1
+                if depth == 0:
+                    return t[start:i + 1]
+        start = t.find("{", start + 1)
+    return None
+
+
+def _repair_json(raw):
+    """Fix the two malformations models actually produce: a trailing comma and
+    a raw newline/tab inside a string value."""
+    raw = re.sub(r",\s*([}\]])", r"\1", raw)
+    out = []
+    instr = esc = False
+    for ch in raw:
+        if instr:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                instr = False
+            elif ch == "\n":
+                out.append("\\n"); continue
+            elif ch == "\r":
+                out.append("\\r"); continue
+            elif ch == "\t":
+                out.append("\\t"); continue
+            out.append(ch)
+            continue
+        if ch == '"':
+            instr = True
+        out.append(ch)
+    return "".join(out)
+
+
 def extract_json(text):
-    t = text.strip()
-    t = re.sub(r"^```(?:json)?\s*|\s*```$", "", t, flags=re.S).strip()
-    i, j = t.find("{"), t.rfind("}")
-    if i < 0 or j < 0:
+    t = re.sub(r"^```(?:json)?\s*|\s*```$", "", (text or "").strip(), flags=re.S).strip()
+    raw = _scan_object(t)
+    if raw is None:
         raise ValueError("no JSON object in response")
-    return json.loads(t[i:j + 1])
+    try:
+        return json.loads(raw)
+    except Exception:
+        pass
+    try:
+        return json.loads(_repair_json(raw))
+    except Exception as e:
+        # keep the broken output for diagnosis instead of losing it
+        try:
+            p = os.path.join(ROOT, "scripts", ".gen_quiz_bad_output.json")
+            open(p, "w", encoding="utf-8").write(t)
+            print("   (bad model output saved to %s)" % p)
+        except Exception:
+            pass
+        raise ValueError("could not parse JSON: %s" % e)
 
 
 def dur_seconds(d):

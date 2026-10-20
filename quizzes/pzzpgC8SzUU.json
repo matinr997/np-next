@@ -1,0 +1,147 @@
+{
+ "questions": [
+  {
+   "type": "mc",
+   "qf": "کودکی ۴ ساله که کارهای خانه را انجام می‌دهد تا بر روی جدول پاداش استیکر بگیرد، به احتمال زیاد در کدام مرحله از نظریه رشد اخلاقی کولبرگ قرار دارد؟",
+   "qe": "A 4-year-old child does her chores in order to receive a sticker on a reward chart. In which stage of Kohlberg's theory of moral development is this child most likely operating?",
+   "of": [
+    "قراردادی (conventional)، زیرا در این مرحله کودک به تأیید دیگران اهمیت می‌دهد",
+    "پیش‌قراردادی (pre-conventional)، زیرا رفتار او با تمایل به کسب پاداش انگیزه می‌گیرد",
+    "پس‌قراردادی (post-conventional)، زیرا در این سن کودک تفکر انتزاعی درباره اخلاقیات دارد",
+    "هیچ‌کدام از این موارد، زیرا نظریه کولبرگ تنها برای نوجوانان کاربرد دارد"
+   ],
+   "oe": [
+    "Conventional, because at this stage the child cares about the approval of others",
+    "Pre-conventional, because the child's behavior is motivated by a desire to earn a reward",
+    "Post-conventional, because at this age the child thinks abstractly about morality",
+    "None of the above, because Kohlberg's theory applies only to adolescents"
+   ],
+   "c": 1,
+   "wf": "کودکان ≤ ۵ سال در مرحله پیش‌قراردادی قرار دارند و رفتار آن‌ها عمدتاً با انگیزه کسب پاداش یا اجتناب از پیامد شکل می‌گیرد؛ به همین دلیل جدول استیکر برای این سن کارآمد است.",
+   "we": "Children ≤ 5 years old are in the pre-conventional stage, where behavior is driven mainly by a desire for a reward or avoidance of a consequence, which is why sticker charts work so well for this age.",
+   "ts": 68
+  },
+  {
+   "type": "mc",
+   "qf": "بر اساس توضیح ویدیو، کدام ویژگی مرحله قراردادی رشد اخلاقی کولبرگ (حدود ۶ تا ۱۲ سالگی) را به بهترین شکل توصیف می‌کند؟",
+   "qe": "According to the video, which characteristic best describes Kohlberg's conventional stage of moral development (approximately ages 6 to 12)?",
+   "of": [
+    "کودک رفتار خود را با تفکر انتزاعی و استفاده از تجربیات گذشته درباره اخلاقیات تنظیم می‌کند",
+    "کودک رفتار خود را با این پرسش هدایت می‌کند که «آیا دیگران کار من را درست می‌دانند؟» و به شدت دنبال تأیید همسالان است",
+    "رفتار کودک تنها با انگیزه کسب پاداش یا اجتناب از پیامد توضیح داده می‌شود",
+    "کودک اصلاً به تأثیر رفتار خود بر دیگران یا نظر آن‌ها توجهی نمی‌کند"
+   ],
+   "oe": [
+    "The child adjusts behavior using abstract thinking and past experiences about morality",
+    "The child is guided by asking whether others agree that the behavior is right and strongly seeks peer approval",
+    "The child's behavior is explained only by a desire for reward or avoidance of consequence",
+    "The child does not consider the effect of behavior on others or what others think"
+   ],
+   "c": 1,
+   "wf": "در مرحله قراردادی، کودک شروع به بررسی تأثیر رفتار خود بر دیگران می‌کند و به دنبال تأیید دیگران است؛ همین ویژگی او را در برابر فشار همسالان آسیب‌پذیر می‌کند و تقویت مثبت رفتار مثبت را ضروری می‌سازد.",
+   "we": "In the conventional stage the child begins to consider how actions affect others and seeks others' approval, which also makes this age group susceptible to peer pressure and requires positive reinforcement of positive behavior.",
+   "ts": 156
+  },
+  {
+   "type": "mc",
+   "qf": "بیماری به پرستار می‌گوید به‌تازگی از شریک زندگی‌اش جدا شده، ارتقای شغلی نگرفته و هم‌زمان با ناامنی غذایی روبه‌روست. بر اساس سلسله‌مراتب نیازهای ماسلو، اولویت اقدام پرستار کدام است؟",
+   "qe": "A patient tells the nurse they recently broke up with their partner, did not get a promotion at work, and is also dealing with food insecurity. According to Maslow's hierarchy of needs, what is the nurse's priority?",
+   "of": [
+    "رسیدگی به ناامنی غذایی، زیرا این نیاز در پایین‌ترین سطح پرم قرار دارد",
+    "کمک به بیمار برای بازیابی احساس عشق و تعلق، زیرا این یک نیاز انسانی مهم است",
+    "تقویت عزت‌نفس بیمار با توجه به ارتقای شغلی که دریافت نکرده است",
+    "ارجاع بیمار به گروه‌های حمایتی برای بازسازی روابط و کاهش انزوا"
+   ],
+   "oe": [
+    "Addressing the food insecurity, because it sits at the bottom of the pyramid",
+    "Helping the patient restore a sense of love and belonging, because it is an important human need",
+    "Supporting the patient's self-esteem in relation to the promotion they did not receive",
+    "Referring the patient to support groups to rebuild relationships and reduce isolation"
+   ],
+   "c": 0,
+   "wf": "ویدیو توضیح می‌دهد که تا زمانی که نیازهای پایین‌تر برآورده نشوند، نمی‌توان به نیازهای بالاتر پرداخت؛ بنابراین در مثال بیمارِ دارای ناامنی غذایی، اولویت با ناامنی غذایی است، حتی اگر بخواهیم به عشق و تعلق و عزت‌نفس او هم کمک کنیم.",
+   "we": "The video explains that lower needs must be met before higher ones can be addressed, so in this example the priority is the food insecurity at the bottom of the hierarchy, even though the nurse also wants to help with love/belonging and self-esteem issues.",
+   "ts": 503
+  },
+  {
+   "type": "cloze",
+   "qf": "پرستار در حال ارزیابی رشد اخلاقی کودکان است. کودکی ۱۰ ساله که برای دوست بیمارش کارت «زودتر خوب شوی» می‌نویسد و به دنبال تأیید همسالان است، در مرحله {0} رشد اخلاقی کولبرگ قرار دارد؛ در حالی که نوجوانی ۱۴ ساله که با استفاده از تجربیات گذشته به‌طور انتزاعی درباره اخلاقیات استدلال می‌کند، در مرحله {1} قرار دارد.",
+   "qe": "A nurse is assessing children's moral development. A 10-year-old who writes a \"get well soon\" card for a sick friend and seeks peer approval is in Kohlberg's {0} stage, whereas a 14-year-old who uses past experiences to reason abstractly about morality is in the {1} stage.",
+   "blanks": [
+    {
+     "of": [
+      "پیش‌قراردادی (pre-conventional)",
+      "قراردادی (conventional)",
+      "پس‌قراردادی (post-conventional)"
+     ],
+     "oe": [
+      "Pre-conventional",
+      "Conventional",
+      "Post-conventional"
+     ],
+     "c": 1
+    },
+    {
+     "of": [
+      "پیش‌قراردادی (pre-conventional)",
+      "قراردادی (conventional)",
+      "پس‌قراردادی (post-conventional)"
+     ],
+     "oe": [
+      "Pre-conventional",
+      "Conventional",
+      "Post-conventional"
+     ],
+     "c": 2
+    }
+   ],
+   "wf": "مرحله قراردادی حدود ۶ تا ۱۲ سالگی را در بر می‌گیرد و شامل توجه به تأثیر رفتار بر دیگران و جلب تأیید است؛ از ۱۳ سالگی به بعد، مرحله پس‌قراردادی با تفکر انتزاعی و استفاده از تجربیات گذشته آغاز می‌شود.",
+   "we": "The conventional stage spans roughly ages 6 to 12 and involves considering how actions affect others and seeking approval; from age 13 onward, the post-conventional stage brings abstract thinking and the use of past experiences.",
+   "ts": 192
+  },
+  {
+   "type": "dnd",
+   "qf": "کدام‌یک از موارد زیر در سلسله‌مراتب نیازهای ماسلو، نیازهای سطح «ایمنی» به شمار می‌روند؟",
+   "qe": "Which of the following are considered \"safety\" needs in Maslow's hierarchy of needs?",
+   "items": [
+    {
+     "fa": "احساس امنیت جسمی در محل زندگی",
+     "en": "Feeling physically safe where I live"
+    },
+    {
+     "fa": "داشتن دوستان و احساس تعلق به خانواده، چه از راه خون و چه از راه انتخاب",
+     "en": "Having friends and a sense of family, whether by blood or by choice"
+    },
+    {
+     "fa": "دسترسی به مراقبت‌های پزشکی",
+     "en": "Having access to medical care"
+    },
+    {
+     "fa": "کسب یک مدرک تحصیلی مشخص یا گرفتن ارتقای شغلی",
+     "en": "Earning a specific degree or getting a promotion"
+    },
+    {
+     "fa": "زندگی در منطقه‌ای که «بیابان غذایی» است و دسترسی به غذای باکیفیت وجود ندارد",
+     "en": "Living in a food desert where access to good-quality food is limited"
+    },
+    {
+     "fa": "غذا، آب و سرپناه برای زنده ماندن",
+     "en": "Food, water, and shelter for survival"
+    }
+   ],
+   "keep": [
+    0,
+    2,
+    4
+   ],
+   "wf": "ایمنی به‌عنوان سطح دوم پرم ماسلو شامل ایمنی جسمی، شغل و امنیت مالی و دسترسی به منابع مانند مراقبت پزشکی و کیفیت غذا است؛ دوستان و خانواده سطح عشق و تعلق، مدرک یا ارتقا سطح عزت‌نفس و غذا و آب و سرپناه سطح فیزیولوژیک را نشان می‌دهند.",
+   "we": "Safety, the second tier of Maslow's pyramid, includes physical safety, employment and financial security, and access to resources such as medical care and quality food; friends and family fall under love and belonging, a degree or promotion under self-esteem, and food, water, and shelter under physiological needs.",
+   "ts": 326
+  }
+ ],
+ "video": "pzzpgC8SzUU",
+ "gen": {
+  "model": "freeeeee",
+  "n": 5
+ }
+}

@@ -88,6 +88,18 @@
         "h1": "Account",
         "desc": "Your Nurse Plus account: profile, billing, settings, progress statistics and CME credits."
       }
+    },
+    "admin": {
+      "ir": {
+        "title": "پنل مدیریت نرس پلاس",
+        "h1": "پنل مدیریت",
+        "desc": "پنل مدیریت نرس پلاس — افزودن ویدیو به صف پایپ‌لاین، تنظیم مدل هوش مصنوعی و پیگیری وضعیت انتشار."
+      },
+      "com": {
+        "title": "Nurse Plus Admin",
+        "h1": "Admin panel",
+        "desc": "Nurse Plus admin panel — queue videos, configure the AI model and track publishing."
+      }
     }
   },
   "notIndexed": [

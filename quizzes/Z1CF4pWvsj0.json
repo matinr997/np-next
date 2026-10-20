@@ -50,8 +50,19 @@
    "qf": "اثر کرونوتروپیک منفی دیگوکسین باعث می‌شود ضربان قلب {0} شود و اثر اینوتروپیک مثبت آن قدرت انقباض را افزایش می‌دهد.",
    "qe": "Digoxin’s negative chronotropic effect makes the heart rate {0}, while its positive inotropic effect increases the force of contraction.",
    "blanks": [
-    "کندتر",
-    "slower"
+    {
+     "of": [
+      "کندتر",
+      "سریع‌تر",
+      "نامنظم"
+     ],
+     "oe": [
+      "slower",
+      "faster",
+      "irregular"
+     ],
+     "c": 0
+    }
    ],
    "wf": "دیگوکسین ضربان قلب را کند و قدرت انقباض را بیشتر می‌کند. همین ترکیب بار کاری قلب را کاهش می‌دهد و خستگی و تنگی نفس ناشی از نارسایی قلبی را بهتر می‌کند.",
    "we": "Digoxin slows the heart rate while increasing contractile force. That combination lowers cardiac workload and improves the fatigue and dyspnea of heart failure."
@@ -62,8 +73,32 @@
    "qf": "پادزهر سمیت دیگوکسین، {0} است.",
    "qe": "The antidote to digoxin toxicity is {0}.",
    "blanks": [
-    "دیگوکسین ایمون فاب",
-    "digoxin immune Fab"
+    {
+     "of": [
+      "دیگوکسین ایمون فاب",
+      "کلسیم گلوکونات",
+      "پروپرانولول"
+     ],
+     "oe": [
+      "digoxin immune Fab",
+      "calcium gluconate",
+      "propranolol"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "digoxin immune Fab",
+      "digoxin",
+      "activated charcoal"
+     ],
+     "oe": [
+      "digoxin immune Fab",
+      "digoxin",
+      "activated charcoal"
+     ],
+     "c": 0
+    }
    ],
    "wf": "دیگوکسین ایمون فاب آنتی‌بادی اختصاصی است که دیگوکسین را در بدن خنثی می‌کند و به‌عنوان پادزهر در موارد سمیت شدید تجویز می‌شود.",
    "we": "Digoxin immune Fab is a specific antibody that neutralizes digoxin in the body and is given as the antidote in severe toxicity."
@@ -74,16 +109,28 @@
    "qf": "اقدامات پرستاری برای بیماری که دیگوکسین دریافت می‌کند را به همان ترتیبی بچینید که در ویدیو بیان می‌شود.",
    "qe": "Arrange the nursing actions for a client receiving digoxin in the order the video states.",
    "items": [
-    "پایش سطح پتاسیم بیمار در طول درمان",
-    "بررسی نبض بیمار پیش از تجویز دارو",
-    "پایش سطح سرمی دیگوکسین در طول درمان",
-    "خودداری از تجویز دارو اگر نبض کمتر از ۶۰ بار در دقیقه باشد"
+    {
+     "fa": "پایش سطح پتاسیم بیمار در طول درمان",
+     "en": "Monitor the client's potassium level during treatment"
+    },
+    {
+     "fa": "بررسی نبض بیمار پیش از تجویز دارو",
+     "en": "Check the client's pulse before administering the medication"
+    },
+    {
+     "fa": "پایش سطح سرمی دیگوکسین در طول درمان",
+     "en": "Monitor the serum digoxin level during treatment"
+    },
+    {
+     "fa": "خودداری از تجویز دارو اگر نبض کمتر از ۶۰ بار در دقیقه باشد",
+     "en": "Withhold the medication if the pulse is less than 60 beats per minute"
+    }
    ],
    "keep": [
-    "بررسی نبض بیمار پیش از تجویز دارو",
-    "خودداری از تجویز دارو اگر نبض کمتر از ۶۰ بار در دقیقه باشد",
-    "پایش سطح سرمی دیگوکسین در طول درمان",
-    "پایش سطح پتاسیم بیمار در طول درمان"
+    1,
+    3,
+    2,
+    0
    ],
    "wf": "ویدیو ترتیب مراقبت را چنین بیان می‌کند: نخست بررسی نبض پیش از تجویز، سپس خودداری از دوز در نبض زیر ۶۰، سپس پایش سطح سرمی دیگوکسین و در پایان پایش پتاسیم به‌دلیل خطر سمیت.",
    "we": "The video gives the nursing order: check the pulse before administration first, then withhold the dose if the rate is under 60, then monitor the serum digoxin level, and potassium last because of the toxicity risk."

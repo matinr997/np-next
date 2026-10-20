@@ -50,8 +50,32 @@
    "qf": "آمیودارون با بلوکه کردن کانال {0} در سلول عضلهٔ قلبی، پتانسیل عمل را طولانی کرده و رپلاریزاسیون را به تأخیر می‌اندازد.",
    "qe": "Amiodarone blocks the {0} channels in cardiac muscle cells, prolonging the action potential and delaying repolarization.",
    "blanks": [
-    "پتاسیم",
-    "potassium"
+    {
+     "of": [
+      "پتاسیم",
+      "سدیم",
+      "کلسیم"
+     ],
+     "oe": [
+      "potassium",
+      "sodium",
+      "calcium"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "پتاسیم",
+      "سدیم",
+      "کلسیم"
+     ],
+     "oe": [
+      "potassium",
+      "sodium",
+      "calcium"
+     ],
+     "c": 0
+    }
    ],
    "wf": "ضدآریتمی‌های کلاس سه کانال پتاسیم را بلوکه می‌کنند. کاهش خروج پتاسیون، پتانسیل عمل را طولانی کرده و تحریک‌پذیری سلول قلبی را کاهش می‌دهد تا ریتم‌های نابهنجار تثبیت شوند.",
    "we": "Class III antiarrhythmics block potassium channels. Reduced potassium outflow prolongs the action potential and lowers cardiac cell excitability, stabilizing abnormal rhythms."
@@ -62,8 +86,32 @@
    "qf": "یکی از سه هشدار بلک‌باکس آمیودارون، سمیت {0} است که می‌تواند به التهاب شدید ریه منجر شود.",
    "qe": "One of amiodarone’s three black box warnings is {0} toxicity, which can lead to severe lung inflammation.",
    "blanks": [
-    "ریوی",
-    "pulmonary"
+    {
+     "of": [
+      "ریوی",
+      "کبدی",
+      "قلبی"
+     ],
+     "oe": [
+      "pulmonary",
+      "hepatic",
+      "cardiac"
+     ],
+     "c": 0
+    },
+    {
+     "of": [
+      "ریوی",
+      "کبدی",
+      "قلبی"
+     ],
+     "oe": [
+      "pulmonary",
+      "hepatic",
+      "cardiac"
+     ],
+     "c": 0
+    }
    ],
    "wf": "سه هشدار بلک‌باکس آمیودارون عبارت‌اند از سمیت ریوی، سمیت کبدی و سمیت قلبی. سمیت قلبی می‌تواند آریتمی‌هایی مانند تورسادس‌دوپوینت ایجاد کند و سمیت کبدی آنزیم‌های کبدی را بالا می‌برد.",
    "we": "Amiodarone carries three black box warnings: pulmonary, hepatic and cardiac toxicity. Cardiac toxicity can cause arrhythmias such as torsades de pointes, and hepatic toxicity raises liver enzymes."
@@ -74,16 +122,28 @@
    "qf": "پایش‌های لازم در طول درمان با آمیودارون را به همان ترتیبی بچینید که در ویدیو بیان می‌شود.",
    "qe": "Arrange the required monitoring for a client on amiodarone in the order the video states.",
    "items": [
-    "پایش عملکرد تیروئید با T3، T4 و TSH",
-    "پایش عملکرد ریه با تست عملکرد ریه و اسکن قفسه سینه",
-    "پایش نوار قلب، علائم حیاتی و الکترولیت‌ها",
-    "پایش عملکرد کبد با AST و ALT"
+    {
+     "fa": "پایش عملکرد تیروئید با T3، T4 و TSH",
+     "en": "Monitor thyroid function with T3, T4, and TSH"
+    },
+    {
+     "fa": "پایش عملکرد ریه با تست عملکرد ریه و اسکن قفسه سینه",
+     "en": "Monitor lung function with pulmonary function tests and a chest X-ray"
+    },
+    {
+     "fa": "پایش نوار قلب، علائم حیاتی و الکترولیت‌ها",
+     "en": "Monitor ECG, vital signs, and electrolytes"
+    },
+    {
+     "fa": "پایش عملکرد کبد با AST و ALT",
+     "en": "Monitor liver function with AST and ALT"
+    }
    ],
    "keep": [
-    "پایش نوار قلب، علائم حیاتی و الکترولیت‌ها",
-    "پایش عملکرد ریه با تست عملکرد ریه و اسکن قفسه سینه",
-    "پایش عملکرد کبد با AST و ALT",
-    "پایش عملکرد تیروئید با T3، T4 و TSH"
+    2,
+    1,
+    3,
+    0
    ],
    "wf": "ویدیو ترتیب پایش را چنین بیان می‌کند: نخست نوار قلب و علائم حیاتی و الک trolیت‌ها، سپس عملکرد ریه، سپس عملکرد کبد با AST و ALT و در پایان عملکرد تیروئید با T3، T4 و TSH.",
    "we": "The video gives the monitoring order: ECG and vital signs and electrolytes first, then lung function, then liver function with AST and ALT, and thyroid function with T3, T4 and TSH last."

@@ -179,7 +179,7 @@ def titles(o, dep, site):
 
 
 # ---------------------------------------------------------------- head blocks
-def head_tags(site, dep, path, title, desc, image, typ='website', extra_ld=None, og_title=None):
+def head_tags(site, dep, path, title, desc, image, typ='website', extra_ld=None, og_title=None, noindex=None):
     """The complete SEO head for a generated page. Absolute URLs only, so the
     output is identical whether the site is served from a repo subpath or a
     domain root."""
@@ -188,7 +188,8 @@ def head_tags(site, dep, path, title, desc, image, typ='website', extra_ld=None,
     out = []
     out.append('<title>%s</title>' % esc(title))
     out.append('<meta name="description" content="%s">' % esc(desc))
-    if site.get('noindex'):
+    ni = site.get('noindex') if noindex is None else noindex
+    if ni:
         out.append('<meta name="robots" content="noindex, nofollow">')
     else:
         out.append('<meta name="robots" content="index, follow, max-image-preview:large, '
@@ -389,8 +390,10 @@ def watch_page(site, dep, o, related):
 
     b.append('</main>')
 
+    # The sidebar is always rendered: a topic with a single video has no
+    # siblings, and omitting the column left a hole in the two-column layout.
+    b.append('<aside class="wp-side"><h2>%s</h2>' % e('درس‌های مرتبط' if ir else 'Related lessons'))
     if related:
-        b.append('<aside class="wp-side"><h2>%s</h2>' % e('درس‌های مرتبط' if ir else 'Related lessons'))
         b.append('<ul class="wp-rel">')
         for r in related:
             lbl = r['fa'] if ir else r['en']
@@ -399,7 +402,13 @@ def watch_page(site, dep, o, related):
                      '<b>%s</b><i>%s · %s</i></a></li>'
                      % (UP, r['slug'], r['id'], e('%s — %s' % (lbl, r['cat'] if ir else r['cat_en'])),
                         e(lbl[:78]), e(r['cat'] if ir else r['cat_en']), e(r['dur_txt'])))
-        b.append('</ul></aside>')
+        b.append('</ul>')
+    else:
+        b.append('<ul class="wp-rel wp-rel-one">')
+        b.append('<li><a href="%sindex.html"><b>%s</b><i>%s</i></a></li>' % (UP, e('همهٔ ویدیوها' if ir else 'All videos'), e('رفتن به فهرست' if ir else 'Back to the library')))
+        b.append('<li><a href="%stopics/%s/"><b>%s</b><i>%s</i></a></li>'
+                 % (UP, topic_slug(o), e(o['cat'] if ir else o['cat_en']), e('موضوع' if ir else 'Topic')))
+        b.append('</ul>')
 
     b.append('</div>')
     b.append('<div class="wp-foot">')
@@ -515,6 +524,32 @@ def inject_static(site):
             assert marks[0] in new and block in new, 'head injection failed for %s' % rel
             open(fp, 'w', encoding='utf-8').write(new)
 
+    # The admin panel is a private page: it must never be indexed, but it also
+    # must NOT be blocked in robots.txt — a crawl block would stop the crawler
+    # from ever reading the noindex directive. So: crawlable, self-canonical,
+    # noindex in the head.
+    ap = os.path.join(ROOT, 'admin', 'index.html')
+    if os.path.exists(ap) and 'admin' in site.get('perPage', {}):
+        src = open(ap, encoding='utf-8').read()
+        meta = site['perPage']['admin']['ir']
+        block = head_tags(site, 'ir', 'admin/', meta['title'], meta['desc'],
+                          'https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg',
+                          'website', None, None, noindex=True)
+        new = re.sub(r'%s.*?%s' % (marks[0], marks[1]), '', src, flags=re.S)
+        # head_tags carries its own <title>; drop the page's original one so
+        # the document does not end up with two titles.
+        new = re.sub(r'<title>.*?</title>\s*', '', new, count=1, flags=re.S)
+        if '</title>' in new:
+            new = re.sub(r'(</title>)',
+                         lambda m: m.group(1) + '\n' + marks[0] + '\n' + block + '\n' + marks[1],
+                         new, count=1)
+        else:
+            new = re.sub(r'(<head[^>]*>)',
+                         lambda m: m.group(1) + '\n' + marks[0] + '\n' + block + '\n' + marks[1],
+                         new, count=1)
+        assert marks[0] in new and block in new, 'head injection failed for admin/index.html'
+        open(ap, 'w', encoding='utf-8').write(new)
+
 
 def clean_prev(path):
     if os.path.isdir(path):
@@ -609,14 +644,17 @@ def write_404(site):
     b.append('</ul><div class="wp-cta"><a class="wp-btn p" href="./">بازگشت به صفحهٔ اصلی</a></div>')
     head = head_tags(site, 'ir', '404.html', 'صفحه پیدا نشد | %s' % site['brand']['ir'],
                      'نشانی درخواستی در %s وجود ندارد یا جابه‌جا شده است. از فهرست درس‌های '
-                     'پیشنهادی پایین همین صفحه یا جست‌وجوی کتابخانه استفاده کنید.'
+                     'پیشنهادی پایین همین صفحه یا جست‌وجوی کتابخانه استفاده کنید. تمام '
+                     'درس‌ها با متن گفتاری، سرفصل زمانی و آزمون NCLEX در دسترس‌اند.'
                      % site['brand']['ir'],
                      'https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg',
                      'website', [ld_site(site, 'ir')])
     open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8').write(
         page(site, 'ir', '404.html',
              'صفحه پیدا نشد | %s' % site['brand']['ir'],
-             'نشانی درخواستی وجود ندارد یا جابه‌جا شده است.', '', '\n'.join(b),
+             'نشانی درخواستی وجود ندارد یا جابه‌جا شده است. از فهرست درس‌های پیشنهادی '
+             'پایین همین صفحه یا جست‌وجوی کتابخانه استفاده کنید — تمام درس‌ها با متن '
+             'گفتاری، سرفصل زمانی و آزمون NCLEX در دسترس‌اند.', '', '\n'.join(b),
              [ld_site(site, 'ir')], depth=0))
 
 

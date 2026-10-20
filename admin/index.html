@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<!--seo:start-->
+<title>پنل مدیریت نرس پلاس</title>
+<meta name="description" content="پنل مدیریت نرس پلاس — افزودن ویدیو به صف پایپ‌لاین، تنظیم مدل هوش مصنوعی و پیگیری وضعیت انتشار.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://matinr997.github.io/np-next/admin/">
+<link rel="alternate" hreflang="fa" href="https://matinr997.github.io/np-next/admin/">
+<link rel="alternate" hreflang="en" href="https://matinr997.github.io/np-next/com/admin/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matinr997.github.io/np-next/admin/">
+<meta property="og:title" content="پنل مدیریت نرس پلاس">
+<meta property="og:description" content="پنل مدیریت نرس پلاس — افزودن ویدیو به صف پایپ‌لاین، تنظیم مدل هوش مصنوعی و پیگیری وضعیت انتشار.">
+<meta property="og:image" content="https://i.ytimg.com/vi/oNEBmBtBvtw/maxresdefault.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="پنل مدیریت نرس پلاس">
+<meta property="og:site_name" content="نرس پلاس">
+<meta property="og:locale" content="fa_IR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">[]</script>
+<!--seo:end-->
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../assets/globals.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+
+<!-- ============================ LOGIN ============================ -->
+<div class="adm-login" id="loginView">
+  <form class="adm-card adm-login-card" id="loginForm" novalidate>
+    <div class="adm-login-brand"><span class="adm-dot"></span> پنل مدیریت نرس پلاس</div>
+    <h1 class="adm-login-title">ورود به پنل مدیریت</h1>
+    <p class="adm-sub">برای مدیریت صف پایپ‌لاین و تنظیمات مدل هوش مصنوعی وارد شوید.</p>
+
+    <label class="adm-field">
+      <span class="adm-label">ایمیل</span>
+      <input type="email" id="loginEmail" dir="ltr" autocomplete="username" placeholder="admin@example.com" spellcheck="false">
+    </label>
+
+    <label class="adm-field">
+      <span class="adm-label">رمز عبور</span>
+      <input type="password" id="loginPass" dir="ltr" autocomplete="current-password" placeholder="••••••••">
+    </label>
+
+    <div class="adm-alert adm-alert-error" id="loginError" role="alert" hidden></div>
+
+    <button class="adm-btn adm-btn-primary adm-btn-block" id="loginBtn" type="submit">ورود</button>
+  </form>
+</div>
+
+<!-- ============================ APP ============================ -->
+<div class="adm-shell" id="appView" hidden>
+
+  <header class="adm-top">
+    <div class="adm-top-in">
+      <div class="adm-top-brand"><span class="adm-dot"></span> پنل مدیریت نرس پلاس</div>
+      <div class="adm-top-side">
+        <span class="adm-user" id="userName"></span>
+        <button class="adm-btn adm-btn-ghost adm-btn-sm" id="logoutBtn" type="button">خروج</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="adm-grid">
+
+    <!-- ---------- افزودن ویدیو ---------- -->
+    <section class="adm-card adm-area-add">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">افزودن ویدیو</h2>
+        <span class="adm-count" id="linkCount">۰ لینک شناسایی شد</span>
+      </div>
+      <p class="adm-hint">لینک‌های یوتیوب را هر کدام در یک خط (یا با فاصله) بچسبانید. لینک‌های تکراری پیش از افزوده‌شدن شناسایی و رد می‌شوند.</p>
+
+      <textarea class="adm-textarea" id="urlInput" rows="5" spellcheck="false"
+        placeholder="https://www.youtube.com/watch?v=..."></textarea>
+
+      <div class="adm-detected" id="detected"></div>
+
+      <div class="adm-actions">
+        <button class="adm-btn adm-btn-primary" id="addBtn" type="button">افزودن به صف</button>
+        <button class="adm-btn adm-btn-ghost" id="clearBtn" type="button">پاک کردن نتایج</button>
+      </div>
+
+      <div class="adm-result-summary" id="addSummary" hidden></div>
+      <ul class="adm-results" id="addResults" aria-live="polite"></ul>
+    </section>
+
+    <!-- ---------- صف پایپ‌لاین ---------- -->
+    <section class="adm-card adm-area-queue">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">صف پایپ‌لاین</h2>
+        <span class="adm-count" id="queueCount">۰ کار</span>
+      </div>
+      <p class="adm-hint adm-hint-tight">به‌روزرسانی خودکار هر ۴ ثانیه</p>
+      <div class="adm-jobs" id="jobsList"></div>
+      <div class="adm-empty" id="jobsEmpty">هنوز کاری در صف نیست.</div>
+    </section>
+
+    <!-- ---------- تنظیمات مدل هوش مصنوعی ---------- -->
+    <section class="adm-card adm-card-ai adm-area-side">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">تنظیمات مدل هوش مصنوعی</h2>
+        <span class="adm-ai-pill">AI</span>
+      </div>
+
+      <label class="adm-field">
+        <span class="adm-label">آدرس endpoint</span>
+        <input type="text" id="llmEndpoint" dir="ltr" spellcheck="false" placeholder="http://localhost:20128/v1">
+      </label>
+
+      <label class="adm-field">
+        <span class="adm-label">کلید API</span>
+        <div class="adm-in-row">
+          <input type="password" id="llmKey" dir="ltr" autocomplete="off" spellcheck="false" placeholder="••••••••">
+          <button class="adm-btn adm-btn-ghost adm-btn-sm adm-btn-noflex" id="toggleKey" type="button">نمایش</button>
+        </div>
+        <span class="adm-note" id="keyNote"></span>
+      </label>
+
+      <label class="adm-field">
+        <span class="adm-label">مدل</span>
+        <div class="adm-model-picker">
+          <input type="search" id="modelFilter" dir="ltr" placeholder="جست‌وجو در فهرست مدل‌ها…" spellcheck="false">
+          <select id="modelSelect" size="6" aria-label="فهرست مدل‌ها"></select>
+          <span class="adm-note" id="modelCount"></span>
+        </div>
+        <input type="text" id="llmModel" dir="ltr" spellcheck="false" placeholder="یا شناسهٔ مدل را دستی وارد کنید (مثلاً gpt-4o-mini)">
+      </label>
+
+      <div class="adm-actions">
+        <button class="adm-btn adm-btn-ghost" id="testBtn" type="button">تست اتصال</button>
+        <button class="adm-btn adm-btn-primary" id="saveLlmBtn" type="button">ذخیره تنظیمات</button>
+      </div>
+
+      <div class="adm-alert" id="llmMsg" role="status" hidden></div>
+    </section>
+
+    <!-- ---------- ویدیوهای موجود ---------- -->
+    <section class="adm-card adm-area-videos">
+      <div class="adm-card-head">
+        <h2 class="adm-card-title">ویدیوهای موجود</h2>
+        <span class="adm-count" id="videosCount">۰ ویدیو</span>
+      </div>
+
+      <div class="adm-toolbar">
+        <input type="search" id="videoSearch" placeholder="جست‌وجو در عنوان یا کانال…" spellcheck="false">
+      </div>
+
+      <div class="adm-table-wrap">
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th scope="col">شناسه</th>
+              <th scope="col">عنوان فارسی</th>
+              <th scope="col">عنوان انگلیسی</th>
+              <th scope="col">کانال</th>
+              <th scope="col">وضعیت</th>
+            </tr>
+          </thead>
+          <tbody id="videosBody"></tbody>
+        </table>
+      </div>
+      <div class="adm-empty" id="videosEmpty">ویدیویی برای نمایش نیست.</div>
+    </section>
+
+  </div>
+</div>
+
+<div class="adm-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

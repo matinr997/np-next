@@ -166,18 +166,58 @@ INSERT INTO plan_prices (plan_code, source, amount, currency, gateway) VALUES
   ('m1','com',1499,'USD','stripe'),
   ('y1','com',9999,'USD','stripe');
 
--- صف پایپ‌لاین محتوا: admin لینک کانال/ویدیو می‌دهد، cron هر ۵ دقیقه یک job را
--- مرحله‌به‌مرحله (list → transcript → translate → quiz → publish) پیش می‌برد.
-CREATE TABLE pipeline_jobs (
-  id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  yt_id       CHAR(11)      NULL,                          -- بعد از کشف از کانال پر می‌شود
-  channel_url VARCHAR(255)  NULL,                          -- اگر job از لینک کانال باشد
-  stage       ENUM('discover','transcript','translate','quiz','publish','done','error')
-              NOT NULL DEFAULT 'discover',
-  status      ENUM('queued','running','ok','error') NOT NULL DEFAULT 'queued',
-  log         TEXT          NULL,                          -- خطا/جزئیات آخرین اجرا
-  created_by  BIGINT UNSIGNED NULL,                        -- users.id (admin)
+-- ============================================================
+-- صف پایپ‌لاین محتوا (admin panel)
+-- admin در پنل لینک ویدیو را paste می‌کند → job ساخته می‌شود →
+-- worker (Mac یا GitHub Actions) آن را مرحله‌به‌مرحله جلو می‌برد.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS pipeline_jobs (
+  id          VARCHAR(40)  PRIMARY KEY,                       -- job_<hex> (app-generated, portable)
+  yt_id       CHAR(11)     NULL,                              -- YouTube id (11 chars)
+  url         VARCHAR(500) NOT NULL DEFAULT '',               -- همان لینکی که admin paste کرده
+  kind        VARCHAR(16)  NOT NULL DEFAULT 'video',         -- video | chat
+  channel     VARCHAR(120) NULL,
+  stage       ENUM('discover','transcript','translate','quiz','publish') NOT NULL DEFAULT 'discover',
+  status      ENUM('queued','running','done','failed','skipped','canceled') NOT NULL DEFAULT 'queued',
+  progress    TINYINT UNSIGNED NOT NULL DEFAULT 0,            -- 0..100
+  title_fa    VARCHAR(255) NULL,
+  title_en    VARCHAR(255) NULL,
+  error       TEXT NULL,
+  log         TEXT NULL,
+  created_by  VARCHAR(190) NULL,                              -- admin email
   created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_status (status, stage)
+  KEY idx_status (status, stage),
+  KEY idx_yt (yt_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ============================================================
+-- تنظیمات مدل هوش مصنوعی (endpoint + key + model) — تک‌ردیف
+-- key هرگز به مرورگر برنمی‌گردد؛ فقط has_key:true گزارش می‌شود.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS llm_settings (
+  id         TINYINT UNSIGNED NOT NULL PRIMARY KEY DEFAULT 1,
+  endpoint   VARCHAR(255) NOT NULL DEFAULT '',                -- مثلاً https://host/v1
+  api_key    VARCHAR(255) NOT NULL DEFAULT '',
+  model      VARCHAR(190) NOT NULL DEFAULT '',
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- کش مدل‌های در دسترس endpoint (کاربر ممکن است ۵۰۰+ مدل داشته باشد)
+CREATE TABLE IF NOT EXISTS llm_models (
+  model_id   VARCHAR(190) NOT NULL PRIMARY KEY,
+  owned_by   VARCHAR(120) NOT NULL DEFAULT '',
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS chat_messages (
+  id         VARCHAR(40)  NOT NULL PRIMARY KEY,
+  job_id     VARCHAR(40)  NOT NULL,
+  role       ENUM('user','agent','system') NOT NULL DEFAULT 'user',
+  text       TEXT         NOT NULL,
+  file_name  VARCHAR(255) NULL,
+  file_path  VARCHAR(500) NULL,                              -- مسیر روی هاست (worker از راه HTTP می‌گیرد)
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_job (job_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
